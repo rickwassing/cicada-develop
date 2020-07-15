@@ -2,11 +2,31 @@
 
 This repository contains the source files for Cicada, an open source software for analysing actigraphy and data from other wearable devices.
 
+## Versioning
+
+We use [semantic versioning](http://semver.org/). Current verion is 0.1.2. Cicada is still in initial development. Anything may change at any time and the software should not be considered stable.
+
+## Authors
+
+-   **Rick Wassing**, Woolcock Institute of Medical Research, The University of Sydney, Australia - _Initial work_
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/rickwassing/cicada-develop/blob/master/docs/LICENSE) file for details
+
+## Acknowledgments
+
+In building Cicada, I have translated and adopted functionality from other open-source projects.
+I would kindly thank:
+
+-   Vincent T. van Hees and colleagues for their pioneering work on GGIR, an R-package to process accelerometry data. [Visit the GGIR CRAN repository](https://cran.r-project.org/web/packages/GGIR/index.html).
+-   Maxim Osipov, Bart Te Lindert, and German Gómez-Herrero for their work on the [Actant Activity Analysis Toolbox](https://github.com/btlindert/actant-1) and GeneActiv .bin file import functions.
+
 ## Getting Started
 
-Cicada is written in Matlab R2019b. I invite anyone to clone the source files and contribute to the project. If you don't have Matlab, and just want to use the software, download the compiled executables Cicada.exe (Windows) or Cicada.app (MacOs)from the [Cicada repository].
+Cicada is written in Matlab R2019b. I invite anyone to clone the repository and contribute to the project. If you just want to use the software, you don't need Matlab, just download the compiled executables Cicada.exe (Windows) or Cicada.app (MacOs)from the this [Cicada repository].
 
-The data from actigraphy and/or other wearable devices are stored in a structure, named 'ACT'. This structure is highly similar to that of the 'EEG' structure used in EEGLAB.
+The data from actigraphy and/or other wearable devices are stored in a structure, named 'ACT'. This structure is highly similar to that of the ['EEG' structure](https://sccn.ucsd.edu/wiki/A05:_Data_Structures) used in [EEGLAB](https://sccn.ucsd.edu/eeglab/index.php).
 
 ### 'ACT' data structure
 
@@ -74,22 +94,126 @@ The data from actigraphy and/or other wearable devices are stored in a structure
 -   **settings/CicadaSettings.json** specifies the default settings for displaying the data, epoch length, and importing sleep diary data.
 -   **settings/xSleepDiary.json** specifies the format and column number (index) of the date and time used to encode the sleep diary data. Multiple .json files can be specified, loaded, edited and saved in order to load sleep diaries with different formatting.
 
-## Versioning
+### Menu items and their call-alone functions
 
-We use [semantic versioning](http://semver.org/). Current verion is 0.1.2. Cicada is still in initial development. Anything may change at any time and the software should not be considered stable.
+**File > Open WorkSpace**
 
-## Authors
+```
+ACT = cic_loadmat(fullpath);
+[ACT, err, msg] = cic_checkDataset(ACT);
+ACT = cic_calcEpochedMetrics(ACT, epoch); % Epoch length in seconds
+ACT = cic_getDays(ACT, analysisWinStart, analysisWinEnd); % e.g. '15:00', '15:00'
+```
 
--   **Rick Wassing**, Woolcock Institute of Medical Research, The University of Sydney, Australia - _Initial work_
+**File > Save WorkSpace (As)**
 
-## License
+```
+ACT = cic_savemat(ACT, fullpath);
+```
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/rickwassing/cicada-develop/blob/master/docs/LICENSE) file for details
+**File > Import Data > Import GeneActiv (.bin)**
 
-## Acknowledgments
+```
+ACT = cic_importGeneActivBin(fullpath);
+ACT = cic_calcEpochedMetrics(ACT, epoch); % Epoch length in seconds
+ACT = cic_getDays(ACT, analysisWinStart, analysisWinEnd); % e.g. '15:00', '15:00'
+```
 
-In building Cicada, I have translated and adopted functionality from other open-source projects.
-I would kindly thank:
+**File > Import Events > Import Sleep Diary**
 
--   Vincent T. van Hees and colleagues for their pioneering work on GGIR, an R-package to process accelerometry data. [Visit the GGIR CRAN repository](https://cran.r-project.org/web/packages/GGIR/index.html).
--   Maxim Osipov, Bart Te Lindert, and German Gómez-Herrero for their work on the [Actant Activity Analysis Toolbox](https://github.com/btlindert/actant-1) and GeneActiv .bin file import functions.
+```
+[ACT, rawSleepDiary] = cic_importSleepDiary(ACT, fullpath); % Path to tabular text file or spreadsheet
+[ACT, importSettings, err, msg] = cic_importSleepDiarySettings(ACT, fullpath); % Path to .JSON settings file
+[ACT, err, msg] = cic_parseSleepDiary(ACT, rawSleepDiary, importSettings);
+ACT = cic_diarySleepEvents(ACT); % Generate events in 'ACT.events' from sleep diary
+ACT = cic_actigraphySleepEvents(ACT); % Genererate sleep period and waso events if annotation is available
+```
+
+**File > Export > Statistics**
+
+```
+ACT = cic_exportStatistics(ACT, fullpath); % Write the statistics in 'ACT.stats' to .CSV files
+```
+
+**File > Export > Report**
+
+```
+% Sorry, this part of Cicada has not been developed yet.
+```
+
+**File > Export > Matlab Code**
+
+```
+ACT = cic_writeHistory(ACT, fullpath); % Write history to .m Matlab script
+```
+
+**Edit > Dataset Info**
+
+```
+ACT = cic_editInformation(ACT, newInfo); % Structure with any number, name and type of fields
+```
+
+**Edit > Select Data**
+
+```
+ACT = cic_selectDatasetUsingTime(ACT, startDate, endDate); % Start and end date [datenum] to crop the dataset to
+ACT = cic_getDays(ACT, analysisWinStart, analysisWinEnd); % e.g. '15:00', '15:00'
+```
+
+**Edit > Change Time Zone**
+
+```
+ACT = cic_changeTimeZone(ACT, newTimeZone) % New time zone [string]
+ACT = cic_getDays(ACT, analysisWinStart, analysisWinEnd); % e.g. '15:00', '15:00'
+```
+
+**Edit > Change Epoch Length**
+
+```
+ACT = cic_calcEpochedMetrics(ACT, epoch); % New epoch length in seconds
+```
+
+**Preprocess > GGIR Automatic Calibration**
+
+```
+ACT = cic_ggirAutomaticCalibration(ACT);
+ACT = cic_calcEpochedMetrics(ACT, epoch); % Epoch length in seconds
+```
+
+**Preprocess > GGIR Non-Wear Detection**
+
+```
+[ACT, err] = cic_ggirDetectNonWear(ACT);
+```
+
+**Analysis > Annotate Epochs > GGIR Annotation**
+
+```
+ACT = cic_ggirAnnotation(ACT, params); % Parameters used in algorithm [struct]
+ACT = cic_actigraphySleepEvents(ACT); % Genererate sleep period and waso events if sleep windows are available
+```
+
+**Analysis > Events > Create Daily Events**
+
+```
+ACT = cic_createDailyEvent(ACT, onset, duration, label); % Onset [string] in 'HH:MM', duration in hours, label [string]
+```
+
+**Analysis > Events > Create Relative Events**
+
+```
+ACT = cic_createRelativeEvent(ACT, ...
+    ref, ...      % [string] either 'onset' or 'offset'
+    refLabel, ... % [string] label of reference events
+    refType, ...  % [string] type of reference events
+    delay, ...    % [double] delay of new events, value can be negative or positive
+    duration, ... % [double] duration of new events
+    newLabel);    % [string] label of new events
+```
+
+**Analysis > Events > GGIR Sleep Detection**
+
+```
+ACT = cic_ggirSleepPeriodDetection(ACT);
+ACT = cic_actigraphySleepEvents(ACT); % Genererate sleep period and waso events if annotation is available
+```
