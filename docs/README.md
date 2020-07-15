@@ -217,3 +217,10 @@ ACT = cic_createRelativeEvent(ACT, ...
 ACT = cic_ggirSleepPeriodDetection(ACT);
 ACT = cic_actigraphySleepEvents(ACT); % Genererate sleep period and waso events if annotation is available
 ```
+
+**Statistics > Generate Statistics**
+
+```
+ACT = cic_statistics(ACT); % Calculate average, daily and sleep statistics
+ACT = cic_statistics(ACT, 'customEvent', eventLabel); % Calculate statistics for custom events
+```
