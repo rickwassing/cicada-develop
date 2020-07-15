@@ -1,0 +1,17 @@
+{
+	"format": {
+		"date": "dd/mm/yyyy",
+		"lightsOut": "HH:MM",
+		"finAwake": "HH:MM",
+		"lightsOn": "HH:MM"
+	},
+	"idx": {
+		"date": 1,
+		"lightsOut": 3,
+		"sleepLatency": 4,
+		"awakenings": null,
+		"waso": null,
+		"finAwake": 5,
+		"lightsOn": 6
+	}
+}

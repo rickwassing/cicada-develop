@@ -1,0 +1,97 @@
+function [idxInBedStart, idxInBedEnd] = ggirSleepPeriodDetection(angle, epoch)
+
+% Initialize constant variables.
+window          = (5*60) / epoch;  % 5 minute window converted to samples
+inBedThres      = 15;              % 15 times the 10th percentile of the median absolute deviation of the angle
+inBedBlockSize  = (30*60) / epoch; % 30 minute window converted to samples. Used to find periods that are probable in-bed periods
+outBedBlockSize = (60*60) / epoch; % 60 minute window converted to samples. Any period in between 2 in-bed periods that is less than 60 minutes is still regarded as 'in-bed'
+constrain2range = true;
+
+% Create rolling median absolute difference of the angle
+funcHandle = @(x) median(abs(diff(x)));
+[rollMedAbsDiffAngle, rollIdx] = rollCellFun(funcHandle, angle, window, 'Fill', false); % 5 minute rolling median of the absolute difference
+
+% If there are any NaN's then we need to impute those values
+if any(isnan(rollMedAbsDiffAngle))
+    [onset, duration] = getBouts(isnan(rollMedAbsDiffAngle));
+    for b = 1:length(onset)
+        % if the first sample is NaN, use the first non-NaN value
+        if (onset(b)-1) < 1 
+            vals = [rollMedAbsDiffAngle(onset(b)+duration(b)) rollMedAbsDiffAngle(onset(b)+duration(b))];
+        % if the last sample is NaN, use the last non-NaN value
+        elseif (onset(b)+duration(b)) > length(rollMedAbsDiffAngle)
+            vals = [rollMedAbsDiffAngle(onset(b)-1) rollMedAbsDiffAngle(onset(b)-1)];
+        % else, use the non-NaN values just prior and after the NaN-bout
+        else
+            vals = [rollMedAbsDiffAngle(onset(b)-1) rollMedAbsDiffAngle(onset(b)+duration(b))];
+        end
+        rollMedAbsDiffAngle(onset(b):onset(b)+duration(b)-1) = linspace(vals(1),vals(2),duration(b));
+    end
+end
+
+% Calculate the threshold that distinguishes potential in-bed from out-bed periods
+inBedThres = prctile(rollMedAbsDiffAngle, 10) * inBedThres;
+if constrain2range
+    if inBedThres < 0.13; inBedThres = 0.13; end
+    if inBedThres > 0.50; inBedThres = 0.50; end
+% else % redundant, I forced 'constrain2range' to be true
+%     if pp == 0; pp = 0.20; end
+end
+% Initialize 'noMovement' as a vector of zeros
+noMovement = zeros(1,length(rollMedAbsDiffAngle));
+% Those indices where the angle change is below the threshold are timepoints 
+% where the subject is potentially in bed
+noMovement(rollMedAbsDiffAngle < inBedThres) = 1;
+% Convert this dichotomous vector to index numbers
+idxInBedStart = find(diff([0,noMovement,0]) == 1);  % start of blocks in bed
+idxInBedEnd   = find(diff([0,noMovement,0]) == -1); % end of blocks in bed
+% Only keep those blocks that are longer than inBedBlockSize
+thresInBedBlocks = (idxInBedEnd - idxInBedStart) > inBedBlockSize;
+idxInBedStart = idxInBedStart(thresInBedBlocks);
+idxInBedEnd   = idxInBedEnd(thresInBedBlocks);
+
+% if there are no blocks that are potential in-bed blocks, return
+if isempty(idxInBedStart) 
+    idxInBedStart = [];
+    idxInBedEnd   = [];
+    return
+end
+
+% Initialize 'inBedTime' as a vector of NaN's
+inBed = zeros(1,length(rollMedAbsDiffAngle));
+% Record these blocks in the 'inBed' vector
+for m = 1:length(idxInBedStart)
+    inBed(idxInBedStart(m):idxInBedEnd(m)) = 1;
+end
+% Fill up gaps in between 2 in-bed blocks, if the gap is less than 60 minutes
+outBed = double(inBed == 0);
+idxOutBedStart = find(diff([0,outBed,0]) == 1); % start of blocks out of bed
+idxOutBedEnd = find(diff([0,outBed,0]) == -1);  % end of blocks out of bed
+% Only keep those blocks that are shorter than outBedBlockSize
+idxOutBedStart = idxOutBedStart((idxOutBedEnd - idxOutBedStart) < outBedBlockSize);
+idxOutBedEnd   = idxOutBedEnd((idxOutBedEnd - idxOutBedEnd) < outBedBlockSize);
+% These 'outBed' blocks should still be regarded as 'inBed', so record these blocks in the 'inBed' vector
+for m = 1:length(idxOutBedStart)
+    inBed(idxOutBedStart(m):idxOutBedEnd(m)) = 1;
+end
+% Force the length of 'inBed' to equal the length of 'rollMedAbsDiffAngle'
+if length(inBed) == (length(rollMedAbsDiffAngle)+1)
+    inBed = inBed(1:(length(inBed)-1));
+end
+% We assume 1 in-bed block per day: only keep the longest in-bed block
+idxInBedStart = find(diff([0,inBed,0]) == 1)';  % start of in-bed blocks
+idxInBedEnd   = find(diff([0,inBed,0]) == -1)'; % end of in-bed blocks
+% Make sure we do not mistake a block of non-wear as an in-bed block
+nonwear = isnan(rollCellFun(funcHandle, angle, window, 'Fill', false));
+for b = 1:length(idxInBedStart)
+    pctNan = sum(nonwear(idxInBedStart(b):idxInBedEnd(b)-1)) / (idxInBedEnd(b) - idxInBedStart(b));
+    if pctNan > 0.9
+        idxInBedEnd(b) = 0;
+    end
+end
+[~,longestInBed] = max(idxInBedEnd - idxInBedStart);
+
+idxInBedStart = idxInBedStart(longestInBed);
+idxInBedEnd   = idxInBedEnd(longestInBed) + rollIdx(1) - 1;
+
+end

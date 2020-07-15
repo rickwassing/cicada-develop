@@ -1,0 +1,49 @@
+{
+	"importSettings": {
+		"sleepDiary": "/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada_appdesigner/settings/ConsensusSleepDiary.json"
+	},
+	"display": {
+		"actogramStartClock": "15:00",
+		"actogramEndClock": "15:00",
+		"actogramWidth": "single",
+		"actogramLength": 7,
+		"acceleration": {
+			"rowspan": 2,
+			"log": 0,
+			"range": [
+				0,
+				1
+			],
+			"view": "euclNorm",
+			"counts": {
+				"log": 0,
+				"range": [
+					0,
+					1000
+				]
+			},
+			"euclNorm": {
+				"log": 0,
+				"range": [
+					0,
+					1
+				]
+			},
+			"angle": {
+				"log": 0,
+				"range": [
+					-120,
+					120
+				]
+			}
+		}
+	},
+	"analysis": {
+		"epochLength": 5
+	},
+	"XTickSize": [
+		12,
+		13,
+		16
+	]
+}
