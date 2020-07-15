@@ -40,20 +40,20 @@ The data from actigraphy and/or other wearable devices are stored in a structure
 -   **ACT.timezone** [string] time zone
 -   **ACT.epoch** [int] epoch length in seconds used to transform raw data into metrics
 -   **ACT.data** [struct] contains all raw data
-    **data.acceleration.x** [double] accelerometry in x-axis
-    **data.acceleration.y** [double] accelerometry in y-axis
-    **data.acceleration.z** [double] accelerometry in z-axis
-    **data.(measurement).(datatype)** [double] e.g. 'data.temperature.wrist', to store temperature data obtained from the wrist; or 'data.light.w', to store broad-spectrum light exposure
+    -   **data.acceleration.x** [double] accelerometry in x-axis
+    -   **data.acceleration.y** [double] accelerometry in y-axis
+    -   **data.acceleration.z** [double] accelerometry in z-axis
+    -   **data.(measurement).(datatype)** [double] e.g. 'data.temperature.wrist', to store temperature data obtained from the wrist; or 'data.light.w', to store broad-spectrum light exposure
 -   **ACT.events** [table] contains all events
-    **events.id** [int] unique identifier
-    **events.onset** [datenum] onset of event
-    **events.duration** [double] duration of event in days
-    **events.label** [cell] event label
-    **events.type** [cell] event type
+    -   **events.id** [int] unique identifier
+    -   **events.onset** [datenum] onset of event
+    -   **events.duration** [double] duration of event in days
+    -   **events.label** [cell] event label
+    -   **events.type** [cell] event type
 -   **ACT.metric** [struct] contains all metric
-    **metric.acceleration.euclNormMinOne** [timeseries] Euclidean normal of the vector [x, y, z] minus 1 to account for static gravity, averaged in epochs of length 'ACT.epoch'
-    **metric.acceleration.bpFiltEuclNorm** [timeseries] Euclidean norm bandpass filtered between 0.2 and 15 Hz using a 4th order Butterworth filter, averaged in epochs of length 'ACT.epoch'
-    **metric.acceleration.angle_z** [timeseries] angle of the accelerometry device in the z-axis, given by 'atan(z / sqrt(x^2 + y^2)) / (pi/180)' where 'x', 'y' and 'z' are median acceleration values obtained in moving windows of length 'ACT.epoch'
+    -   **metric.acceleration.euclNormMinOne** [timeseries] Euclidean normal of the vector [x, y, z] minus 1 to account for static gravity, averaged in epochs of length 'ACT.epoch'
+    -   **metric.acceleration.bpFiltEuclNorm** [timeseries] Euclidean norm bandpass filtered between 0.2 and 15 Hz using a 4th order Butterworth filter, averaged in epochs of length 'ACT.epoch'
+    -   **metric.acceleration.angle_z** [timeseries] angle of the accelerometry device in the z-axis, given by 'atan(z / sqrt(x^2 + y^2)) / (pi/180)' where 'x', 'y' and 'z' are median acceleration values obtained in moving windows of length 'ACT.epoch'
 -   **ACT.analysis** [struct] contains all output from analysis steps
 -   **ACT.stats** [struct] contains all output from statistics
 -   **ACT.display** [struct] contains all display settings
