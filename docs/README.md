@@ -16,7 +16,7 @@ We use [semantic versioning](http://semver.org/). Current verion is 0.1.2. Cicad
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](docs/LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/rickwassing/cicada-develop/blob/master/docs/LICENSE) file for details
 
 ## Acknowledgments
 
