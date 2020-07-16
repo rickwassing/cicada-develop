@@ -74,7 +74,8 @@ The data from actigraphy and/or other wearable devices are stored in a structure
     -   **metric.acceleration.euclNormMinOne** [timeseries] Euclidean normal of the vector [x, y, z] minus 1 to account for static gravity, averaged in epochs of length `ACT.epoch`
     -   **metric.acceleration.bpFiltEuclNorm** [timeseries] Euclidean norm bandpass filtered between 0.2 and 15 Hz using a 4th order Butterworth filter, averaged in epochs of length `ACT.epoch`
     -   **metric.acceleration.angle_z** [timeseries] angle of the accelerometry device in the z-axis, given by
-        `atan(z / sqrt(x^2 + y^2)) / (pi/180)`, where 'x', 'y' and 'z' are median acceleration values obtained in moving windows of length `ACT.epoch`
+        -   `atan(z / sqrt(x^2 + y^2)) / (pi/180)`,
+        -   where 'x', 'y' and 'z' are median acceleration values obtained in moving windows of length `ACT.epoch`
 -   **ACT.analysis** [struct] contains all output from analysis steps
 -   **ACT.stats** [struct] contains all output from statistics
 -   **ACT.display** [struct] contains all display settings
@@ -118,6 +119,7 @@ The Cicada user interface is comprised of various 'Components', e.g. a `uipannel
 **File > Open WorkSpace**
 
 ```
+
 ACT = cic_loadmat(fullpath);
 [ACT, err, msg] = cic_checkDataset(ACT);
 ACT = cic_calcEpochedMetrics(ACT, epoch); % Epoch length in seconds
