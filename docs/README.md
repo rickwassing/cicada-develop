@@ -26,7 +26,7 @@ I would kindly thank:
 
 Cicada is written in Matlab R2019b. I invite anyone to clone the repository and contribute to the project. If you just want to use the software, you don't need Matlab, just download the compiled executables Cicada.exe (Windows) or Cicada.app (MacOs)from the this [Cicada repository].
 
-The data from actigraphy and/or other wearable devices are stored in a structure, named 'ACT'. This structure is highly similar to that of the ['EEG' structure](https://sccn.ucsd.edu/wiki/A05:_Data_Structures) used in [EEGLAB](https://sccn.ucsd.edu/eeglab/index.php).
+The data from actigraphy and/or other wearable devices are stored in a structure, named `ACT`. This structure is highly similar to that of the [`EEG` structure](https://sccn.ucsd.edu/wiki/A05:_Data_Structures) used in [EEGLAB](https://sccn.ucsd.edu/eeglab/index.php).
 
 ### 'ACT' data structure
 
@@ -63,7 +63,7 @@ The data from actigraphy and/or other wearable devices are stored in a structure
     -   **data.acceleration.x** [double] accelerometry in x-axis
     -   **data.acceleration.y** [double] accelerometry in y-axis
     -   **data.acceleration.z** [double] accelerometry in z-axis
-    -   **data.(measurement).(datatype)** [double] e.g. 'data.temperature.wrist', to store temperature data obtained from the wrist; or 'data.light.w', to store broad-spectrum light exposure
+    -   **data.(measurement).(datatype)** [double] e.g. `data.temperature.wrist`, to store temperature data obtained from the wrist; or `data.light.w`, to store broad-spectrum light exposure
 -   **ACT.events** [table] contains all events
     -   **events.id** [int] unique identifier
     -   **events.onset** [datenum] onset of event
@@ -71,9 +71,9 @@ The data from actigraphy and/or other wearable devices are stored in a structure
     -   **events.label** [cell] event label
     -   **events.type** [cell] event type
 -   **ACT.metric** [struct] contains all metric
-    -   **metric.acceleration.euclNormMinOne** [timeseries] Euclidean normal of the vector [x, y, z] minus 1 to account for static gravity, averaged in epochs of length 'ACT.epoch'
-    -   **metric.acceleration.bpFiltEuclNorm** [timeseries] Euclidean norm bandpass filtered between 0.2 and 15 Hz using a 4th order Butterworth filter, averaged in epochs of length 'ACT.epoch'
-    -   **metric.acceleration.angle_z** [timeseries] angle of the accelerometry device in the z-axis, given by 'atan(z / sqrt(x^2 + y^2)) / (pi/180)' where 'x', 'y' and 'z' are median acceleration values obtained in moving windows of length 'ACT.epoch'
+    -   **metric.acceleration.euclNormMinOne** [timeseries] Euclidean normal of the vector [x, y, z] minus 1 to account for static gravity, averaged in epochs of length `ACT.epoch`
+    -   **metric.acceleration.bpFiltEuclNorm** [timeseries] Euclidean norm bandpass filtered between 0.2 and 15 Hz using a 4th order Butterworth filter, averaged in epochs of length `ACT.epoch`
+    -   **metric.acceleration.angle_z** [timeseries] angle of the accelerometry device in the z-axis, given by `atan(z / sqrt(x^2 + y^2)) / (pi/180)`, where 'x', 'y' and 'z' are median acceleration values obtained in moving windows of length `ACT.epoch`
 -   **ACT.analysis** [struct] contains all output from analysis steps
 -   **ACT.stats** [struct] contains all output from statistics
 -   **ACT.display** [struct] contains all display settings
@@ -84,9 +84,9 @@ The data from actigraphy and/or other wearable devices are stored in a structure
 
 ### Functions
 
--   **package/appFunc** contains all functions that start with 'app\_'. They contruct the graphical user interface by updating each component's properties upon events and changes in the data.
--   **package/cicadaFunc** contains all high-level functions that start with 'cic\_' and either manipulate the data directly or call sub-functions to do so. This organization is highly similar to the 'pop\*' functions in EEGLAB.
--   **package/mountFunc** contains all functions that start with 'mount\_', which are used to draw graphical objects such as, 'plot()', 'patch()' and 'barh', or other components such as 'uiaxes()' and 'uipanel'.
+-   **package/appFunc** contains all functions that start with `app\_`. They contruct the graphical user interface by updating each component's properties upon events and changes in the data.
+-   **package/cicadaFunc** contains all high-level functions that start with `cic\_` and either manipulate the data directly or call sub-functions to do so. This organization is highly similar to the `pop_\*` functions in EEGLAB.
+-   **package/mountFunc** contains all functions that start with `mount\_`, which are used to draw graphical objects such as, `plot()`, `patch()` and `barh()`, or other components such as `uiaxes()` and `uipanel`.
 -   **package/supportFunc** contains all other functions that are used by the aforementioned functions.
 
 ### Settings files
@@ -96,7 +96,7 @@ The data from actigraphy and/or other wearable devices are stored in a structure
 
 ### Cicada User Inferface Management
 
-The Cicada user interface is comprised of various 'Components', e.g. a 'uipannel', 'uiaxes', or 'plot' objects (note that Component and Object can be used interchangably, but here I refer to them as Components). Each Component has properties, e.g. 'Position', 'XLim', or 'XData', and their values are dicated by the data in the 'ACT' structure. For example, the user can change the analysis window through the Cicada GUI and this will trigger the event function to update the 'ACT.startdate' and 'ACT.enddate' value and call 'lifecycle(app)'. The 'lifecycle(app)' function is based on the lifecycle method of React a JavaScript library for building user inferfaces. The 'lifecycle()' function is comprised of the following sequence of sub-functions:
+The Cicada user interface is comprised of various 'Components', e.g. a `uipannel`, `uiaxes`, or `plot` objects (note that the terms Component and Object can be used interchangably, but here I refer to them as Components). Each Component has properties, e.g. `Position`, `XLim`, or `XData`, and their values are dicated by the data in the `ACT` structure. For example, the user can change the analysis window through the Cicada GUI and this will trigger the event function to update the `ACT.startdate` and `ACT.enddate` value and call 'lifecycle(app)'. The 'lifecycle(app)' function is based on the lifecycle method of React a JavaScript library for building user inferfaces. The 'lifecycle()' function is comprised of the following sequence of sub-functions:
 
 > If you are familiar with the React lifecycle method, or if you have a more appropriate approach for updating the user interface, and you'd like to contribute please contact me.
 
