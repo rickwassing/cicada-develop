@@ -85,7 +85,7 @@ The data from actigraphy and/or other wearable devices are stored in a structure
 ### Functions
 
 -   **package/appFunc** contains all functions that start with 'app\_'. They contruct the graphical user interface by updating each component's properties upon events and changes in the data.
--   **package/cicadaFunc** contains all high-level functions that start with 'cic*' and either manipulate the data directly or call sub-functions to do so. This organization is highly similar to the 'pop*' functions in EEGLAB.
+-   **package/cicadaFunc** contains all high-level functions that start with 'cic\_' and either manipulate the data directly or call sub-functions to do so. This organization is highly similar to the 'pop\*' functions in EEGLAB.
 -   **package/mountFunc** contains all functions that start with 'mount\_', which are used to draw graphical objects such as, 'plot()', 'patch()' and 'barh', or other components such as 'uiaxes()' and 'uipanel'.
 -   **package/supportFunc** contains all other functions that are used by the aforementioned functions.
 
@@ -94,133 +94,187 @@ The data from actigraphy and/or other wearable devices are stored in a structure
 -   **settings/CicadaSettings.json** specifies the default settings for displaying the data, epoch length, and importing sleep diary data.
 -   **settings/xSleepDiary.json** specifies the format and column number (index) of the date and time used to encode the sleep diary data. Multiple .json files can be specified, loaded, edited and saved in order to load sleep diaries with different formatting.
 
+### Cicada User Inferface Management
+
+The Cicada user interface is comprised of various 'Components', e.g. a 'uipannel', 'uiaxes', or 'plot' objects (note that Component and Object can be used interchangably, but here I refer to them as Components). Each Component has properties, e.g. 'Position', 'XLim', or 'XData', and their values are dicated by the data in the 'ACT' structure. For example, the user can change the analysis window through the Cicada GUI and this will trigger the event function to update the 'ACT.startdate' and 'ACT.enddate' value and call 'lifecycle(app)'. The 'lifecycle(app)' function is comprised of the following sequence of sub-functions:
+
+-   **mapStateToProps(app)** Maps the current state of the 'ACT' data structure to 'mount', i.e. create, Components if they don't exist yet, or to create a copy of the relevant Component properties with updated values. Importantly, these properties are not updated here but later in the lifecycle. This construction of Components is processed by the 'app_construct\*' functions which contain the sub-functions 'shouldComponentMount()', 'mountComponent()' and 'constructComponent()' (see below). For optimization purposes, only those Components that are a member of the component-groups in 'app.ComponentList' are mapped.
+-   **app_construct\*(app, ~)** This set of functions is organized by Component groups. For example, 'app_constructDataPanel()' is responsible for constructing all the components in the main panel in the Data Analysis tab. For each of the required Components, the function 'shouldComponentMount()' is called, which checks if the Component, identified by its 'Tag' property, already exists or not. If not, the Components properties are constructed in a cell array called 'props', and the function 'mountComponent()' is called. If the Component exists, the relevant properties are constructed and the function 'constructComponent()' is called.
+-   **shouldComponentMount(app, Parent, Tag)** Uses the build-in Matlab function 'findobj()' to find a Component identified by its unique Tag among the Children of the Parent Component. If the 'findobj()' function returns empty, the Component does not exist yet, and should be mounted, otherwise it should be constructed.
+-   **mountComponent(app, mountFnc, Parent, Properties)** Uses the build-in Matlab function 'eval()' to call the mount function, specified as a string in 'mountFnc'. The mounting of Components is processed by the 'mount\_\*' functions which take in the arguments 'app', 'Parent', and 'Properties'.
+-   **constructComponent(app, Tag, Parent, Properties)** Creates 'app.Components' which is a cell array of size N-by-2 where the fist column contains the handle to the Component, and the second column contains the relevant properties and their updated values.
+-   **shouldComponentUpdate(app, Component, NewProps)** Once the 'app.Components' cell array is constructed for all relevant Component groups, a for-loop runs through all N elements. For each, 'shouldComponentUpdate()' checks if the current Component property values are equal to the updated property values in 'app.Components'. Only if at least one property is different, the Component is updated by the function 'updateComponent()'
+-   **updateComponent(app, Component, NewProps)** Updates the property values of the Component.
+-   **unmountComponents(app)** Finally, 'unmountComponents()' checks for each Component in the relevant Component groups if the data in the 'ACT' structure still requires a particular Component to exist. For example, if the user deletes an event, the graphical 'patch' Component should be removed as well. The unmounting of Components is processed by 'unmountComponent()'.
+-   **unmountComponent(app, Component)** Uses the build-in Matlab function 'delete()' to unmount a Component.
+
 ### Menu items and their call-alone functions
 
 **File > Open WorkSpace**
 
 ```
+
 ACT = cic_loadmat(fullpath);
 [ACT, err, msg] = cic_checkDataset(ACT);
 ACT = cic_calcEpochedMetrics(ACT, epoch); % Epoch length in seconds
 ACT = cic_getDays(ACT, analysisWinStart, analysisWinEnd); % e.g. '15:00', '15:00'
+
 ```
 
 **File > Save WorkSpace (As)**
 
 ```
+
 ACT = cic_savemat(ACT, fullpath);
+
 ```
 
 **File > Import Data > Import GeneActiv (.bin)**
 
 ```
+
 ACT = cic_importGeneActivBin(fullpath);
 ACT = cic_calcEpochedMetrics(ACT, epoch); % Epoch length in seconds
 ACT = cic_getDays(ACT, analysisWinStart, analysisWinEnd); % e.g. '15:00', '15:00'
+
 ```
 
 **File > Import Events > Import Sleep Diary**
 
 ```
+
 [ACT, rawSleepDiary] = cic_importSleepDiary(ACT, fullpath); % Path to tabular text file or spreadsheet
 [ACT, importSettings, err, msg] = cic_importSleepDiarySettings(ACT, fullpath); % Path to .JSON settings file
 [ACT, err, msg] = cic_parseSleepDiary(ACT, rawSleepDiary, importSettings);
 ACT = cic_diarySleepEvents(ACT); % Generate events in 'ACT.events' from sleep diary
 ACT = cic_actigraphySleepEvents(ACT); % Genererate sleep period and waso events if annotation is available
+
 ```
 
 **File > Export > Statistics**
 
 ```
+
 ACT = cic_exportStatistics(ACT, fullpath); % Write the statistics in 'ACT.stats' to .CSV files
+
 ```
 
 **File > Export > Report**
 
 ```
+
 % Sorry, this part of Cicada has not been developed yet.
+
 ```
 
 **File > Export > Matlab Code**
 
 ```
+
 ACT = cic_writeHistory(ACT, fullpath); % Write history to .m Matlab script
+
 ```
 
 **Edit > Dataset Info**
 
 ```
+
 ACT = cic_editInformation(ACT, newInfo); % Structure with any number, name and type of fields
+
 ```
 
 **Edit > Select Data**
 
 ```
+
 ACT = cic_selectDatasetUsingTime(ACT, startDate, endDate); % Start and end date [datenum] to crop the dataset to
 ACT = cic_getDays(ACT, analysisWinStart, analysisWinEnd); % e.g. '15:00', '15:00'
+
 ```
 
 **Edit > Change Time Zone**
 
 ```
+
 ACT = cic_changeTimeZone(ACT, newTimeZone) % New time zone [string]
 ACT = cic_getDays(ACT, analysisWinStart, analysisWinEnd); % e.g. '15:00', '15:00'
+
 ```
 
 **Edit > Change Epoch Length**
 
 ```
+
 ACT = cic_calcEpochedMetrics(ACT, epoch); % New epoch length in seconds
+
 ```
 
 **Preprocess > GGIR Automatic Calibration**
 
 ```
+
 ACT = cic_ggirAutomaticCalibration(ACT);
 ACT = cic_calcEpochedMetrics(ACT, epoch); % Epoch length in seconds
+
 ```
 
 **Preprocess > GGIR Non-Wear Detection**
 
 ```
+
 [ACT, err] = cic_ggirDetectNonWear(ACT);
+
 ```
 
 **Analysis > Annotate Epochs > GGIR Annotation**
 
 ```
+
 ACT = cic_ggirAnnotation(ACT, params); % Parameters used in algorithm [struct]
 ACT = cic_actigraphySleepEvents(ACT); % Genererate sleep period and waso events if sleep windows are available
+
 ```
 
 **Analysis > Events > Create Daily Events**
 
 ```
+
 ACT = cic_createDailyEvent(ACT, onset, duration, label); % Onset [string] in 'HH:MM', duration in hours, label [string]
+
 ```
 
 **Analysis > Events > Create Relative Events**
 
 ```
+
 ACT = cic_createRelativeEvent(ACT, ...
-    ref, ...      % [string] either 'onset' or 'offset'
-    refLabel, ... % [string] label of reference events
-    refType, ...  % [string] type of reference events
-    delay, ...    % [double] delay of new events, value can be negative or positive
-    duration, ... % [double] duration of new events
-    newLabel);    % [string] label of new events
+ref, ... % [string] either 'onset' or 'offset'
+refLabel, ... % [string] label of reference events
+refType, ... % [string] type of reference events
+delay, ... % [double] delay of new events, value can be negative or positive
+duration, ... % [double] duration of new events
+newLabel); % [string] label of new events
+
 ```
 
 **Analysis > Events > GGIR Sleep Detection**
 
 ```
+
 ACT = cic_ggirSleepPeriodDetection(ACT);
 ACT = cic_actigraphySleepEvents(ACT); % Genererate sleep period and waso events if annotation is available
+
 ```
 
 **Statistics > Generate Statistics**
 
 ```
+
 ACT = cic_statistics(ACT); % Calculate average, daily and sleep statistics
 ACT = cic_statistics(ACT, 'customEvent', eventLabel); % Calculate statistics for custom events
+
+```
+
+```
+
 ```
