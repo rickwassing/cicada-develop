@@ -10,6 +10,10 @@ We use [semantic versioning](http://semver.org/). Current verion is 0.1.2. Cicad
 
 -   **Rick Wassing**, Woolcock Institute of Medical Research, The University of Sydney, Australia - _Initial work_
 
+> ### Your help is more than welcome!
+>
+> I am a neuroscientist, foremost, and not a software developer. Although I have ample experience in Matlab and other coding-languages, and I have coded Cicada to the best of my abilities, it may not be the most efficient way the software could have been written. I would be very grateful for anyone who'd like to contribute to Cicada.
+
 ## License
 
 ![Creative Commons License](https://i.creativecommons.org/l/by-sa/4.0/80x15.png) This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
@@ -86,21 +90,21 @@ The data from actigraphy and/or other wearable devices are stored in a structure
 
 ### Functions
 
--   **package/appFunc** contains all functions that start with `app_`. They contruct the graphical user interface by updating each component's properties upon events and changes in the data.
--   **package/cicadaFunc** contains all high-level functions that start with `cic_` and either manipulate the data directly or call sub-functions to do so. This organization is highly similar to the `pop_*` functions in EEGLAB.
+-   **package/appFunc** contains all functions that start with `app_`. They construct the graphical user interface by mounting each component or updating its properties upon events and changes in the data.
+-   **package/cicadaFunc** contains all stand-alone functions that start with `cic_` and either manipulate the data directly or call sub-functions to do so. This organization is highly similar to the `pop_*` functions in EEGLAB.
 -   **package/mountFunc** contains all functions that start with `mount_`, which are used to draw graphical objects such as, `plot()`, `patch()` and `barh()`, or other components such as `uiaxes()` and `uipanel`.
 -   **package/supportFunc** contains all other functions that are used by the aforementioned functions.
 
 ### Settings files
 
 -   **settings/CicadaSettings.json** specifies the default settings for displaying the data, epoch length, and importing sleep diary data.
--   **settings/\*SleepDiary.json** specifies the format and column number (index) of the date and time used to encode the sleep diary data. Multiple .json files can be specified, loaded, edited and saved in order to load sleep diaries with different formatting.
+-   **settings/\*SleepDiary.json** specifies the format and column number (index) of the date and time used to encode the sleep diary data. Multiple .json files can be specified, loaded, edited and saved in order to import sleep diaries with different formatting.
 
 ### Cicada User Inferface Management
 
-The Cicada user interface is comprised of various 'Components', e.g. a `uipannel`, `uiaxes`, or `plot` objects (note that the terms Component and Object can be used interchangably, but here I refer to them as Components). Each Component has properties, e.g. `Position`, `XLim`, or `XData`, and their values are dicated by the data in the `ACT` structure. For example, the user can change the analysis window through the Cicada GUI and this will trigger the event function to update the `ACT.startdate` and `ACT.enddate` value and call `lifecycle(app)`. The `lifecycle()` function is based on the lifecycle method of React a JavaScript library for building user inferfaces. The 'lifecycle()' function is comprised of the following sequence of sub-functions:
+The Cicada user interface is comprised of various 'Components', e.g. `uipannel`, `uiaxes`, or `plot` objects (note that the terms 'Component' and 'Object' can be used interchangably, but here I refer to them as Components). Each Component has properties, e.g. `Position`, `XLim`, or `XData`, and their values are dicated by the data in the `ACT` structure. For example, the user can change the analysis window through the Cicada GUI and this will trigger the event function to update the `ACT.startdate` and `ACT.enddate` value. At the end of each event, the `lifecycle()` function is called, which is based on the lifecycle method of [React, a JavaScript library for building user inferfaces](https://reactjs.org). The `lifecycle()` function is comprised of the following sequence of sub-functions:
 
-> ### Your help is more than welcome!
+> ### Again, your help is more than welcome!
 >
 > If you are familiar with the React lifecycle method, or if you have a more appropriate approach for updating the user interface, and you'd like to contribute please contact me.
 
