@@ -8,7 +8,7 @@ We use [semantic versioning](http://semver.org/). Current verion is 0.1.2. Cicad
 
 ## Authors
 
--   **Rick Wassing**, Woolcock Institute of Medical Research, The University of Sydney, Australia - _Initial work_
+-   **Rick Wassing**, rick.wassing@sydney.edu.au, Woolcock Institute of Medical Research, The University of Sydney, Australia
 
 > ### Your help is more than welcome!
 >
