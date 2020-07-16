@@ -122,7 +122,7 @@ The Cicada user interface is comprised of various 'Components', e.g. `uipannel`,
 
 **File > Open WorkSpace**
 
-```
+```matlab
 
 ACT = cic_loadmat(fullpath);
 [ACT, err, msg] = cic_checkDataset(ACT);
@@ -133,7 +133,7 @@ ACT = cic_getDays(ACT, analysisWinStart, analysisWinEnd); % e.g. '15:00', '15:00
 
 **File > Save WorkSpace (As)**
 
-```
+```matlab
 
 ACT = cic_savemat(ACT, fullpath);
 
@@ -141,7 +141,7 @@ ACT = cic_savemat(ACT, fullpath);
 
 **File > Import Data > Import GeneActiv (.bin)**
 
-```
+```matlab
 
 ACT = cic_importGeneActivBin(fullpath);
 ACT = cic_calcEpochedMetrics(ACT, epoch); % Epoch length in seconds
@@ -151,7 +151,7 @@ ACT = cic_getDays(ACT, analysisWinStart, analysisWinEnd); % e.g. '15:00', '15:00
 
 **File > Import Events > Import Sleep Diary**
 
-```
+```matlab
 
 [ACT, rawSleepDiary] = cic_importSleepDiary(ACT, fullpath); % Path to tabular text file or spreadsheet
 [ACT, importSettings, err, msg] = cic_importSleepDiarySettings(ACT, fullpath); % Path to .JSON settings file
@@ -163,7 +163,7 @@ ACT = cic_actigraphySleepEvents(ACT); % Genererate sleep period and waso events 
 
 **File > Export > Statistics**
 
-```
+```matlab
 
 ACT = cic_exportStatistics(ACT, fullpath); % Write the statistics in 'ACT.stats' to .CSV files
 
@@ -171,7 +171,7 @@ ACT = cic_exportStatistics(ACT, fullpath); % Write the statistics in 'ACT.stats'
 
 **File > Export > Report**
 
-```
+```matlab
 
 % Sorry, this part of Cicada has not been developed yet.
 
@@ -179,7 +179,7 @@ ACT = cic_exportStatistics(ACT, fullpath); % Write the statistics in 'ACT.stats'
 
 **File > Export > Matlab Code**
 
-```
+```matlab
 
 ACT = cic_writeHistory(ACT, fullpath); % Write history to .m Matlab script
 
@@ -187,7 +187,7 @@ ACT = cic_writeHistory(ACT, fullpath); % Write history to .m Matlab script
 
 **Edit > Dataset Info**
 
-```
+```matlab
 
 ACT = cic_editInformation(ACT, newInfo); % Structure with any number, name and type of fields
 
@@ -195,7 +195,7 @@ ACT = cic_editInformation(ACT, newInfo); % Structure with any number, name and t
 
 **Edit > Select Data**
 
-```
+```matlab
 
 ACT = cic_selectDatasetUsingTime(ACT, startDate, endDate); % Start and end date [datenum] to crop the dataset to
 ACT = cic_getDays(ACT, analysisWinStart, analysisWinEnd); % e.g. '15:00', '15:00'
@@ -204,7 +204,7 @@ ACT = cic_getDays(ACT, analysisWinStart, analysisWinEnd); % e.g. '15:00', '15:00
 
 **Edit > Change Time Zone**
 
-```
+```matlab
 
 ACT = cic_changeTimeZone(ACT, newTimeZone) % New time zone [string]
 ACT = cic_getDays(ACT, analysisWinStart, analysisWinEnd); % e.g. '15:00', '15:00'
@@ -213,7 +213,7 @@ ACT = cic_getDays(ACT, analysisWinStart, analysisWinEnd); % e.g. '15:00', '15:00
 
 **Edit > Change Epoch Length**
 
-```
+```matlab
 
 ACT = cic_calcEpochedMetrics(ACT, epoch); % New epoch length in seconds
 
@@ -221,7 +221,7 @@ ACT = cic_calcEpochedMetrics(ACT, epoch); % New epoch length in seconds
 
 **Preprocess > GGIR Automatic Calibration**
 
-```
+```matlab
 
 ACT = cic_ggirAutomaticCalibration(ACT);
 ACT = cic_calcEpochedMetrics(ACT, epoch); % Epoch length in seconds
@@ -230,7 +230,7 @@ ACT = cic_calcEpochedMetrics(ACT, epoch); % Epoch length in seconds
 
 **Preprocess > GGIR Non-Wear Detection**
 
-```
+```matlab
 
 [ACT, err] = cic_ggirDetectNonWear(ACT);
 
@@ -238,7 +238,7 @@ ACT = cic_calcEpochedMetrics(ACT, epoch); % Epoch length in seconds
 
 **Analysis > Annotate Epochs > GGIR Annotation**
 
-```
+```matlab
 
 ACT = cic_ggirAnnotation(ACT, params); % Parameters used in algorithm [struct]
 ACT = cic_actigraphySleepEvents(ACT); % Genererate sleep period and waso events if sleep windows are available
@@ -247,7 +247,7 @@ ACT = cic_actigraphySleepEvents(ACT); % Genererate sleep period and waso events 
 
 **Analysis > Events > Create Daily Events**
 
-```
+```matlab
 
 ACT = cic_createDailyEvent(ACT, onset, duration, label); % Onset [string] in 'HH:MM', duration in hours, label [string]
 
@@ -255,7 +255,7 @@ ACT = cic_createDailyEvent(ACT, onset, duration, label); % Onset [string] in 'HH
 
 **Analysis > Events > Create Relative Events**
 
-```
+```matlab
 
 ACT = cic_createRelativeEvent(ACT, ...
 ref, ... % [string] either 'onset' or 'offset'
@@ -269,7 +269,7 @@ newLabel); % [string] label of new events
 
 **Analysis > Events > GGIR Sleep Detection**
 
-```
+```matlab
 
 ACT = cic_ggirSleepPeriodDetection(ACT);
 ACT = cic_actigraphySleepEvents(ACT); % Genererate sleep period and waso events if annotation is available
@@ -278,13 +278,13 @@ ACT = cic_actigraphySleepEvents(ACT); % Genererate sleep period and waso events 
 
 **Statistics > Generate Statistics**
 
-```
+```matlab
 
 ACT = cic_statistics(ACT); % Calculate average, daily and sleep statistics
 ACT = cic_statistics(ACT, 'customEvent', eventLabel); % Calculate statistics for custom events
 
 ```
 
-```
+Thank you for reading this far! Have a nice day.
 
-```
+Rick
