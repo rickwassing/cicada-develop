@@ -73,7 +73,8 @@ The data from actigraphy and/or other wearable devices are stored in a structure
 -   **ACT.metric** [struct] contains all metric
     -   **metric.acceleration.euclNormMinOne** [timeseries] Euclidean normal of the vector [x, y, z] minus 1 to account for static gravity, averaged in epochs of length `ACT.epoch`
     -   **metric.acceleration.bpFiltEuclNorm** [timeseries] Euclidean norm bandpass filtered between 0.2 and 15 Hz using a 4th order Butterworth filter, averaged in epochs of length `ACT.epoch`
-    -   **metric.acceleration.angle_z** [timeseries] angle of the accelerometry device in the z-axis, given by `atan(z / sqrt(x^2 + y^2)) / (pi/180)`, where 'x', 'y' and 'z' are median acceleration values obtained in moving windows of length `ACT.epoch`
+    -   **metric.acceleration.angle_z** [timeseries] angle of the accelerometry device in the z-axis, given by
+        `atan(z / sqrt(x^2 + y^2)) / (pi/180)`, where 'x', 'y' and 'z' are median acceleration values obtained in moving windows of length `ACT.epoch`
 -   **ACT.analysis** [struct] contains all output from analysis steps
 -   **ACT.stats** [struct] contains all output from statistics
 -   **ACT.display** [struct] contains all display settings
@@ -84,38 +85,39 @@ The data from actigraphy and/or other wearable devices are stored in a structure
 
 ### Functions
 
--   **package/appFunc** contains all functions that start with `app\_`. They contruct the graphical user interface by updating each component's properties upon events and changes in the data.
--   **package/cicadaFunc** contains all high-level functions that start with `cic\_` and either manipulate the data directly or call sub-functions to do so. This organization is highly similar to the `pop_\*` functions in EEGLAB.
--   **package/mountFunc** contains all functions that start with `mount\_`, which are used to draw graphical objects such as, `plot()`, `patch()` and `barh()`, or other components such as `uiaxes()` and `uipanel`.
+-   **package/appFunc** contains all functions that start with `app_`. They contruct the graphical user interface by updating each component's properties upon events and changes in the data.
+-   **package/cicadaFunc** contains all high-level functions that start with `cic_` and either manipulate the data directly or call sub-functions to do so. This organization is highly similar to the `pop_*` functions in EEGLAB.
+-   **package/mountFunc** contains all functions that start with `mount_`, which are used to draw graphical objects such as, `plot()`, `patch()` and `barh()`, or other components such as `uiaxes()` and `uipanel`.
 -   **package/supportFunc** contains all other functions that are used by the aforementioned functions.
 
 ### Settings files
 
 -   **settings/CicadaSettings.json** specifies the default settings for displaying the data, epoch length, and importing sleep diary data.
--   **settings/xSleepDiary.json** specifies the format and column number (index) of the date and time used to encode the sleep diary data. Multiple .json files can be specified, loaded, edited and saved in order to load sleep diaries with different formatting.
+-   **settings/\*SleepDiary.json** specifies the format and column number (index) of the date and time used to encode the sleep diary data. Multiple .json files can be specified, loaded, edited and saved in order to load sleep diaries with different formatting.
 
 ### Cicada User Inferface Management
 
-The Cicada user interface is comprised of various 'Components', e.g. a `uipannel`, `uiaxes`, or `plot` objects (note that the terms Component and Object can be used interchangably, but here I refer to them as Components). Each Component has properties, e.g. `Position`, `XLim`, or `XData`, and their values are dicated by the data in the `ACT` structure. For example, the user can change the analysis window through the Cicada GUI and this will trigger the event function to update the `ACT.startdate` and `ACT.enddate` value and call 'lifecycle(app)'. The 'lifecycle(app)' function is based on the lifecycle method of React a JavaScript library for building user inferfaces. The 'lifecycle()' function is comprised of the following sequence of sub-functions:
+The Cicada user interface is comprised of various 'Components', e.g. a `uipannel`, `uiaxes`, or `plot` objects (note that the terms Component and Object can be used interchangably, but here I refer to them as Components). Each Component has properties, e.g. `Position`, `XLim`, or `XData`, and their values are dicated by the data in the `ACT` structure. For example, the user can change the analysis window through the Cicada GUI and this will trigger the event function to update the `ACT.startdate` and `ACT.enddate` value and call `lifecycle(app)`. The `lifecycle()` function is based on the lifecycle method of React a JavaScript library for building user inferfaces. The 'lifecycle()' function is comprised of the following sequence of sub-functions:
 
+> ### Your help is more than welcome!
+>
 > If you are familiar with the React lifecycle method, or if you have a more appropriate approach for updating the user interface, and you'd like to contribute please contact me.
 
--   **mapStateToProps(app)** Maps the current state of the 'ACT' data structure to 'mount', i.e. create, Components if they don't exist yet, or to create a copy of the relevant Component properties with updated values. Importantly, these properties are not updated here but later in the lifecycle. This construction of Components is processed by the 'app_construct\*' functions which contain the sub-functions 'shouldComponentMount()', 'mountComponent()' and 'constructComponent()' (see below). For optimization purposes, only those Components that are a member of the component-groups in 'app.ComponentList' are mapped.
--   **app_construct\*(app, ~)** This set of functions is organized by Component groups. For example, 'app_constructDataPanel()' is responsible for constructing all the components in the main panel in the Data Analysis tab. For each of the required Components, the function 'shouldComponentMount()' is called, which checks if the Component, identified by its 'Tag' property, already exists or not. If not, the Component properties are constructed in a cell array called 'props', and the function 'mountComponent()' is called. If the Component exists, the relevant properties are constructed and the function 'constructComponent()' is called.
--   **shouldComponentMount(app, Parent, Tag)** Uses the build-in Matlab function 'findobj()' to find a Component identified by its unique Tag among the Children of the Parent Component. If the 'findobj()' function returns empty, the Component does not exist yet, and should be mounted, otherwise it should be constructed.
--   **mountComponent(app, mountFnc, Parent, Properties)** Uses the build-in Matlab function 'eval()' to call the mount function, specified as a string in 'mountFnc'. The mounting of Components is processed by the 'mount\_\*' functions which take in the arguments 'app', 'Parent', and 'Properties'.
--   **constructComponent(app, Tag, Parent, Properties)** Creates 'app.Components' which is a cell array of size N-by-2 where the fist column contains the handle to the Component, and the second column contains the relevant properties and their updated values.
--   **shouldComponentUpdate(app, Component, NewProps)** Once the 'app.Components' cell array is constructed for all relevant Component groups, a for-loop runs through all N elements. For each, 'shouldComponentUpdate()' checks if the current Component property values are equal to the updated property values in 'app.Components'. Only if at least one property is different, the Component is updated by the function 'updateComponent()'
+-   **mapStateToProps(app)** Maps the current state of the `ACT` data structure to 'mount', i.e. create, Components if they don't exist yet, or to create a copy of the relevant Component properties with updated values. Importantly, these properties are not updated here but later in the lifecycle. This construction of Components is processed by the `app_construct*` functions which contain the sub-functions `shouldComponentMount()`, `mountComponent()` and `constructComponent()` (see below). For optimization purposes, only those Components that are a member of the component-groups in `app.ComponentList` are mapped.
+-   **app_construct\*(app, ~)** This set of functions is organized by Component groups. For example, `app_constructDataPanel()` is responsible for constructing all the components in the main panel in the Data Analysis tab. For each of the required Components, the function `shouldComponentMount()` is called, which checks if the Component, identified by its `Tag` property, already exists or not. If not, the Component properties are constructed in a cell array called `props`, and the function `mountComponent()` is called. If the Component exists, the relevant properties are constructed and the function `constructComponent()` is called.
+-   **shouldComponentMount(app, Parent, Tag)** Uses the build-in Matlab function `findobj()` to find a Component identified by its unique Tag among the Children of the Parent Component. If the `findobj()` function returns empty, the Component does not exist yet, and should be mounted, otherwise it should be constructed.
+-   **mountComponent(app, mountFnc, Parent, Properties)** Uses the build-in Matlab function `eval()` to call the mount function, specified as a string in `mountFnc`. The mounting of Components is processed by the `mount_*` functions which take in the arguments `app`, `Parent`, and `Properties`.
+-   **constructComponent(app, Tag, Parent, Properties)** Creates `app.Components` which is a cell array of size N-by-2 where the fist column contains the handle to the Component, and the second column contains the relevant properties and their updated values.
+-   **shouldComponentUpdate(app, Component, NewProps)** Once the `app.Components` cell array is constructed for all relevant Component groups, a for-loop runs through all N elements. For each, `shouldComponentUpdate()` checks if the current Component property values are equal to the updated property values in `app.Components`. Only if at least one property is different, the Component is updated by the function `updateComponent()`.
 -   **updateComponent(app, Component, NewProps)** Updates the property values of the Component.
--   **unmountComponents(app)** Finally, 'unmountComponents()' checks for each Component in the relevant Component groups if the data in the 'ACT' structure still requires a particular Component to exist. For example, if the user deletes an event, the graphical 'patch' Component should be removed as well. The unmounting of Components is processed by 'unmountComponent()'.
--   **unmountComponent(app, Component)** Uses the build-in Matlab function 'delete()' to unmount a Component.
+-   **unmountComponents(app)** Finally, `unmountComponents()` checks for each Component in the relevant Component groups if the data in the `ACT` structure still requires a particular Component to exist. For example, if the user deletes an event, the graphical Component should be removed as well. The unmounting of Components is processed by `unmountComponent()`.
+-   **unmountComponent(app, Component)** Uses the build-in Matlab function `delete()` to unmount a Component.
 
 ### Menu items and their call-alone functions
 
 **File > Open WorkSpace**
 
 ```
-
 ACT = cic_loadmat(fullpath);
 [ACT, err, msg] = cic_checkDataset(ACT);
 ACT = cic_calcEpochedMetrics(ACT, epoch); % Epoch length in seconds
