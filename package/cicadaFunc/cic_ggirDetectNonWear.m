@@ -8,12 +8,9 @@ function [ACT, err] = cic_ggirDetectNonWear(ACT)
 %   PLoS One. 2013 Apr 23;8(4):e61691. doi: 10.1371/journal.pone.0061691.
 % ---------------------------------------------------------
 % Initialize variables
-ACT.thresholds.winShort = 15*60*ACT.srate; % 15 minutes
-ACT.thresholds.winLong  = 60*60*ACT.srate; % 60 minutes
-% Extract variable for shortness
-winShort   = ACT.thresholds.winShort;
-winLong    = ACT.thresholds.winLong;
-maxWindows = floor(ACT.pnts/ACT.thresholds.winShort);
+winShort = 15*60*ACT.srate; % 15 minutes
+winLong = 60*60*ACT.srate; % 60 minutes
+maxWindows = floor(ACT.pnts/winShort);
 if maxWindows == 0
     err = sprintf('Did not perform non-wear detection, data is too short <%i samples>', ACT.pnts);
     fprintf('%s\n', err)
@@ -28,20 +25,20 @@ nonWear = zeros(ACT.pnts,3);
 % Get thresholds
 switch ACT.info.device
     case 'genea'
-        ACT.thresholds.offWristStd = 0.003;
-        ACT.thresholds.offWristRng = 0.05;
+        offWristStd = 0.003;
+        offWristRng = 0.05;
     case 'geneactive'
-        ACT.thresholds.offWristStd = 0.013; % 0.0109 in rest test
-        ACT.thresholds.offWristRng = 0.15;  % 0.1279 in rest test
+        offWristStd = 0.013; % 0.0109 in rest test
+        offWristRng = 0.15;  % 0.1279 in rest test
     case 'actigraph'
-        ACT.thresholds.offWristStd = 0.013; % Adjustment needed for 'actigraph'
-        ACT.thresholds.offWristRng = 0.15;
+        offWristStd = 0.013; % Adjustment needed for 'actigraph'
+        offWristRng = 0.15;
     case 'axivity'
-        ACT.thresholds.offWristStd = 0.013; % Adjustment needed for 'axivity'
-        ACT.thresholds.offWristRng = 0.15;
+        offWristStd = 0.013; % Adjustment needed for 'axivity'
+        offWristRng = 0.15;
     otherwise
-        ACT.thresholds.offWristStd = 0.013;
-        ACT.thresholds.offWristRng = 0.15;
+        offWristStd = 0.013;
+        offWristRng = 0.15;
 end
 
 for win = 1:maxWindows
@@ -60,12 +57,12 @@ for win = 1:maxWindows
         if ax == 3; fname = 'z'; end
         % ---------------------------------------------------------
         % Calculate the standard deviation and range in the window
-        stdwacc = nanstd(ACT.data.acceleration.(fname)(winEdges(1)+1:winEdges(2)));
-        rngwacc = range(ACT.data.acceleration.(fname)(winEdges(1)+1:winEdges(2)));
+        stdwacc = nanstd(ACT.data.acceleration.(fname).Data(winEdges(1)+1:winEdges(2)));
+        rngwacc = range(ACT.data.acceleration.(fname).Data(winEdges(1)+1:winEdges(2)));
         % ---------------------------------------------------------
         % If the standard deviation and range is below the threshold, then
         % this window can be scored as off-wrist.
-        if stdwacc < ACT.thresholds.offWristStd && rngwacc < ACT.thresholds.offWristRng
+        if stdwacc < offWristStd && rngwacc < offWristRng
             nonWear(winEdges(1)+1:winEdges(2),ax) = 1;
         end
     end

@@ -115,14 +115,58 @@ ACT.xmin  = times(1);
 ACT.xmax  = times(end);
 % ---------------------------------------------------------
 % Store the data, note that GeneActiv does not measure heart-rate
-ACT.data.acceleration.x    = xyz(:,1)';
-ACT.data.acceleration.y    = xyz(:,2)';
-ACT.data.acceleration.z    = xyz(:,3)';
-ACT.data.light.w           = light';
-ACT.data.temperature.wrist = prop_val(:,2)';
+% -----
+% x-axis
+ACT.data.acceleration.x = timeseries(xyz(:,1), times, 'Name', 'acceleration_x');
+ACT.data.acceleration.x.DataInfo.Units = 'g';
+ACT.data.acceleration.x.TimeInfo.Units = 'days';
+ACT.data.acceleration.x.TimeInfo.Format = 'dd-mmm-yyyy HH:MM:SS';
+ACT.data.acceleration.x.TimeInfo.StartDate = '00-Jan-0000 00:00:00';
+% Force the timeseries to have uniform interval
+ACT.data.acceleration.x = setuniformtime(ACT.data.acceleration.x, 'StartTime', ACT.xmin, 'Interval', 1/(ACT.srate*60*60*24));
+% -----
+% y-axis
+ACT.data.acceleration.y = timeseries(xyz(:,2), times, 'Name', 'acceleration_y');
+ACT.data.acceleration.y.DataInfo.Units = 'g';
+ACT.data.acceleration.y.TimeInfo.Units = 'days';
+ACT.data.acceleration.y.TimeInfo.Format = 'dd-mmm-yyyy HH:MM:SS';
+ACT.data.acceleration.y.TimeInfo.StartDate = '00-Jan-0000 00:00:00';
+% Force the timeseries to have uniform interval
+ACT.data.acceleration.y = setuniformtime(ACT.data.acceleration.y, 'StartTime', ACT.xmin, 'Interval', 1/(ACT.srate*60*60*24));
+% -----
+% x-axis
+ACT.data.acceleration.z = timeseries(xyz(:,3), times, 'Name', 'acceleration_z');
+ACT.data.acceleration.z.DataInfo.Units = 'g';
+ACT.data.acceleration.z.TimeInfo.Units = 'days';
+ACT.data.acceleration.z.TimeInfo.Format = 'dd-mmm-yyyy HH:MM:SS';
+ACT.data.acceleration.z.TimeInfo.StartDate = '00-Jan-0000 00:00:00';
+% Force the timeseries to have uniform interval
+ACT.data.acceleration.z = setuniformtime(ACT.data.acceleration.z, 'StartTime', ACT.xmin, 'Interval', 1/(ACT.srate*60*60*24));
+% -----
+% Light data
+ACT.data.light.wideSpec = timeseries(light, times, 'Name', 'light_broadSpec');
+ACT.data.light.wideSpec.DataInfo.Units = 'lux';
+ACT.data.light.wideSpec.TimeInfo.Units = 'days';
+ACT.data.light.wideSpec.TimeInfo.Format = 'dd-mmm-yyyy HH:MM:SS';
+ACT.data.light.wideSpec.TimeInfo.StartDate = '00-Jan-0000 00:00:00';
+% Force the timeseries to have uniform interval
+ACT.data.light.wideSpec = setuniformtime(ACT.data.light.wideSpec, 'StartTime', ACT.xmin, 'Interval', 1/(ACT.srate*60*60*24));
+% -----
+% Temperature data
+ACT.data.temperature.wrist = timeseries(prop_val(:,2), times, 'Name', 'temperature_wrist');
+ACT.data.temperature.wrist.DataInfo.Units = '*C';
+ACT.data.temperature.wrist.TimeInfo.Units = 'days';
+ACT.data.temperature.wrist.TimeInfo.Format = 'dd-mmm-yyyy HH:MM:SS';
+ACT.data.temperature.wrist.TimeInfo.StartDate = '00-Jan-0000 00:00:00';
+% Force the timeseries to have uniform interval
+ACT.data.temperature.wrist = setuniformtime(ACT.data.temperature.wrist, 'StartTime', ACT.xmin, 'Interval', 1/(ACT.srate*60*60*24));
 % ---------------------------------------------------------
 % Creat timeseries for raw data
-ACT.times = times;
+ACT.times = ACT.data.acceleration.x.Time;
+% Update the time variables
+ACT.pnts = length(ACT.times);
+ACT.xmin = times(1);
+ACT.xmax = times(end);
 % ---------------------------------------------------------
 % Store events
 ACT.events = table();

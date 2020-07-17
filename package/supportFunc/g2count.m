@@ -3,7 +3,7 @@ function ACT = g2count(ACT)
 % Calculate Counts from accelerometer data
 % filter z-accelerometer data
 [b, a] = butter(5, [3/(ACT.srate/2) 11/(ACT.srate/2)], 'bandpass');
-z_filt = filtfilt(b, a, ACT.data.acceleration.z);
+z_filt = filtfilt(b, a, ACT.data.acceleration.z.Data);
 
 % convert data to 128 bins between 0 and 5
 [~, binned] = histc(abs(z_filt), linspace(0, 5, 128+1));
@@ -32,6 +32,9 @@ times = ACT.xmin+step/2:step:ACT.xmin+step/2+(length(ACT.metric.acceleration.cou
 
 % Save the metric
 ACT.metric.acceleration.counts = timeseries(ACT.metric.acceleration.counts', times, 'Name', 'counts');
+ACT.metric.acceleration.counts.DataInfo.Units = 'a.u.';
 ACT.metric.acceleration.counts.TimeInfo.Units = 'days';
+ACT.metric.acceleration.counts.TimeInfo.Format = 'dd-mmm-yyyy HH:MM:SS';
+ACT.metric.acceleration.counts.TimeInfo.StartDate = '00-Jan-0000 00:00:00';
 
 end

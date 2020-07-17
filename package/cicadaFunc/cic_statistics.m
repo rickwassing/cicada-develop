@@ -100,6 +100,10 @@ if ismember('customEvent', do)
                 % ---------------------------------------------------------
                 % Extract this day's data and insert NaNs for rejected segments
                 [data, times] = selectDataUsingTime(ACT.metric.(datatypes{ti}).(fnames{fi}).Data, ACT.metric.(datatypes{ti}).(fnames{fi}).Time, events.onset(ei), events.onset(ei)+events.duration(ei));
+                if isempty(data)
+                    data = nan;
+                    times = 0;
+                end
                 data(events2idx(ACT, times, 'Label', 'reject')) = nan;
                 % ---------------------------------------------------------
                 % Calculate average

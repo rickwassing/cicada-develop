@@ -14,26 +14,26 @@ sphereCriterion  = 0.3;
 windowLength     = 10;
 maxIter          = 1000;
 tolerance        = 1e-10;
-if isempty(ACT.data.temperature.wrist)
+if ~isfield(ACT.data.temperature, 'wrist')
     useTemp = false;
 else
     useTemp = true;
 end
 % ---------------------------------------------------------
 % Is there enough data to populate the sphere?
-if length(ACT.data.acceleration.x) <= minLoadCriterion-21
+if length(ACT.data.acceleration.x.Data) <= minLoadCriterion-21
     return
 end
 
 meta = table();
-meta.GxM = averagePerWindow(ACT.data.acceleration.x, ACT.srate, windowLength)';
-meta.GyM = averagePerWindow(ACT.data.acceleration.y, ACT.srate, windowLength)';
-meta.GzM = averagePerWindow(ACT.data.acceleration.z, ACT.srate, windowLength)';
-meta.GxSD = stdPerWindow(ACT.data.acceleration.x, ACT.srate, windowLength)';
-meta.GySD = stdPerWindow(ACT.data.acceleration.y, ACT.srate, windowLength)';
-meta.GzSD = stdPerWindow(ACT.data.acceleration.z, ACT.srate, windowLength)';
+meta.GxM = averagePerWindow(ACT.data.acceleration.x.Data, ACT.srate, windowLength)';
+meta.GyM = averagePerWindow(ACT.data.acceleration.y.Data, ACT.srate, windowLength)';
+meta.GzM = averagePerWindow(ACT.data.acceleration.z.Data, ACT.srate, windowLength)';
+meta.GxSD = stdPerWindow(ACT.data.acceleration.x.Data, ACT.srate, windowLength)';
+meta.GySD = stdPerWindow(ACT.data.acceleration.y.Data, ACT.srate, windowLength)';
+meta.GzSD = stdPerWindow(ACT.data.acceleration.z.Data, ACT.srate, windowLength)';
 if useTemp
-    meta.temperatureM = averagePerWindow(ACT.data.temperature.wrist, ACT.srate, windowLength)';
+    meta.temperatureM = averagePerWindow(ACT.data.temperature.wrist.Data, ACT.srate, windowLength)';
 end
 meta(1,:) = [];
 
@@ -162,9 +162,9 @@ ACT.etc.cal.x_offset = actOffset(1);
 ACT.etc.cal.y_offset = actOffset(2);
 ACT.etc.cal.z_offset = actOffset(3);
 
-ACT.data.acceleration.x = (ACT.data.acceleration.x - ACT.etc.cal.x_offset) ./ ACT.etc.cal.x_gain;
-ACT.data.acceleration.y = (ACT.data.acceleration.y - ACT.etc.cal.y_offset) ./ ACT.etc.cal.y_gain;
-ACT.data.acceleration.z = (ACT.data.acceleration.z - ACT.etc.cal.z_offset) ./ ACT.etc.cal.z_gain;
+ACT.data.acceleration.x.Data = (ACT.data.acceleration.x.Data - ACT.etc.cal.x_offset) ./ ACT.etc.cal.x_gain;
+ACT.data.acceleration.y.Data = (ACT.data.acceleration.y.Data - ACT.etc.cal.y_offset) ./ ACT.etc.cal.y_gain;
+ACT.data.acceleration.z.Data = (ACT.data.acceleration.z.Data - ACT.etc.cal.z_offset) ./ ACT.etc.cal.z_gain;
 % ---------------------------------------------------------
 % Set saved to false
 ACT.saved = false;
@@ -178,4 +178,3 @@ ACT.history = char(ACT.history, '% GGIR''s Automatic calibration algorithm (DOI:
 ACT.history = char(ACT.history, 'ACT = cic_ggirAutomaticCalibration(ACT);');
 
 end % EOF
-

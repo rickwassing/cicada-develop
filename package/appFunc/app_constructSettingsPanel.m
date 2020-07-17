@@ -165,6 +165,11 @@ for di = 1:length(app.ACT.display.order)
             };
         % Mount component using the 'mount_uigridlayout' function
         mountComponent(app, 'mount_uigridlayout', parent, props);
+    else
+        % Construct the component with its updated Row Height 
+        constructComponent(app, ['GridLayoutSettingsPanel_', app.ACT.display.order{di}], parent, { ...
+            'RowHeight', {18, 18, 18, 21*length(fnames)+3}; ...
+            });
     end
     % -----
     % Extract parent gridlayout object to use for its children

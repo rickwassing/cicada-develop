@@ -13,8 +13,7 @@ ACT = g2count(ACT);
 % -----
 % First, create a new time series for the epoched data
 step  = 1/(24*60*60/ACT.epoch);
-nWins = floor(ACT.pnts/(ACT.srate*ACT.epoch));
-times = ACT.xmin + step/2 : step : ACT.xmin + step/2 + (nWins-1) * step;
+times = ACT.xmin:step:ACT.xmax;
 % -----
 % Initialize an empty a timeseries object, which will be used by other
 % preprocessing and analyses algorithms to indicate:
@@ -24,37 +23,47 @@ times = ACT.xmin + step/2 : step : ACT.xmin + step/2 + (nWins-1) * step;
 % 1   = light activity
 % 2   = moderate activity
 % 3   = vigorous activity
-ACT.analysis.annotate = timeseries(zeros(nWins,1), times, 'Name', 'annotate');
+ACT.analysis.annotate = timeseries(zeros(length(times),1), times, 'Name', 'annotate');
+ACT.analysis.annotate.DataInfo.Units = 'a.u.';
 ACT.analysis.annotate.TimeInfo.Units = 'days';
+ACT.analysis.annotate.TimeInfo.Format = 'dd-mmm-yyyy HH:MM:SS';
+ACT.analysis.annotate.TimeInfo.StartDate = '00-Jan-0000 00:00:00';
+
 % -----
 % Euclidean Norm Minus One
-tmp = sqrt(ACT.data.acceleration.x .^2 + ACT.data.acceleration.y .^2 + ACT.data.acceleration.z .^2) - 1;
+tmp = sqrt(ACT.data.acceleration.x.Data .^2 + ACT.data.acceleration.y.Data .^2 + ACT.data.acceleration.z.Data .^2) - 1;
 tmp(tmp < 0) = 0;
 ACT.metric.acceleration.euclNormMinOne = timeseries(averagePerWindow(...
     tmp, ...
     ACT.srate, ...
     ACT.epoch)', times, 'Name', 'euclNormMinOne');
+ACT.metric.acceleration.euclNormMinOne.DataInfo.Units = 'g';
 ACT.metric.acceleration.euclNormMinOne.TimeInfo.Units = 'days';
+ACT.metric.acceleration.euclNormMinOne.TimeInfo.Format = 'dd-mmm-yyyy HH:MM:SS';
+ACT.metric.acceleration.euclNormMinOne.TimeInfo.StartDate = '00-Jan-0000 00:00:00';
 % -----
 % Bandpass filtered Euclidean Norm @ 0.2 - 14.95 Hz
 [b, a] = butter(4, [0.2/(ACT.srate/2) 14.95/(ACT.srate/2)], 'bandpass');
-tmp_x = filtfilt(b, a, ACT.data.acceleration.x);
-tmp_y = filtfilt(b, a, ACT.data.acceleration.y);
-tmp_z = filtfilt(b, a, ACT.data.acceleration.z);
+tmp_x = filtfilt(b, a, ACT.data.acceleration.x.Data);
+tmp_y = filtfilt(b, a, ACT.data.acceleration.y.Data);
+tmp_z = filtfilt(b, a, ACT.data.acceleration.z.Data);
 ACT.metric.acceleration.bpFiltEuclNorm = timeseries(averagePerWindow(...
     sqrt(tmp_x.^2 + tmp_y.^2 + tmp_z.^2),...
     ACT.srate, ...
     ACT.epoch)', times, 'Name', 'bpFiltEuclNorm');
+ACT.metric.acceleration.bpFiltEuclNorm.DataInfo.Units = 'g';
 ACT.metric.acceleration.bpFiltEuclNorm.TimeInfo.Units = 'days';
+ACT.metric.acceleration.bpFiltEuclNorm.TimeInfo.Format = 'dd-mmm-yyyy HH:MM:SS';
+ACT.metric.acceleration.bpFiltEuclNorm.TimeInfo.StartDate = '00-Jan-0000 00:00:00';
 % -----
 % Calculate moving medians for angles
 k = ACT.epoch*ACT.srate;
 if mod(k,2) == 0; k = k+1; end % Force an odd-sized window
 % -----
 % Calculate moving medians
-tmp_x = movmedian(ACT.data.acceleration.x, k, 'EndPoints', 'fill');
-tmp_y = movmedian(ACT.data.acceleration.y, k, 'EndPoints', 'fill');
-tmp_z = movmedian(ACT.data.acceleration.z, k, 'EndPoints', 'fill');
+tmp_x = movmedian(ACT.data.acceleration.x.Data, k, 'EndPoints', 'fill');
+tmp_y = movmedian(ACT.data.acceleration.y.Data, k, 'EndPoints', 'fill');
+tmp_z = movmedian(ACT.data.acceleration.z.Data, k, 'EndPoints', 'fill');
 % -----
 % Replace any NaN's in the first 1000 samples with the first non-NaN value
 if any(isnan(tmp_x(1:1000))) && any(~isnan(tmp_x(1:1000)))
@@ -83,19 +92,42 @@ ACT.metric.acceleration.angle_z = timeseries(averagePerWindow(...
     atan(tmp_z ./ sqrt(tmp_x.^2 + tmp_y.^2)) ./ (pi/180), ...
     ACT.srate, ...
     ACT.epoch)', times, 'Name', 'angle_z');
+ACT.metric.acceleration.angle_z.DataInfo.Units = '*';
 ACT.metric.acceleration.angle_z.TimeInfo.Units = 'days';
+ACT.metric.acceleration.angle_z.TimeInfo.Format = 'dd-mmm-yyyy HH:MM:SS';
+ACT.metric.acceleration.angle_z.TimeInfo.StartDate = '00-Jan-0000 00:00:00';
+
 % ---------------------------------------------------------
-% Calculate epoched data
+% Calculate epoched data, except for acceleration
 dataTypes = fieldnames(ACT.data);
 dataTypes(strcmpi(dataTypes, 'acceleration')) = [];
 for di = 1:length(dataTypes)
+    % Extract all the fieldnames of this data type
     fnames = fieldnames(ACT.data.(dataTypes{di}));
     for fi = 1:length(fnames)
-        ACT.metric.(dataTypes{di}).(fnames{fi}) = timeseries(averagePerWindow(...
-            ACT.data.(dataTypes{di}).(fnames{fi}), ...
-            ACT.srate, ...
-            ACT.epoch)', times, 'Name', fnames{fi});
+        % Resample the timeseries
+        srate = 1/(ACT.data.(dataTypes{di}).(fnames{fi}).TimeInfo.Increment*60*60*24);
+        if srate > 1/ACT.epoch
+            % Downsample the data
+            tmp = retime(timetable(ACT.data.(dataTypes{di}).(fnames{fi}).Data, 'SampleRate', srate), ...
+                'Regular', 'mean', ...
+                'SampleRate', 1/ACT.epoch);
+        elseif srate < 1/ACT.epoch
+            % Upsample the data
+            tmp = retime(timetable(ACT.data.(dataTypes{di}).(fnames{fi}).Data, 'SampleRate', srate), ...
+                'Regular', 'linear', ...
+                'SampleRate', 1/ACT.epoch);
+        else
+            % Do nothing
+            tmp = timetable(ACT.data.(dataTypes{di}).(fnames{fi}).Data, 'SampleRate', srate);
+        end
+        % Convert timetable back to timeseries
+        times = ACT.data.(dataTypes{di}).(fnames{fi}).Time(1) + seconds(tmp.Time) / (60*60*24);
+        ACT.metric.(dataTypes{di}).(fnames{fi}) = timeseries(tmp{:, :}, times, 'Name', [dataTypes{di}, '-', fnames{fi}]);
+        ACT.metric.(dataTypes{di}).(fnames{fi}).DataInfo.Units = ACT.data.(dataTypes{di}).(fnames{fi}).DataInfo.Units;
         ACT.metric.(dataTypes{di}).(fnames{fi}).TimeInfo.Units = 'days';
+        ACT.metric.(dataTypes{di}).(fnames{fi}).TimeInfo.Format = 'dd-mmm-yyyy HH:MM:SS';
+        ACT.metric.(dataTypes{di}).(fnames{fi}).TimeInfo.StartDate = '00-Jan-0000 00:00:00';
     end
 end
 % ---------------------------------------------------------

@@ -7,6 +7,9 @@ currOrder = {parent.Children.Tag};
 desOrder = fieldnames(app.ACT.display.(datatype).field);
 desOrder = cellfun(@(fname) ['PlotData-', datatype, '_field-', fname, '_day-', num2str(day)], desOrder, 'UniformOutput', false);
 
+% Only keep the desired order of the existing components
+desOrder(~ismember(desOrder, currOrder)) = [];
+
 % Get the new indices of the order of the children
 newIdx = cell2mat(cellfun(@(tag) find(strcmpi(tag, currOrder)), desOrder, 'UniformOutput', false));
 

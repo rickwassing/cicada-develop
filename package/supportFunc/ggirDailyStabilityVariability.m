@@ -13,10 +13,8 @@ intraDailyVar  = NaN;
 % Create Euclidean Norm in 30 second epochs
 epoch = 30; % seconds
 step  = 1/(24*60*60/epoch);
-nWins = floor(ACT.pnts/(ACT.srate*epoch));
-% times = ACT.xmin + step/2 : step : ACT.xmin + (nWins-1) * step + step/2;
-times = ACT.xmin : step : ACT.xmin + (nWins-1) * step;
-euclNormMinOne = sqrt(ACT.data.acceleration.x .^2 + ACT.data.acceleration.y .^2 + ACT.data.acceleration.z .^2) - 1;
+times = ACT.xmin:step:ACT.xmax;
+euclNormMinOne = sqrt(ACT.data.acceleration.x.Data .^2 + ACT.data.acceleration.y.Data .^2 + ACT.data.acceleration.z.Data .^2) - 1;
 euclNormMinOne(euclNormMinOne < 0) = 0;
 euclNormMinOne = averagePerWindow(euclNormMinOne, ACT.srate, epoch);
 

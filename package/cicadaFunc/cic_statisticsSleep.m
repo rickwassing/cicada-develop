@@ -77,8 +77,13 @@ for s = 1:size(slpWindows,1)
     waso = selectEventsUsingTime(ACT.events, slpWindows.onset(s), slpWindows.onset(s)+slpWindows.duration(s), ...
         'Label', 'waso', ...
         'Type', slpPeriodType);
-    ACT.stats.sleep.(eventType).nAwakening(s, 1) = size(waso, 1);
-    ACT.stats.sleep.(eventType).wakeAfterSlpOnset(s, 1) = sum(waso.duration) * 24*60;
+    if isempty(waso) && strcmpi(eventType, 'sleepDiary')
+        ACT.stats.sleep.(eventType).nAwakening(s, 1) = NaN;
+        ACT.stats.sleep.(eventType).wakeAfterSlpOnset(s, 1) = NaN;
+    else
+        ACT.stats.sleep.(eventType).nAwakening(s, 1) = size(waso, 1);
+        ACT.stats.sleep.(eventType).wakeAfterSlpOnset(s, 1) = sum(waso.duration) * 24*60;
+    end
     % ---------------------------------------------------------
     % Total sleep time = (final awakening - sleep onset) - wake after sleep onset
     ACT.stats.sleep.(eventType).totSlpTime(s, 1) = (datenum(ACT.stats.sleep.(eventType).clockFinAwake{s,1}, 'dd/mm/yyyy HH:MM') - datenum(ACT.stats.sleep.(eventType).clockSlpOnset{s,1}, 'dd/mm/yyyy HH:MM')) *24*60 - ACT.stats.sleep.(eventType).wakeAfterSlpOnset(s,1);

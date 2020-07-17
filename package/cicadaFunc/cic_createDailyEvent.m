@@ -6,9 +6,9 @@ if ~isnumeric(onset)
 end
 % Repeat 'onset' for each day in the recording
 startDay = floor(ACT.xmin);
-endDay = floor(ACT.xmax);
+endDay = ceil(ACT.xmax);
 onset = startDay + onset : endDay + onset;
-onset(onset < ACT.xmin | onset+duration > ACT.xmax) = [];
+onset(onset < ACT.xmin | onset+(duration/24) > ACT.xmax) = [];
 % ---------------------------------------------------------
 % Add events
 ACT = cic_editEvents(ACT, 'add', onset, repmat(duration/24, length(onset), 1), 'Label', label, 'Type', 'customEvent');

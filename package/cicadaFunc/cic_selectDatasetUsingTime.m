@@ -14,13 +14,13 @@ end
 % ---------------------------------------------------------
 % Cut the raw data
 times = ACT.times;
-[~, ACT.times] = selectDataUsingTime(ACT.data.acceleration.x, times, startDate, endDate);
+[~, ACT.times] = selectDataUsingTime(ACT.data.acceleration.x.Data, times, startDate, endDate);
 datatypes = fieldnames(ACT.data);
-for d = 1:length(datatypes)
-    if isstruct(ACT.data.(datatypes{d}))
-        fnames = fieldnames(ACT.data.(datatypes{d}));
-        for f = 1:length(fnames)
-            ACT.data.(datatypes{d}).(fnames{f}) = selectDataUsingTime(ACT.data.(datatypes{d}).(fnames{f}), times, startDate, endDate);
+for di = 1:length(datatypes)
+    if isstruct(ACT.data.(datatypes{di}))
+        fnames = fieldnames(ACT.data.(datatypes{di}));
+        for fi = 1:length(fnames)
+            ACT.data.(datatypes{di}).(fnames{fi}) = getsampleusingtime(ACT.data.(datatypes{di}).(fnames{fi}), startDate, endDate);
         end
     end
 end
@@ -29,24 +29,22 @@ ACT.xmin = ACT.times(1);
 ACT.xmax = ACT.times(end);
 % ---------------------------------------------------------
 % Cut the annotation data
-[data, time] = selectDataUsingTime(ACT.analysis.annotate.Data, ACT.analysis.annotate.Time, startDate, endDate);
-ACT.analysis.annotate = timeseries(data, time, 'Name', 'annotate');
-ACT.analysis.annotate.TimeInfo.Units = 'days';
+ACT.analysis.annotate = getsampleusingtime(ACT.analysis.annotate, startDate, endDate);
 % ---------------------------------------------------------
 % Cut the metrics
 metrictypes = fieldnames(ACT.metric);
-for m = 1:length(metrictypes)
-    if isstruct(ACT.metric.(metrictypes{m}))
-        fnames = fieldnames(ACT.metric.(metrictypes{m}));
-        for f = 1:length(fnames)
-            [data, time] = selectDataUsingTime(ACT.metric.(metrictypes{m}).(fnames{f}).Data, ACT.metric.(metrictypes{m}).(fnames{f}).Time, startDate, endDate);
-            ACT.metric.(metrictypes{m}).(fnames{f}) = timeseries(data, time, 'Name', fnames{f});
-            ACT.metric.(metrictypes{m}).(fnames{f}).TimeInfo.Units = 'days';
+for mi = 1:length(metrictypes)
+    if isstruct(ACT.metric.(metrictypes{mi}))
+        fnames = fieldnames(ACT.metric.(metrictypes{mi}));
+        for fi = 1:length(fnames)
+            ACT.metric.(metrictypes{mi}).(fnames{fi}) = getsampleusingtime( ...
+                ACT.metric.(metrictypes{mi}).(fnames{fi}), ...
+                startDate, endDate);
         end
     else
-        [data, time] = selectDataUsingTime(ACT.metric.(metrictypes{m}).Data, ACT.metric.(metrictypes{m}).Time, startDate, endDate);
-        ACT.metric.(metrictypes{m}) = timeseries(data, time, 'Name', metrictypes{m});
-        ACT.metric.(metrictypes{m}).TimeInfo.Units = 'days';
+        ACT.metric.(metrictypes{mi}) = getsampleusingtime(...
+            ACT.metric.(metrictypes{mi}), ...
+            startDate, endDate);
     end
 end
 % ---------------------------------------------------------

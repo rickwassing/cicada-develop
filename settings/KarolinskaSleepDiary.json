@@ -1,6 +1,6 @@
 {
 	"format": {
-		"date": "dd/mm/yyyy",
+		"date": "dd/mm/yy",
 		"lightsOut": "HH:MM",
 		"finAwake": "HH:MM",
 		"lightsOn": "HH:MM"

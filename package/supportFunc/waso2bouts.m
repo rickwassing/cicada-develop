@@ -1,5 +1,9 @@
 function wasoBouts = waso2bouts(waso, nAwake, startDate, endDate)
 
+while startDate > endDate
+    endDate = endDate + 1;
+end
+
 nAwake = round(nAwake);
 wBout = (waso/nAwake) / (24*60);
 

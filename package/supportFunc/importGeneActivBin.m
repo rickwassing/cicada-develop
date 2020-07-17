@@ -115,7 +115,7 @@ while strcmpi(page_name, DATA_PAGE_NAME)
     if nb_pages_in_header
         if ((data_page_count/nb_pages)-pct) > 0.01
             pct = (data_page_count/nb_pages);
-            cancel = showWaitbar(sprintf('Reading bin file (%.0f%%)', pct*100), pct, 'on');
+            cancel = showWaitbar(sprintf('Reading .bin file (%.0f%%)', pct*100), pct, 'on');
             if cancel
                 header = 'cancel';
                 return

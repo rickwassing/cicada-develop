@@ -330,6 +330,9 @@ for di = 1:app.ACT.ndays
                             if shouldComponentMount(app, ax, ['PlotData-', axesTypes{ai}, '_field-', fnames{fi}, '_day-', num2str(di)])
                                 % Set X and YData
                                 [YData, XData] = selectDataUsingTime(app.ACT.metric.(axesTypes{ai}).(fnames{fi}).Data, app.ACT.metric.(axesTypes{ai}).(fnames{fi}).Time, StartDate, EndDate);
+                                if isempty(YData)
+                                    continue
+                                end
                                 % If the minimum value is zero or smaller, add 0.0001 so the log-scale does not get to -infinity
                                 YData = ifelse(min(YData) <= 0, YData+0.0001, YData);
                                 % Define the properties
@@ -346,6 +349,9 @@ for di = 1:app.ACT.ndays
                             else
                                 % Set X and YData
                                 [YData, XData] = selectDataUsingTime(app.ACT.metric.(axesTypes{ai}).(fnames{fi}).Data, app.ACT.metric.(axesTypes{ai}).(fnames{fi}).Time, StartDate, EndDate);
+                                if isempty(YData)
+                                    continue
+                                end
                                 % If the minimum value is zero or smaller, add 0.0001 so the log-scale does not get to -infinity
                                 YData = ifelse(min(YData) <= 0, YData+0.0001, YData);
                                 % Construct the component
@@ -355,9 +361,9 @@ for di = 1:app.ACT.ndays
                                     'Visible', ifelse(app.ACT.display.(axesTypes{ai}).field.(fnames{fi}).show, 'on', 'off'); ...
                                     'Color', app.ACT.display.(axesTypes{ai}).field.(fnames{fi}).clr;
                                     });
-                                app_reorderPlotComponents(app, ax, axesTypes{ai}, di)
                             end
                         end
+                        app_reorderPlotComponents(app, ax, axesTypes{ai}, di)
                     end
             end
         end

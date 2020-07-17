@@ -63,13 +63,17 @@ for di = 1:ACT.ndays+1
             % ---------------------------------------------------------
             % Extract this day's data and insert NaNs for rejected segments
             [data, times] = selectDataUsingTime(ACT.metric.(datatypes{ti}).(fnames{fi}).Data, ACT.metric.(datatypes{ti}).(fnames{fi}).Time, startDate, endDate);
+            if isempty(data)
+                data = nan;
+                times = 0;
+            end
             data(events2idx(ACT, times, 'Label', 'reject')) = nan;
             % ---------------------------------------------------------
             % Calculate average
             ACT.stats.daily.(['av', titleCase(datatypes{ti}), titleCase(fnames{fi})])(di, 1) = nanmean(data);
             % ---------------------------------------------------------
             % Calculate the min, max and clock onset only if there is a whole 24 hour day
-            if range(timesEuclNorm)+ACT.epoch/(24*60*60) > 0.9999
+            if range(times)+ACT.epoch/(24*60*60) > 0.9999
                 [...
                     ACT.stats.daily.(['min', titleCase(datatypes{ti}), titleCase(fnames{fi}), 'MovWin30m'])(di, 1), ...
                     ACT.stats.daily.(['clockOnsetMin', titleCase(datatypes{ti}), titleCase(fnames{fi}), 'MovWin30m']){di, 1}...

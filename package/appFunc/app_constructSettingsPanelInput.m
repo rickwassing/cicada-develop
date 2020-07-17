@@ -246,9 +246,11 @@ for fi = 1:length(fnames)
         parent.UserData.(['FieldUpButton_', fnames{fi}]).UserData.field = fnames{fi};
         parent.UserData.(['FieldUpButton_', fnames{fi}]).UserData.direction = -1;
         parent.UserData.(['FieldUpButton_', fnames{fi}]).ButtonPushedFcn = {@app.EventListener};
-        if fi == 1
-            parent.UserData.(['FieldUpButton_', fnames{fi}]).Enable = 'off';
-        end
+    end
+    if fi == 1
+        parent.UserData.(['FieldUpButton_', fnames{fi}]).Enable = 'off';
+    else
+        parent.UserData.(['FieldUpButton_', fnames{fi}]).Enable = 'on';
     end
     % ---------------------------------------------------------
     % Down Button
@@ -266,9 +268,11 @@ for fi = 1:length(fnames)
         parent.UserData.(['FieldDownButton_', fnames{fi}]).UserData.field = fnames{fi};
         parent.UserData.(['FieldDownButton_', fnames{fi}]).UserData.direction = 1;
         parent.UserData.(['FieldDownButton_', fnames{fi}]).ButtonPushedFcn = {@app.EventListener};
-        if fi == length(fnames)
-            parent.UserData.(['FieldDownButton_', fnames{fi}]).Enable = 'off';
-        end
+    end
+    if fi == length(fnames)
+        parent.UserData.(['FieldDownButton_', fnames{fi}]).Enable = 'off';
+    else
+        parent.UserData.(['FieldDownButton_', fnames{fi}]).Enable = 'on';
     end
 end
 

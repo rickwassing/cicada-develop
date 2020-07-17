@@ -48,7 +48,7 @@ clockOnsetM5 = timesToday(idx);
 if isnan(clockOnsetM5)
     return
     % -----
-    % If this is the first day, it is very unlikely that a complete sleep window was recorded after today's nightnight, so return
+    % If this is the first day, it is very unlikely that a complete sleep window was recorded after today's midnight, so return
 elseif di == 1
     return
     % -----
@@ -83,7 +83,7 @@ euclNormToday(events2idx(ACT, timesToday, 'Label', 'reject')) = nan;
 
 % Calculate the mean Euclidean Norm for each rolling window
 euclNormToday = movmean(euclNormToday, window, 'omitnan', 'Endpoints', 'discard');
-timesToday    = timesToday(1:end-(window-1));
+timesToday = timesToday(1:end-(window-1));
 
 % Find the value and the time of the day where the metric is minimal
 [avEuclNormL5, idx] = min(euclNormToday);

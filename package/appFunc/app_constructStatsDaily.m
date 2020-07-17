@@ -327,46 +327,16 @@ for fi = 1:length(fnames)
                 Text = ifelse(isnan(value), '-', ifelse(value == 1, 'yes', 'no'));
                 Color = [0.00, 0.24, 0.56];
                 Label = 'Slept across noon';
-            case 'avLightW'
-                Text = ifelse(isnan(value), '-', sprintf('%.0f lux', value));
-                Color = [0.15, 0.15, 0.15];
-                Label = 'Light - mean';
-            case 'minLightWMovWin30m'
-                Text = ifelse(isnan(value), '-', sprintf('%.0f lux', value));
-                Color = [0.15, 0.15, 0.15];
-                Label = 'Min';
-            case 'maxLightWMovWin30m'
-                Text = ifelse(isnan(value), '-', sprintf('%.0f lux', value));
-                Color = [0.15, 0.15, 0.15];
-                Label = 'Max';
-            case 'clockOnsetMinLightWMovWin30m'
-                Text = ifelse(strcmp(value{:}, 'na'), '-', value{:});
-                Color = [0.15, 0.15, 0.15];
-                Label = 'Clock onset min';
-            case 'clockOnsetMaxLightWMovWin30m'
-                Text = ifelse(strcmp(value{:}, 'na'), '-', value{:});
-                Color = [0.15, 0.15, 0.15];
-                Label = 'Clock onset max';
-            case 'avTemperatureWrist'
-                Text = ifelse(isnan(value), '-', sprintf('%.0f *C', value));
-                Color = [0.15, 0.15, 0.15];
-                Label = 'Temperature - mean';
-            case 'minTemperatureWristMovWin30m'
-                Text = ifelse(isnan(value), '-', sprintf('%.0f *C', value));
-                Color = [0.15, 0.15, 0.15];
-                Label = 'Min';
-            case 'maxTemperatureWristMovWin30m'
-                Text = ifelse(isnan(value), '-', sprintf('%.0f *C', value));
-                Color = [0.15, 0.15, 0.15];
-                Label = 'Max';
-            case 'clockOnsetMinTemperatureWristMovWin30m'
-                Text = ifelse(strcmp(value{:}, 'na'), '-', value{:});
-                Color = [0.15, 0.15, 0.15];
-                Label = 'Clock onset min';
-            case 'clockOnsetMaxTemperatureWristMovWin30m'
-                Text = ifelse(strcmp(value{:}, 'na'), '-', value{:});
-                Color = [0.15, 0.15, 0.15];
-                Label = 'Clock onset max';
+            otherwise
+                if isnumeric(value)
+                    Text = ifelse(isnan(value), '-', sprintf('%.0f', value));
+                    Color = [0.15, 0.15, 0.15];
+                    Label = fnames{fi};
+                elseif iscell(value)
+                    Text = ifelse(strcmp(value{:}, 'na'), '-', value{:});
+                    Color = [0.15, 0.15, 0.15];
+                    Label = fnames{fi};
+                end
         end
         % Check if component should mount
         if shouldComponentMount(app, parent, ['DailyStats_Value-', fnames{fi}, '_day-', num2str(di)])
@@ -410,6 +380,11 @@ for fi = 1:length(fnames)
             };
         % Mount component using the 'mount_patch' function
         mountComponent(app, 'mount_uilabel', parent, props);
+    else
+        % Construct the component with its updated Label
+        constructComponent(app, ['DailyStats_Label-', fnames{fi}], parent, {...
+            'Text', Label; ...
+            });
     end
 end
 

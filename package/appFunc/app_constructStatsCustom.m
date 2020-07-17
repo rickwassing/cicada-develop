@@ -130,13 +130,13 @@ if doPlotTimeseries
     % -----
     % Patch, Text and Markers
     % -----
-    pnts = min(cellfun(@(t) t.length, app.ACT.analysis.custom.(tableName).lightWMovWin5m));
-    data = nanmean(cell2mat(cellfun(@(t) asrow(t.Data(1:pnts)), app.ACT.analysis.custom.(tableName).lightWMovWin5m, 'UniformOutput', false)));
+    pnts = min(cellfun(@(t) t.length, app.ACT.analysis.custom.(tableName).idespecMovWin5m));
+    data = nanmean(cell2mat(cellfun(@(t) asrow(t.Data(1:pnts)), app.ACT.analysis.custom.(tableName).lightWidespecMovWin5m, 'UniformOutput', false)));
     times = ((0:pnts-1).*app.ACT.epoch/(60*60*24))';
     [~, idxMin] = min(data);
     [~, idxMax] = max(data);
     app_constructStatsAverageDayGraph(app, parent, timeseries(ascolumn(data), times), ...
-        'lightWMovWin5m', 'lux', 1, ...
+        'lightWidespecMovWin5m', 'lux', 1, ...
         datestr(times(idxMax), 'HH:MM'), ...
         datestr(times(idxMin), 'HH:MM'), ...
         max(data), ...
@@ -302,23 +302,23 @@ for fi = 1:length(fnames)
                     Text = ifelse(strcmp(value{:}, 'na'), '-', value{:});
                     Color = [0.49, 0.18, 0.56];
                     Label = 'Clock onset max act';
-                case 'avLightW'
+                case 'avLightWidespec'
                     Text = sprintf('%.0f lux', value);
                     Color = [0.15, 0.15, 0.15];
                     Label = 'Light - mean';
-                case 'minLightWMovWin5m'
+                case 'minLightWidespecMovWin5m'
                     Text = sprintf('%.0f lux', value);
                     Color = [0.15, 0.15, 0.15];
                     Label = 'Min';
-                case 'clockOnsetMinLightWMovWin5m'
+                case 'clockOnsetMinLightWidespecMovWin5m'
                     Text = ifelse(strcmp(value{:}, 'na'), '-', value{:});
                     Color = [0.15, 0.15, 0.15];
                     Label = 'Clock onset min';
-                case 'maxLightWMovWin5m'
+                case 'maxLightWidespecMovWin5m'
                     Text = sprintf('%.0f lux', value);
                     Color = [0.15, 0.15, 0.15];
                     Label = 'Min';
-                case 'clockOnsetMaxLightWMovWin5m'
+                case 'clockOnsetMaxLightWidespecMovWin5m'
                     Text = ifelse(strcmp(value{:}, 'na'), '-', value{:});
                     Color = [0.15, 0.15, 0.15];
                     Label = 'Clock onset max';

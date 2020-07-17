@@ -1,19 +1,38 @@
 function [ACT, importSettings, err, msg] = cic_importSleepDiarySettings(ACT, fullpath)
-% ---------------------------------------------------------
-% Read the JSON file
-importSettings = jsondecode(fileread(fullpath));
-if ~isfield(importSettings, 'format') || ~isfield(importSettings, 'idx')
+
+if exist(fullpath, 'file') == 0
+    % ---------------------------------------------------------
+    % File could not be found, so create default import settings
+    importSettings.format.date = 'dd/mm/yyyy';
+    importSettings.format.lightsOut = 'HH:MM';
+    importSettings.format.finAwake = 'HH:MM';
+    importSettings.format.lightsOn = 'HH:MM';
+    importSettings.idx.date = [];
+    importSettings.idx.lightsOut = [];
+    importSettings.idx.sleepLatency = [];
+    importSettings.idx.awakenings = [];
+    importSettings.idx.waso = [];
+    importSettings.idx.finAwake = [];
+    importSettings.idx.lightsOn = [];
     err = true;
-    msg = 'Selected JSON file does not contain the required fields ''format'' and ''idx''.';
-    if isfield(ACT.analysis.settings, 'importSleepDiarySettings')
-        importSettings = ACT.analysis.settings.importSleepDiarySettings;
-    else
-        importSettings = struct();
-    end
-    return
+    msg = 'Import settings JSON file could not be found. Check the path to ''sleepDiary'' in the Cicada Settings .JSON file. Default import settings will be used.';
 else
-    err = false;
-    msg = '';
+    % ---------------------------------------------------------
+    % Read the JSON file
+    importSettings = jsondecode(fileread(fullpath));
+    if ~isfield(importSettings, 'format') || ~isfield(importSettings, 'idx')
+        err = true;
+        msg = 'Selected JSON file does not contain the required fields ''format'' and ''idx''.';
+        if isfield(ACT.analysis.settings, 'importSleepDiarySettings')
+            importSettings = ACT.analysis.settings.importSleepDiarySettings;
+        else
+            importSettings = struct();
+        end
+        return
+    else
+        err = false;
+        msg = '';
+    end
 end
 ACT.analysis.settings.importSleepDiarySettings = importSettings;
 % ---------------------------------------------------------

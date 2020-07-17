@@ -4,9 +4,12 @@ function [parsedDate, err, msg] = parseSleepDiaryDate(rawValues, formatIn, forma
 err = false;
 msg = '';
 
+% Save the number of rows
+nRows = length(rawValues);
+
 try
     % Initialize parsedDate as empty cell array
-    parsedDate = cell(length(rawValues), 1);
+    parsedDate = cell(nRows, 1);
     % Remove the rows with missing values
     missingRows = ismissing(rawValues);
     rawValues(missingRows) = [];
@@ -24,7 +27,7 @@ try
     end
 catch
     % The conversion resulted in an error
-    parsedDate = nan(size(rawValues));
+    parsedDate = nan(nRows, 1);
     err = true;
     msg = 'Error in parseSleepDiaryDate (line 14). Date formatting failed';
 end
