@@ -59,12 +59,10 @@ Download the application installer from the Cicada GitHub repository, for MS Win
 Cicada develop source code
 --------------------------
 
-Download the .Zip or clone the Cicada-develop GitHub repository (here). 
+- Download the .Zip or clone the Cicada-develop GitHub repository (here). 
+- Open Matlab and navigate to the path where the Cicada directory is located (or add the Cicada directory to the Matlab Search Path).
+- Call the Cicada application in the Command Window:
 
-Open Matlab and navigate to the path where the Cicada directory is located (or add the Cicada directory to the Matlab Search Path).
+.. code-block:: matlab
 
-Call the Cicada application in the Command Window:
-
-.. code-block:: ruby
-
-  print "Hello, World!\n"
+  >> Cicada
