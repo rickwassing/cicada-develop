@@ -1,4 +1,4 @@
-function [ACT, err, msg] = cic_importLightPin(ACT, fullpath)
+function [ACT, err, warn, msg] = cic_importWIMRLightPin(ACT, fullpath)
 % ---------------------------------------------------------
 % Read the .CSV file as a table
 % -----
@@ -43,6 +43,17 @@ times(idxRm) = [];
 % Get the sampling rate
 srate = 1/mean(diff(times)); % samples per day, i.e. not in samples per second (Hz)
 % -----
+% Check if the data covers the entire timeseries of actiwatch data
+warn = false;
+if (times(1) - 1/srate) > ACT.xmin || (times(1) + 1/srate) < ACT.xmax
+    warn = true;
+    msg = sprintf('The WIMR Light Pin data does not cover the entire timeseries of the actigraphy data. \nActigraphy:\t%s - %s\nLight Pin:\t%s - %s', ...
+        datestr(ACT.xmin, 'dd/mm/yyyy HH:MM'), ...
+        datestr(ACT.xmax, 'dd/mm/yyyy HH:MM'), ...
+        datestr(times(1), 'dd/mm/yyyy HH:MM'), ...
+        datestr(times(end), 'dd/mm/yyyy HH:MM'));
+end
+% -----
 % Store data in the metric structure
 fnames = rawData.Properties.VariableNames(3:8);
 for fi = 1:length(fnames)
@@ -62,7 +73,8 @@ ACT.saved = false;
 % Write history
 ACT.history = char(ACT.history, '% ---------------------------------------------------------');
 ACT.history = char(ACT.history, '% Import Light Pin data');
-ACT.history = char(ACT.history, sprintf('[ACT, err, msg] = cic_importLightPin(ACT, ''%s'');', fullpath));
+ACT.history = char(ACT.history, sprintf('[ACT, err, warn, msg] = cic_importLightPin(ACT, ''%s'');', fullpath));
 ACT.history = char(ACT.history, 'if err; error(msg); end');
+ACT.history = char(ACT.history, 'if warn; warning(msg); end');
 
 end % EOF

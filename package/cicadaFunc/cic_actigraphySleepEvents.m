@@ -38,7 +38,7 @@ if ~isfield(ACT.analysis.settings, 'sleepWindowType')
 end
 % ---------------------------------------------------------
 % If there is no annotation yet, return
-if ~any(ACT.analysis.annotate.Data ~= 0) && ~any(isnan(ACT.analysis.annotate.Data))
+if ~any(ACT.analysis.annotate.acceleration.Data ~= 0) && ~any(isnan(ACT.analysis.annotate.acceleration.Data))
     return
 end
 % ---------------------------------------------------------
@@ -56,11 +56,11 @@ waso = struct();
 waso.onset = [];
 waso.duration = [];
 for si = 1:size(sleepWindow, 1)
-    [annotate, time] = selectDataUsingTime(ACT.analysis.annotate.Data, ACT.analysis.annotate.Time, sleepWindow.onset(si), sleepWindow.onset(si) + sleepWindow.duration(si));
+    [annotate, time] = selectDataUsingTime(ACT.analysis.annotate.acceleration.Data, ACT.analysis.annotate.acceleration.Time, sleepWindow.onset(si), sleepWindow.onset(si) + sleepWindow.duration(si));
     sleepPeriod.onset(si, 1) = time(find(annotate == -1, 1, 'first'));
     sleepPeriod.duration(si, 1) = time(find(annotate == -1, 1, 'last')) - sleepPeriod.onset(si, 1);
     % Get all Awakenings
-    [annotate, time] = selectDataUsingTime(ACT.analysis.annotate.Data, ACT.analysis.annotate.Time, sleepPeriod.onset(si), sleepPeriod.onset(si) + sleepPeriod.duration(si));
+    [annotate, time] = selectDataUsingTime(ACT.analysis.annotate.acceleration.Data, ACT.analysis.annotate.acceleration.Time, sleepPeriod.onset(si), sleepPeriod.onset(si) + sleepPeriod.duration(si));
     [o, d] = getBouts(annotate > -1);
     waso.onset = [waso.onset; time(o)];
     waso.duration = [waso.duration; (d*ACT.epoch)/(24*60*60)];

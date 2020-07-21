@@ -1,3 +1,4 @@
+
 function app_constructDataPanel(app)
 
 % For each day ...
@@ -170,7 +171,7 @@ for di = 1:app.ACT.ndays
                     % Annotation
                     if ismember('Annotation', app.ComponentList)
                         % If annotation data exists ...
-                        if any(app.ACT.analysis.annotate.Data ~= 0)
+                        if any(app.ACT.analysis.annotate.acceleration.Data ~= 0)
                             % ... Plot the annotation data at each intensity level
                             for intensity = 3:-1:0
                                 % Check if component should mount

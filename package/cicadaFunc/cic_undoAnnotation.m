@@ -1,7 +1,7 @@
 function [ACT, ids] = cic_undoAnnotation(ACT)
 % ---------------------------------------------------------
 % Undo annotation
-ACT.analysis.annotate.Data = zeros(size(ACT.analysis.annotate.Data));
+ACT.analysis.annotate.acceleration.Data = zeros(size(ACT.analysis.annotate.acceleration.Data));
 % ---------------------------------------------------------
 % Remove any existing sleep periods and waso events
 ids = [];

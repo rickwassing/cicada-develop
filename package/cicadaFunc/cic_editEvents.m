@@ -13,6 +13,27 @@ function [ACT, id] = cic_editEvents(ACT, method, onset, duration, varargin)
 % Initialize the varargin parser
 p = inputParser;
 % ---------------------------------------------------------
+% Before we do anything, make sure the 'start' event is in the table with its ID as the maximum among all IDs
+if ~any(strcmpi(ACT.events.label, 'start'))
+    add = table();
+    add.id = ifelse(isempty(ACT.events.id), 1, max(ACT.events.id)+1);
+    add.onset = ACT.xmin;
+    add.duration = 0;
+    add.label = {'start'};
+    add.type = {''};
+    ACT.events = [ACT.events; add];
+elseif sum(strcmpi(ACT.events.label, 'start')) > 1
+    ACT.events(strcmpi(ACT.events.label, 'start'), :) = [];
+    add = table();
+    add.id = ifelse(isempty(ACT.events.id), 1, max(ACT.events.id)+1);
+    add.onset = ACT.xmin;
+    add.duration = 0;
+    add.label = {'start'};
+    add.type = {''};
+    ACT.events = [ACT.events; add];
+end
+    
+% ---------------------------------------------------------
 if ~strcmpi(method, 'delete') % 'onset' and 'duration' are not required for deleting events
     % Make sure onset and duration are not empty
     if isempty(onset) || isempty(duration)

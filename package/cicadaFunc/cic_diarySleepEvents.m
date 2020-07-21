@@ -17,6 +17,9 @@ ACT = cic_editEvents(ACT, 'add', sleepWindow.onset, sleepWindow.duration, 'Label
 % Update the pipeline
 ACT = cic_updatePipe(ACT, 'preproc');
 % ---------------------------------------------------------
+% Set saved to false
+ACT.saved = false;
+% ---------------------------------------------------------
 % Write history
 ACT.history = char(ACT.history, '% -----');
 ACT.history = char(ACT.history, '% Insert sleep events from diary to ''ACT.events''');

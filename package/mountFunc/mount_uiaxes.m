@@ -23,6 +23,9 @@ for pi = 1:size(props, 1)
 end
 Component.UserData.props = props;
 
+% *****
+% * ISSUE 4
+% *****
 if destructurise
     DestrComponent = struct(Component);
     DestrComponent.Axes.UserData.input = 'cursor';

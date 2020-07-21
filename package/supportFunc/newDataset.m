@@ -62,6 +62,6 @@ ACT.events.label    = zeros(0);
 ACT.events.type     = zeros(0);
 
 ACT.analysis.settings = struct();
-ACT.analysis.annotate = timeseries();
+ACT.analysis.annotate.acceleration = timeseries();
 
 end

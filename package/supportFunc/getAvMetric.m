@@ -79,12 +79,18 @@ if strcmpi(p.Results.getMinMax, 'min')
 elseif strcmpi(p.Results.getMinMax, 'max')
     [value, idx] = max(metricPerWin);
 end
+% if the min/.,ax value is not unique, find the largest bout and its middle index
+if sum(metricPerWin == value) > 1
+    [onset, duration] = getBouts(metricPerWin == value);
+    [~, largestBout] = max(duration);
+    idx = onset(largestBout) + ceil(duration(largestBout) / 2);
+end
 
 % The index 'idx' indicates the center of the window, so take away half of
 % the 'oddWindow' lenght and check if it is not smaller than 1
 idx = idx - (oddWindow-1)/2;
 if idx < 1
-    idx = length(metricPerWin) + idx; % idx will be '0' or negative
+    idx = length(metricPerWin) + idx;
 end
 
 times = startTime+(0:length(metricPerWin)-1)*ACT.epoch / (60*60*24);

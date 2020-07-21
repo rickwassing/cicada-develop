@@ -1,4 +1,4 @@
-function app_constructTab(app)
+function app_constructInterval(app)
 % ---------------------------------------------------------
 % If the position field of the interval is not set, then there is no interval to plot, so return
 if ~isfield(app.Interval, 'Position')

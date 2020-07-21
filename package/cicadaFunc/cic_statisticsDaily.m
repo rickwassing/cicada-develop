@@ -15,7 +15,7 @@ for di = 1:ACT.ndays+1
         break % if there is no more data, break out of this loop
     end
     euclNormMinOne(events2idx(ACT, timesEuclNorm, 'Label', 'reject')) = nan;
-    annotate = selectDataUsingTime(ACT.analysis.annotate.Data, ACT.analysis.annotate.Time, startDate, endDate);
+    annotate = selectDataUsingTime(ACT.analysis.annotate.acceleration.Data, ACT.analysis.annotate.acceleration.Time, startDate, endDate);
     % ---------------------------------------------------------
     % Day of the week
     ACT.stats.daily.date(di, 1) = cellstr(datestr(startDate, 'dd/mm/yyyy'));
@@ -40,7 +40,7 @@ for di = 1:ACT.ndays+1
         ] = getM5L5(ACT, di);
     % ---------------------------------------------------------
     % How much time and activity was spend in moderate to vigorous activity in hours
-    if any(ACT.analysis.annotate.Data ~= 0)
+    if any(ACT.analysis.annotate.acceleration.Data ~= 0)
         ACT.stats.daily.hoursModVigAct(di,1) = sum(annotate >= 2) * ACT.epoch / 3600;
         ACT.stats.daily.avEuclNormModVigAct(di, 1) = nanmean(euclNormMinOne(annotate >= 2));
     else

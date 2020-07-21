@@ -56,7 +56,7 @@ if ismember('customEvent', do)
         % ---------------------------------------------------------
         % Extract this event's Euclidean Norm
         [euclNormMinOne, times] = selectDataUsingTime(ACT.metric.acceleration.euclNormMinOne.Data, ACT.metric.acceleration.euclNormMinOne.Time, events.onset(ei), events.onset(ei)+events.duration(ei));
-        annotate = selectDataUsingTime(ACT.analysis.annotate.Data, ACT.analysis.annotate.Time, events.onset(ei), events.onset(ei)+events.duration(ei));
+        annotate = selectDataUsingTime(ACT.analysis.annotate.acceleration.Data, ACT.analysis.annotate.acceleration.Time, events.onset(ei), events.onset(ei)+events.duration(ei));
         % insert NaNs for rejected segments
         euclNormMinOne(events2idx(ACT, times, 'Label', 'reject')) = nan;
         annotate(events2idx(ACT, times, 'Label', 'reject')) = nan;

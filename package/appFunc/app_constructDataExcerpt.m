@@ -134,7 +134,7 @@ for ai = 1:length(axesTypes)
             % ---------------------------------------------------------
             % Annotation
             % If annotation data exists ...
-            if any(app.MainApp.ACT.analysis.annotate.Data ~= 0)
+            if any(app.MainApp.ACT.analysis.annotate.acceleration.Data ~= 0)
                 % ... Plot the annotation data at each intensity level
                 for intensity = 3:-1:0
                     % Get properties that need more elaborate calculation

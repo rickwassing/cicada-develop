@@ -9,7 +9,7 @@ Colors = [...
     ];
 
 % Get annotate data
-[annotate, time] = selectDataUsingTime(app.ACT.analysis.annotate.Data, app.ACT.analysis.annotate.Time, startDate, endDate);
+[annotate, time] = selectDataUsingTime(app.ACT.analysis.annotate.acceleration.Data, app.ACT.analysis.annotate.acceleration.Time, startDate, endDate);
 
 % set non-wear bouts to nan
 annotate(events2idx(app.ACT, time, 'Label', 'reject')) = NaN;

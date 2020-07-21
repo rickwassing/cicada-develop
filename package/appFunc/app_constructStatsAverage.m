@@ -230,23 +230,43 @@ app_constructStatsAverageDayGraph(app, app.AvStats_GridLayoutAccelerationPanel, 
     app.ACT.stats.average.(select).clockOnsetMinEuclNormMovWin5h, ...
     app.ACT.stats.average.(select).maxEuclNormMovWin5h, ...
     app.ACT.stats.average.(select).minEuclNormMovWin5h)
+% ---------------------------------------------------------
+% Light
 % -----
-% Light W
-app_constructStatsAverageDayGraph(app, app.AvStats_GridLayoutLightPanel, app.ACT.analysis.average.(select).lightWidespecMovWin30m, ...
-    'lightWidespecMovWin30m', 'lux', 1, ...
-    app.ACT.stats.average.(select).clockOnsetMaxLightWidespecMovWin30m, ...
-    app.ACT.stats.average.(select).clockOnsetMinLightWidespecMovWin30m, ...
-    app.ACT.stats.average.(select).maxLightWidespecMovWin30m, ...
-    app.ACT.stats.average.(select).minLightWidespecMovWin30m)
-% -----
+% Find the first 'Light' variable, as we assume this is the most important one
+% *****
+% * ISSUE #1
+% *****
+% * ISSUE #2
+% *****
+fnames = fieldnames(app.ACT.analysis.average.(select));
+fi = strRegexpCheck(fnames, 'light.+MovWin30m');
+if any(fi)
+    tableVarName = fnames{find(fi, 1, 'first')};
+    tableVarName(1) = upper(tableVarName(1));
+    app_constructStatsAverageDayGraph(app, app.AvStats_GridLayoutLightPanel, app.ACT.analysis.average.(select).(fnames{find(fi, 1, 'first')}), ...
+        fnames{find(fi, 1, 'first')}, 'lux', 1, ...
+        app.ACT.stats.average.(select).(['clockOnsetMax', tableVarName]), ...
+        app.ACT.stats.average.(select).(['clockOnsetMin', tableVarName]), ...
+        app.ACT.stats.average.(select).(['max', tableVarName]), ...
+        app.ACT.stats.average.(select).(['min', tableVarName]))
+end
+% ---------------------------------------------------------
 % Temperature
-app_constructStatsAverageDayGraph(app, app.AvStats_GridLayoutTemperaturePanel, app.ACT.analysis.average.(select).temperatureWristMovWin30m, ...
-    'temperatureWristMovWin30m', '*C', 1, ...
-    app.ACT.stats.average.(select).clockOnsetMaxTemperatureWristMovWin30m, ...
-    app.ACT.stats.average.(select).clockOnsetMinTemperatureWristMovWin30m, ...
-    app.ACT.stats.average.(select).maxTemperatureWristMovWin30m, ...
-    app.ACT.stats.average.(select).minTemperatureWristMovWin30m)
-
+% -----
+% Find the first 'Temperature' variable, as we assume this is the most important one
+fnames = fieldnames(app.ACT.analysis.average.(select));
+fi = strRegexpCheck(fnames, 'temperature.+MovWin30m');
+if any(fi)
+    tableVarName = fnames{find(fi, 1, 'first')};
+    tableVarName(1) = upper(tableVarName(1));
+    app_constructStatsAverageDayGraph(app, app.AvStats_GridLayoutTemperaturePanel, app.ACT.analysis.average.(select).(fnames{find(fi, 1, 'first')}), ...
+        fnames{find(fi, 1, 'first')}, '*C', 1, ...
+        app.ACT.stats.average.(select).(['clockOnsetMax', tableVarName]), ...
+        app.ACT.stats.average.(select).(['clockOnsetMin', tableVarName]), ...
+        app.ACT.stats.average.(select).(['max', tableVarName]), ...
+        app.ACT.stats.average.(select).(['min', tableVarName]))
+end
 % ---------------------------------------------------------
 % Set Text values of the Stats Info Panel
 app.AvStats_NumberofDaysValue.Text = num2str(sum(ismember(app.ACT.stats.daily.day, selectDays)));
@@ -255,7 +275,7 @@ app.AvStats_TimeRejectedValue.Text = duration2str(app.ACT.stats.average.(select)
 
 % ---------------------------------------------------------
 % Set Text values of the Acceleration Panel
-if app.ACT.stats.average.(select).hoursModVigAct > 0 && any(app.ACT.analysis.annotate.Data ~= 0)
+if app.ACT.stats.average.(select).hoursModVigAct > 0 && any(app.ACT.analysis.annotate.acceleration.Data ~= 0)
     app.AvStats_HoursModVigActValue.Text = duration2str(app.ACT.stats.average.(select).hoursModVigAct/24);
     app.AvStats_AvEuclNormModVigActValue.Text = sprintf('%.0f mg', app.ACT.stats.average.(select).avEuclNormModVigAct*1000);
 else
@@ -398,7 +418,8 @@ if ~isfield(app.ACT.stats.sleep, 'sleepDiary')
     app.AvStats_SlpWindowDiaryValue.Visible = 'off';
     app.AvStats_SlpEffSlpTimeDiaryValue.Visible = 'off';
     app.AvStats_MismatchLabel.Visible = 'off';
-    app.AvStats_MismatchValue.Visible = 'off';
+    app.AvStats_MismatchSleepTimeValue.Visible = 'off';
+    app.AvStats_MismatchSleepPeriodValue.Visible = 'off';
     return
 elseif ~app.ACT.stats.sleep.compareAverage
     app.AvStats_LegendDiaryLabel.Visible = 'off';
@@ -411,7 +432,8 @@ elseif ~app.ACT.stats.sleep.compareAverage
     app.AvStats_SlpWindowDiaryValue.Visible = 'off';
     app.AvStats_SlpEffSlpTimeDiaryValue.Visible = 'off';
     app.AvStats_MismatchLabel.Visible = 'off';
-    app.AvStats_MismatchValue.Visible = 'off';
+    app.AvStats_MismatchSleepTimeValue.Visible = 'off';
+    app.AvStats_MismatchSleepPeriodValue.Visible = 'off';
     return
 else
     app.AvStats_LegendDiaryLabel.Visible = 'on';
@@ -424,7 +446,8 @@ else
     app.AvStats_SlpWindowDiaryValue.Visible = 'on';
     app.AvStats_SlpEffSlpTimeDiaryValue.Visible = 'on';
     app.AvStats_MismatchLabel.Visible = 'on';
-    app.AvStats_MismatchValue.Visible = 'on';
+    app.AvStats_MismatchSleepTimeValue.Visible = 'on';
+    app.AvStats_MismatchSleepPeriodValue.Visible = 'on';
 end
 
 % ---------------------------------------------------------
@@ -443,17 +466,31 @@ else
 end
 
 % ---------------------------------------------------------
-% Set Text values of the Sleep Diary variables
-mismatch = app.ACT.stats.average.(select).avMismatch;
+% Set Text values of the Sleep Time Mismatch
+mismatch = app.ACT.stats.average.(select).avSleepTimeMismatch;
 if mismatch > 0
-    mismatch = sprintf('%s (overest)', duration2str(abs(mismatch)/(24*60)));
+    mismatch = sprintf('%s', duration2str(abs(mismatch)/(24*60)));
 elseif mismatch < 0
-    mismatch = sprintf('-%s (underest)', duration2str(abs(mismatch)/(24*60)));
+    mismatch = sprintf('-%s', duration2str(abs(mismatch)/(24*60)));
 elseif ~isnan(app.ACT.stats.average.(select).avTotSlpTimeAct) && ~isnan(app.ACT.stats.average.(select).avTotSlpTimeDiary)
     mismatch = 'no mismatch';
 else
-    mismatch = 'no data';
+    mismatch = '-';
 end
-app.AvStats_MismatchValue.Text = mismatch;
+app.AvStats_MismatchSleepTimeValue.Text = mismatch;
+
+% ---------------------------------------------------------
+% Set Text values of the Sleep Period Mismatch
+mismatch = app.ACT.stats.average.(select).avSleepPeriodMismatch;
+if mismatch > 0
+    mismatch = sprintf('%s', duration2str(abs(mismatch)/(24*60)));
+elseif mismatch < 0
+    mismatch = sprintf('-%s', duration2str(abs(mismatch)/(24*60)));
+elseif ~isnan(app.ACT.stats.average.(select).avSlpPeriodAct) && ~isnan(app.ACT.stats.average.(select).avSlpPeriodDiary)
+    mismatch = 'no mismatch';
+else
+    mismatch = '-';
+end
+app.AvStats_MismatchSleepPeriodValue.Text = mismatch;
 
 end

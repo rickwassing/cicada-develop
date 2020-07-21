@@ -29,7 +29,7 @@ ACT.xmin = ACT.times(1);
 ACT.xmax = ACT.times(end);
 % ---------------------------------------------------------
 % Cut the annotation data
-ACT.analysis.annotate = getsampleusingtime(ACT.analysis.annotate, startDate, endDate);
+ACT.analysis.annotate.acceleration = getsampleusingtime(ACT.analysis.annotate.acceleration, startDate, endDate);
 % ---------------------------------------------------------
 % Cut the metrics
 metrictypes = fieldnames(ACT.metric);

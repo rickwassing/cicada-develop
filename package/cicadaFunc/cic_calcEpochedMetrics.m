@@ -23,11 +23,11 @@ times = ACT.xmin:step:ACT.xmax;
 % 1   = light activity
 % 2   = moderate activity
 % 3   = vigorous activity
-ACT.analysis.annotate = timeseries(zeros(length(times),1), times, 'Name', 'annotate');
-ACT.analysis.annotate.DataInfo.Units = 'a.u.';
-ACT.analysis.annotate.TimeInfo.Units = 'days';
-ACT.analysis.annotate.TimeInfo.Format = 'dd-mmm-yyyy HH:MM:SS';
-ACT.analysis.annotate.TimeInfo.StartDate = '00-Jan-0000 00:00:00';
+ACT.analysis.annotate.acceleration = timeseries(zeros(length(times),1), times, 'Name', 'annotateAcceleration');
+ACT.analysis.annotate.acceleration.DataInfo.Units = 'a.u.';
+ACT.analysis.annotate.acceleration.TimeInfo.Units = 'days';
+ACT.analysis.annotate.acceleration.TimeInfo.Format = 'dd-mmm-yyyy HH:MM:SS';
+ACT.analysis.annotate.acceleration.TimeInfo.StartDate = '00-Jan-0000 00:00:00';
 
 % -----
 % Euclidean Norm Minus One

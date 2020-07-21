@@ -8,9 +8,9 @@ ACT.xmin = ACT.times(1);
 ACT.xmax = ACT.times(end);
 % ---------------------------------------------------------
 % Change the time in annotation data
-t = datetime(ACT.analysis.annotate.Time, 'ConvertFrom', 'datenum', 'TimeZone', ACT.timezone);
+t = datetime(ACT.analysis.annotate.acceleration.Time, 'ConvertFrom', 'datenum', 'TimeZone', ACT.timezone);
 t.TimeZone = newTimeZone;
-ACT.analysis.annotate.Time = datenum(t);
+ACT.analysis.annotate.acceleration.Time = datenum(t);
 % ---------------------------------------------------------
 % Change the time in all metrics
 % Cut the metrics

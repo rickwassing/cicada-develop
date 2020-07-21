@@ -20,7 +20,7 @@ ACT.history = char(ACT.history, 'ACT = cic_undoAnalysis(ACT);');
 ACT.saved = false;
 % ---------------------------------------------------------
 % Undo Annotate Epochs > GGIR annotation
-ACT.analysis.annotate.Data = zeros(ACT.analysis.annotate.Length, 1);
+ACT.analysis.annotate.acceleration.Data = zeros(ACT.analysis.annotate.acceleration.Length, 1);
 % ---------------------------------------------------------
 % If there is no sleep window, then we're done
 if ~isfield(ACT.analysis.settings, 'sleepWindowType')
