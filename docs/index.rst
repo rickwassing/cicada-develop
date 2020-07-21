@@ -54,7 +54,11 @@ Usage
 Cicada as a standalone application
 ----------------------------------
 
-Download the application installer from the Cicada GitHub repository, for MS Windows (here) or for MacOS (here). [Describe installation process].
+Download the application installer from the Cicada GitHub repository, 
+- for MS Windows (here) or 
+- for MacOS (here). 
+
+[Describe installation process].
 
 Cicada develop source code
 --------------------------
