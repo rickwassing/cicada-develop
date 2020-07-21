@@ -46,7 +46,7 @@ Getting Started
 Dependencies
 ============
 
-Cicada is written in Matlab R2019b. You can download the standalone desktop application which does not require a Matlab license or any other software. However, if you want to contribute or adapt the code, a Matlab license is required.
+You can download the standalone desktop application which does not require a Matlab license or any other software. However, if you want to contribute or adapt the code, a Matlab license is required.
 
 Usage
 =====
