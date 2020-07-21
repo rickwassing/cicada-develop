@@ -60,7 +60,11 @@ Cicada develop source code
 --------------------------
 
 Download the .Zip or clone the Cicada-develop GitHub repository (here). 
+
 Open Matlab and navigate to the path where the Cicada directory is located (or add the Cicada directory to the Matlab Search Path).
+
 Call the Cicada application in the Command Window:
-.. code-block::
-   >> code
+
+.. code-block:: ruby
+
+  print "Hello, World!\n"
