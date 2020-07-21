@@ -24,5 +24,5 @@ License
 
 |License| This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License_.
 
-.. |Creative Commons License| image:: https://i.creativecommons.org/l/by-sa/4.0/80x15.png
+.. |License| image:: https://i.creativecommons.org/l/by-sa/4.0/80x15.png
 .. _License: http://creativecommons.org/licenses/by-sa/4.0/
