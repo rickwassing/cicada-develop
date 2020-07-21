@@ -22,7 +22,7 @@ I am a neuroscientist, foremost, and not a software developer. Although I have a
 License
 =======
 
-`Creative Commons License`_ This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License_.
+|License| This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License_.
 
 .. |Creative Commons License| image:: https://i.creativecommons.org/l/by-sa/4.0/80x15.png
 .. _License: http://creativecommons.org/licenses/by-sa/4.0/
