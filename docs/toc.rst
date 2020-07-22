@@ -8,7 +8,7 @@ Table of Contents
 
 Overview
 ========
-- :ref:`The Cicada interface <index-cicada>` explains the Cicada user-interface and how to interact with it
+- :ref:`The Cicada interface <overview-interface-top>` explains the Cicada user-interface and how to interact with it
 - :ref:`The Cicada package <index-cicada>` describes how the code is structured in the 'package' directory
 - :ref:`The Cicada settings files <index-cicada>` shows how the Cicada .json settings files are used and what information is stored in these settings files
 - :ref:`The Cicada method<index-cicada>` defines key terms and outlines the ways in which the data is processed and analysed.
