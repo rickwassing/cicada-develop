@@ -13,20 +13,20 @@ The Cicada User Interface
 1. **Menu bar.**
     - The 'File' menu concerns everything about loading and saving workspaces; importing data and events; exporting the calculated statistics, reports and Matlab code; and to close the current workspace or quit the program.
     - The 'Edit' menu concerns everything about changing the dataset information regarding the study, participant and recording; to change the recording time; and set the epoch length.
-    - The 'View' menu allows to to switch the metric used to display the accelerometer data.
-    - The 'Preprocess' menu concern all data processing steps that may be necessary before analysing the data.
-    - The 'Analysis' menu allows you to annotate each epoch according to some thresholding method, or to define events. Either way, the labels of these annotated epochs/events are used to select those parts of the data for calculating statistics.
-    - The 'Statistics' menu allows you to calculate average and daily statistics, and if defined, to also calulate statistics over sleep and custom events.
+    - The 'View' menu is used to switch which metric is displayed as the acceleration data.
+    - The 'Preprocess' menu concerns all data processing steps that may be necessary before analysing the data.
+    - The 'Analysis' menu lists all options to annotate each epoch according to some thresholding method, or to define events. Either way, the labels of these annotated epochs/events are used to select segments of the data for calculating statistics.
+    - The 'Statistics' menu calculates average and daily statistics, and if defined, also calulates statistics for sleep events and custom events.
     - The 'Window' menu is used as a patch for an open issue (`#4 on GitHub <https://github.com/rickwassing/cicada-develop/issues>`_). Whenever data panels are mispositioned, use this menu to realign them.
     - The 'Help' menu shows information about the software, the author, and the associated license, and provides a link to these documents.
-2. **Information Panel.** Shows all the information regarding the study, participant and recording.
+2. **Information Panel.** Shows all the information regarding the study, participant and recording (see :ref:`below <overview-interface-information-panel>`).
 3. **Tab Group.**
-    - The 'Data Analysis' tab shows all of the epoched metrics in the current dataset.
-    - The 'Average Stats' tab shows the statistics which are averaged across the entire recording.
+    - The 'Data Analysis' tab shows all events and epoched metrics in the current dataset.
+    - The 'Average Stats' tab shows the statistics averaged across the entire recording.
     - The 'Daily Stats' tab shows the statistics for each day in the recording.
     - Additional tabs are shown, when applicable, to show statistics for sleep or custom events.
-4. **Data Analyis Tab and Panels.** Shows all of the epoched metrics for each of the available datatypes (e.g. acceleration, light, temperature) in each analysis window.
-5. **Settings Panel.** Allows the user to change the analysis window, change how the data is displayed, and delete entire groups of annotation and events with the same label.
+4. **Data Analyis Tab and Panels.** Shows all events and epoched metrics for each of the available data types (e.g. acceleration, light and temperature), in one panel for each single or double day segment in the recording (see :ref:`below <overview-interface-data-analysis-tab>`).
+5. **Settings Panel.** Allows the user to change the analysis window, change how the data metrics are displayed, and delete entire groups of annotation types and events with the same label (see :ref:`below <overview-interface-settings-panel>`).
 
 .. _overview-interface-information-panel:
 
@@ -44,18 +44,18 @@ Information Panel
 Data Analysis Tab and Panels
 ============================
 
-The data is segmented into 24h or 48h partitions and the data for each partition is displayed in a panel.
+The data is partitioned into single day or double day segments according to the plot option and analysis window start and end clock time. Each panel displays the data metrics for each segment.
 
 .. figure:: images/overview-interface-3.png
     :align: center
     :width: 735px
     
-    **Example data panel.** (1) The title of the panel shows the start and end date of the displayed data segment. There are 4 axes in this data panel. One for the events (2), which shows a sleep window event; and three additional axes for each data type in this recording. This recording was made with an ActivInsights GeneActiv watch, which measures acceleration, light exposure and temperature. The acceleration is shown in axes (3), and the light and temperature timeseries are shown in the axes identified by (4).
+    **Example data panel.** (1) The title of the panel shows the start and end date of the displayed data segment, in this example '21/05/2020 15:00' until '22/05/2020 15:00'. There are 4 axes in this data panel. One for the events (2), which shows a sleep window event (purple bar); and three additional axes for each data type in this recording. This recording was made with an ActivInsights GeneActiv watch, which measures acceleration, light exposure and temperature. The acceleration is shown in axes (3), and the light and temperature timeseries are shown in the axes identified by (4).
 
-Interact with the data to create events
----------------------------------------
+Interact with the interface to create events
+--------------------------------------------
 
-You can interact with the data panel by the use of your mouse cursor, and a few keyboard keys. The purpose of this interaction is for you to create events. 
+You can interact with the user interface by the use of your mouse cursor, and a few keyboard keys. The purpose of this is to create events with predefined or custom event label. For each of these event labels, Cicada will select those data segments for calculating statistics.
 
 1. Left-click anywhere within the data panel to indicate the **onset** or **offset** of the event. A pink cursor will appear with a label showing the time in ``HH:MM``.
 2. Optionally, adjust the location of the cursor by pressing the ``left`` or ``right arrow`` keys on your keyboard.
@@ -71,11 +71,11 @@ You can interact with the data panel by the use of your mouse cursor, and a few 
     :align: center
     :width: 608px
     
-    **Create New Event.** (1) The portion of the data that you selected is shown in the top panel. (2) Each event has a label, select a pre-existing event label from the dropdown list, or specify a new custom event label. (3) To create the event, press ``Create``, or use the ``Cancel`` button to abort.
+    **Create New Event.** The portion of the data that you selected is shown in the top panel (1). Each event has a label, select a pre-existing event label from the dropdown list, or specify a new custom event label (2). To create the event, press ``Create``, or use the ``Cancel`` button to abort (3).
 
 .. note::
 
-    This selection tool may also be useful to inspect the data. Use the cursors to select part of the data, and this user interface will show the details of that data segment.
+    This selection tool may also be useful to inspect the data. Use the cursors to select part of the data, and this user interface will show the zoomed-in details of that data segment.
 
 .. _overview-interface-edit-events:
 
@@ -86,13 +86,13 @@ To manually edit an event, click on the event of interest in the data analysis p
 
 .. note::
 
-    Events that are of type ``manual``, ``reject`` or ``customEvent`` can be manually editted. Events that are created by algorithms or are imported from files have a different event type, and cannot be manually editted. The reason for this is to enable repeatability of analysis pipelines. To edit an event created by an algorithm or imported from file, use the appropriate ``edit`` button to reassign the event type to ``manual``.
+    Events that are of type ``manual``, ``reject`` or ``customEvent`` can be manually editted. Events that are created by algorithms or are imported from files have a different event type, and cannot be manually editted. The reason for this is to maintain the original data integrity and to ensure repeatability of analysis pipelines. To edit an event created by an algorithm or imported from file, use the appropriate ``edit`` button to reassign the event type to ``manual`` (see :ref:`below <overview-interface-edit-sleep-window>`.
 
 .. figure:: images/overview-interface-5.png
     :align: center
     :width: 451px
 
-    **Edit Event**. You can edit the event label, its onset and duration. (1) Use the dropdown menu to reassign an event label, or select ``Custom Label`` to specify your own short, specific and informative event label. (2) Change the onset of the event. (3) Change the duration of the event. (4) You can delete this single event by using the ``Delete`` button, or confirm any changes with the ``Edit`` button, or abort with ``Cancel``.
+    **Edit Event**. You can edit the event label, its onset and duration. Use the dropdown menu to reassign an event label, or select ``Custom Label`` to specify your own short, specific and informative event label (1). Change the onset of the event (2) or the duration of the event (3). Delete this single event by using the ``Delete`` button, or confirm any changes with the ``Edit`` button, or abort with ``Cancel`` (4).
 
 .. warning::
     When you change the event onset, for example from ``07:30`` to ``08:00``, the event offset will also be 30 minutes later. Similarly, if you change the duration of the event, for example from ``1h 0m`` to ``1h 30m``, the event offset will also be 30 minutes later. Adjust both the event onset and duration accordingly to keep the event offset fixed.
@@ -102,24 +102,60 @@ To manually edit an event, click on the event of interest in the data analysis p
 Settings Panel
 ==============
 
-The data is segmented into 24h or 48h partitions and the data for each partition is displayed in a panel.
+The settings panel lists all display options for each data type, which are acceleration, light and temperature in this example, and can be used to delete entire groups of annotation types and events with the same label.
 
 .. figure:: images/overview-interface-6.png
     :align: center
     :width: 360px
     
-    **Settings Panel.** The display settings for each data type can be changed in panels identified by (1) and (2); which correspond to acceleration, light and temperature in our example (See :ref:`below <overview-interface-display-settings>` for details). Change the order of the data axes with the `^` (up) and `v` (down) buttons (3). When applicable, the annotation of epochs can be deleted in panel (4), the sleep windows can be manually edited or deleted in panel (5, see :ref:`below <overview-interface-edit-sleep-window>` for details), and entire groups of events with the same label can be deleted in panel (6).
+    **Settings Panel.** The display settings for each data type can be changed in panels identified by (1) and (2); which correspond to acceleration, light and temperature in our example (see :ref:`below <overview-interface-display-settings>` for details). Change the order of the data axes with the '^' (up) and 'v' (down) buttons (3). When applicable, the annotation of epochs can be deleted in panel (4), the sleep windows can be manually edited or deleted in panel (5, see :ref:`below <overview-interface-edit-sleep-window>` for details), and entire groups of events with the same label can be deleted in panel (6).
 
 .. _overview-interface-display-settings:
 
 Display Settings
 ----------------
 
-The ``height`` of their respective axes is relative to each other. In this example the acceleration axis is 2 times the height of the light and temperature axes. 
+- Actogram
+    - The ``Height`` of the respective axes for each data type is relative to each other. In this example the acceleration axis is 2 times the height of the light and temperature axes.
+    - The ``Length`` of the actogram determines the number of days that are displayed in one view.
+    - The ``Plot`` dropdown menu determines whether a single or a double day is shown in each panel. Note that when viewing double days, the second day in the first panel is equal to the first day in the second panel, etc.
+    - The ``Clock`` inputs set the start and end time for each data segment, i.e. horizontal axis. This is mainly used for display purposes only. However, currently, the only algorithm that depends on this setting is the :ref:`GGIR sleep detection algorithm <link>`.
+    - The ``Range`` inputs sets the minimum and maximum limits of the vertical axis.
+    - The ``Log`` check-box sets the scale of the vertical axis to 'linear' or 'logarithmic (base 10)'.
+- Other data types, e.g. light or temperature
+    - The ``Show`` check-boxes are used to show or hide the axes or single data traces.
+    - The coloured button determines the color of the data trace.
+    - The '^' (up) and 'v' (down) buttons can be used to reorder the data traces.
 
-Panel (1) further shows the number of days that are displayed in one view (``length``), whether the actogram displays a single or a double day. Note that when viewing the double day, the second day in the first panel is equal to the first day in the second panel, etc. 
+.. _overview-interface-delete-annotation-type:
+
+Delete Annotation Types
+-----------------------
+
+Various thresholding methods are used to annotate acceleration data, or other data types. To undo these annotations, 
+1. first select the appropriate annotatation type, 
+2. then press the ``delete`` button,
+3. in the confirmation dialogue, press ``Yes, delete`` to confirm, or ``No, cancel`` to abort.
 
 .. _overview-interface-edit-sleep-window:
 
-Display Settings
-----------------
+Sleep Window Types
+------------------
+
+Sleep windows can be defined in various ways. For example, the user may manually create sleep window events, import a sleep diary, or use the GGIR sleep detection algorithm to define sleep windows. While all of these events have the label ``sleepWindow``, their types differ (respectively ``manual``, ``sleepDiary`` and ``GGIR``. The Sleep Window Type panel is used to select which sleep windows the user wants to use to calculate statistics for. After selecting the appropriate sleep window type from the dropdown menu, click ``Apply`` for this setting to take effect.
+
+Edit sleep windows created by algorithms or imported from a file
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Sleep window events that are created by algorithms or imported from a file cannot directly be editted manually. The reason for this is to maintain the original data integrity and to ensure repeatability of analysis pipelines. To edit a sleep window event created by an algorithm or imported from file, 
+1. first select the appropriate sleep window type from the dropdown menu, 
+2. then click the ``edit`` button.
+Now, all sleep window events of this type are copied and are reassigned to ``manual`` sleep window events. These events can now be editted as described :ref:`before <overview-interface-edit-events>`.
+
+Delete Multiple Events
+----------------------
+
+Single events can be deted as described :ref:`before <overview-interface-edit-events>`, but it may be more convenient to delete all events with the same label at once. To do so
+1. first select the appropriate event label from the dropdown menu, 
+2. then click the ``delete`` button,
+3. in the confirmation dialogue, press ``Yes, delete`` to confirm, or ``No, cancel`` to abort.
