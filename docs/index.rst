@@ -93,9 +93,6 @@ Cicada develop source code
 
     >> cicada
 
-Contents
------------------
-
 .. toctree::
   :maxdepth: 2
   :caption: Contents
@@ -107,3 +104,9 @@ Contents
   :caption: Overview
 
   overview-interface.rst
+
+.. toctree::
+  :maxdepth: 2
+  :caption: Overview
+
+  overview-package.rst

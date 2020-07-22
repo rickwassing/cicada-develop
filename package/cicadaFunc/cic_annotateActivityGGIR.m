@@ -42,8 +42,10 @@ else % no posture change with intervals of 5 minutes found
 end
 % ---------------------------------------------------------
 % Save 'sustainedInactivity' as a timeseries in 'ACT.analysis.annotate'
-ACT.analysis.annotate.Data(ACT.analysis.annotate.Data == -1) = 0; 
-ACT.analysis.annotate.Data(sustainedInactive == 1) = -1;
+% First remove any epoch that was annotated as sustained inactive
+ACT.analysis.annotate.acceleration.Data(ACT.analysis.annotate.acceleration.Data == -1) = 0; 
+% Now add the sustained inactive epochs
+ACT.analysis.annotate.acceleration.Data(sustainedInactive == 1) = -1;
 
 % ---------------------------------------------------------
 % PART 2 - FIND EPOCHS OF LIGHT, MODERATE AND VIGOROUS ACTIVITY
@@ -82,12 +84,12 @@ idxVigorousActivity = sustainedInactive ~= 1 & ...
     ACT.metric.acceleration.euclNormMinOne.Data >= params.thrAct_vig;
 % ---------------------------------------------------------
 % Save these activity levels as a timeseries in 'ACT.analysis.annotate'
-ACT.analysis.annotate.Data(ACT.analysis.annotate.Data == 1) = 0; % first remove the old annotations
-ACT.analysis.annotate.Data(ACT.analysis.annotate.Data == 2) = 0; 
-ACT.analysis.annotate.Data(ACT.analysis.annotate.Data == 3) = 0; 
-ACT.analysis.annotate.Data(idxLightActivity)              = 1; % light activity
-ACT.analysis.annotate.Data(idxMVPA)                       = 2; % moderate activity
-ACT.analysis.annotate.Data(idxMVPA & idxVigorousActivity) = 3; % vigorous activity
+ACT.analysis.annotate.acceleration.Data(ACT.analysis.annotate.acceleration.Data == 1) = 0; % first remove the old annotations
+ACT.analysis.annotate.acceleration.Data(ACT.analysis.annotate.acceleration.Data == 2) = 0; 
+ACT.analysis.annotate.acceleration.Data(ACT.analysis.annotate.acceleration.Data == 3) = 0; 
+ACT.analysis.annotate.acceleration.Data(idxLightActivity)              = 1; % light activity
+ACT.analysis.annotate.acceleration.Data(idxMVPA)                       = 2; % moderate activity
+ACT.analysis.annotate.acceleration.Data(idxMVPA & idxVigorousActivity) = 3; % vigorous activity
 % ---------------------------------------------------------
 % Set saved to false
 ACT.saved = false;

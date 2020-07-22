@@ -15,7 +15,7 @@ for di = 1:ACT.ndays+1
         break % if there is no more data, break out of this loop
     end
     euclNormMinOne(events2idx(ACT, timesEuclNorm, 'Label', 'reject')) = nan;
-    annotate = selectDataUsingTime(ACT.analysis.annotate.acceleration.Data, ACT.analysis.annotate.acceleration.Time, startDate, endDate);
+    annotate = selectDataUsingTime(ACT..acceleration.Data, ACT.analysis.annotate.acceleration.Time, startDate, endDate);
     % ---------------------------------------------------------
     % Day of the week
     ACT.stats.daily.date(di, 1) = cellstr(datestr(startDate, 'dd/mm/yyyy'));
