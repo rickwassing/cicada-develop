@@ -89,14 +89,8 @@ Cicada develop source code
 
   >> cicada
 
-Table of Contents
+Contents
 -----------------
-
-.. toctree::
-  :maxdepth: 2
-  :caption: Basics
-
-  index.rst
 
 .. toctree::
   :maxdepth: 2
