@@ -9,7 +9,7 @@ This repository contains the source files for Cicada, an open source software fo
 .. _index-version:
 
 Version 0.1.2 (beta)
-===================
+====================
 
 Cicada is still in initial development. **Anything may change at any time and the software should not be considered stable.**
 
@@ -92,3 +92,4 @@ Table of Contents
 .. toctree::
   index
   toc
+  overview-interface
