@@ -1,4 +1,5 @@
 .. _index-top:
+
 ======
 Cicada
 ======
@@ -6,24 +7,28 @@ Cicada
 This repository contains the source files for Cicada, an open source software for analysing actigraphy and data from other wearable devices.
 
 .. _index-version:
+
 Version 0.1.2 (beta)
 ===================
 
 Cicada is still in initial development. **Anything may change at any time and the software should not be considered stable.**
 
 .. _index-authors:
+
 Authors
 =======
 
 -   **Rick Wassing**, rick.wassing@sydney.edu.au, Woolcock Institute of Medical Research, The University of Sydney, Australia
 
 .. _index-help:
+
 Your help is more than welcome!
 ===============================
 
 I am a neuroscientist, foremost, and not a software developer. Although I have ample experience in Matlab and other coding-languages, and I have coded Cicada to the best of my abilities, it may not be the most efficient way the software could have been written. I would be very grateful for anyone who'd like to contribute to Cicada.
 
 .. _index-license:
+
 License
 =======
 
@@ -33,6 +38,7 @@ License
 .. _License: http://creativecommons.org/licenses/by-sa/4.0/
 
 .. _index-acknowledgments:
+
 Acknowledgments
 ===============
 
@@ -46,17 +52,20 @@ I would kindly thank:
 .. _`Actant Activity Analysis Toolbox`: https://github.com/btlindert/actant-1
 
 .. _index-gettingStarted:
+
 ===============
 Getting Started
 ===============
 
 .. _index-dependencies:
+
 Dependencies
 ============
 
 You can download the standalone desktop application which does not require a Matlab license or any other software. However, if you want to contribute or adapt the code, a Matlab license is required.
 
 .. _index-usage:
+
 Cicada as a standalone application
 ==================================
 

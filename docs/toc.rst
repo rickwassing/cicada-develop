@@ -1,9 +1,11 @@
 .. _toc-top:
+
 =================
 Table of Contents
 =================
 
 .. _toc-overview:
+
 Overview
 ========
 - :ref:`The Cicada interface <index-cicada>` explains the Cicada user-interface and how to interact with it
@@ -13,6 +15,7 @@ Overview
 - :ref:`The 'ACT' data structure <index-cicada>` explains how the dataset is structured in the 'ACT' data structure
 
 .. _toc-file:
+
 The File Menu
 =============
 - :ref:`Importing an accelerometry recording<link>`
@@ -24,6 +27,7 @@ The File Menu
 - :ref:`Exporting Matlab code<link>`
 
 .. _toc-edit:
+
 The Edit Menu
 =============
 - :ref:`Edit dataset information<link>`
@@ -32,14 +36,16 @@ The Edit Menu
 - :ref:`Change epoch length<link>`
 
 .. _toc-preproc:
+
 The Preprocess Menu
-=============
+===================
 - :ref:`Automatic calibration of acceleration data using GGIR<link>`
 - :ref:`Automatic detection of 'non-wear' time segments in acceleration data<link>`
 
 .. _toc-analysis:
+
 The Analysis Menu
-=============
+=================
 
 The data can be analysed in two ways. First, you can annotate each epoch of the data. Here, each epoch is assigned a label according to some thresholding method. Secondly, you can define events, which are time segments of the data identified by a label and an onset and duration. When calculating statistics, these annotation and event labels are used to select those epochs for calculating e.g. average acceleration and time spend in those epochs.
 
@@ -55,10 +61,14 @@ Events
 - :ref:`Create events that are relative to the onset of offset of other events<link>`
 - :ref:`Create 'sleep window' events using GGIR's automatic sleep period detection<link>`
 
+.. _toc-stats:
+
 The Statistics Menu
-=============
+===================
 - :ref:`Generate output statistics<link>`
 
+.. _toc-window:
+
 The Window Menu
-=============
+===============
 - :ref:`Why and when we need to reposition the panels, issue #3<link>`
