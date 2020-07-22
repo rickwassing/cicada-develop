@@ -27,5 +27,11 @@ The Cicada User Interface is made up of 5 main sections
 4. **Main Data Analyis Panel.** Shows all of the epoched metrics for each of the available datatypes (e.g. acceleration, light, temperature) in each analysis window.
 5. **Settings Panel.** Allows the user to change the analysis window, change how the data is displayed, and delete entire groups of annotation and events with the same label.
 
-.. figure:: images/index-apple-logo.png
-    :align: center
+
+
+
+==================== ==================
+Download for Windows Download for MacOs
+==================== ==================
+`Here<index-usage>`_ `Here<index-usage>`_
+==================== ==================

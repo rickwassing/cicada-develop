@@ -1,21 +1,23 @@
 .. _index-top:
 
+.. figure:: images/index-cicada-logo.png
+  :width: 125px
+  :align: center
+
 ======
 Cicada
 ======
 
-This repository contains the source files for Cicada, an open source software for analysing actigraphy and data from other wearable devices.
+Cicada is an open source software for analysing actigraphy and data from other wearable devices.
 
 .. _index-version:
 
 Version 0.1.2 (beta)
 --------------------
 
-Cicada is still in initial development.
-
 .. warning::
 
-  Anything may change at any time and the software should not be considered stable.
+  Cicada is still in development. Anything may change at any time and the software should not be considered stable.
 
 .. _index-authors:
 
@@ -57,6 +59,7 @@ I would kindly thank:
 
 .. _index-gettingStarted:
 
+===============
 Getting Started
 ===============
 
@@ -72,22 +75,23 @@ You can download the standalone desktop application which does not require a Mat
 Cicada as a standalone application
 ----------------------------------
 
-Download the application installer from the Cicada GitHub repository, 
-- for MS Windows (here) or 
-- for MacOS (here). 
+1. Download the application installer from the Cicada GitHub repository.
 
-[Describe installation process].
+  - `Download for MS Windows <here>`_
+  - `Download for MacOS <here>`_
+
+2. [Describe installation process].
 
 Cicada develop source code
 --------------------------
 
-- Download the code as a .zip file (`here <https://github.com/rickwassing/cicada-develop/archive/master.zip>`_) or clone the Cicada-develop GitHub repository (`here <https://github.com/rickwassing/cicada-develop>`_). 
-- Open Matlab and navigate to the path where the Cicada directory is located (or add the Cicada directory to the Matlab Search Path).
-- Call the Cicada application in the Command Window:
+1. Download the code as a .zip file (`here <https://github.com/rickwassing/cicada-develop/archive/master.zip>`_) or clone the Cicada-develop GitHub repository (`here <https://github.com/rickwassing/cicada-develop>`_). 
+2. Open Matlab and navigate to the path where the Cicada directory is located (or add the Cicada directory to the Matlab Search Path).
+3. Call the Cicada application in the Command Window:
 
-.. code-block:: matlab
+  .. code-block:: matlab
 
-  >> cicada
+    >> cicada
 
 Contents
 -----------------
