@@ -9,9 +9,10 @@ This repository contains the source files for Cicada, an open source software fo
 .. _index-version:
 
 Version 0.1.2 (beta)
-====================
+--------------------
 
 Cicada is still in initial development.
+
 .. warning::
 
   Anything may change at any time and the software should not be considered stable.
@@ -19,21 +20,21 @@ Cicada is still in initial development.
 .. _index-authors:
 
 Authors
-=======
+-------
 
 -   **Rick Wassing**, rick.wassing@sydney.edu.au, Woolcock Institute of Medical Research, The University of Sydney, Australia
 
 .. _index-help:
 
 Your help is more than welcome!
-===============================
+-------------------------------
 
 I am a neuroscientist, foremost, and not a software developer. Although I have ample experience in Matlab and other coding-languages, and I have coded Cicada to the best of my abilities, it may not be the most efficient way the software could have been written. I would be very grateful for anyone who'd like to contribute to Cicada.
 
 .. _index-license:
 
 License
-=======
+-------
 
 |License| This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License_.
 
@@ -43,7 +44,7 @@ License
 .. _index-acknowledgments:
 
 Acknowledgments
-===============
+---------------
 
 In building Cicada, I have translated and adopted functionality from other open-source projects.
 I would kindly thank:
@@ -56,21 +57,20 @@ I would kindly thank:
 
 .. _index-gettingStarted:
 
-===============
 Getting Started
 ===============
 
 .. _index-dependencies:
 
 Dependencies
-============
+------------
 
 You can download the standalone desktop application which does not require a Matlab license or any other software. However, if you want to contribute or adapt the code, a Matlab license is required.
 
 .. _index-usage:
 
 Cicada as a standalone application
-==================================
+----------------------------------
 
 Download the application installer from the Cicada GitHub repository, 
 - for MS Windows (here) or 
@@ -79,7 +79,7 @@ Download the application installer from the Cicada GitHub repository,
 [Describe installation process].
 
 Cicada develop source code
-==========================
+--------------------------
 
 - Download the code as a .zip file (`here <https://github.com/rickwassing/cicada-develop/archive/master.zip>`_) or clone the Cicada-develop GitHub repository (`here <https://github.com/rickwassing/cicada-develop>`_). 
 - Open Matlab and navigate to the path where the Cicada directory is located (or add the Cicada directory to the Matlab Search Path).
@@ -90,11 +90,11 @@ Cicada develop source code
   >> cicada
 
 Table of Contents
-=================
+-----------------
 
 .. toctree::
   :maxdepth: 2
-  :caption: Cicada
+  :caption: Basics
 
   index.rst
 
