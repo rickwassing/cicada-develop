@@ -78,7 +78,7 @@ Cicada develop source code
 
 .. code-block:: matlab
 
-  >> Cicada
+  >> cicada
 
 Table of Contents
 -----------------
