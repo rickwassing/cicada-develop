@@ -6,7 +6,7 @@ The Cicada User Interface
 
 The Cicada User Interface is made up of 5 main sections
 
-.. figure:: _screenshots/overview-interface-1.png
+.. figure:: images/overview-interface-1.png
     :align: center
 
 1. **Menu bar.**
@@ -26,3 +26,6 @@ The Cicada User Interface is made up of 5 main sections
     - Additional tabs are shown, when applicable, to show statistics for sleep or custom events.
 4. **Main Data Analyis Panel.** Shows all of the epoched metrics for each of the available datatypes (e.g. acceleration, light, temperature) in each analysis window.
 5. **Settings Panel.** Allows the user to change the analysis window, change how the data is displayed, and delete entire groups of annotation and events with the same label.
+
+.. figure:: images/index-apple-logo.png
+    :align: center
