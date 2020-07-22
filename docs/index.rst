@@ -57,11 +57,8 @@ Dependencies
 You can download the standalone desktop application which does not require a Matlab license or any other software. However, if you want to contribute or adapt the code, a Matlab license is required.
 
 .. _index-usage:
-Usage
-=====
-
 Cicada as a standalone application
-----------------------------------
+==================================
 
 Download the application installer from the Cicada GitHub repository, 
 - for MS Windows (here) or 
@@ -70,9 +67,9 @@ Download the application installer from the Cicada GitHub repository,
 [Describe installation process].
 
 Cicada develop source code
---------------------------
+==========================
 
-- Download the .Zip or clone the Cicada-develop GitHub repository (here). 
+- Download the code as a .zip file (`here <https://github.com/rickwassing/cicada-develop/archive/master.zip>`_) or clone the Cicada-develop GitHub repository (`here <https://github.com/rickwassing/cicada-develop>`_). 
 - Open Matlab and navigate to the path where the Cicada directory is located (or add the Cicada directory to the Matlab Search Path).
 - Call the Cicada application in the Command Window:
 
@@ -81,9 +78,9 @@ Cicada develop source code
   >> cicada
 
 Table of Contents
------------------
+=================
 
 .. toctree::
-  :maxdepth: 1
+  :maxdepth: 2
   index
   toc
