@@ -88,5 +88,3 @@ Cicada develop source code
 
 .. toctree::
   index
-  toc
-  overview-interface
