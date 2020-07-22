@@ -100,13 +100,8 @@ Cicada develop source code
   toc.rst
 
 .. toctree::
-  :maxdepth: 2
+  :maxdepth: 3
   :caption: Overview
 
   overview-interface.rst
-
-.. toctree::
-  :maxdepth: 2
-  :caption: Overview
-
   overview-package.rst
