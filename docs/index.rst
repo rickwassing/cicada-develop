@@ -86,9 +86,6 @@ Cicada develop source code
 
   >> cicada
 
-Table of Contents
-=================
-
 .. toctree::
   index
   toc
