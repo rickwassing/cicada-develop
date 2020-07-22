@@ -70,3 +70,9 @@ Cicada develop source code
 .. code-block:: matlab
 
   >> Cicada
+
+Table of Contents
+-----------------
+
+.. toctree::
+  toc
