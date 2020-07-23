@@ -12,7 +12,7 @@ Overview
     - defines key terms and outlines the ways in which the data is processed and analysed
 - :ref:`The Cicada interface <overview-interface-top>`
     - explains the Cicada user-interface and how to interact with it
-- :ref:`The Cicada package <index-cicada>`
+- :ref:`The Cicada package <overview-package-top>`
     - describes how the code is structured in the 'package' directory
 - :ref:`The Cicada settings files <index-cicada>`
     - shows how the Cicada .json settings files are used and what information is stored in these settings files

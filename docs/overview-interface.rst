@@ -132,7 +132,7 @@ Display Settings
 Delete Annotation Types
 -----------------------
 
-Various thresholding methods can be used to annotate acceleration data, or annotate other data types. To undo these annotations, 
+Various thresholding methods can be used to annotate acceleration data, or annotate other data types. See the documentation:ref:`here <link>` for an in-depth overview of annotation methods. To undo these annotations, 
 
 1. first select the appropriate annotatation type, 
 2. then press the ``delete`` button,
@@ -143,7 +143,7 @@ Various thresholding methods can be used to annotate acceleration data, or annot
 Sleep Window Types
 ------------------
 
-Sleep windows can be defined in various ways. For example, the user may manually create sleep window events, import a sleep diary, or use the GGIR sleep detection algorithm to define sleep windows. While all of these events have the label ``sleepWindow``, their types differ (respectively ``manual``, ``sleepDiary`` and ``GGIR``). The Sleep Window Type panel can be used to select which type of sleep windows are used to calculate statistics for. 
+Sleep windows can be defined in various ways. See the documentation:ref:`here <link>` for an in-depth discussion of sleep analysis. For example, the user may manually create sleep window events, import a sleep diary, or use the GGIR sleep detection algorithm to define sleep windows. While all of these events have the label ``sleepWindow``, their types differ (respectively ``manual``, ``sleepDiary`` and ``GGIR``). The Sleep Window Type panel can be used to select which type of sleep windows are used to calculate statistics. 
 
 1. Select the appropriate sleep window type from the dropdown menu, 
 2. then click ``Apply`` for this setting to take effect.
@@ -151,7 +151,7 @@ Sleep windows can be defined in various ways. For example, the user may manually
 Edit sleep windows created by algorithms or imported from a file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Sleep window events that are created by algorithms or imported from a file cannot directly be editted manually. The reason for this is to maintain the original data integrity and to ensure repeatability of analysis pipelines. To edit a sleep window event created by an algorithm or imported from file,
+Sleep window events that are created by algorithms or imported from a file cannot be manually editted directly. The reason for this is to maintain the original data integrity and to ensure repeatability of analysis pipelines. To edit a sleep window event created by an algorithm or imported from file,
 
 1. first select the appropriate sleep window type from the dropdown menu, 
 2. then click the ``edit`` button.
