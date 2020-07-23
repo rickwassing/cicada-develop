@@ -103,5 +103,6 @@ Cicada develop source code
   :maxdepth: 3
   :caption: Overview
 
+  overview-method.rst
   overview-interface.rst
   overview-package.rst
