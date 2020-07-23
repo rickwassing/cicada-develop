@@ -86,7 +86,7 @@ idxVigorousActivity = sustainedInactive ~= 1 & ...
 % Save these activity levels as a timeseries in 'ACT.analysis.annotate'
 ACT.analysis.annotate.acceleration.Data(ACT.analysis.annotate.acceleration.Data == 1) = 0; % first remove the old annotations
 ACT.analysis.annotate.acceleration.Data(ACT.analysis.annotate.acceleration.Data == 2) = 0; 
-ACT.analysis.annotate.acceleration.Data(ACT.analysis.annotate.acceleration.Data == 3) = 0; 
+ACT.analysis.annotate.acceleration.Data(ACT.analysis.annotate.accelerationedu.Data == 3) = 0; 
 ACT.analysis.annotate.acceleration.Data(idxLightActivity)              = 1; % light activity
 ACT.analysis.annotate.acceleration.Data(idxMVPA)                       = 2; % moderate activity
 ACT.analysis.annotate.acceleration.Data(idxMVPA & idxVigorousActivity) = 3; % vigorous activity

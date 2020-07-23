@@ -11,12 +11,12 @@ The Cicada User Interface
     **The Cicada User Interface is made up of 5 main sections.**
 
 1. **Menu bar.**
-    - The 'File' menu concerns everything about loading and saving workspaces; importing data and events; exporting the calculated statistics, reports and Matlab code; and to close the current workspace or quit the program.
-    - The 'Edit' menu concerns everything about changing the dataset information regarding the study, participant and recording; to change the recording time; and set the epoch length.
+    - The 'File' menu concerns everything about loading and saving workspaces; importing data and events; exporting statistics, reports and Matlab code; and to close the workspace or quit the program.
+    - The 'Edit' menu concerns everything about changing information regarding the study, participant and recording; to change the recording time; and set the epoch length.
     - The 'View' menu is used to switch which metric is displayed as the acceleration data.
-    - The 'Preprocess' menu concerns all data processing steps that may be necessary before analysing the data.
+    - The 'Preprocess' menu concerns all data processing steps that may be necessary before analysis.
     - The 'Analysis' menu lists all options to annotate each epoch according to some thresholding method, or to define events. Either way, the labels of these annotated epochs/events are used to select segments of the data for calculating statistics.
-    - The 'Statistics' menu calculates average and daily statistics, and if defined, also calulates statistics for sleep events and custom events.
+    - The 'Statistics' menu calculates average and daily statistics, and if applicable, also calulates statistics for sleep events and custom events.
     - The 'Window' menu is used as a patch for an open issue (`#4 on GitHub <https://github.com/rickwassing/cicada-develop/issues>`_). Whenever data panels are mispositioned, use this menu to realign them.
     - The 'Help' menu shows information about the software, the author, and the associated license, and provides a link to these documents.
 2. **Information Panel.** Shows all the information regarding the study, participant and recording (see :ref:`below <overview-interface-information-panel>`).
@@ -24,9 +24,9 @@ The Cicada User Interface
     - The 'Data Analysis' tab shows all events and epoched metrics in the current dataset.
     - The 'Average Stats' tab shows the statistics averaged across the entire recording.
     - The 'Daily Stats' tab shows the statistics for each day in the recording.
-    - Additional tabs are shown, when applicable, to show statistics for sleep or custom events.
+    - More tabs are shown, if applicable, to show statistics for sleep or custom events.
 4. **Data Analyis Tab and Panels.** Shows all events and epoched metrics for each of the available data types (e.g. acceleration, light and temperature), in one panel for each single or double day segment in the recording (see :ref:`below <overview-interface-data-analysis-tab>`).
-5. **Settings Panel.** Allows the user to change the analysis window, change how the data metrics are displayed, and delete entire groups of annotation types and events with the same label (see :ref:`below <overview-interface-settings-panel>`).
+5. **Settings Panel.** To change the analysis window, change how the epoched metrics are displayed, and delete groups of annotation types or events with the same label (see :ref:`below <overview-interface-settings-panel>`).
 
 .. _overview-interface-information-panel:
 
@@ -44,7 +44,7 @@ Information Panel
 Data Analysis Tab and Panels
 ============================
 
-The data is partitioned into single day or double day segments according to the plot option and analysis window start and end clock time. Each panel displays the data metrics for each segment.
+The data is partitioned into single or double day segments according to the details in the settings panel (see :ref:`below <overview-interface-settings-panel>`). Each panel displays the epoched metrics for each segment.
 
 .. figure:: images/overview-interface-3.png
     :align: center
@@ -55,15 +55,15 @@ The data is partitioned into single day or double day segments according to the 
 Interact with the interface to create events
 --------------------------------------------
 
-You can interact with the user interface by the use of your mouse cursor, and a few keyboard keys. The purpose of this is to create events with predefined or custom event label. For each of these event labels, Cicada will select those data segments for calculating statistics.
+You can interact with the user interface by the use of your mouse cursor, and a few keyboard keys. The purpose of this is to create events with predefined or custom event labels. For each of these event labels, Cicada will select those data segments for calculating statistics.
 
 1. Left-click anywhere within the data panel to indicate the **onset** or **offset** of the event. A pink cursor will appear with a label showing the time in ``HH:MM``.
 2. Optionally, adjust the location of the cursor by pressing the ``left`` or ``right arrow`` keys on your keyboard.
 3. Lock-in this timepoint by pressing the ``enter`` key. The cursor will now appear in blue color.
-4. Left-click anywhere within the data panel, a pink cursor will appear, and again, adjust using the ``arrow`` keys. If this second time point (pink) is *after* the first timepoint (blue) then the first timepoint marks the event **onset** and the second marks the event **offset**; and *vice versa*.
-5. When you're unhappy about your selection
+4. Left-click anywhere within the data panel, a pink cursor will appear, and again, adjust using the ``arrow`` keys. If this second timepoint (pink) is *after* the first timepoint (blue) then the first timepoint marks the event **onset** and the second marks the event **offset**; and *vice versa*.
+5. If you're unhappy about your selection
     - press the ``escape`` or ``backspace`` key on your keyboard, all cursors will disappear, go to step 1.
-6. When you're happy about your selection
+6. If you're happy about your selection
     - Press the ``enter`` key, the selection will now appear as a blue rectangle.
 7. The following interface will appear
 
@@ -71,7 +71,7 @@ You can interact with the user interface by the use of your mouse cursor, and a 
     :align: center
     :width: 608px
     
-    **Create New Event.** The portion of the data that you selected is shown in the top panel (1). Each event has a label, select a pre-existing event label from the dropdown list, or specify a new custom event label (2). To create the event, press ``Create``, or use the ``Cancel`` button to abort (3).
+    **Create New Event.** The portion of the data that you selected is shown in the top panel (1). To label the new event, select a pre-existing event label from the dropdown list, or specify a new custom event label (2). To create the event, press ``Create``, or use the ``Cancel`` button to abort (3).
 
 .. note::
 
@@ -82,11 +82,11 @@ You can interact with the user interface by the use of your mouse cursor, and a 
 Edit events
 -----------
 
-To manually edit an event, click on the event of interest in the data analysis panel.
+To manually edit an event, left-click on the event of interest in the data analysis panel.
 
 .. note::
 
-    Events that are of type ``manual``, ``reject`` or ``customEvent`` can be manually editted. Events that are created by algorithms or are imported from files have a different event type, and cannot be manually editted. The reason for this is to maintain the original data integrity and to ensure repeatability of analysis pipelines. To edit an event created by an algorithm or imported from file, use the appropriate ``edit`` button to reassign the event type to ``manual`` (see :ref:`below <overview-interface-edit-sleep-window>`.
+    Events that are of type ``manual``, ``reject`` or ``customEvent`` can be manually editted. Events that are created by algorithms or are imported from files have a different event type, and cannot be manually editted. The reason for this is to maintain the original data integrity and to ensure repeatability of analysis pipelines. To edit an event created by an algorithm or imported from file, use the appropriate ``edit`` button to reassign the event type to ``manual`` (see :ref:`below <overview-interface-edit-sleep-window>`).
 
 .. figure:: images/overview-interface-5.png
     :align: center
@@ -102,13 +102,13 @@ To manually edit an event, click on the event of interest in the data analysis p
 Settings Panel
 ==============
 
-The settings panel lists all display options for each data type, which are acceleration, light and temperature in this example, and can be used to delete entire groups of annotation types and events with the same label.
+The settings panel lists all display options for each data type, which are 'acceleration', 'light' and 'temperature' in this example, and can be used to delete groups of annotation types and events with the same label.
 
 .. figure:: images/overview-interface-6.png
     :align: center
     :width: 360px
     
-    **Settings Panel.** The display settings for each data type can be changed in panels identified by (1) and (2); which correspond to acceleration, light and temperature in our example (see :ref:`below <overview-interface-display-settings>` for details). Change the order of the data axes with the '^' (up) and 'v' (down) buttons (3). When applicable, the annotation of epochs can be deleted in panel (4), the sleep windows can be manually edited or deleted in panel (5, see :ref:`below <overview-interface-edit-sleep-window>` for details), and entire groups of events with the same label can be deleted in panel (6).
+    **Settings Panel.** The display settings for each data type can be changed in panels identified by (1) and (2); which correspond to 'acceleration', 'light' and 'temperature' in our example (see :ref:`below <overview-interface-display-settings>` for details). Change the order of the data axes with the '^' (up) and 'v' (down) buttons (3). If applicable, the annotation of epochs can be deleted in panel (4), the sleep windows can be manually edited or deleted in panel (5, see :ref:`below <overview-interface-edit-sleep-window>` for details), and entire groups of events with the same label can be deleted in panel (6).
 
 .. _overview-interface-display-settings:
 
@@ -117,22 +117,23 @@ Display Settings
 
 - Actogram
     - The ``Height`` of the respective axes for each data type is relative to each other. In this example the acceleration axis is 2 times the height of the light and temperature axes.
-    - The ``Length`` of the actogram determines the number of days that are displayed in one view.
+    - The ``Length`` of the actogram determines the number of days that are displayed in one view, i.e. without scrolling.
     - The ``Plot`` dropdown menu determines whether a single or a double day is shown in each panel. Note that when viewing double days, the second day in the first panel is equal to the first day in the second panel, etc.
     - The ``Clock`` inputs set the start and end time for each data segment, i.e. horizontal axis. This is mainly used for display purposes only. However, currently, the only algorithm that depends on this setting is the :ref:`GGIR sleep detection algorithm <link>`.
     - The ``Range`` inputs sets the minimum and maximum limits of the vertical axis.
     - The ``Log`` check-box sets the scale of the vertical axis to 'linear' or 'logarithmic (base 10)'.
-- Other data types, e.g. light or temperature
+- Other data types, e.g. 'light' or 'temperature'
     - The ``Show`` check-boxes are used to show or hide the axes or single data traces.
-    - The coloured button determines the color of the data trace.
-    - The '^' (up) and 'v' (down) buttons can be used to reorder the data traces.
+    - The coloured ``buttons`` can be used to change the color of the data trace.
+    - The ``^`` (up) and ``v`` (down) buttons can be used to reorder the data traces.
 
 .. _overview-interface-delete-annotation-type:
 
 Delete Annotation Types
 -----------------------
 
-Various thresholding methods are used to annotate acceleration data, or other data types. To undo these annotations, 
+Various thresholding methods can be used to annotate acceleration data, or annotate other data types. To undo these annotations, 
+
 1. first select the appropriate annotatation type, 
 2. then press the ``delete`` button,
 3. in the confirmation dialogue, press ``Yes, delete`` to confirm, or ``No, cancel`` to abort.
@@ -142,20 +143,26 @@ Various thresholding methods are used to annotate acceleration data, or other da
 Sleep Window Types
 ------------------
 
-Sleep windows can be defined in various ways. For example, the user may manually create sleep window events, import a sleep diary, or use the GGIR sleep detection algorithm to define sleep windows. While all of these events have the label ``sleepWindow``, their types differ (respectively ``manual``, ``sleepDiary`` and ``GGIR``. The Sleep Window Type panel is used to select which sleep windows the user wants to use to calculate statistics for. After selecting the appropriate sleep window type from the dropdown menu, click ``Apply`` for this setting to take effect.
+Sleep windows can be defined in various ways. For example, the user may manually create sleep window events, import a sleep diary, or use the GGIR sleep detection algorithm to define sleep windows. While all of these events have the label ``sleepWindow``, their types differ (respectively ``manual``, ``sleepDiary`` and ``GGIR``). The Sleep Window Type panel can be used to select which type of sleep windows are used to calculate statistics for. 
+
+1. Select the appropriate sleep window type from the dropdown menu, 
+2. then click ``Apply`` for this setting to take effect.
 
 Edit sleep windows created by algorithms or imported from a file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Sleep window events that are created by algorithms or imported from a file cannot directly be editted manually. The reason for this is to maintain the original data integrity and to ensure repeatability of analysis pipelines. To edit a sleep window event created by an algorithm or imported from file, 
+Sleep window events that are created by algorithms or imported from a file cannot directly be editted manually. The reason for this is to maintain the original data integrity and to ensure repeatability of analysis pipelines. To edit a sleep window event created by an algorithm or imported from file,
+
 1. first select the appropriate sleep window type from the dropdown menu, 
 2. then click the ``edit`` button.
-Now, all sleep window events of this type are copied and are reassigned to ``manual`` sleep window events. These events can now be editted as described :ref:`before <overview-interface-edit-events>`.
+
+Cicada will now copy all sleep window events of this type reassign their type to ``manual`` sleep window events. These events can now be editted as described :ref:`before <overview-interface-edit-events>`.
 
 Delete Multiple Events
 ----------------------
 
-Single events can be deted as described :ref:`before <overview-interface-edit-events>`, but it may be more convenient to delete all events with the same label at once. To do so
+Single events can be deted as described :ref:`before <overview-interface-edit-events>`, but it may be more convenient to delete all events with the same label at once. To do so,
+
 1. first select the appropriate event label from the dropdown menu, 
 2. then click the ``delete`` button,
 3. in the confirmation dialogue, press ``Yes, delete`` to confirm, or ``No, cancel`` to abort.

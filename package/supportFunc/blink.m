@@ -81,7 +81,6 @@ if isequaln(CurrentFontColor, OriginalFontColor) % Matches original text
 else
     h.FontColor = OriginalFontColor;
 end
-fprintf('Im blinking %i\n', h.FontColor(1));
 end
 function resetBlink(~,~,h)
 h.FontColor =  getappdata(h,'OriginalFontColor');
