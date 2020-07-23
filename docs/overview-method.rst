@@ -4,12 +4,12 @@
 The Cicada Method
 =================
 
-**This page outlines the main ways in which the data is processed and analysed.**
+**This page outlines the main ways in which the data is processed and analysed. More detailed descriptions of each of these steps are linked in the respective sections.**
 
 Why do we need Cicada?
 ======================
 
-Indeed, a good question, because there are already a few good packages available that can process and analyse actigraphy data (`GGIR`_ for instance). However, there is currently--to my knowledge--no graphical user interfaces (GUIs) available to do so. Secondly, most packages are focussed on analysing data from one wearable device, while in some research, multiple wearable devices are used simultaneously. Cicada solves both issues by providing a (hopefully intuitive) way of visualizing and analysing data from various wearable devices.
+Indeed, a good question, because there are already a few good packages available that can process and analyse actigraphy data (`GGIR`_ for instance). However, there is currently---to my knowledge---no graphical user interfaces (GUIs) available to do so. Secondly, most packages are focussed on analysing data from one wearable device, while in some research, multiple wearable devices are used simultaneously. Cicada solves both issues by providing a (hopefully intuitive) way of visualizing and analysing data from various wearable devices.
 
 .. _`GGIR`: https://cran.r-project.org/web/packages/GGIR/index.html
 
@@ -29,6 +29,10 @@ While Cicada can process data from various wearable devices, it requires an acti
 
 - click ``File`` > ``Import Actigraphy`` > and select your device type of choice.
 
+:ref:`Read more... <link>`.
+
+:guilabel:`New Pull Request`
+
 Importing Data from other wearable devices
 ------------------------------------------
 
@@ -45,7 +49,7 @@ The start and end date of the actigraphy recording is used to crop the imported 
 Now the Cicada gets buzzing
 ---------------------------
 
-Every time you import Data, the Cicada then calculates predefined Metrics in common Epochs. This accomplishes two things. First, often the raw Data cannot be readily interpreted, e.g. accelaration values in 3-dimensions, or a raw ECG trace don't mean much, it is the Euclidean Norm or the heart-rate that is meaningful. Secondly, by calculating these Metrics in a common timeframe which is dictated by the Epoch length, these various timeseries can be synchronised and analysed together and the whole is larger than the sum of its parts. What a beauty.
+Every time you import Data, the Cicada then calculates predefined Metrics in common Epochs. This accomplishes two things. First, often the raw Data cannot be readily interpreted, e.g. accelaration values in 3-dimensions, or a raw ECG trace don't mean much, it is the Euclidean Norm or the heart-rate that is meaningful. Secondly, Cicada calculates these Metrics in a common timeframe which is dictated by the Epoch length. These various timeseries can then be synchronised and analysed together and the whole is larger than the sum of its parts. What a beauty.
 
 Saving and loading a Dataset
 ----------------------------
@@ -63,7 +67,7 @@ Once an actigraphy recording is imported, it is stored in a Dataset called ``ACT
 Editing the Dataset
 -------------------
 
-Before we start to analyse the Dataset, you may want to edit a few variables in the Dataset or change the recording.
+Before we start analysing the Dataset, you may want to edit a few variables in the Dataset or change the recording.
 
 **To edit any information about the study, participant or recording,**
 
