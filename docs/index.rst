@@ -85,7 +85,7 @@ Cicada as a standalone application
 Cicada develop source code
 --------------------------
 
-1. Download the code as a .zip file (`here <https://github.com/rickwassing/cicada-develop/archive/master.zip>`_) or clone the Cicada-develop GitHub repository (`here <https://github.com/rickwassing/cicada-develop>`_). 
+1. Download the code  `as a .zip file <https://github.com/rickwassing/cicada-develop/archive/master.zip>`_ or `clone the Cicada-develop GitHub repository <https://github.com/rickwassing/cicada-develop>`_. 
 2. Open Matlab and navigate to the path where the Cicada directory is located (or add the Cicada directory to the Matlab Search Path).
 3. Call the Cicada application in the Command Window:
 
@@ -103,6 +103,7 @@ Cicada develop source code
   :maxdepth: 3
   :caption: Overview
 
+  overview-terms.rst
   overview-method.rst
   overview-interface.rst
   overview-package.rst

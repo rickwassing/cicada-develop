@@ -89,3 +89,5 @@ The default Epoch length that is used to calculate Metrics in a common timeframe
 
 Viewing the various acceleration Metrics
 ----------------------------------------
+
+The Euclidean Norm is the default Metric to view the acceleration data.
