@@ -29,9 +29,7 @@ While Cicada can process data from various wearable devices, it requires an acti
 
 - click ``File`` > ``Import Actigraphy`` > and select your device type of choice.
 
-:ref:`Read more... <link>`.
-
-:guilabel:`New Pull Request`
+:ref:`Read more... <index-top>`.
 
 Importing Data from other wearable devices
 ------------------------------------------
