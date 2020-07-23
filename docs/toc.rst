@@ -8,7 +8,7 @@ Table of Contents
 
 Overview
 ========
-- :ref:`The Cicada method<index-cicada>`
+- :ref:`The Cicada method<overview-method-top>`
     - defines key terms and outlines the ways in which the data is processed and analysed
 - :ref:`The Cicada interface <overview-interface-top>`
     - explains the Cicada user-interface and how to interact with it
