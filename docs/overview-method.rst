@@ -19,7 +19,7 @@ The general procedures
 Importing an actigraphy recording
 ---------------------------------
 
-While Cicada can process data from various wearable devices, it requires an actigraphy recording as the basis of it all. So, the first thing we need to do is import an actigraphy recording. *For advanced users, the (raw) data is stored in a variable of class* ``timeseries``.
+While Cicada can process data from various wearable devices, it requires an actigraphy recording as the basis of it all. So, the first thing we need to do is import an actigraphy recording. *For advanced users, the* :abbr:`raw data (The collection of data that are downloaded from the wearable devices` *is stored in a variable of class* ``timeseries``.
 
 .. note::
 
@@ -34,7 +34,7 @@ While Cicada can process data from various wearable devices, it requires an acti
 Importing Data from other wearable devices
 ------------------------------------------
 
-The start and end date of the actigraphy recording is used to crop the imported recording of any other wearable device. In other words, the actigraphy recording is leading. *For advanced users, the (raw) data is stored as a* ``timeseries`` *variable in its original form, i.e. sampling rate, which can be different from the actigraphy recording*.
+The start and end date of the **actigraphy recording** is used to crop the imported recording of any other wearable device. In other words, the actigraphy recording is leading. *For advanced users, the (raw) data is stored as a* ``timeseries`` *variable in its original form, i.e. sampling rate, which can be different from the actigraphy recording*.
 
 .. note::
 
@@ -43,6 +43,8 @@ The start and end date of the actigraphy recording is used to crop the imported 
 **To import Data from a wearable device (other than actigraphy),**
 
 - click ``File`` > ``Import Other Data`` > and select your device type of choice.
+
+:ref:`Read more... <index-top>`.
 
 Now the Cicada gets buzzing
 ---------------------------
