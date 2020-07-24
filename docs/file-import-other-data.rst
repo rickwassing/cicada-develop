@@ -11,7 +11,7 @@ Importing data from other wearable devices
 WIMR Light Pin
 ==============
 
-**To import Raw Data from a Light Pin Spectrometer developed at the Woolcock Instite, Sydney, Australia,**
+**To import Raw Data from a Light Pin Spectrometer developed at the Woolcock Institute, Sydney, Australia,**
 
 - click ``File`` > ``Import Other Data`` > ``Import WIMR Light Pin (.csv)``.
 

@@ -119,7 +119,7 @@ Cicada can import 7 predefined variables from a sleep diary,
 
     - The Sleep Window Events are defined as ``lightsOut`` to ``lightsOn``.
     - The Sleep Period Events are defined as ``lightsOut`` + ``sleepLatency`` to ``finAwake``.
-    - The WASO Events are defined by the combination of ``awakenings`` and ``waso``, such that each of the *N* = ``awakenings`` Events have a duration of ``waso`` / ``awakenings`` minutes.
+    - The WASO Events are defined by the combination of ``awakenings`` and ``waso``, such that each of the *N* = ``awakenings``, WASO Events have a duration of ``waso`` / ``awakenings`` minutes.
 
 As described above, the different import settings that guide Cicada in the way Raw Data files should be imported are stored in separate JSON files. The import settings file that Cicada should use by default is stored in the Cicada Settings file. This way, the user can define multiple import settings files, for instance for the various types of sleep diaries the research group may use. 
 

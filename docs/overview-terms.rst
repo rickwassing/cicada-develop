@@ -22,7 +22,7 @@ Key Terms
 - **Events**. Segments that are defined by an onset and duration and identified by a unique label. In addition, the event type identifies the origin of the event, e.g. ``manual`` for user-defined events, or ``GGIR`` for events created by GGIR algorithms.
     - **Reject Event**. An event that identifies a segment that should be disregarded in calculating statistics, e.g. time periods where a devices was not worn.
     - **Button Events**. An event triggered by a button press on any of the wearable devices by the research participant. Button events have no duration.
-    - **Sleep Window Events**. A time period in which the research participant is in bed (in-bed until rise-time), or a time period in which the research participant *intends* to sleep (lights out until lights on, or eyes closed until eyes open).
+    - **Sleep Window Events**. A time period in which the research participant is in bed (in-bed until rise-time), or a time period in which the research participant *intends* to sleep (eyes closed until eyes open).
 
     .. note::
 
