@@ -84,7 +84,7 @@ Select Variables
 
 .. note::
 
-    You have to make the decision to define the Sleep Window Events as the period in which the participant reported to be in bed, or the period the participant reported to have the intention to sleep. In our example, ``Bed Time`` is mapped to ``Lights Out``, and ``Rise Time`` is mapped to ``Lights On``. This means that any sleep variable that is derived from the Sleep Window, e.g. sleep efficiency, is relative to the *time in bed*. Alternatively, you may choose to map ``Eyes Closed`` and ``Eyes Open`` to define the Sleep Window. Now any sleep variable derived from the Sleep Window, is relative to the time the participant *intended* to sleep.
+    You have to make the decision to define the Sleep Window Events as the period in which the participant reported to be in bed, or the period the participant reported to have the intention to sleep. In our example, we used ``Bed Time`` and ``Rise Time`` to define the Sleep Window. This means that any sleep variable that is derived from the Sleep Window and Period, e.g. sleep latency, is relative to the *time in bed*. Alternatively, you may choose to use ``Eyes Closed`` and ``Eyes Open`` to define the Sleep Window. Now any sleep variable derived from the Sleep Window and Period, is relative to the time the participant *intended* to sleep.
 
 - Use the dropdown lists to indicate which column header corresponds to each of these variables. They do not have to have the same label, e.g. ``Lights Out`` is mapped to the ``BedTime`` column in the Raw Data. 
 - If any non-required variable is not available, click the ``Select...`` item in the dropdown list, e.g. ``# awakenings`` and ``WASO`` is not available in our example. 
