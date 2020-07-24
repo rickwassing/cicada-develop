@@ -9,17 +9,11 @@ Table of Contents
 Overview
 ========
 - :ref:`Key Terms <overview-terms-top>`
-    - defines key terms
-- :ref:`The Cicada method<overview-method-top>`
-    - outlines the ways in which the data is processed and analysed
-- :ref:`The Cicada interface <overview-interface-top>`
-    - explains the Cicada user-interface and how to interact with it
-- :ref:`The Cicada package <overview-package-top>`
-    - describes how the code is structured in the 'package' directory
+- :ref:`The Cicada method to process an Actigraphy Dataset <overview-method-top>`
+- :ref:`The Cicada interface and how to interact with it <overview-interface-top>`
+- :ref:`The Cicada package and structure of its code <overview-package-top>`
 - :ref:`The Cicada settings files <overview-settings-files-top>`
-    - shows how the Cicada .json settings files are used and what information is stored in these settings files
 - :ref:`The 'ACT' data structure <index-cicada>`
-    - explains how the dataset is structured in the 'ACT' data structure
 
 .. _toc-file:
 
@@ -64,6 +58,7 @@ Annotation
 Events
 ------
 - :ref:`Use the mouse cursor to create new events <link>`
+- :ref:`Define Sleep Windows, explain SW type, and overlap <link>`
 - :ref:`Create repeated daily events given a time of day and duration <link>`
 - :ref:`Create events that are relative to the onset or offset of other events <link>`
 - :ref:`Create 'sleep window' events using GGIR's automatic sleep period detection <link>`

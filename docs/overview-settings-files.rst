@@ -97,7 +97,6 @@ But here is more you say?
 Don't worry about the default ``XTickSize``. It's just one of those quirks.
 
 
-=================================
 Sleep Diary Import Settings Files
 =================================
 
@@ -108,9 +107,9 @@ Sleep Diary Import Settings Files
 Cicada can import 7 predefined variables from a sleep diary, 
 
 1. ``date`` [datestring]
-2. ``lightsOut``[datestring]
-3. ``sleepLatency``in minutes [integer]
-4. ``awakenings``, [integer]
+2. ``lightsOut`` [datestring]
+3. ``sleepLatency`` in minutes [integer]
+4. ``awakenings`` [integer]
 5. ``waso`` in minutes [integer]
 6. ``finAwake`` [datestring]
 7. ``lightsOn`` [datestring]
@@ -125,15 +124,15 @@ As described above, the different import settings that guide Cicada in the way R
 
 Let's assume we have a tabular Raw Data file that contains the following column headers and data formatting,
 
-1. **Date**, specified as dd/mm/yy, e.g. '16/05/20'
-2. **Notes**, specified as text, e.g. 'Watched TV in bed'
-3. **Bed time**, specified as 'HH:MM' 24h clock time, e.g. '22:30'
-4. **Eyes closed**, specified as 'HH:MM' 24h clock time, e.g. '22:45'
-5. **Sleep onset latency**, specified in minutes
-6. **Final awakening**, specified as 'HH:MM' 24h clock time, e.g. '7:30'
-7. **Eyes open**, specified as 'HH:MM' 24h clock time, e.g. '7:45'
-8. **Rise time**, specified as 'HH:MM' 24h clock time, e.g. '8:00'
-9. **Sleep quality**, specified as ordinal values between 1-5
+1. **Date**, specified as 'dd/mm/yy', e.g. ``16/05/20``
+2. **Notes**, specified as 'text', e.g. ``Watched TV in bed``
+3. **Bed time**, specified as 'HH:MM' 24h clock time, e.g. ``22:30``
+4. **Eyes closed**, specified as 'HH:MM' 24h clock time, e.g. ``22:45``
+5. **Sleep onset latency**, specified in minutes, e.g. ``15``
+6. **Final awakening**, specified as 'HH:MM' 24h clock time, e.g. ``7:30``
+7. **Eyes open**, specified as 'HH:MM' 24h clock time, e.g. ``7:45``
+8. **Rise time**, specified as 'HH:MM' 24h clock time, e.g. ``8:00``
+9. **Sleep quality**, specified as ordinal values between 1-5, e.g. ``3``
 
 The sleep diary import settings file must specify how the Raw Data maps to the expected 7 predefined variables. In the example below, you can see how the format in which the Raw Data is stored is specfied in ``"format": {}``, and how the available columns in the Raw Data is mapped to the 7 variables in ``"idx": {}``. Here you can see that the researcher decided to use 'bed time' and 'rise time' to define the Sleep Windows (``lightsOut`` and ``lightsOn`` are column 3 and 8 respectively). Also, you can see that the Raw Data did not contain any information about the number of awakenings or WASO (their value is ``null``).
 

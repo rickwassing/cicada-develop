@@ -68,5 +68,5 @@ This section provides a detailed overview of all the fields in the ``ACT`` Datas
 - **ACT.display** [struct] contains all display settings
 - **ACT.etc** [struct] 'etcetera' contains all other non-essential variables
 - **ACT.saved** [bool] indicates whether file is saved or not
-- **ACT.pipe** [cell] keeps track of pipeline stages, ``load``, ``preproc``, '``analysis`` and ``statistics``
+- **ACT.pipe** [cell] keeps track of pipeline stages, ``load``, ``preproc``, ``analysis`` and ``statistics``
 - **ACT.history** [char] stores all steps executed by the user interface as Matlab code to reproduce the exact same data processing
