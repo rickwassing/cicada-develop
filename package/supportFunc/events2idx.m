@@ -17,16 +17,16 @@ addParameter(p,'id',[], ...
 parse(p, varargin{:});
 
 if nargin < 3
-    id = ACT.events.id;
+    id = ACT.analysis.events.id;
 else
     if ~isempty(p.Results.id)
         id = p.Results.id;
     elseif isempty(p.Results.label)
-        id = ACT.events.id(strcmpi(ACT.events.type, p.Results.type));
+        id = ACT.analysis.events.id(strcmpi(ACT.analysis.events.type, p.Results.type));
     elseif isempty(p.Results.type)
-        id = ACT.events.id(strcmpi(ACT.events.label, p.Results.label));
+        id = ACT.analysis.events.id(strcmpi(ACT.analysis.events.label, p.Results.label));
     elseif ~isempty(p.Results.type) && ~isempty(p.Results.label)
-        id = ACT.events.id(strcmpi(ACT.events.label, p.Results.label) & strcmpi(ACT.events.type,p.Results.type));
+        id = ACT.analysis.events.id(strcmpi(ACT.analysis.events.label, p.Results.label) & strcmpi(ACT.analysis.events.type,p.Results.type));
     else
         id = [];
     end
@@ -35,9 +35,9 @@ end
 idx = false(size(time));
 
 for ev = 1:length(id)
-    idxEvent = ACT.events.id == id(ev);
-    onset  = find(time >= ACT.events.onset(idxEvent), 1, 'first');
-    offset = find(time <= (ACT.events.onset(idxEvent) + ACT.events.duration(idxEvent)), 1, 'last');
+    idxEvent = ACT.analysis.events.id == id(ev);
+    onset  = find(time >= ACT.analysis.events.onset(idxEvent), 1, 'first');
+    offset = find(time <= (ACT.analysis.events.onset(idxEvent) + ACT.analysis.events.duration(idxEvent)), 1, 'last');
     if isempty(onset) || isempty(offset)
         continue
     end

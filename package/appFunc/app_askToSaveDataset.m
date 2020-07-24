@@ -1,4 +1,4 @@
-function result = app_askToSaveWorkspace(app, event)
+function result = app_askToSaveDatset(app, event)
 
 % Initialize result to be true
 result = true;
@@ -7,8 +7,8 @@ result = true;
 if ~isempty(app.ACT)
     if ~app.ACT.saved && isfield(app.ACT, 'filename')
         % Ask to save the file, don't save, or cancel the process
-        message = {'Save the workspace to' app.ACT.filename 'before closing?'};
-        title   = 'Save Workspace';
+        message = {'Save the dataset to' app.ACT.filename 'before closing?'};
+        title   = 'Save Dataset';
         sel = uiconfirm(app.CicadaUIFigure, message, title, ...
             'Options',{'Cancel', 'Don''t save', 'Save'},...
             'DefaultOption', 'Cancel', ...
@@ -20,7 +20,7 @@ if ~isempty(app.ACT)
             case 'Cancel'
                 result = false;
             case 'Save'
-                app.SaveWorkspaceMenu.MenuSelectedFcn(app, event);
+                app.SaveDatasetMenu.MenuSelectedFcn(app, event);
                 if ~app.ACT.saved % Something went wrong while saving
                     result = false;
                 end

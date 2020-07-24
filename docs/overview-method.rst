@@ -19,7 +19,7 @@ The general procedures
 Importing an actigraphy recording
 ---------------------------------
 
-While Cicada can process data from various wearable devices, it requires an actigraphy recording as the basis of it all. So, the first thing we need to do is import an actigraphy recording. *For advanced users, the* :abbr:`raw data (The collection of data that are downloaded from the wearable devices` *is stored in a variable of class* ``timeseries``.
+While Cicada can process Raw Data from various wearable devices, it requires an actigraphy recording as the basis of it all. So, the first thing we need to do is import an actigraphy recording. *For advanced users, the Raw Data are stored as variables of class* ``timeseries``.
 
 .. note::
 
@@ -29,12 +29,12 @@ While Cicada can process data from various wearable devices, it requires an acti
 
 - click ``File`` > ``Import Actigraphy`` > and select your device type of choice.
 
-:ref:`Read more... <index-top>`.
+:ref:`Read more... <index-top>`
 
-Importing Data from other wearable devices
+Importing Data from other Wearable Devices
 ------------------------------------------
 
-The start and end date of the **actigraphy recording** is used to crop the imported recording of any other wearable device. In other words, the actigraphy recording is leading. *For advanced users, the (raw) data is stored as a* ``timeseries`` *variable in its original form, i.e. sampling rate, which can be different from the actigraphy recording*.
+The start and end date of the **actigraphy recording** is used to crop the imported recording of any other Wearable Device. In other words, the actigraphy recording is leading. *For advanced users, the Raw Data from other Wearable Devices are stored as * ``timeseries`` *variables in its original form, i.e. sampling rate, which can be different from the actigraphy recording*.
 
 .. note::
 
@@ -44,12 +44,12 @@ The start and end date of the **actigraphy recording** is used to crop the impor
 
 - click ``File`` > ``Import Other Data`` > and select your device type of choice.
 
-:ref:`Read more... <index-top>`.
+:ref:`Read more... <index-top>`
 
 Now the Cicada gets buzzing
 ---------------------------
 
-Every time you import Data, the Cicada then calculates predefined Metrics in common Epochs. This accomplishes two things. First, often the raw Data cannot be readily interpreted, e.g. accelaration values in 3-dimensions, or a raw ECG trace don't mean much, it is the Euclidean Norm or the heart-rate that is meaningful. Secondly, Cicada calculates these Metrics in a common timeframe which is dictated by the Epoch length. These various timeseries can then be synchronised and analysed together and the whole is larger than the sum of its parts. What a beauty.
+Every time you import Raw Data, the Cicada then calculates predefined Metrics in common Epochs. This accomplishes two things. First, often the Raw Data cannot be readily interpreted, e.g. accelaration values in 3-dimensions, or a raw ECG trace don't mean much, it is the Euclidean norm or the heart-rate that is meaningful. Secondly, Cicada calculates these Metrics in a common timeframe which is dictated by the Epoch length. These various timeseries can then be synchronised and analysed together.
 
 Saving and loading a Dataset
 ----------------------------
@@ -64,34 +64,175 @@ Once an actigraphy recording is imported, it is stored in a Dataset called ``ACT
 
 - click ``File`` > ``Load Dataset``.
 
+:ref:`Read more... <index-top>`
+
+Changin the display settings
+----------------------------
+
+It is somewhat subjective, but you may want to change the way the Epoched Metrics are displayed in the data analysis tab. You can change 
+
+1. the relative height of each of the axes, 
+2. the number of panels that are shown in one view without scrolling, 
+3. the length of the actogram, 
+4. the start and end clock times of the analysis window, 
+5. the range of the vertical axes, 
+6. whether the vertical axes are in linear or logarithmic scale, 
+7. to show or hide certain axes or adjust their order, 
+8. set the color of the plotted timeseries, and 
+9. to show and hide individual timeseries or adjust their order.
+
+:ref:`Read more... <overview-interface-settings-panel>`
+
 Editing the Dataset
 -------------------
 
-Before we start analysing the Dataset, you may want to edit a few variables in the Dataset or change the recording.
+Before we start analysing the Dataset, you may want to add, edit or remove a few things in the Dataset. For example, you can specify the study name, the condition and session number, crop the Dataset in time, change the time zone, or specify a different Epoch length.
 
 **To edit any information about the study, participant or recording,**
 
 - click ``Edit`` > ``Dataset Info``.
 
-Sometimes, the actigraph starts the recording as soon as it is configured and is then send by post to the participant and back to the institute. In such situations, you may want to select only that part of the recording where the participant actually wore the device.
+:ref:`Read more... <index-top>`
+
+Sometimes, the actigraph recording is started as soon as it is configured, and the device is then send by post to the participant and back to the institute. In such situations, you may want to select only that part of the recording where the participant actually wore the device.
 
 **To select a part of the Dataset given some start and end date and time,**
 
 - click ``Edit`` > ``Select Data``.
 
-Often, the clock of the actigraph is synchronized with the clock of the computer that configured the device. In some cases, if the computer time is wrong, the recording may be in the wrong time zone. Alternatively, if the recording includes a shift in time due to e.g. daylight-saving regulations or travel, you can select the appropriate part of the data and change the time zone.
+:ref:`Read more... <index-top>`
+
+Often, the clock of the actigraph is synchronized with the clock of the computer that configured the device. In some cases, if the computer time is wrong, the recording may be in the wrong time zone. Alternatively, if the recording includes a shift in time due to e.g. daylight-saving regulations or travel, you can select the appropriate part of the Dataset and change the time zone.
 
 **To change the time zone,**
 
 - click ``Edit`` > ``Change Time Zone``.
 
-The default Epoch length that is used to calculate Metrics in a common timeframe is 5 seconds, which is suitable for most use-cases. However, you may have data that could require a different Epoch length.
+:ref:`Read more... <index-top>`
+
+The default Epoch length that is used to calculate Metrics in a common timeframe is 5 seconds, which is suitable for most use-cases. However, your study may use devices that require a different Epoch length.
 
 **To change the Epoch length,**
 
 - click ``Edit`` > ``Change Epoch Length``.
 
+:ref:`Read more... <index-top>`
+
 Viewing the various acceleration Metrics
 ----------------------------------------
 
-The Euclidean Norm is the default Metric to view the acceleration data.
+The Euclidean Norm is the default Metric to displayed in the actogram (the axes above the events axes). However, you can also display the Angle or the Activity Counts. The Angle shows the angle of the accelerometer with respect to the 'z' direction, and Activity Counts are indirectly derived from the accelerometry data to match the traditional actigraphic count recordings obtained using the Actiwatch (used to be Mini Mitter, Respironics Inc., nowadays Philips Healthcare).
+
+**To change the display,**
+
+- click ``View`` > and select your Metric of choice.
+
+.. note::
+
+    It is somewhat subjective, but the Angle may be the best Metric to manually create Sleep Window Events. When we step into bed, we transition from an upright position to a horizontal position and subsequently have very little changes in the angle of the accelerometer (except for when we toss-and-turn). This behavior is most visible by looking at the Angle of the accelerometer.
+
+Preprocessing the Dataset
+-------------------------
+
+Now, we are sure that the Dataset has complete information about the study, the participant and the study, and we have cropped the Dataset to the part that we're interested in. *However, we are still not quite ready to analyse the Metrics*. Next, we need to make sure that the Epoched Metrics are suitable for Analysis. For example, we might need to calibrate the Raw Data and recalculate the Epoched Metrics, or we might need to create Reject Events to indicate which sections of the Epoched Metrics should be disregarded in the Analysis.
+
+**To calibrate the Raw Data,**
+
+- click ``Preprocess`` > ``GGIR Automatic Calibration``.
+
+:ref:`Read more... <index-top>`
+
+.. note::
+
+    For ActivInsight GeneActiv devices, the calibration 'offset' and 'gains' are already stored in each device, and these values are used to calibrate the Raw Data when it is imported into Cicada.
+
+**To automatically detect non-wear segments as Reject Events,**
+
+- click ``Preprocess`` > ``GGIR Non-Wear Detection``.
+
+:ref:`Read more... <index-top>`
+
+**To manually create Reject Events,**
+
+:ref:`follow the instructions in the next section <overview-interface-create-events>`.
+
+**To edit or delete Reject Events,**
+
+:ref:`follow the instructions in the next section <overview-interface-edit-events>`.
+
+Analysing the Dataset
+---------------------
+
+Now we can start to Annotate the Epoched Metrics, and create Events. These two types of Analyses will define segments of the Dataset which are selected to calculate Statistics for. 
+
+Annotation
+^^^^^^^^^^
+
+Cicada uses an algorithm adapted from GGIR's ``identify_level.R`` function to annotate the acceleration Metrics. First, the user has to specify a set of parameters. The 'activity treshold' (e.g. 0.10 g for 'moderate' activity) is used to identify Epochs in which the acceleration Metric 'Euclidean Norm' is above 0.10 g. The parameters 'activity time' (e.g. 10 minutes) and 'bout criterion' (e.g. 80%) are then used to only keep those segments in which 80% of the Epochs within a 10 minute window are above 0.10 g. The entire segment is then labelled as 'moderate' activity. This is repeated for all activity levels. Any Epoch that has not met any of the criteria is labelled as 'low' activity. This way, each and every Epoch has an Annotation label.
+
+**To Annotate acceleration Metrics with GGIR,**
+
+- click ``Analyse`` > ``Annotate Epochs`` > ``Annotate Acceleration (GGIR)``.
+
+:ref:`Read more... <index-top>`
+
+In addition to Annotating acceleration Metrics, we can Annotate light Metics. [Explain algorithm].
+
+**To Annotate light Metrics,**
+
+- click ``Analyse`` > ``Annotate Epochs`` > ``Annotate Light``.
+
+:ref:`Read more... <index-top>`
+
+Sleep Window Events
+^^^^^^^^^^^^^^^^^^^
+
+An important part of analysing the Dataset is to define Sleep Window Events. They can be :ref:`created manually <overview-interface-create-events>`, imported from a :ref:`sleep diary <index-top>`, or finally, we can define Sleep Window Events by using an algorithm. 
+
+**To manually create Sleep Window Events,**
+
+:ref:`follow the instructions in the next section <overview-interface-create-events>`.
+
+**To import a sleep diary,**
+
+:ref:`please refer to the section on importing sleep diaries <index-top>`.
+
+**To create Sleep Window Events using GGIR's sleep detection algorithm,**
+
+- click ``Analyse`` > ``Events`` > ``GGIR Sleep Detection``.
+
+:ref:`Read more... <index-top>`
+
+.. note::
+
+    The GGIR sleep detection algorithm depends on the onset and offset of the 'analysis window', which is defined by the actogram start and end clock times shown in the settings panel. The default analysis window is '15:00' until '15:00' the next day. The sleep detection algorithm assumes to find one main Sleep Window between these two timepoints. Cicada uses 15:00 as an emperically derived cut point where it is highly unlikely, under normal circumstances, that a Sleep Window begins before 15:00 and ends after 15:00, or begins before 15:00 and ends after 15:00. *However, depending on your sample, e.g. shiftworkers, youth or sleep disorders, you may want to adjust this analysis window*.
+
+Custom Events
+^^^^^^^^^^^^^
+
+In addition to creating Custom Events manually, which is described in the next section on :ref:`creating events <overview-interface-create-events>`, Cicada has two more ways to create Custom Events. In some use-cases, you may want to analyse the same part of the day, for all of the days in the recording. For example, your study might have instructed participants to excersize, every morning between 10:00 am and 11:30 am. To create Statistics for specifically these time segments, we can define 'Daily Events' with the 'onset' at ``10:00``, 'duration' ``1h 30m`` and 'label' ``Morning Excersize``.
+
+**To Create Daily Events,**
+
+- click ``Analyse`` > ``Events`` > ``Create Daily Events``.
+
+:ref:`Read more... <index-top>`
+
+Secondly, you may want to study segments that are before, during or after existing Events. For example, you may be interested in the activity levels prior to sleep. To calculate Statistics on the 3 hours prior to each Sleep Window Event, we can define 'Relative Events' with the 'reference Event label' ``sleepWindow``, the 'reference Event type' ``actigraphy``, relative to the ``onset``, with a 'delay' of ``-3h 0m``, a 'duration' of ``3h 0m`` and 'label' ``Presleep Activity``.
+
+**To Create Relative Events,**
+
+- click ``Analyse`` > ``Events`` > ``Create Relative Events``.
+
+:ref:`Read more... <index-top>`
+
+Calculating Statistics
+----------------------
+
+Once we're done with Annotating the Dataset and creating all the Events that define segments of interest, we can calculate Statistics. The Statistics are calculated as averages across the entire Dataset, for each day in the Dataset (midnight-to-midnight), for each Sleep Window Event, and for each Custom Event. The Epoch Annotation's are used to calculate the time spent in each level of Annotation, e.g. time spent in 'moderate' activity, or time with 'bright' light exposure. Not only does Cicada calculate average Metrics for these segments, for some Metrics it will also calculate the clock onset of the maximal and minimal value. For a comprehensive overview, please refer to the section on :ref:`Statistics and their description of how they are calculated <index-top>`.
+
+**To calculate Statistics,**
+
+- click ``Statistics`` > ``Generate Statistics``.
+
+:ref:`Read more... <index-top>`

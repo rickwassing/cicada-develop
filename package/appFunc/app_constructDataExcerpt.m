@@ -87,7 +87,7 @@ for ai = 1:length(axesTypes)
         % Case 1: axes contain events
         case 'events'
             % Extract all events from this start to end date
-            events = selectEventsUsingTime(app.MainApp.ACT.events, StartDate, EndDate, 'Enclosed', false);
+            events = selectEventsUsingTime(app.MainApp.ACT.analysis.events, StartDate, EndDate, 'Enclosed', false);
             % -----
             % For each event ...
             for ei = 1:size(events, 1)

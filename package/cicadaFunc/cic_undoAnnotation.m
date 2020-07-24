@@ -5,12 +5,12 @@ ACT.analysis.annotate.acceleration.Data = zeros(size(ACT.analysis.annotate.accel
 % ---------------------------------------------------------
 % Remove any existing sleep periods and waso events
 ids = [];
-rm = selectEventsUsingTime(ACT.events, ACT.xmin, ACT.xmax, 'Label', 'sleepPeriod', 'Type', 'actigraphy');
+rm = selectEventsUsingTime(ACT.analysis.events, ACT.xmin, ACT.xmax, 'Label', 'sleepPeriod', 'Type', 'actigraphy');
 if ~isempty(rm)
     [ACT, id] = cic_editEvents(ACT, 'delete', [], [], 'id', rm.id);
     ids = [ids; id];
 end
-rm = selectEventsUsingTime(ACT.events, ACT.xmin, ACT.xmax, 'Label', 'waso', 'Type', 'actigraphy');
+rm = selectEventsUsingTime(ACT.analysis.events, ACT.xmin, ACT.xmax, 'Label', 'waso', 'Type', 'actigraphy');
 if ~isempty(rm)
     [ACT, id] = cic_editEvents(ACT, 'delete', [], [], 'id', rm.id);
     ids = [ids; id];

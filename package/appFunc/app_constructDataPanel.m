@@ -94,7 +94,7 @@ for di = 1:app.ACT.ndays
                 case 'events'
                     if ismember('Events', app.ComponentList)
                         % Extract all events from this start to end date
-                        events = selectEventsUsingTime(app.ACT.events, StartDate, EndDate, 'Enclosed', false);
+                        events = selectEventsUsingTime(app.ACT.analysis.events, StartDate, EndDate, 'Enclosed', false);
                         % Assume we do not have to re-order the event components
                         shouldReorder = false;
                         % -----

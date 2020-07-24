@@ -45,7 +45,7 @@ if ismember('customEvent', do)
     ACT.stats.custom.(tableName) = table();
     % ---------------------------------------------------------
     % Extract all these custom events
-    events = selectEventsUsingTime(ACT.events, ACT.xmin, ACT.xmax, 'Label', label, 'Type', 'customEvent');
+    events = selectEventsUsingTime(ACT.analysis.events, ACT.xmin, ACT.xmax, 'Label', label, 'Type', 'customEvent');
     % ---------------------------------------------------------
     % Onset and offset of the events
     ACT.stats.custom.(tableName).onset = cellstr(datestr(events.onset, 'dd/mm/yyyy HH:MM'));

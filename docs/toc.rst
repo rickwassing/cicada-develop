@@ -24,7 +24,7 @@ Overview
 The File Menu
 =============
 - :ref:`Importing an accelerometry recording<link>`
-- :ref:`Saving and loading a workspace<link>`
+- :ref:`Saving and loading a Dataset<link>`
 - :ref:`Importing data from other wearable devices<link>`
 - :ref:`Importing a sleep diary<link>`
 - :ref:`Exporting statistics<link>`

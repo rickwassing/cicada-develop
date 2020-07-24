@@ -49,7 +49,7 @@ for mi = 1:length(metrictypes)
 end
 % ---------------------------------------------------------
 % Cut the events
-ACT.events = selectEventsUsingTime(ACT.events, startDate, endDate);
+ACT.analysis.events = selectEventsUsingTime(ACT.analysis.events, startDate, endDate);
 % ---------------------------------------------------------
 % Set saved to false
 ACT.saved = false;

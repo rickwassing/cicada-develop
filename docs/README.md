@@ -68,7 +68,7 @@ The data from actigraphy and/or other wearable devices are stored in a structure
     -   **data.acceleration.y** [double] accelerometry in y-axis
     -   **data.acceleration.z** [double] accelerometry in z-axis
     -   **data.(measurement).(datatype)** [double] e.g. `data.temperature.wrist`, to store temperature data obtained from the wrist; or `data.light.w`, to store broad-spectrum light exposure
--   **ACT.events** [table] contains all events
+-   **ACT.analysis.events** [table] contains all events
     -   **events.id** [int] unique identifier
     -   **events.onset** [datenum] onset of event
     -   **events.duration** [double] duration of event in days
@@ -120,7 +120,7 @@ The Cicada user interface is comprised of various 'Components', e.g. `uipannel`,
 
 ### Menu items and their call-alone functions
 
-**File > Open WorkSpace**
+**File > Open Dataset**
 
 ```matlab
 
@@ -131,7 +131,7 @@ ACT = cic_getDays(ACT, analysisWinStart, analysisWinEnd); % e.g. '15:00', '15:00
 
 ```
 
-**File > Save WorkSpace (As)**
+**File > Save Dataset (As)**
 
 ```matlab
 
@@ -156,7 +156,7 @@ ACT = cic_getDays(ACT, analysisWinStart, analysisWinEnd); % e.g. '15:00', '15:00
 [ACT, rawSleepDiary] = cic_importSleepDiary(ACT, fullpath); % Path to tabular text file or spreadsheet
 [ACT, importSettings, err, msg] = cic_importSleepDiarySettings(ACT, fullpath); % Path to .JSON settings file
 [ACT, err, msg] = cic_parseSleepDiary(ACT, rawSleepDiary, importSettings);
-ACT = cic_diarySleepEvents(ACT); % Generate events in 'ACT.events' from sleep diary
+ACT = cic_diarySleepEvents(ACT); % Generate events in 'ACT.analysis.events' from sleep diary
 ACT = cic_actigraphySleepEvents(ACT); % Genererate sleep period and waso events if annotation is available
 
 ```

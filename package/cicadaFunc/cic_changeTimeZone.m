@@ -31,10 +31,10 @@ for m = 1:length(metrictypes)
 end
 % ---------------------------------------------------------
 % Change the time in all events
-for ev = 1:size(ACT.events, 1)
-    t = datetime(ACT.events.onset(ev), 'ConvertFrom', 'datenum', 'TimeZone', ACT.timezone);
+for ev = 1:size(ACT.analysis.events, 1)
+    t = datetime(ACT.analysis.events.onset(ev), 'ConvertFrom', 'datenum', 'TimeZone', ACT.timezone);
     t.TimeZone = newTimeZone;
-    ACT.events.onset(ev) = datenum(t);
+    ACT.analysis.events.onset(ev) = datenum(t);
 end
 % ---------------------------------------------------------
 % Save the new timezone to struct

@@ -1,12 +1,12 @@
 function ACT = cic_createRelativeEvent(ACT, ref, refLabel, refType, delay, duration, newLabel)
 % ---------------------------------------------------------
 % Calculate onset based on the onset or offset of the events
-idx = strcmpi(ACT.events.label, refLabel) & strcmpi(ACT.events.type, refType);
+idx = strcmpi(ACT.analysis.events.label, refLabel) & strcmpi(ACT.analysis.events.type, refType);
 switch ref
     case 'onset'
-        onset = ACT.events.onset(idx) + delay/24; % onset of the events plus the delay
+        onset = ACT.analysis.events.onset(idx) + delay/24; % onset of the events plus the delay
     case 'offset'
-        onset = ACT.events.onset(idx) + ACT.events.duration(idx) + delay/24; % offset of the events plus delay
+        onset = ACT.analysis.events.onset(idx) + ACT.analysis.events.duration(idx) + delay/24; % offset of the events plus delay
 end
 % ---------------------------------------------------------
 % Add events

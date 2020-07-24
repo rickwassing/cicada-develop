@@ -169,19 +169,19 @@ ACT.xmin = times(1);
 ACT.xmax = times(end);
 % ---------------------------------------------------------
 % Store events
-ACT.events = table();
+ACT.analysis.events = table();
 if any(button)
-    ACT.events.id       = [1;(2:length(find(button))+1)'];
-    ACT.events.onset    = [times(1);round2minute(times(button))];
-    ACT.events.duration = zeros(sum(button)+1,1);
-    ACT.events.label    = [{'start'};repmat({'button'},length(find(button)),1)];
-    ACT.events.type     = [{''};repmat({'button'},length(find(button)),1)];
+    ACT.analysis.events.id       = [1;(2:length(find(button))+1)'];
+    ACT.analysis.events.onset    = [times(1);round2minute(times(button))];
+    ACT.analysis.events.duration = zeros(sum(button)+1,1);
+    ACT.analysis.events.label    = [{'start'};repmat({'button'},length(find(button)),1)];
+    ACT.analysis.events.type     = [{''};repmat({'button'},length(find(button)),1)];
 else
-    ACT.events.id       = 1;
-    ACT.events.onset    = times(1);
-    ACT.events.duration = zeros(1,1);
-    ACT.events.label    = {'start'};
-    ACT.events.type     = {''};
+    ACT.analysis.events.id       = 1;
+    ACT.analysis.events.onset    = times(1);
+    ACT.analysis.events.duration = zeros(1,1);
+    ACT.analysis.events.label    = {'start'};
+    ACT.analysis.events.type     = {''};
 end
 % ---------------------------------------------------------
 % Save the Dynamic Range of this device: required for clipping detection

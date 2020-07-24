@@ -22,7 +22,7 @@ ACT.saved = false;
 % ---------------------------------------------------------
 % Write history
 ACT.history = char(ACT.history, '% -----');
-ACT.history = char(ACT.history, '% Insert sleep events from diary to ''ACT.events''');
+ACT.history = char(ACT.history, '% Insert sleep events from diary to ''ACT.analysis.events''');
 ACT.history = char(ACT.history, 'ACT = cic_diarySleepEvents(ACT);');
 % ---------------------------------------------------------
 % We'll continue adding more sleep events if they exist, or return otherwise

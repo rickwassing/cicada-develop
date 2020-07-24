@@ -10,7 +10,7 @@ for ci = 1:length(cmpIdx)
     idxId = regexp(app.ComponentList{cmpIdx(ci)}, 'id-[0-9]+');
     id = str2double(app.ComponentList{cmpIdx(ci)}(idxId+3:end));
     % ... and extract the event
-    event = app.ACT.events(app.ACT.events.id == id, :);
+    event = app.ACT.analysis.events(app.ACT.analysis.events.id == id, :);
     % ---------------------------------------------------------
     % If this event does not exist, we can unmount it
     if isempty(event)

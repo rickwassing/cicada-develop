@@ -11,7 +11,7 @@ The Cicada User Interface
     **The Cicada User Interface is made up of 5 main sections.**
 
 1. **Menu bar.**
-    - The 'File' menu concerns everything about loading and saving workspaces; importing data and events; exporting statistics, reports and Matlab code; and to close the workspace or quit the program.
+    - The 'File' menu concerns everything about loading and saving Datasets; importing data and events; exporting statistics, reports and Matlab code; and to close the Dataset or quit the program.
     - The 'Edit' menu concerns everything about changing information regarding the study, participant and recording; to change the recording time; and set the epoch length.
     - The 'View' menu is used to switch which metric is displayed as the acceleration data.
     - The 'Preprocess' menu concerns all data processing steps that may be necessary before analysis.
@@ -51,6 +51,8 @@ The data is partitioned into single or double day segments according to the deta
     :width: 735px
     
     **Example data panel.** (1) The title of the panel shows the start and end date of the displayed data segment, in this example '21/05/2020 15:00' until '22/05/2020 15:00'. There are 4 axes in this data panel. One for the events (2), which shows a sleep window event (purple bar); and three additional axes for each data type in this recording. This recording was made with an ActivInsights GeneActiv watch, which measures acceleration, light exposure and temperature. The acceleration is shown in axes (3), and the light and temperature timeseries are shown in the axes identified by (4).
+
+.. _overview-interface-create-events:
 
 Interact with the interface to create events
 --------------------------------------------

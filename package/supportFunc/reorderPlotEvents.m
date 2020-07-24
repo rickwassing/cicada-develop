@@ -16,14 +16,14 @@ for ch = 1:length(parent.Children)
     if ~strcmpi(parent.Children(ch).Tag(1:5), 'Event')
         o.other = [o.other, ch];
     else
-        idx = app.ACT.events.id == parent.Children(ch).UserData.id;
+        idx = app.ACT.analysis.events.id == parent.Children(ch).UserData.id;
         if ~any(idx)
             % Disregard this object, it will be deleted
             o.other = [o.other, ch];
             continue
         end
-        label = app.ACT.events.label{idx};
-        type  = app.ACT.events.type{idx};
+        label = app.ACT.analysis.events.label{idx};
+        type  = app.ACT.analysis.events.type{idx};
         if strcmpi(type, 'customEvent')
             o.(type) = [o.(type), ch];
         else

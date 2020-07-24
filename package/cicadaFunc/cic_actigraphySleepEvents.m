@@ -15,12 +15,12 @@ end
 ids = [];
 % ---------------------------------------------------------
 % Start by removing any existing sleep periods and waso events
-rm = selectEventsUsingTime(ACT.events, select(1), select(2), 'Label', 'sleepPeriod', 'Type', 'actigraphy');
+rm = selectEventsUsingTime(ACT.analysis.events, select(1), select(2), 'Label', 'sleepPeriod', 'Type', 'actigraphy');
 if ~isempty(rm)
     [ACT, id] = cic_editEvents(ACT, 'delete', [], [], 'id', rm.id);
     ids = [ids; id];
 end
-rm = selectEventsUsingTime(ACT.events, select(1), select(2), 'Label', 'waso', 'Type', 'actigraphy');
+rm = selectEventsUsingTime(ACT.analysis.events, select(1), select(2), 'Label', 'waso', 'Type', 'actigraphy');
 if ~isempty(rm)
     [ACT, id] = cic_editEvents(ACT, 'delete', [], [], 'id', rm.id);
     ids = [ids; id];
@@ -43,7 +43,7 @@ if ~any(ACT.analysis.annotate.acceleration.Data ~= 0) && ~any(isnan(ACT.analysis
 end
 % ---------------------------------------------------------
 % Select all sleep windows 
-sleepWindow = selectEventsUsingTime(ACT.events, select(1), select(2), 'Label', 'sleepWindow', 'Type', ACT.analysis.settings.sleepWindowType);
+sleepWindow = selectEventsUsingTime(ACT.analysis.events, select(1), select(2), 'Label', 'sleepWindow', 'Type', ACT.analysis.settings.sleepWindowType);
 % ---------------------------------------------------------
 % If there are no sleep windows, return
 if isempty(sleepWindow)

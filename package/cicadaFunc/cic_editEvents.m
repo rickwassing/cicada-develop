@@ -14,23 +14,23 @@ function [ACT, id] = cic_editEvents(ACT, method, onset, duration, varargin)
 p = inputParser;
 % ---------------------------------------------------------
 % Before we do anything, make sure the 'start' event is in the table with its ID as the maximum among all IDs
-if ~any(strcmpi(ACT.events.label, 'start'))
+if ~any(strcmpi(ACT.analysis.events.label, 'start'))
     add = table();
-    add.id = ifelse(isempty(ACT.events.id), 1, max(ACT.events.id)+1);
+    add.id = ifelse(isempty(ACT.analysis.events.id), 1, max(ACT.analysis.events.id)+1);
     add.onset = ACT.xmin;
     add.duration = 0;
     add.label = {'start'};
     add.type = {''};
-    ACT.events = [ACT.events; add];
-elseif sum(strcmpi(ACT.events.label, 'start')) > 1
-    ACT.events(strcmpi(ACT.events.label, 'start'), :) = [];
+    ACT.analysis.events = [ACT.analysis.events; add];
+elseif sum(strcmpi(ACT.analysis.events.label, 'start')) > 1
+    ACT.analysis.events(strcmpi(ACT.analysis.events.label, 'start'), :) = [];
     add = table();
-    add.id = ifelse(isempty(ACT.events.id), 1, max(ACT.events.id)+1);
+    add.id = ifelse(isempty(ACT.analysis.events.id), 1, max(ACT.analysis.events.id)+1);
     add.onset = ACT.xmin;
     add.duration = 0;
     add.label = {'start'};
     add.type = {''};
-    ACT.events = [ACT.events; add];
+    ACT.analysis.events = [ACT.analysis.events; add];
 end
     
 % ---------------------------------------------------------
@@ -65,7 +65,7 @@ switch method
         % Parse the variable arguments
         parse(p,varargin{:});
         % Create a new table with new events
-        id = (max(ACT.events.id)+1:max(ACT.events.id)+length(onset))';
+        id = (max(ACT.analysis.events.id)+1:max(ACT.analysis.events.id)+length(onset))';
         add = table();
         add.id = id;
         add.onset = onset;
@@ -73,11 +73,11 @@ switch method
         add.label = repmat({p.Results.label},length(onset),1);
         add.type = repmat({p.Results.type},length(onset),1);
         % Add the new table to the events table
-        ACT.events = [ACT.events; add];
+        ACT.analysis.events = [ACT.analysis.events; add];
         % replace the 'start' event ID with the largest ID+1 so
         % future new events will not re-use IDs of previously defined events
-        if ACT.events.id(strcmpi(ACT.events.label, 'start')) <= max(ACT.events.id)
-            ACT.events.id(strcmpi(ACT.events.label, 'start')) = max(ACT.events.id)+1;
+        if ACT.analysis.events.id(strcmpi(ACT.analysis.events.label, 'start')) <= max(ACT.analysis.events.id)
+            ACT.analysis.events.id(strcmpi(ACT.analysis.events.label, 'start')) = max(ACT.analysis.events.id)+1;
         end
     case 'edit'
         % If the user wants to edit an event, an 'id' must be provided
@@ -99,14 +99,14 @@ switch method
         end
         % Update the onset and duration of the event
         id = p.Results.id;
-        idx = ACT.events.id == id;
-        ACT.events.onset(idx) = onset;
-        ACT.events.duration(idx) = duration;
+        idx = ACT.analysis.events.id == id;
+        ACT.analysis.events.onset(idx) = onset;
+        ACT.analysis.events.duration(idx) = duration;
         if ~isempty(p.Results.label)
-            ACT.events.label{idx} = p.Results.label;
+            ACT.analysis.events.label{idx} = p.Results.label;
         end
         if ~isempty(p.Results.type)
-            ACT.events.type{idx} = p.Results.type;
+            ACT.analysis.events.type{idx} = p.Results.type;
         end
     case 'delete'
         % If the user wants to delete an event, an 'id', 'label' and/or 'type' must be provided
@@ -127,30 +127,30 @@ switch method
             return
         else % Otherwise, at leasts a label or a type has been specified
             if ~isempty(p.Results.id) % If the user specified an id
-                idx = ismember(ACT.events.id, p.Results.id);
+                idx = ismember(ACT.analysis.events.id, p.Results.id);
             elseif isempty(p.Results.type) % If the user specified a label, but not a type
-                idx = strcmpi(ACT.events.label, p.Results.label);
+                idx = strcmpi(ACT.analysis.events.label, p.Results.label);
             elseif isempty(p.Results.label) % If the user specified a type, but not a label
-                idx = strcmpi(ACT.events.type, p.Results.type);
+                idx = strcmpi(ACT.analysis.events.type, p.Results.type);
             elseif ~isempty(p.Results.type) && ~isempty(p.Results.label) % If the user specified a label and a type
-                idx = strcmpi(ACT.events.label, p.Results.label) & strcmpi(ACT.events.type, p.Results.type);
+                idx = strcmpi(ACT.analysis.events.label, p.Results.label) & strcmpi(ACT.analysis.events.type, p.Results.type);
             end
         end
         % Get the IDs from the to-be deleted events
-        id = ACT.events.id(idx);
+        id = ACT.analysis.events.id(idx);
         if any(idx)
             % Delete the events, and replace the 'start' event ID with the largest deleted ID so
             % future new events will not re-use IDs of previously deleted events
-            ACT.events(idx, :) = [];
-            if ACT.events.id(strcmpi(ACT.events.label, 'start')) <= max(id)
-                ACT.events.id(strcmpi(ACT.events.label, 'start')) = max(id)+1;
+            ACT.analysis.events(idx, :) = [];
+            if ACT.analysis.events.id(strcmpi(ACT.analysis.events.label, 'start')) <= max(id)
+                ACT.analysis.events.id(strcmpi(ACT.analysis.events.label, 'start')) = max(id)+1;
             end
         end
 end
 % ---------------------------------------------------------
 % Sort the events table
-[~, idx] = sort(ACT.events.onset);
-ACT.events = ACT.events(idx, :);
+[~, idx] = sort(ACT.analysis.events.onset);
+ACT.analysis.events = ACT.analysis.events(idx, :);
 % ---------------------------------------------------------
 % Set saved to false
 ACT.saved = false;
