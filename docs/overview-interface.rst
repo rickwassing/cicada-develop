@@ -57,7 +57,7 @@ The data is partitioned into single or double day segments according to the deta
 Interact with the interface to create events
 --------------------------------------------
 
-You can interact with the user interface by the use of your mouse cursor, and a few keyboard keys. The purpose of this is to create events with predefined or custom event labels. For each of these event labels, Cicada will select those data segments for calculating statistics.
+You can interact with the user interface by the use of your mouse cursor, and a few keyboard keys. The purpose of this is to create events with predefined or custom event labels. For each of these event labels, Cicada will select those data segments for calculating statistics (except for Reject Events of course).
 
 1. Left-click anywhere within the data panel to indicate the **onset** or **offset** of the event. A pink cursor will appear with a label showing the time in ``HH:MM``.
 2. Optionally, adjust the location of the cursor by pressing the ``left`` or ``right arrow`` keys on your keyboard.

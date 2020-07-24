@@ -107,3 +107,5 @@ Cicada develop source code
   overview-method.rst
   overview-interface.rst
   overview-package.rst
+  overview-settings-files.rst
+  overview-act-structure.rst

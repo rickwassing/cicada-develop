@@ -10,8 +10,8 @@ Key Terms
 - **Sampling Rate**. The number of datapoints per unit of time.
 - **Epoch**. The length of a timesegment in seconds over which Raw Data is synchronized.
 - **Epoched Metrics**. In order to properly analyse the Raw Data from various different types of wearable devices, Cicada needs to synchronize their timeseries that have a common Epoch length. In addition, the same Raw Data can be transformed into various Metrics. For example, the acceleration in 'x', 'y', and 'z' directions are used to compute the 'Euclidean Norm' Metric, but also to compute the 'Angle' Metric.
-    - **Euclidean Norm**. The length of the 3-dimensional vector ``[x, y, z]`` given by ``sqrt(x^2 + y^2 + z^2)``, where ``x``, ``y`` and ``z`` are the instantaneous acceleration in g's (:math:`9.81 m/s^2`).
-    - **Angle**. The angle of the accelerometer with respect to the ‘z’ axis, given by ``atan(z/ sqrt(x^2 + y^2)) / (pi/180)``, where ``x``, ``y`` and ``z`` are median acceleration values in g’s (:math:`9.81 m/s^2`) in moving windows of length 'Epoch'.
+    - **Euclidean Norm**. The length of the 3D vector ``[x, y, z]`` given by ``sqrt(x^2 + y^2 + z^2)``, where ``x``, ``y`` and ``z`` are the instantaneous acceleration in g's (9.81 :math:`m/s^2`).
+    - **Angle**. The angle of the accelerometer with respect to the ‘z’ axis, given by ``atan(z/ sqrt(x^2 + y^2)) / (pi/180)``, where ``x``, ``y`` and ``z`` are median acceleration values in g’s in moving windows of length 'Epoch'.
     - **Activity Counts**. Derived activity counts in arbitrary units from the accelerometry data according to B.H. Te Lindert et al. (2013) Sleep (DOI: 10.5665/sleep.2648).
     - Other derived epoched metrics are simply down- or upsampled values for each Epoch.
 - **Preprocessing**. The steps to make sure the Epoched Metrics are suitable for Analysis. For example, we might need to calibrate the Raw Data and recalculate the Epoched Metrics, or we might need to create *Reject Events* (see definition below) to indicate which sections of the Epoched Metrics should be disregarded in the Analysis.

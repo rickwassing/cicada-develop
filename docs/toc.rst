@@ -14,7 +14,7 @@ Overview
     - explains the Cicada user-interface and how to interact with it
 - :ref:`The Cicada package <overview-package-top>`
     - describes how the code is structured in the 'package' directory
-- :ref:`The Cicada settings files <index-cicada>`
+- :ref:`The Cicada settings files <overview-settings-files-top>`
     - shows how the Cicada .json settings files are used and what information is stored in these settings files
 - :ref:`The 'ACT' data structure <index-cicada>`
     - explains how the dataset is structured in the 'ACT' data structure

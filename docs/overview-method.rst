@@ -9,7 +9,7 @@ The Cicada Method
 Why do we need Cicada?
 ======================
 
-Indeed, a good question, because there are already a few good packages available that can process and analyse actigraphy data (`GGIR`_ for instance). However, there is currently---to my knowledge---no graphical user interfaces (GUIs) available to do so. Secondly, most packages are focussed on analysing data from one wearable device, while in some research, multiple wearable devices are used simultaneously. Cicada solves both issues by providing a (hopefully intuitive) way of visualizing and analysing data from various wearable devices.
+Indeed, a good question, because there are already a few good packages available that can process and analyse actigraphy data (`GGIR`_ for instance). However, there is currently---to my knowledge---no graphical user interfaces (GUIs) available to do so. Secondly, most packages are focussed on analysing data from one wearable device, while in some research, multiple wearable devices are used simultaneously. Cicada aims to solve both issues by providing a (hopefully intuitive) way of visualizing and analysing data from various wearable devices.
 
 .. _`GGIR`: https://cran.r-project.org/web/packages/GGIR/index.html
 
@@ -34,7 +34,7 @@ While Cicada can process Raw Data from various wearable devices, it requires an 
 Importing Data from other Wearable Devices
 ------------------------------------------
 
-The start and end date of the **actigraphy recording** is used to crop the imported recording of any other Wearable Device. In other words, the actigraphy recording is leading. *For advanced users, the Raw Data from other Wearable Devices are stored as * ``timeseries`` *variables in its original form, i.e. sampling rate, which can be different from the actigraphy recording*.
+The start and end date of the **actigraphy recording** is used to crop the imported recording of any other Wearable Device. In other words, the actigraphy recording is leading. *For advanced users, the Raw Data from other Wearable Devices are stored as* ``timeseries`` *variables in its original form, i.e. sampling rate, which can be different from the actigraphy recording*.
 
 .. note::
 
@@ -54,7 +54,7 @@ Every time you import Raw Data, the Cicada then calculates predefined Metrics in
 Saving and loading a Dataset
 ----------------------------
 
-Once an actigraphy recording is imported, it is stored in a Dataset called ``ACT``. *For advanced users, this is a variable of class* ``struct`` *and contains the fields listed in the section* :ref:`the 'ACT' data structure <index-cicada>`. 
+Once an actigraphy recording is imported, it is stored in a Dataset called ``ACT``. *For advanced users, this is a variable of class* ``struct`` *and contains the fields listed in the section on* :ref:`the 'ACT' data structure <index-top>`. 
 
 **To save (or save-as) the Dataset,**
 
@@ -129,7 +129,7 @@ The Euclidean Norm is the default Metric to displayed in the actogram (the axes 
 
 .. note::
 
-    It is somewhat subjective, but the Angle may be the best Metric to manually create Sleep Window Events. When we step into bed, we transition from an upright position to a horizontal position and subsequently have very little changes in the angle of the accelerometer (except for when we toss-and-turn). This behavior is most visible by looking at the Angle of the accelerometer.
+    It is somewhat subjective, but the Angle may be the best Metric to view when manually creating Sleep Window Events. When we step into bed, we transition from an upright position to a horizontal position and subsequently have very little changes in the angle of the accelerometer (except for when we toss-and-turn). This behavior is most visible by looking at the Angle of the accelerometer.
 
 Preprocessing the Dataset
 -------------------------
@@ -144,7 +144,9 @@ Now, we are sure that the Dataset has complete information about the study, the 
 
 .. note::
 
-    For ActivInsight GeneActiv devices, the calibration 'offset' and 'gains' are already stored in each device, and these values are used to calibrate the Raw Data when it is imported into Cicada.
+    For ActivInsight GeneActiv devices, the calibration 'offset' and 'gains' are already stored in each device, and these values are used to calibrate the Raw Data when it is imported into Cicada. There is no need to recalibrate this Raw Data again here.
+
+Reject Events can be defined manually, or Cicada can automatically detect them by using an adaption of GGIR's automatic non-wear detection algorithm (`DOI: 10.1371/journal.pone.0061691 <http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0061691>`_).
 
 **To automatically detect non-wear segments as Reject Events,**
 
@@ -187,7 +189,7 @@ In addition to Annotating acceleration Metrics, we can Annotate light Metics. [E
 Sleep Window Events
 ^^^^^^^^^^^^^^^^^^^
 
-An important part of analysing the Dataset is to define Sleep Window Events. They can be :ref:`created manually <overview-interface-create-events>`, imported from a :ref:`sleep diary <index-top>`, or finally, we can define Sleep Window Events by using an algorithm. 
+An important part of analysing the Dataset is to define Sleep Window Events. They can be created manually, imported from a sleep diary, or we can define Sleep Window Events by using an algorithm. 
 
 **To manually create Sleep Window Events,**
 
@@ -203,7 +205,7 @@ An important part of analysing the Dataset is to define Sleep Window Events. The
 
 :ref:`Read more... <index-top>`
 
-.. note::
+.. warning::
 
     The GGIR sleep detection algorithm depends on the onset and offset of the 'analysis window', which is defined by the actogram start and end clock times shown in the settings panel. The default analysis window is '15:00' until '15:00' the next day. The sleep detection algorithm assumes to find one main Sleep Window between these two timepoints. Cicada uses 15:00 as an emperically derived cut point where it is highly unlikely, under normal circumstances, that a Sleep Window begins before 15:00 and ends after 15:00, or begins before 15:00 and ends after 15:00. *However, depending on your sample, e.g. shiftworkers, youth or sleep disorders, you may want to adjust this analysis window*.
 
@@ -229,7 +231,9 @@ Secondly, you may want to study segments that are before, during or after existi
 Calculating Statistics
 ----------------------
 
-Once we're done with Annotating the Dataset and creating all the Events that define segments of interest, we can calculate Statistics. The Statistics are calculated as averages across the entire Dataset, for each day in the Dataset (midnight-to-midnight), for each Sleep Window Event, and for each Custom Event. The Epoch Annotation's are used to calculate the time spent in each level of Annotation, e.g. time spent in 'moderate' activity, or time with 'bright' light exposure. Not only does Cicada calculate average Metrics for these segments, for some Metrics it will also calculate the clock onset of the maximal and minimal value. For a comprehensive overview, please refer to the section on :ref:`Statistics and their description of how they are calculated <index-top>`.
+Once we're done with Annotating the Dataset and creating all the Events that define segments of interest, we can calculate Statistics. The Statistics are calculated as averages across the entire Dataset, for each day in the Dataset (midnight-to-midnight), for each Sleep Window Event, and for each Custom Event. The Epoch Annotation's are used to calculate the time spent in each level of Annotation, e.g. time spent in 'moderate' activity, or time with 'bright' light exposure. Not only does Cicada calculate average Metrics for these segments, for some Metrics it will also calculate the clock onset of the maximal and minimal value. 
+
+For a comprehensive overview of all Statistics, please refer to the section on :ref:`Statistics and their description of how they are calculated <index-top>`.
 
 **To calculate Statistics,**
 
