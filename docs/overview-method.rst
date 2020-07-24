@@ -66,7 +66,7 @@ Once an actigraphy recording is imported, it is stored in a Dataset called ``ACT
 
 :ref:`Read more... <index-top>`
 
-Changin the display settings
+Changing the display settings
 ----------------------------
 
 It is somewhat subjective, but you may want to change the way the Epoched Metrics are displayed in the data analysis tab. You can change 
@@ -238,5 +238,38 @@ For a comprehensive overview of all Statistics, please refer to the section on :
 **To calculate Statistics,**
 
 - click ``Statistics`` > ``Generate Statistics``.
+
+:ref:`Read more... <index-top>`
+
+Exporting Statistics
+--------------------
+
+[Describe method here]
+
+**To export Statistics,**
+
+- click ``File`` > ``Export`` > ``Statistics``.
+
+:ref:`Read more... <index-top>`
+
+Exporting Report
+----------------
+
+This is not developed yet, sorry
+
+**To export a report,**
+
+- click ``File`` > ``Export`` > ``Report``.
+
+:ref:`Read more... <index-top>`
+
+Exporting Matlab code
+---------------------
+
+Cicada automatically logs all the steps that we have performed as Matlab code in ``ACT.history``. You can export this code to a Matlab '.m' file, which in turn, you can open as a script in the Matlab Editor. First of all, this allows you to exactly reproduce all the steps that we just did within Cicada. Secondly, by adapting the script in some clever ways, you can batch process all your other Actigraphy recordings. So, you can first process 1 Actigraphy recording in Cicada, export the script, adapt the script, and run all other Actigraphy recordings automatically. You probably still need to manually go through all the exported Statistics to make sure all is well and proper. You can then quickly edit those processed Datasets in Cicada that require some manual work.
+
+**To export the Matlab code,**
+
+- click ``File`` > ``Export`` > ``Matlab Code``.
 
 :ref:`Read more... <index-top>`
