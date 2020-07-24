@@ -125,14 +125,15 @@ As described above, the different import settings that guide Cicada in the way R
 
 Let's assume we have a tabular Raw Data file that contains the following column headers and data formatting,
 
-1. **Date**, specified as dd/mm/yy, e.g. '24/07/20'
-2. **Subject id**, specified as text, e.g. 'sub01'
+1. **Date**, specified as dd/mm/yy, e.g. '16/05/20'
+2. **Notes**, specified as text, e.g. 'Watched TV in bed'
 3. **Bed time**, specified as 'HH:MM' 24h clock time, e.g. '22:30'
 4. **Eyes closed**, specified as 'HH:MM' 24h clock time, e.g. '22:45'
 5. **Sleep onset latency**, specified in minutes
 6. **Final awakening**, specified as 'HH:MM' 24h clock time, e.g. '7:30'
 7. **Eyes open**, specified as 'HH:MM' 24h clock time, e.g. '7:45'
 8. **Rise time**, specified as 'HH:MM' 24h clock time, e.g. '8:00'
+9. **Sleep quality**, specified as ordinal values between 1-5
 
 The sleep diary import settings file must specify how the Raw Data maps to the expected 7 predefined variables. In the example below, you can see how the format in which the Raw Data is stored is specfied in ``"format": {}``, and how the available columns in the Raw Data is mapped to the 7 variables in ``"idx": {}``. Here you can see that the researcher decided to use 'bed time' and 'rise time' to define the Sleep Windows (``lightsOut`` and ``lightsOn`` are column 3 and 8 respectively). Also, you can see that the Raw Data did not contain any information about the number of awakenings or WASO (their value is ``null``).
 

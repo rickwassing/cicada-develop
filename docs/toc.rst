@@ -25,29 +25,29 @@ Overview
 
 Importing, loading, saving, and exporting
 =========================================
-- :ref:`Importing an actigraphy recording<link>`
-- :ref:`Saving and loading a Dataset<link>`
-- :ref:`Importing data from other wearable devices<link>`
-- :ref:`Importing a sleep diary<link>`
-- :ref:`Exporting statistics<link>`
-- :ref:`Exporting a report (future release)<link>`
-- :ref:`Exporting Matlab code<link>`
+- :ref:`Importing an actigraphy recording <file-import-actigraphy-top>`
+- :ref:`Saving and loading a Dataset <file-save-open-dataset-top>`
+- :ref:`Importing data from other wearable devices <file-import-other-data-top>`
+- :ref:`Importing a sleep diary <file-import-sleep-diary-top>`
+- :ref:`Exporting statistics <link>`
+- :ref:`Exporting a report (future release) <link>`
+- :ref:`Exporting Matlab code <link>`
 
 .. _toc-edit:
 
 Edit the Dataset
 ================
-- :ref:`Edit dataset information<link>`
-- :ref:`Select part of the recording<link>`
-- :ref:`Change time zone<link>`
-- :ref:`Change epoch length<link>`
+- :ref:`Edit dataset information <link>`
+- :ref:`Select part of the recording <link>`
+- :ref:`Change time zone <link>`
+- :ref:`Change epoch length <link>`
 
 .. _toc-preproc:
 
 Preprocess the Dataset
 ======================
-- :ref:`Automatic calibration of acceleration data using GGIR<link>`
-- :ref:`Automatic detection of 'non-wear' time segments in acceleration data<link>`
+- :ref:`Automatic calibration of acceleration data using GGIR <link>`
+- :ref:`Automatic detection of 'non-wear' time segments in acceleration data <link>`
 
 .. _toc-analysis:
 
@@ -58,24 +58,24 @@ The data can be analysed in two ways. First, you can annotate each epoch of the 
 
 Annotation
 ----------
-- :ref:`Annotate acceleration data into ordinal activity levels using GGIR<link>`
-- :ref:`Annotate light data into ordinal exposure levels<link>`
+- :ref:`Annotate acceleration data into ordinal activity levels using GGIR <link>`
+- :ref:`Annotate light data into ordinal exposure levels <link>`
 
 Events
 ------
-- :ref:`Use the mouse cursor to create new events<link>`
-- :ref:`Create repeated daily events given a time of day and duration<link>`
-- :ref:`Create events that are relative to the onset or offset of other events<link>`
-- :ref:`Create 'sleep window' events using GGIR's automatic sleep period detection<link>`
+- :ref:`Use the mouse cursor to create new events <link>`
+- :ref:`Create repeated daily events given a time of day and duration <link>`
+- :ref:`Create events that are relative to the onset or offset of other events <link>`
+- :ref:`Create 'sleep window' events using GGIR's automatic sleep period detection <link>`
 
 .. _toc-stats:
 
 Calculating Statistics
 ======================
-- :ref:`Calculate statistics<link>`
+- :ref:`Calculate statistics <link>`
 
 .. _toc-window:
 
 The Window Menu
 ===============
-- :ref:`Why and when we need to reposition the panels, issue #3<link>`
+- :ref:`Why and when we need to reposition the panels, issue #3 <link>`

@@ -10,24 +10,40 @@
 		"acceleration": {
 			"rowspan": 2,
 			"log": 0,
-			"range": [0, 1],
+			"range": [
+				0,
+				1
+			],
 			"view": "euclNorm",
 			"counts": {
 				"log": 0,
-				"range": [0, 1000]
+				"range": [
+					0,
+					1000
+				]
 			},
 			"euclNorm": {
 				"log": 0,
-				"range": [0, 1]
+				"range": [
+					0,
+					1
+				]
 			},
 			"angle": {
 				"log": 0,
-				"range": [-120, 120]
+				"range": [
+					-120,
+					120
+				]
 			}
 		}
 	},
 	"analysis": {
 		"epochLength": 5
 	},
-	"XTickSize": [12, 13, 16]
+	"XTickSize": [
+		12,
+		13,
+		16
+	]
 }

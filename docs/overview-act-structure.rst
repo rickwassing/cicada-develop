@@ -36,14 +36,14 @@ This section provides a detailed overview of all the fields in the ``ACT`` Datas
 - **ACT.timezone** [string] time zone
 - **ACT.epoch** [int] epoch length in seconds used to transform Raw Data into Metrics
 - **ACT.data** [struct] contains all Raw Data
-    - **data.acceleration.x** [double] actigraphy in x-axis
-    - **data.acceleration.y** [double] actigraphy in y-axis
-    - **data.acceleration.z** [double] actigraphy in z-axis
+    - **data.acceleration.x** [double] Accelerometry in x-axis
+    - **data.acceleration.y** [double] Accelerometry in y-axis
+    - **data.acceleration.z** [double] Accelerometry in z-axis
     - **data.(measurement).(datatype)** [double] e.g. ``data.temperature.wrist``, to store temperature data obtained from the wrist; or ``data.light.wideSpec``, to store wide-spectrum light exposure
 - **ACT.metric** [struct] contains all (derived) Metrics, in common Epochs of length ``ACT.epoch``
     - **metric.acceleration.euclNormMinOne** [timeseries] Euclidean normal of the vector ``[x, y, z]`` minus 1 to account for static gravity
     - **metric.acceleration.bpFiltEuclNorm** [timeseries] Euclidean normal bandpass filtered between 0.2 and 15 Hz using a 4th order Butterworth filter
-    - **metric.acceleration.angle_z** [timeseries] angle of the accelerometry device in the z-axis, given by ``atan(z / sqrt(x^2 + y^2)) / (pi/180)``, where ``x``, ``y`` and ``z`` are median acceleration values obtained in moving windows of length ``ACT.epoch``
+    - **metric.acceleration.angle_z** [timeseries] angle of the Accelerometry device in the z-axis, given by ``atan(z / sqrt(x^2 + y^2)) / (pi/180)``, where ``x``, ``y`` and ``z`` are median acceleration values obtained in moving windows of length ``ACT.epoch``
 - **ACT.analysis** [struct] contains all Annotation and Events
     - **analysis.annotation** [struct] contains all Annotatation timeseries
         - **annotation.acceleration** [timeseries] contains Annotation of 'acceleration' Metrics

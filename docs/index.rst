@@ -112,6 +112,9 @@ Cicada develop source code
 
 .. toctree::
   :maxdepth: 3
-  :caption: Importing, loading, saving, and exporting
+  :caption: Import, open, save, export
 
   file-import-actigraphy.rst
+  file-save-open-dataset.rst
+  file-import-other-data.rst
+  file-import-sleep-diary.rst
