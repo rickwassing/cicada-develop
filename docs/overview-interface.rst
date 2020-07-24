@@ -11,22 +11,22 @@ The Cicada User Interface
     **The Cicada User Interface is made up of 5 main sections.**
 
 1. **Menu bar.**
-    - The 'File' menu concerns everything about loading and saving Datasets; importing data and events; exporting statistics, reports and Matlab code; and to close the Dataset or quit the program.
-    - The 'Edit' menu concerns everything about changing information regarding the study, participant and recording; to change the recording time; and set the epoch length.
-    - The 'View' menu is used to switch which metric is displayed as the acceleration data.
-    - The 'Preprocess' menu concerns all data processing steps that may be necessary before analysis.
-    - The 'Analysis' menu lists all options to annotate each epoch according to some thresholding method, or to define events. Either way, the labels of these annotated epochs/events are used to select segments of the data for calculating statistics.
-    - The 'Statistics' menu calculates average and daily statistics, and if applicable, also calulates statistics for sleep events and custom events.
+    - The 'File' menu concerns everything about loading and saving Datasets; importing Raw Data and Events; exporting Statistics, reports and Matlab code; and to close the Dataset or quit the program.
+    - The 'Edit' menu concerns everything about changing information regarding the study, participant and recording; to change the recording time; and set the Epoch length.
+    - The 'View' menu is used to switch which Metric is displayed as the Acceleration Metric.
+    - The 'Preprocess' menu concerns all Data processing steps that may be necessary before Analysis.
+    - The 'Analysis' menu lists all options to Annotate each Epoch according to some thresholding method, or to define Events. Either way, the labels of these Annotated Epochs/Events are used to select segments of the Dataset for calculating Statistics.
+    - The 'Statistics' menu calculates average and daily Statistics, and if applicable, also calulates Statistics for Sleep Window Events and Custom Events.
     - The 'Window' menu is used as a patch for an open issue (`#4 on GitHub <https://github.com/rickwassing/cicada-develop/issues>`_). Whenever data panels are mispositioned, use this menu to realign them.
     - The 'Help' menu shows information about the software, the author, and the associated license, and provides a link to these documents.
 2. **Information Panel.** Shows all the information regarding the study, participant and recording (see :ref:`below <overview-interface-information-panel>`).
 3. **Tab Group.**
-    - The 'Data Analysis' tab shows all events and epoched metrics in the current dataset.
-    - The 'Average Stats' tab shows the statistics averaged across the entire recording.
-    - The 'Daily Stats' tab shows the statistics for each day in the recording.
-    - More tabs are shown, if applicable, to show statistics for sleep or custom events.
-4. **Data Analyis Tab and Panels.** Shows all events and epoched metrics for each of the available data types (e.g. acceleration, light and temperature), in one panel for each single or double day segment in the recording (see :ref:`below <overview-interface-data-analysis-tab>`).
-5. **Settings Panel.** To change the analysis window, change how the epoched metrics are displayed, and delete groups of annotation types or events with the same label (see :ref:`below <overview-interface-settings-panel>`).
+    - The 'Data Analysis' tab shows all Events and Epoched Metrics in the current dataset.
+    - The 'Average Stats' tab shows the Statistics averaged across the entire recording.
+    - The 'Daily Stats' tab shows the Statistics for each day in the recording.
+    - More tabs are shown, if applicable, to show Statistics for Sleep Window Events or Custom Events.
+4. **Data Analyis Tab and Panels.** Shows all Events and Epoched Metrics for each of the available Data types (e.g. Acceleration, light and temperature), in one panel for each single or double day segment in the recording (see :ref:`below <overview-interface-data-analysis-tab>`).
+5. **Settings Panel.** To change the analysis window, change how the Epoched Metrics are displayed, and delete groups of Annotation types or Events with the same label (see :ref:`below <overview-interface-settings-panel>`).
 
 .. _overview-interface-information-panel:
 

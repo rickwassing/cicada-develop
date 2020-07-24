@@ -8,8 +8,10 @@ Table of Contents
 
 Overview
 ========
+- :ref:`Key Terms <overview-terms-top>`
+    - defines key terms
 - :ref:`The Cicada method<overview-method-top>`
-    - defines key terms and outlines the ways in which the data is processed and analysed
+    - outlines the ways in which the data is processed and analysed
 - :ref:`The Cicada interface <overview-interface-top>`
     - explains the Cicada user-interface and how to interact with it
 - :ref:`The Cicada package <overview-package-top>`
@@ -21,9 +23,9 @@ Overview
 
 .. _toc-file:
 
-The File Menu
-=============
-- :ref:`Importing an accelerometry recording<link>`
+Importing, loading, saving, and exporting
+=========================================
+- :ref:`Importing an actigraphy recording<link>`
 - :ref:`Saving and loading a Dataset<link>`
 - :ref:`Importing data from other wearable devices<link>`
 - :ref:`Importing a sleep diary<link>`
@@ -33,8 +35,8 @@ The File Menu
 
 .. _toc-edit:
 
-The Edit Menu
-=============
+Edit the Dataset
+================
 - :ref:`Edit dataset information<link>`
 - :ref:`Select part of the recording<link>`
 - :ref:`Change time zone<link>`
@@ -42,15 +44,15 @@ The Edit Menu
 
 .. _toc-preproc:
 
-The Preprocess Menu
-===================
+Preprocess the Dataset
+======================
 - :ref:`Automatic calibration of acceleration data using GGIR<link>`
 - :ref:`Automatic detection of 'non-wear' time segments in acceleration data<link>`
 
 .. _toc-analysis:
 
-The Analysis Menu
-=================
+Analyse the Dataset (Annotation and Events)
+===========================================
 
 The data can be analysed in two ways. First, you can annotate each epoch of the data. Here, each epoch is assigned a label according to some thresholding method. Secondly, you can define events, which are time segments of the data identified by a label, an onset and duration. When calculating statistics, these annotation and event labels are used to select those epochs for calculating e.g. average acceleration and time spend in those epochs.
 
@@ -68,9 +70,9 @@ Events
 
 .. _toc-stats:
 
-The Statistics Menu
-===================
-- :ref:`Generate output statistics<link>`
+Calculating Statistics
+======================
+- :ref:`Calculate statistics<link>`
 
 .. _toc-window:
 

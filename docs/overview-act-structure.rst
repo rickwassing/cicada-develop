@@ -23,10 +23,10 @@ This section provides a detailed overview of all the fields in the ``ACT`` Datas
     - **info.height** [double] participant's height in centimeters
     - **info.weight** [double] participant's weight in kilograms
     - **info.handedness** [string] participant's handedness
-    - **info.deviceLoc** [string] location where the accelerometry device was worn
+    - **info.deviceLoc** [string] location where the actigraphy device was worn
     - **info.phenotype** [struct] contains any additional variables from psychometric or clinical surveys
-- **ACT.pnts** [int] number of data points in Raw accelerometry Data
-- **ACT.srate** [int] sampling frequency of Raw accelerometry Data
+- **ACT.pnts** [int] number of data points in Raw actigraphy Data
+- **ACT.srate** [int] sampling frequency of Raw actigraphy Data
 - **ACT.xmin** [datenum] start date of the recording
 - **ACT.xmax** [datenum] end date of the recording
 - **ACT.startdate** [datenum] start date of the data analysis windows
@@ -36,9 +36,9 @@ This section provides a detailed overview of all the fields in the ``ACT`` Datas
 - **ACT.timezone** [string] time zone
 - **ACT.epoch** [int] epoch length in seconds used to transform Raw Data into Metrics
 - **ACT.data** [struct] contains all Raw Data
-    - **data.acceleration.x** [double] accelerometry in x-axis
-    - **data.acceleration.y** [double] accelerometry in y-axis
-    - **data.acceleration.z** [double] accelerometry in z-axis
+    - **data.acceleration.x** [double] actigraphy in x-axis
+    - **data.acceleration.y** [double] actigraphy in y-axis
+    - **data.acceleration.z** [double] actigraphy in z-axis
     - **data.(measurement).(datatype)** [double] e.g. ``data.temperature.wrist``, to store temperature data obtained from the wrist; or ``data.light.wideSpec``, to store wide-spectrum light exposure
 - **ACT.metric** [struct] contains all (derived) Metrics, in common Epochs of length ``ACT.epoch``
     - **metric.acceleration.euclNormMinOne** [timeseries] Euclidean normal of the vector ``[x, y, z]`` minus 1 to account for static gravity
@@ -60,9 +60,9 @@ This section provides a detailed overview of all the fields in the ``ACT`` Datas
         - **average.week** [table] contains average statistics across weekdays
         - **average.weekend** [table] contains average statistics across weekend days
     - **stats.daily** [table] contains daily statistics
-    - **stats.sleep** [struct] contains statistics for Sleep Window Events
-        - **sleep.actigraphy** [table] contains statistics for Sleep Window Events of type ``actigraphy``
-        - **sleep.sleepDiary** [table] contains statistics for Sleep Window Events of type ``sleepDiary``
+    - **stats.sleep** [struct] contains statistics for Sleep Window and Sleep Period Events
+        - **sleep.actigraphy** [table] contains statistics for Sleep Window and Sleep Period Events of type ``actigraphy``
+        - **sleep.sleepDiary** [table] contains statistics for Sleep Window and Sleep Period Events of type ``sleepDiary``
     - **stats.custom** [struct] contains statistics for Custom Events
         - **custom.(label)** [table] contains statistics for Custom Events identified by ``label``
 - **ACT.display** [struct] contains all display settings

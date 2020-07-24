@@ -51,7 +51,7 @@ Acknowledgments
 In building Cicada, I have translated and adopted functionality from other open-source projects.
 I would kindly thank:
 
--   Vincent T. van Hees and colleagues for their pioneering work on GGIR, an R-package to process accelerometry data. `Visit the GGIR CRAN repository`_.
+-   Vincent T. van Hees and colleagues for their pioneering work on GGIR, an R-package to process actigraphy data. `Visit the GGIR CRAN repository`_.
 -   Maxim Osipov, Bart Te Lindert, and German Gómez-Herrero for their work on the `Actant Activity Analysis Toolbox`_ and GeneActiv .bin file import functions.
 
 .. _`Visit the GGIR CRAN repository`: https://cran.r-project.org/web/packages/GGIR/index.html
@@ -109,3 +109,9 @@ Cicada develop source code
   overview-package.rst
   overview-settings-files.rst
   overview-act-structure.rst
+
+.. toctree::
+  :maxdepth: 3
+  :caption: Importing, loading, saving, and exporting
+
+  file-import-actigraphy.rst

@@ -23,7 +23,7 @@ We use [semantic versioning](http://semver.org/). Current verion is 0.1.2. Cicad
 In building Cicada, I have translated and adopted functionality from other open-source projects.
 I would kindly thank:
 
--   Vincent T. van Hees and colleagues for their pioneering work on GGIR, an R-package to process accelerometry data. [Visit the GGIR CRAN repository](https://cran.r-project.org/web/packages/GGIR/index.html).
+-   Vincent T. van Hees and colleagues for their pioneering work on GGIR, an R-package to process actigraphy data. [Visit the GGIR CRAN repository](https://cran.r-project.org/web/packages/GGIR/index.html).
 -   Maxim Osipov, Bart Te Lindert, and German Gómez-Herrero for their work on the [Actant Activity Analysis Toolbox](https://github.com/btlindert/actant-1) and GeneActiv .bin file import functions.
 
 ## Getting Started
@@ -51,10 +51,10 @@ The data from actigraphy and/or other wearable devices are stored in a structure
     -   **info.height** [double] participant's height in centimeters
     -   **info.weight** [double] participant's weight in kilograms
     -   **info.handedness** [string] participant's handedness
-    -   **info.deviceLoc** [string] location where the accelerometry device was worn
+    -   **info.deviceLoc** [string] location where the actigraphy device was worn
     -   **info.phenotype** [struct] contains any additional variables from psychometric or clinical surveys
--   **ACT.pnts** [int] number of data points in raw accelerometry data
--   **ACT.srate** [int] sampling frequency of raw accelerometry data
+-   **ACT.pnts** [int] number of data points in raw actigraphy data
+-   **ACT.srate** [int] sampling frequency of raw actigraphy data
 -   **ACT.xmin** [datenum] start date of the recording
 -   **ACT.xmax** [datenum] end date of the recording
 -   **ACT.startdate** [datenum] start date of the data analysis windows

@@ -16,16 +16,16 @@ Indeed, a good question, because there are already a few good packages available
 The general procedures
 ======================
 
-Importing an actigraphy recording
+Importing an Actigraphy recording
 ---------------------------------
 
-While Cicada can process Raw Data from various wearable devices, it requires an actigraphy recording as the basis of it all. So, the first thing we need to do is import an actigraphy recording. *For advanced users, the Raw Data are stored as variables of class* ``timeseries``.
+While Cicada can process Raw Data from various wearable devices, it requires an Actigraphy recording as the basis of it all. So, the first thing we need to do is import an Actigraphy recording. *For advanced users, the Raw Data are stored as variables of class* ``timeseries``.
 
 .. note::
 
-    The only actigraph that is currently supported in Cicada is the 'ActivInsight GeneActiv'. This is because I only had access to data from this device. Please, if you have raw data from another actigraph, send me a de-identified copy so I can implement an import function for that device. Most appreciated.
+    The only Actigraph that is currently supported in Cicada is the 'ActivInsight GeneActiv'. This is because I only had access to data from this device. Please, if you have raw data from another Actigraph, send me a de-identified copy so I can implement an import function for that device. Most appreciated.
 
-**To import an actigraphy recording,**
+**To import an Actigraphy recording,**
 
 - click ``File`` > ``Import Actigraphy`` > and select your device type of choice.
 
@@ -34,13 +34,13 @@ While Cicada can process Raw Data from various wearable devices, it requires an 
 Importing Data from other Wearable Devices
 ------------------------------------------
 
-The start and end date of the **actigraphy recording** is used to crop the imported recording of any other Wearable Device. In other words, the actigraphy recording is leading. *For advanced users, the Raw Data from other Wearable Devices are stored as* ``timeseries`` *variables in its original form, i.e. sampling rate, which can be different from the actigraphy recording*.
+The start and end date of the **Actigraphy recording** is used to crop the imported recording of any other Wearable Device. In other words, the Actigraphy recording is leading. *For advanced users, the Raw Data from other Wearable Devices are stored as* ``timeseries`` *variables in its original form, i.e. sampling rate, which can be different from the Actigraphy recording*.
 
 .. note::
 
     The only other wearable device that is currently supported in Cicada is an custom-built spectrometer. Again, please send me a de-identified copy of raw data from another device so I can implement an import function. Most appreciated.
 
-**To import Data from a wearable device (other than actigraphy),**
+**To import Data from a wearable device (other than Actigraphy),**
 
 - click ``File`` > ``Import Other Data`` > and select your device type of choice.
 
@@ -49,7 +49,7 @@ The start and end date of the **actigraphy recording** is used to crop the impor
 Now the Cicada gets buzzing
 ---------------------------
 
-Every time you import Raw Data, the Cicada then calculates predefined Metrics in common Epochs. This accomplishes two things. First, often the Raw Data cannot be readily interpreted, e.g. accelaration values in 3-dimensions, or a raw ECG trace don't mean much, it is the Euclidean norm or the heart-rate that is meaningful. Secondly, Cicada calculates these Metrics in a common timeframe which is dictated by the Epoch length. These various timeseries can then be synchronised and analysed together.
+Every time you import Raw Data, the Cicada then calculates predefined Metrics in common Epochs. This accomplishes two things. First, often the Raw Data cannot be readily interpreted, e.g. accelaration values in 3D, or a raw ECG trace don't mean much, it is the Euclidean norm or the heart-rate that is meaningful. Secondly, Cicada calculates these Metrics in a common timeframe which is dictated by the Epoch length. These various timeseries can then be synchronised and analysed together.
 
 Saving and loading a Dataset
 ----------------------------
@@ -118,10 +118,10 @@ The default Epoch length that is used to calculate Metrics in a common timeframe
 
 :ref:`Read more... <index-top>`
 
-Viewing the various acceleration Metrics
+Viewing the various Acceleration Metrics
 ----------------------------------------
 
-The Euclidean Norm is the default Metric to displayed in the actogram (the axes above the events axes). However, you can also display the Angle or the Activity Counts. The Angle shows the angle of the accelerometer with respect to the 'z' direction, and Activity Counts are indirectly derived from the accelerometry data to match the traditional actigraphic count recordings obtained using the Actiwatch (used to be Mini Mitter, Respironics Inc., nowadays Philips Healthcare).
+The Euclidean Norm is the default Metric to displayed in the actogram (the axes above the events axes). However, you can also display the Angle or the Activity Counts. The Angle shows the angle of the Accelerometer with respect to the 'z' direction, and Activity Counts are indirectly derived from the Raw Accelerometry Data to match the traditional actigraphic count recordings obtained using the Actiwatch (used to be Mini Mitter, Respironics Inc., nowadays Philips Healthcare).
 
 **To change the display,**
 
@@ -170,15 +170,15 @@ Now we can start to Annotate the Epoched Metrics, and create Events. These two t
 Annotation
 ^^^^^^^^^^
 
-Cicada uses an algorithm adapted from GGIR's ``identify_level.R`` function to annotate the acceleration Metrics. First, the user has to specify a set of parameters. The 'activity treshold' (e.g. 0.10 g for 'moderate' activity) is used to identify Epochs in which the acceleration Metric 'Euclidean Norm' is above 0.10 g. The parameters 'activity time' (e.g. 10 minutes) and 'bout criterion' (e.g. 80%) are then used to only keep those segments in which 80% of the Epochs within a 10 minute window are above 0.10 g. The entire segment is then labelled as 'moderate' activity. This is repeated for all activity levels. Any Epoch that has not met any of the criteria is labelled as 'low' activity. This way, each and every Epoch has an Annotation label.
+Cicada uses an algorithm adapted from GGIR's ``identify_level.R`` function to annotate the Acceleration Metrics. First, the user has to specify a set of parameters. The 'activity treshold' (e.g. 0.10 g for 'moderate' activity) is used to identify Epochs in which the Acceleration Metric 'Euclidean Norm' is above 0.10 g. The parameters 'activity time' (e.g. 10 minutes) and 'bout criterion' (e.g. 80%) are then used to only keep those segments in which 80% of the Epochs within a 10 minute window are above 0.10 g. The entire segment is then labelled as 'moderate' activity. This is repeated for all activity levels. Any Epoch that has not met any of the criteria is labelled as 'low' activity. This way, each and every Epoch has an Annotation label.
 
-**To Annotate acceleration Metrics with GGIR,**
+**To Annotate Acceleration Metrics with GGIR,**
 
 - click ``Analyse`` > ``Annotate Epochs`` > ``Annotate Acceleration (GGIR)``.
 
 :ref:`Read more... <index-top>`
 
-In addition to Annotating acceleration Metrics, we can Annotate light Metics. [Explain algorithm].
+In addition to Annotating Acceleration Metrics, we can Annotate light Metics. [Explain algorithm].
 
 **To Annotate light Metrics,**
 
