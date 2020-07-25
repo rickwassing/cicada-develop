@@ -21,11 +21,11 @@ The Cicada User Interface
     - The 'Help' menu shows information about the software, the author, and the associated license, and provides a link to these documents.
 2. **Information Panel.** Shows all the information regarding the study, participant and recording (see :ref:`below <overview-interface-information-panel>`).
 3. **Tab Group.**
-    - The 'Data Analysis' tab shows all Events and Epoched Metrics in the current dataset.
+    - The 'Data Analysis' tab shows all Epoched Metrics, Events and Annotation in the current dataset.
     - The 'Average Stats' tab shows the Statistics averaged across the entire recording.
     - The 'Daily Stats' tab shows the Statistics for each day in the recording.
     - More tabs are shown, if applicable, to show Statistics for Sleep Window Events or Custom Events.
-4. **Data Analyis Tab and Panels.** Shows all Events and Epoched Metrics for each of the available Data types (e.g. Acceleration, light and temperature), in one panel for each single or double day segment in the recording (see :ref:`below <overview-interface-data-analysis-tab>`).
+4. **Data Analyis Tab and Panels.** Shows all Epoched Metrics, Events and Annotation for each of the available Data types (e.g. Acceleration, light and temperature), in one panel for each single or double day segment in the recording (see :ref:`below <overview-interface-data-analysis-tab>`).
 5. **Settings Panel.** To change the analysis window, change how the Epoched Metrics are displayed, and delete groups of Annotation types or Events with the same label (see :ref:`below <overview-interface-settings-panel>`).
 
 .. _overview-interface-information-panel:
@@ -50,7 +50,7 @@ The data is partitioned into single or double day segments according to the deta
     :align: center
     :width: 735px
     
-    **Example data panel.** (1) The title of the panel shows the start and end date of the displayed data segment, in this example '21/05/2020 15:00' until '22/05/2020 15:00'. There are 4 axes in this data panel. One for the events (2), which shows a sleep window event (purple bar); and three additional axes for each data type in this recording. This recording was made with an ActivInsights GeneActiv watch, which measures acceleration, light exposure and temperature. The acceleration is shown in axes (3), and the light and temperature timeseries are shown in the axes identified by (4).
+    **Example data panel.** (1) The title of the panel shows the start and end date of the displayed data segment, in this example '21/05/2020 15:00' until '22/05/2020 15:00'. There are 4 axes in this data panel. One for the events (2), which shows a Sleep Window Event (purple bar); and three additional axes for each data type in this recording. This recording was made with an ActivInsights GeneActiv watch, which measures Acceleration, light exposure and temperature. The Acceleration is shown in axes (3), and the light and temperature timeseries are shown in the axes identified by (4).
 
 .. _overview-interface-create-events:
 
@@ -97,20 +97,25 @@ To manually edit an event, left-click on the event of interest in the data analy
     **Edit Event**. You can edit the event label, its onset and duration. Use the dropdown menu to reassign an event label, or select ``Custom Label`` to specify your own short, specific and informative event label (1). Change the onset of the event (2) or the duration of the event (3). Delete this single event by using the ``Delete`` button, or confirm any changes with the ``Edit`` button, or abort with ``Cancel`` (4).
 
 .. warning::
-    When you change the event onset, for example from ``07:30`` to ``08:00``, the event offset will also be 30 minutes later. Similarly, if you change the duration of the event, for example from ``1h 0m`` to ``1h 30m``, the event offset will also be 30 minutes later. Adjust both the event onset and duration accordingly to keep the event offset fixed.
+
+    When you change the event onset, for example from ``07:30`` to ``08:00``, without changin the duration, the event offset will also be 30 minutes later. Similarly, if you change the duration of the event, for example from ``1h 0m`` to ``1h 30m``, wihtout changing the onset, the event offset will also be 30 minutes later. Adjust both the event onset and duration accordingly if you wish to keep the event offset fixed. Note that the original event offset is shown for reference.
 
 .. _overview-interface-settings-panel:
 
 Settings Panel
 ==============
 
-The settings panel lists all display options for each data type, which are 'acceleration', 'light' and 'temperature' in this example, and can be used to delete groups of annotation types and events with the same label.
+The settings panel lists all display options for each data type. In this example, these are 'Acceleration', 'light' and 'temperature'. The settings panel can also be used to delete groups of Annotation types and Events with the same label.
 
 .. figure:: images/overview-interface-6.png
     :align: center
     :width: 360px
     
-    **Settings Panel.** The display settings for each data type can be changed in panels identified by (1) and (2); which correspond to 'acceleration', 'light' and 'temperature' in our example (see :ref:`below <overview-interface-display-settings>` for details). Change the order of the data axes with the '^' (up) and 'v' (down) buttons (3). If applicable, the annotation of epochs can be deleted in panel (4), the sleep windows can be manually edited or deleted in panel (5, see :ref:`below <overview-interface-edit-sleep-window>` for details), and entire groups of events with the same label can be deleted in panel (6).
+    **Settings Panel.** The display settings for each data type can be changed in panels identified by (1) and (2); which correspond to 'Acceleration', 'light' and 'temperature' in our example (see :ref:`below <overview-interface-display-settings>` for details). Change the order of the data axes with the '^' (up) and 'v' (down) buttons (3). If applicable, the Annotation of Epochs can be deleted in panel (4), the Sleep Windows can be manually edited or deleted in panel (5, see :ref:`below <overview-interface-edit-sleep-window>` for details), and entire groups of Events with the same label can be deleted in panel (6).
+
+. note::
+
+    When Sleep Window Events are created with different methods, e.g. the user manually created Sleep Window Events and also imported a sleep diary, then there are two sets of Sleep Window Events, one of type ``manual`` and one of type ``sleepDiary``. However, Cicada can only use one set to define Sleep Periods and calculate the sleep Statistics. The user must choose, by use of the Sleep Window type dropdown list, which Event type Cicada should use. Similarly, when the same data type is Annotated with different methods, the Annotation type refers to the used method. Again, the user has to choose which Annotation type should be used to calculate Statistics.
 
 .. _overview-interface-display-settings:
 

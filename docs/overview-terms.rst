@@ -6,9 +6,9 @@ Key Terms
 
 - **Wearable Device**. An electronic device worn close to and/or on the surface of the skin, where they detect (and sometimes analyse) information concerning behavior and physiology (acceleration, temperature, body position, heart rate, breathing rate, blood pressure, oxymetry) and/or environment data (light exposure, temperature).
 - **Actigraphy**. *It may not be the official definition*, but here in Cicada we refer to 'Actigraphy' as the complete set of measurements of behavior, physiology and environment which must include 'Accelerometry'.
-- **Accelerometry**. *It may not be the official definition*, but here in Cicada we refer to 'Accelerometry' as the specific measurements of acceleration (often through a wrist-worn device).
-- **Dataset**. A comprehensive collection of various types of data that pertain to a single recording. This includes, but is not limited to, the raw data from e.g. the accelerometer, the derived metrics, statistics and information about the recording. Cicada uses the Matlab class ``struct`` to store the Dataset.
-- **(Raw) Data**. The collection of data that are downloaded from the wearable devices. In most instances, this is raw data, e.g. acceleration in x, y, and z directions from an actiwatch, but it can also be analysed data, e.g. instantaneous heart rate from a wearable ECG device.
+- **Accelerometry**. In Cicada we refer to 'Accelerometry' as the specific measurements of acceleration (often through a wrist-worn device).
+- **Dataset**. A comprehensive collection of various types of data that pertain to a single data acquisition session with one or mode devices. The Dataset also includes, but is not limited to, the Raw Data from e.g. the Accelerometer, the derived Metrics, Statistics and information about the recording, study and participant. Cicada uses the Matlab class ``struct`` to store the Dataset.
+- **(Raw) Data**. The collection of data that are downloaded from the wearable devices. In most instances, this is Raw Data, e.g. acceleration in 'x', 'y', and 'z' directions from an Actiwatch, but it can also be derived data, e.g. instantaneous heart rate from a wearable ECG device.
 - **Sampling Rate**. The number of datapoints per unit of time.
 - **Epoch**. The length of a timesegment in seconds over which Raw Data is synchronized.
 - **Epoched Metrics**. In order to properly analyse the Raw Data from various different types of wearable devices, Cicada needs to synchronize their timeseries that have a common Epoch length. In addition, the same Raw Data can be transformed into various Metrics. For example, the acceleration in 'x', 'y', and 'z' directions are used to compute the 'Euclidean Norm' Metric, but also to compute the 'Angle' Metric.
@@ -22,14 +22,18 @@ Key Terms
 - **Events**. Segments that are defined by an onset and duration and identified by a unique label. In addition, the event type identifies the origin of the event, e.g. ``manual`` for user-defined events, or ``GGIR`` for events created by GGIR algorithms.
     - **Reject Event**. An event that identifies a segment that should be disregarded in calculating statistics, e.g. time periods where a devices was not worn.
     - **Button Events**. An event triggered by a button press on any of the wearable devices by the research participant. Button events have no duration.
-    - **Sleep Window Events**. A time period in which the research participant is in bed (in-bed until rise-time), or a time period in which the research participant *intends* to sleep (eyes closed until eyes open).
+    - **Sleep Window Events**. A time period in which the research participant is in bed (in bed until rise time), or a time period in which the research participant *intends* to sleep (eyes closed until eyes open).
+    - **Sleep Period Events**. A time period in which the research participant is asleep, excluding 'wake-after-sleep-onset' events (sleep onset until final awakening).
 
+    .. figure:: images/sleep-window-choice.png
+        :width: 752px
+        :align: center
+        
     .. note::
 
-        It is virtually impossible to distinguish between 'in-bed' periods and 'intend-to-sleep' periods if the only information available to the user is Actigraphy. However, when Sleep Window Events are determined by a sleep diary, it is the user's choice to define the Sleep Window Events as the period in which the participant reported to be in bed, or the period the participant reported to have the intention to sleep.
+        It is virtually impossible to distinguish between 'in-bed' windows and 'intend-to-sleep' windows if the only information available to the user is Actigraphy. However, when Sleep Window Events are determined by a sleep diary, it is the user's choice to define the Sleep Window Events as the window in which the participant reported to be *in bed*, or the window the participant reported to have the *intention to sleep*. Any sleep variable that is derived from the Sleep Window and Sleep Period, e.g. sleep latency, is affected by this choice, e.g. sleep latency relative to the *time in bed* is different from sleep latency relative to *eyes closed*.
 
-    - **Sleep Period Events**. A time period in which the research participant is asleep, excluding 'wake-after-sleep-onset' events (sleep onset until final awakening).
-    - **WASO Events**. Short for 'wake after sleep onset'. WASO events are defined as segments during the Sleep Period in which the acceleration annotation is not 'sustained inactive' (type is ``actigraphy``) or as segments the participant reported to be awake during the night (type is ``sleepDiary``).
+    - **WASO Events**. Short for 'wake after sleep onset'. WASO events are defined as segments during the Sleep Period in which the acceleration annotation is not 'sustained inactive' (Event type is ``actigraphy``) or as segments the participant reported to be awake during the night (Event type is ``sleepDiary``).
     - **Custom Events**. Events that are defined by the user.
 
 - **Statistics**. Any variable of interest that is calculated across the entire recording, per day in the recording, per Sleep Window, or for each unique label in Custom Events.
@@ -40,7 +44,7 @@ Advanced terms
 **The next set of terms are not necessary to understand if you just want to use Cicada, but they are useful for anyone who would like to contribute to the code.**
 
 - **Component**. Any Matlab object, e.g. ``ax`` and ``parent`` are Components in the line ``ax = uiaxes(parent)``.
-- **Property**. Any field of the Component, e.g. ``XLim`` is a Property of the UIAxes ``ax``, and can be accessed using the dot-notation ``ax.Position``.
+- **Property**. Any field of the Component, e.g. ``XLim`` is a Property of the UIAxes ``ax``, and can be accessed using the dot-notation ``ax.XLim``.
 - **Trigger**. Any user interaction with the user interface, e.g. a mouse click or key-stroke.
 - **State**. The complete set of values in the Dataset.
 - **Lifecycle**. The main function that is called after a Trigger, which is responsible for calling the sequence of functions to update any relevant Property based on the State.

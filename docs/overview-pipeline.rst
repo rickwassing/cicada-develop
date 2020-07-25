@@ -6,14 +6,14 @@ The Cicada Pipeline
 
 **This page outlines the main ways in which the data is processed and analysed. More detailed descriptions of each of these steps are linked in the respective sections.**
 
-Why do we need Cicada?
+Why Do We Need Cicada?
 ======================
 
 Indeed, a good question, because there are already a few good packages available that can process and analyse actigraphy data (`GGIR`_ for instance). However, there is currently---to my knowledge---no graphical user interfaces (GUIs) available to do so. Secondly, most packages are focussed on analysing data from one wearable device, while in some research, multiple wearable devices are used simultaneously. Cicada aims to solve both issues by providing a (hopefully intuitive) way of visualizing and analysing data from various wearable devices.
 
 .. _`GGIR`: https://cran.r-project.org/web/packages/GGIR/index.html
 
-The general procedures
+The General Procedures
 ======================
 
 Importing an Actigraphy recording
@@ -121,7 +121,7 @@ The default Epoch length that is used to calculate Metrics in a common timeframe
 Viewing the various Acceleration Metrics
 ----------------------------------------
 
-The Euclidean Norm is the default Metric to displayed in the actogram (the axes above the events axes). However, you can also display the Angle or the Activity Counts. The Angle shows the angle of the Accelerometer with respect to the 'z' direction, and Activity Counts are indirectly derived from the Raw Accelerometry Data to match the traditional actigraphic count recordings obtained using the Actiwatch (used to be Mini Mitter, Respironics Inc., nowadays Philips Healthcare).
+The Euclidean Norm is the default Metric to displayed in the actogram. However, you can also display the Angle or the Activity Counts. The Angle shows the angle of the Accelerometer with respect to the 'z' direction, and Activity Counts are indirectly derived from the Raw Accelerometry Data to match the traditional actigraphic count recordings obtained using the Actiwatch (used to be Mini Mitter, Respironics Inc., nowadays Philips Healthcare).
 
 **To change the display,**
 
@@ -134,7 +134,7 @@ The Euclidean Norm is the default Metric to displayed in the actogram (the axes 
 Preprocessing the Dataset
 -------------------------
 
-Now, we are sure that the Dataset has complete information about the study, the participant and the study, and we have cropped the Dataset to the part that we're interested in. *However, we are still not quite ready to analyse the Metrics*. Next, we need to make sure that the Epoched Metrics are suitable for Analysis. For example, we might need to calibrate the Raw Data and recalculate the Epoched Metrics, or we might need to create Reject Events to indicate which sections of the Epoched Metrics should be disregarded in the Analysis.
+Ok, so far we have completed the information about the study and the participant, and we have cropped the Dataset to the part that we're interested in. *However, we are still not quite ready to analyse the Metrics*. Next, we need to make sure that the Epoched Metrics are suitable for Analysis. For example, we might need to calibrate the Raw Data and recalculate the Epoched Metrics, or we might need to create Reject Events to indicate which sections of the Epoched Metrics should be disregarded in the Analysis.
 
 **To calibrate the Raw Data,**
 
@@ -144,7 +144,7 @@ Now, we are sure that the Dataset has complete information about the study, the 
 
 .. note::
 
-    For ActivInsight GeneActiv devices, the calibration 'offset' and 'gains' are already stored in each device, and these values are used to calibrate the Raw Data when it is imported into Cicada. There is no need to recalibrate this Raw Data again here.
+    For ActivInsight GeneActiv devices, the calibration 'offset' and 'gains' are already stored in each device, and these values are used to calibrate the Raw Data when it is imported into Cicada. There is no need to recalibrate this Raw Data again.
 
 Reject Events can be defined manually, or Cicada can automatically detect them by using an adaption of GGIR's automatic non-wear detection algorithm (`DOI: 10.1371/journal.pone.0061691 <http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0061691>`_).
 
@@ -156,16 +156,16 @@ Reject Events can be defined manually, or Cicada can automatically detect them b
 
 **To manually create Reject Events,**
 
-:ref:`follow the instructions in the next section <overview-interface-create-events>`.
+:ref:`follow the instructions in the section on how to create events <overview-interface-create-events>`.
 
 **To edit or delete Reject Events,**
 
-:ref:`follow the instructions in the next section <overview-interface-edit-events>`.
+:ref:`follow the instructions in the section on how to edit events <overview-interface-edit-events>`.
 
 Analysing the Dataset
 ---------------------
 
-Now we can start to Annotate the Epoched Metrics, and create Events. These two types of Analyses will define segments of the Dataset which are selected to calculate Statistics for. 
+Now we can start to Annotate the Epoched Metrics and create Events. These two types of Analyses will define segments of the Dataset which are selected to calculate Statistics for. 
 
 Annotation
 ^^^^^^^^^^
@@ -178,7 +178,7 @@ Cicada uses an algorithm adapted from GGIR's ``identify_level.R`` function to an
 
 :ref:`Read more... <index-top>`
 
-In addition to Annotating Acceleration Metrics, we can Annotate light Metics. [Explain algorithm].
+In addition to Annotating Acceleration Metrics, we can Annotate light Metics. [TODO: Explain algorithm].
 
 **To Annotate light Metrics,**
 
@@ -193,11 +193,11 @@ An important part of analysing the Dataset is to define Sleep Window Events. The
 
 **To manually create Sleep Window Events,**
 
-:ref:`follow the instructions in the next section <overview-interface-create-events>`.
+:ref:`follow the instructions in the section on how to create events <overview-interface-create-events>`.
 
 **To import a sleep diary,**
 
-:ref:`please refer to the section on importing sleep diaries <index-top>`.
+:ref:`follow the instructions in the section on importing sleep diaries <index-top>`.
 
 **To create Sleep Window Events using GGIR's sleep detection algorithm,**
 
@@ -212,7 +212,7 @@ An important part of analysing the Dataset is to define Sleep Window Events. The
 Custom Events
 ^^^^^^^^^^^^^
 
-In addition to creating Custom Events manually, which is described in the next section on :ref:`creating events <overview-interface-create-events>`, Cicada has two more ways to create Custom Events. In some use-cases, you may want to analyse the same part of the day, for all of the days in the recording. For example, your study might have instructed participants to excersize, every morning between 10:00 am and 11:30 am. To create Statistics for specifically these time segments, we can define 'Daily Events' with the 'onset' at ``10:00``, 'duration' ``1h 30m`` and 'label' ``Morning Excersize``.
+In addition to creating Custom Events manually, which is described in the section on :ref:`creating events <overview-interface-create-events>`, Cicada has two more ways to create Custom Events. In some use-cases, you may want to analyse the same part of the day, for all of the days in the recording. For example, your study might have instructed participants to excersize, every morning between 10:00 am and 11:30 am. To create Statistics for specifically these time segments, we can define 'Daily Events' with the 'onset' at ``10:00``, 'duration' ``1h 30m`` and 'label' ``Morning Excersize``.
 
 **To Create Daily Events,**
 
@@ -244,7 +244,7 @@ For a comprehensive overview of all Statistics, please refer to the section on :
 Exporting Statistics
 --------------------
 
-[Describe method here]
+[TODO: Describe method here]
 
 **To export Statistics,**
 
@@ -266,7 +266,7 @@ This is not developed yet, sorry
 Exporting Matlab code
 ---------------------
 
-Cicada automatically logs all the steps that we have performed as Matlab code in ``ACT.history``. You can export this code to a Matlab '.m' file, which in turn, you can open as a script in the Matlab Editor. First of all, this allows you to exactly reproduce all the steps that we just did within Cicada. Secondly, by adapting the script in some clever ways, you can batch process all your other Actigraphy recordings. So, you can first process 1 Actigraphy recording in Cicada, export the script, adapt the script, and run all other Actigraphy recordings automatically. You probably still need to manually go through all the exported Statistics to make sure all is well and proper. You can then quickly edit those processed Datasets in Cicada that require some manual work.
+Cicada automatically logs all the steps that we have performed within the software as Matlab code in ``ACT.history``. You can export this code to a Matlab '.m' file, which in turn, you can open as a script in the Matlab Editor. First of all, this allows you to exactly reproduce all the steps that we just did within Cicada. Secondly, by adapting the script in some clever ways, you can batch process all your other Actigraphy recordings. So, you can first process 1 Actigraphy recording in Cicada, export the script, adapt the script, and run all other Actigraphy recordings automatically. You probably still need to manually go through all the exported Statistics to make sure all is well and proper. You can then quickly edit those processed Datasets in Cicada that require some manual work.
 
 **To export the Matlab code,**
 

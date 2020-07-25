@@ -31,7 +31,7 @@ Authors
 Your help is more than welcome!
 -------------------------------
 
-I am a neuroscientist, foremost, and not a software developer. Although I have ample experience in Matlab and other coding-languages, and I have coded Cicada to the best of my abilities, it may not be the most efficient way the software could have been written. I would be very grateful for anyone who'd like to contribute to Cicada.
+I am a neuroscientist, foremost, and not a professional software developer. Although I have ample experience in Matlab and other coding-languages, and I have coded Cicada to the best of my abilities, it could still be improved with your help. I would be very grateful for anyone who'd like to contribute to Cicada.
 
 .. _index-license:
 
