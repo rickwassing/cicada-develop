@@ -9,7 +9,7 @@ Table of Contents
 Overview
 ========
 - :ref:`Key Terms <overview-terms-top>`
-- :ref:`The Cicada method to process an Actigraphy Dataset <overview-method-top>`
+- :ref:`The Cicada pipeline to process an Actigraphy Dataset <overview-pipeline-top>`
 - :ref:`The Cicada interface and how to interact with it <overview-interface-top>`
 - :ref:`The Cicada package and structure of its code <overview-package-top>`
 - :ref:`The Cicada settings files <overview-settings-files-top>`

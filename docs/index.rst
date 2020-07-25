@@ -82,8 +82,8 @@ Cicada as a standalone application
 
 2. [Describe installation process].
 
-Cicada develop source code
---------------------------
+Cicada as a Matlab application
+------------------------------
 
 1. Download the code  `as a .zip file <https://github.com/rickwassing/cicada-develop/archive/master.zip>`_ or `clone the Cicada-develop GitHub repository <https://github.com/rickwassing/cicada-develop>`_. 
 2. Open Matlab and navigate to the path where the Cicada directory is located (or add the Cicada directory to the Matlab Search Path).
@@ -100,18 +100,18 @@ Cicada develop source code
   toc.rst
 
 .. toctree::
-  :maxdepth: 3
+  :maxdepth: 2
   :caption: Overview
 
   overview-terms.rst
-  overview-method.rst
+  overview-pipeline.rst
   overview-interface.rst
   overview-package.rst
   overview-settings-files.rst
   overview-act-structure.rst
 
 .. toctree::
-  :maxdepth: 3
+  :maxdepth: 2
   :caption: Import, open, save, export
 
   file-import-actigraphy.rst
