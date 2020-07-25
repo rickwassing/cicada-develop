@@ -113,7 +113,7 @@ The settings panel lists all display options for each data type. In this example
     
     **Settings Panel.** The display settings for each data type can be changed in panels identified by (1) and (2); which correspond to 'Acceleration', 'light' and 'temperature' in our example (see :ref:`below <overview-interface-display-settings>` for details). Change the order of the data axes with the '^' (up) and 'v' (down) buttons (3). If applicable, the Annotation of Epochs can be deleted in panel (4), the Sleep Windows can be manually edited or deleted in panel (5, see :ref:`below <overview-interface-edit-sleep-window>` for details), and entire groups of Events with the same label can be deleted in panel (6).
 
-. note::
+.. note::
 
     When Sleep Window Events are created with different methods, e.g. the user manually created Sleep Window Events and also imported a sleep diary, then there are two sets of Sleep Window Events, one of type ``manual`` and one of type ``sleepDiary``. However, Cicada can only use one set to define Sleep Periods and calculate the sleep Statistics. The user must choose, by use of the Sleep Window type dropdown list, which Event type Cicada should use. Similarly, when the same data type is Annotated with different methods, the Annotation type refers to the used method. Again, the user has to choose which Annotation type should be used to calculate Statistics.
 
