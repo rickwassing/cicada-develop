@@ -6,6 +6,8 @@ The Cicada Pipeline
 
 **This page outlines the main ways in which the data is processed and analysed. More detailed descriptions of each of these steps are linked in the respective sections.**
 
+**If, at any point, you wonder what I mean with certain terms, check the** :ref:`glossary <overview-terms-top>`.
+
 Why Do We Need Cicada?
 ======================
 
@@ -273,3 +275,6 @@ Cicada automatically logs all the steps that we have performed within the softwa
 - click ``File`` > ``Export`` > ``Matlab Code``.
 
 :ref:`Read more... <index-top>`
+
+Fantastic, you're done, have a cookie before you continue
+---------------------------------------------------------
