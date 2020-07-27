@@ -20,7 +20,7 @@ The location of the default import settings files are stored as 'name' and 'valu
 .. code-block:: json
 
     "importSettings": {
-        "sleepDiary": "./Cicada/settings/mySleepDiary.json"
+        "sleepDiary": "./settings/mySleepDiary.json"
     }
 
 .. note::

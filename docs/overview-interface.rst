@@ -113,10 +113,6 @@ The settings panel lists all display options for each data type. In this example
     
     **Settings Panel.** The display settings for each data type can be changed in panels identified by (1) and (2); which correspond to 'Acceleration', 'light' and 'temperature' in our example (see :ref:`below <overview-interface-display-settings>` for details). Change the order of the data axes with the '^' (up) and 'v' (down) buttons (3). If applicable, the Annotation of Epochs can be deleted in panel (4), the Sleep Windows can be manually edited or deleted in panel (5, see :ref:`below <overview-interface-edit-sleep-window>` for details), and entire groups of Events with the same label can be deleted in panel (6).
 
-.. note::
-
-    When Sleep Window Events are created with different methods, e.g. the user manually created Sleep Window Events and also imported a sleep diary, then there are two sets of Sleep Window Events, one of type ``manual`` and one of type ``sleepDiary``. However, Cicada can only use one set to define Sleep Periods and calculate the sleep Statistics. The user must choose, by use of the Sleep Window type dropdown list, which Event type Cicada should use. Similarly, when the same data type is Annotated with different methods, the Annotation type refers to the used method. Again, the user has to choose which Annotation type should be used to calculate Statistics.
-
 .. _overview-interface-display-settings:
 
 Display Settings
@@ -134,28 +130,17 @@ Display Settings
     - The coloured ``buttons`` can be used to change the color of the data trace.
     - The ``^`` (up) and ``v`` (down) buttons can be used to reorder the data traces.
 
-.. _overview-interface-delete-annotation-type:
-
-Delete Annotation Types
------------------------
-
-Various thresholding methods can be used to annotate acceleration data, or annotate other data types. See the documentation:ref:`here <link>` for an in-depth overview of annotation methods. To undo these annotations, 
-
-1. first select the appropriate annotatation type, 
-2. then press the ``delete`` button,
-3. in the confirmation dialogue, press ``Yes, delete`` to confirm, or ``No, cancel`` to abort.
-
 .. _overview-interface-edit-sleep-window:
 
 Sleep Window Types
 ------------------
 
-Sleep windows can be defined in various ways. See the documentation:ref:`here <link>` for an in-depth discussion of sleep analysis. For example, the user may manually create sleep window events, import a sleep diary, or use the GGIR sleep detection algorithm to define sleep windows. While all of these events have the label ``sleepWindow``, their types differ (respectively ``manual``, ``sleepDiary`` and ``GGIR``). The Sleep Window Type panel can be used to select which type of sleep windows are used to calculate statistics. 
+Sleep windows can be defined in various ways. Refer to the section on :ref:`sleep analysis <link>` for in-depth instructions. For example, the user may manually create sleep window events, import a sleep diary, or use the GGIR sleep detection algorithm to define sleep windows. While all of these events have the label ``sleepWindow``, their types differ (respectively ``manual``, ``sleepDiary`` and ``GGIR``). If there are multiple Sleep Window types, this panel must be used to select which type of Sleep Windows are used to calculate statistics. 
 
-1. Select the appropriate sleep window type from the dropdown menu, 
+1. Select the appropriate sSleep Window type from the dropdown list, 
 2. then click ``Apply`` for this setting to take effect.
 
-Edit sleep windows created by algorithms or imported from a file
+Edit Sleep Windows created by algorithms or imported from a file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Sleep window events that are created by algorithms or imported from a file cannot be manually editted directly. The reason for this is to maintain the original data integrity and to ensure repeatability of analysis pipelines. To edit a sleep window event created by an algorithm or imported from file,
@@ -165,11 +150,33 @@ Sleep window events that are created by algorithms or imported from a file canno
 
 Cicada will now copy all sleep window events of this type reassign their type to ``manual`` sleep window events. These events can now be editted as described :ref:`before <overview-interface-edit-events>`.
 
+.. _overview-interface-delete-annotation-type:
+
+Delete Sleep Windows of a common type
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+When you want to delete the entire set of Sleep Window Events of the same type,
+
+1. first select the appropriate Sleep Window type from the dropdown list, 
+2. then press the ``delete`` button,
+3. in the confirmation dialogue, press ``Yes, delete`` to confirm, or ``No, cancel`` to abort.
+
+Delete Annotation Types
+-----------------------
+
+Different thresholding methods can be used to Annotate the various data types. Refer to the section on :ref:`Annotation <link>` for in-depth instructions. 
+
+To delete Annotations of the same type, 
+
+1. first select the appropriate Annotatation type from the dropdown list, 
+2. then press the ``delete`` button,
+3. in the confirmation dialogue, press ``Yes, delete`` to confirm, or ``No, cancel`` to abort.
+
 Delete Multiple Events
 ----------------------
 
-Single events can be deted as described :ref:`before <overview-interface-edit-events>`, but it may be more convenient to delete all events with the same label at once. To do so,
+Single events can be deted as described in the section on :ref:`editing Events <overview-interface-edit-events>`, but it may be more convenient to delete all events with the same label at once. To do so,
 
-1. first select the appropriate event label from the dropdown menu, 
+1. first select the appropriate Event label from the dropdown menu, 
 2. then click the ``delete`` button,
 3. in the confirmation dialogue, press ``Yes, delete`` to confirm, or ``No, cancel`` to abort.

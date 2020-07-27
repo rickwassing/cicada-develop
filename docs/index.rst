@@ -93,6 +93,11 @@ Cicada as a Matlab application
 
     >> cicada
 
+Follow these quick intructions
+------------------------------
+
+Start learning how to use :ref:`the Cicada pipeline and process an Actigraphy Dataset <overview-pipeline-top>`. You'll find more references to in-depth documentation in each respective section.
+
 .. toctree::
   :maxdepth: 2
   :caption: Contents
@@ -106,8 +111,8 @@ Cicada as a Matlab application
   overview-terms.rst
   overview-pipeline.rst
   overview-interface.rst
-  overview-package.rst
   overview-settings-files.rst
+  overview-package.rst
   overview-act-structure.rst
 
 .. toctree::
