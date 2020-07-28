@@ -146,7 +146,7 @@ Ok, so far we have completed the information about the study and the participant
 
 .. note::
 
-    For ActivInsight GeneActiv devices, the calibration 'offset' and 'gains' are already stored in each device, and these values are used to calibrate the Raw Data when it is imported into Cicada. There is no need to recalibrate this Raw Data again.
+    For ActivInsight GeneActiv devices, the calibration 'offset' and 'gains' are stored in each device, and these values are used to calibrate the Raw Data when it is imported into Cicada. However, temperature may have an impact on the acceleration sensor chip used in GeneActiv devices .
 
 Reject Events can be defined manually, or Cicada can automatically detect them by using an adaption of GGIR's automatic non-wear detection algorithm (`DOI: 10.1371/journal.pone.0061691 <http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0061691>`_).
 
@@ -235,7 +235,7 @@ Calculating Statistics
 
 Once we're done with Annotating the Dataset and creating all the Events that define segments of interest, we can calculate Statistics. The Statistics are calculated as averages across the entire Dataset, for each day in the Dataset (midnight-to-midnight), for each Sleep Window Event, and for each Custom Event. The Epoch Annotation's are used to calculate the time spent in each level of Annotation, e.g. time spent in 'moderate' activity, or time with 'bright' light exposure. Not only does Cicada calculate average Metrics for these segments, for some Metrics it will also calculate the clock onset of the maximal and minimal value. 
 
-For a comprehensive overview of all Statistics, please refer to the section on :ref:`Statistics and their description of how they are calculated <index-top>`.
+Please refer to this section for a :ref:`comprehensive overview of all Statistics and their description of how they are calculated <index-top>`.
 
 **To calculate Statistics,**
 

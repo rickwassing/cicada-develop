@@ -1,4 +1,4 @@
-function X = removeOffsetGain(X,offset,scale)
+function X = removeOffsetGain(X, offset, scale)
 
 if islogical(offset) && offset
     offset = repmat(mean(X),size(X,1),1);

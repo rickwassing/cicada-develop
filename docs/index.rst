@@ -123,3 +123,18 @@ Start learning how to use :ref:`the Cicada pipeline and process an Actigraphy Da
   file-save-open-dataset.rst
   file-import-other-data.rst
   file-import-sleep-diary.rst
+
+.. toctree::
+  :maxdepth: 2
+  :caption: Edit the Dataset
+
+  edit-dataset-info.rst
+  edit-select-data.rst
+  edit-change-time-zone.rst
+  edit-change-epoch-length.rst
+
+.. toctree::
+  :maxdepth: 2
+  :caption: Preprocess the Dataset
+
+  prepoc-calibration.rst

@@ -13,7 +13,7 @@ Overview
 - :ref:`The Cicada interface and how to interact with it <overview-interface-top>`
 - :ref:`The Cicada settings files <overview-settings-files-top>`
 - :ref:`The Cicada package and structure of its code <overview-package-top>`
-- :ref:`The 'ACT' data structure <index-cicada>`
+- :ref:`The 'ACT' data structure <overview-act-structure-top>`
 
 .. _toc-file:
 
@@ -23,18 +23,17 @@ Importing, loading, saving, and exporting
 - :ref:`Saving and loading a Dataset <file-save-open-dataset-top>`
 - :ref:`Importing data from other wearable devices <file-import-other-data-top>`
 - :ref:`Importing a sleep diary <file-import-sleep-diary-top>`
-- :ref:`Exporting statistics <link>`
-- :ref:`Exporting a report (future release) <link>`
-- :ref:`Exporting Matlab code <link>`
+- :ref:`[TODO] Exporting statistics, and a description of their calculation <link>`
+- :ref:`[TODO] Exporting Matlab code <link>`
 
 .. _toc-edit:
 
 Edit the Dataset
 ================
-- :ref:`Edit dataset information <link>`
-- :ref:`Select part of the recording <link>`
-- :ref:`Change time zone <link>`
-- :ref:`Change epoch length <link>`
+- :ref:`Edit dataset information <edit-dataset-info-top>`
+- :ref:`Select part of the recording <edit-select-data-top>`
+- :ref:`Change time zone <edit-change-time-zone-top>`
+- :ref:`Change epoch length <edit-change-epoch-length-top>`
 
 .. _toc-preproc:
 
