@@ -8,8 +8,6 @@ ACT.stats.average.weekend = table();
 % Extract Eucl Norm and Annotation and insert NaNs for rejected segments
 euclNormMinOne = ACT.metric.acceleration.euclNormMinOne.Data;
 euclNormMinOne(events2idx(ACT, ACT.metric.acceleration.euclNormMinOne.Time, 'Label', 'reject')) = nan;
-annotate = ACT.analysis.annotate.acceleration.Data;
-annotate(events2idx(ACT, ACT.analysis.annotate.acceleration.Time, 'Label', 'reject')) = nan;
 
 % ---------------------------------------------------------
 % Get indices of weekend days
@@ -67,12 +65,23 @@ ACT.stats.average.weekend.avEuclNorm = nanmean(euclNormMinOne(idxWeekend));
 
 % ---------------------------------------------------------
 % How much time and activity was spend in moderate to vigorous activity
-ACT.stats.average.all.hoursModVigAct = (sum(annotate >= 2) * ACT.epoch / 3600) / (ACT.xmax-ACT.xmin); % hours per day
-ACT.stats.average.all.avEuclNormModVigAct = nanmean(euclNormMinOne(annotate >= 2));
-ACT.stats.average.week.hoursModVigAct = sum(annotate(~idxWeekend) >= 2) / ((sum(~idxWeekend)) / 24); % # hours per day
-ACT.stats.average.week.avEuclNormModVigAct = nanmean(euclNormMinOne(annotate >= 2 & ~idxWeekend));
-ACT.stats.average.weekend.hoursModVigAct = sum(annotate(idxWeekend) >= 2) / ((sum(idxWeekend)) / 24);
-ACT.stats.average.weekend.avEuclNormModVigAct = nanmean(euclNormMinOne(annotate >= 2 & idxWeekend));
+if isfield(ACT.analysis.annotate, 'acceleration')
+    annotate = ACT.analysis.annotate.acceleration.Data;
+    annotate(events2idx(ACT, ACT.analysis.annotate.acceleration.Time, 'Label', 'reject')) = NaN;
+    ACT.stats.average.all.hoursModVigAct = (sum(annotate >= 3) * ACT.epoch / 3600) / (ACT.xmax-ACT.xmin); % hours per day
+    ACT.stats.average.all.avEuclNormModVigAct = nanmean(euclNormMinOne(annotate >= 3));
+    ACT.stats.average.week.hoursModVigAct = sum(annotate(~idxWeekend) >= 3) / ((sum(~idxWeekend)) / 24); % # hours per day
+    ACT.stats.average.week.avEuclNormModVigAct = nanmean(euclNormMinOne(annotate >= 3 & ~idxWeekend));
+    ACT.stats.average.weekend.hoursModVigAct = sum(annotate(idxWeekend) >= 3) / ((sum(idxWeekend)) / 24);
+    ACT.stats.average.weekend.avEuclNormModVigAct = nanmean(euclNormMinOne(annotate >= 3 & idxWeekend));
+else
+    ACT.stats.average.all.hoursModVigAct = NaN;
+    ACT.stats.average.all.avEuclNormModVigAct = NaN;
+    ACT.stats.average.week.hoursModVigAct = NaN;
+    ACT.stats.average.week.avEuclNormModVigAct = NaN;
+    ACT.stats.average.weekend.hoursModVigAct = NaN;
+    ACT.stats.average.weekend.avEuclNormModVigAct = NaN;
+end
 
 % ---------------------------------------------------------
 % Average and variability of other data
@@ -153,7 +162,7 @@ for select = {'all', 'week', 'weekend'}
     
     % ---------------------------------------------------------
     % Case 1, sleep windows and annotation are both available
-    if isfield(ACT.analysis.settings, 'sleepWindowType') && any(ACT.analysis.annotate.acceleration.Data ~= 0)
+    if isfield(ACT.analysis.settings, 'sleepWindowType') && isfield(ACT.analysis.annotate, 'acceleration')
         % ---------------------------------------------------------
         % Actigraphy
         ACT.stats.average.(select{:}).avClockLightsOutAct    = getAvEventTime(ACT, 'onset', 'Label', 'sleepWindow', 'Type', ACT.analysis.settings.sleepWindowType, 'Select', select{:});
@@ -172,7 +181,7 @@ for select = {'all', 'week', 'weekend'}
         
         % ---------------------------------------------------------
         % Case 2, sleep windows are available but no annotation
-    elseif isfield(ACT.analysis.settings, 'sleepWindowType') && ~any(ACT.analysis.annotate.acceleration.Data ~= 0) && ~any(isnan(ACT.analysis.annotate.acceleration.Data))
+    elseif isfield(ACT.analysis.settings, 'sleepWindowType') && ~isfield(ACT.analysis.annotate, 'acceleration')
         % ---------------------------------------------------------
         % Actigraphy
         ACT.stats.average.(select{:}).avClockLightsOutAct    = getAvEventTime(ACT, 'onset', 'Label', 'sleepWindow', 'Type', ACT.analysis.settings.sleepWindowType, 'Select', select{:});

@@ -275,7 +275,7 @@ app.AvStats_TimeRejectedValue.Text = duration2str(app.ACT.stats.average.(select)
 
 % ---------------------------------------------------------
 % Set Text values of the Acceleration Panel
-if app.ACT.stats.average.(select).hoursModVigAct > 0 && any(app.ACT.analysis.annotate.acceleration.Data ~= 0)
+if app.ACT.stats.average.(select).hoursModVigAct > 0 && isfield(app.ACT.analysis.annotate, 'acceleration')
     app.AvStats_HoursModVigActValue.Text = duration2str(app.ACT.stats.average.(select).hoursModVigAct/24);
     app.AvStats_AvEuclNormModVigActValue.Text = sprintf('%.0f mg', app.ACT.stats.average.(select).avEuclNormModVigAct*1000);
 else

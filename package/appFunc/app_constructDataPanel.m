@@ -171,16 +171,16 @@ for di = 1:app.ACT.ndays
                     % Annotation
                     if ismember('Annotation', app.ComponentList)
                         % If annotation data exists ...
-                        if any(app.ACT.analysis.annotate.acceleration.Data ~= 0)
+                        if isfield(app.ACT.analysis.annotate, 'acceleration')
                             % ... Plot the annotation data at each intensity level
-                            for intensity = 3:-1:0
+                            for intensity = 4:-1:1
                                 % Check if component should mount
-                                if shouldComponentMount(app, ax, ['PatchAnnotation_day-', num2str(di), '_int-' num2str(intensity)])
+                                if shouldComponentMount(app, ax, ['PatchAnnotationAcceleration_day-', num2str(di), '_int-' num2str(intensity)])
                                     % Get properties that need more elaborate calculation
-                                    [XData, YData, Color] = app_getAnnotationPatchProps(app, intensity, StartDate, EndDate);
+                                    [XData, YData, Color] = app_getAnnotationPatchProps(app, 'acceleration', intensity, 4, StartDate, EndDate);
                                     % Define the properties
                                     props = { ...
-                                        'Tag', ['PatchAnnotation_day-', num2str(di), '_int-' num2str(intensity)]; ...
+                                        'Tag', ['PatchAnnotationAcceleration_day-', num2str(di), '_int-' num2str(intensity)]; ...
                                         'XData', XData; ...
                                         'YData', YData; ...
                                         'FaceColor', Color; ...
@@ -195,11 +195,12 @@ for di = 1:app.ACT.ndays
                                     ax.Children = [ax.Children(2:end); ax.Children(1)];
                                 else
                                     % Get properties that need more elaborate calculation
-                                    [XData, YData] = app_getAnnotationPatchProps(app, intensity, StartDate, EndDate);
+                                    [XData, YData, Color] = app_getAnnotationPatchProps(app, 'acceleration', intensity, 4, StartDate, EndDate);
                                     % Construct the component
-                                    constructComponent(app, ['PatchAnnotation_day-', num2str(di), '_int-' num2str(intensity)], ax, { ...
+                                    constructComponent(app, ['PatchAnnotationAcceleration_day-', num2str(di), '_int-' num2str(intensity)], ax, { ...
                                         'XData', XData; ...
                                         'YData', YData; ...
+                                        'FaceColor', Color; ...
                                         });
                                 end
                             end
@@ -319,49 +320,94 @@ for di = 1:app.ACT.ndays
                 otherwise
                     % ---------------------------------------------------------
                     % Data
-                    if ismember('Data', app.ComponentList)
+                    if ismember('Data', app.ComponentList) || ismember('Annotation', app.ComponentList)
                         % -----
-                        % Get what fields exist in this data type
-                        fnames = fieldnames(app.ACT.metric.(axesTypes{ai}));
-                        % For each field ...
-                        for fi = 1:length(fnames)
-                            % ... mount/construct a line plot
-                            % -----
-                            % Check if component should mount
-                            if shouldComponentMount(app, ax, ['PlotData-', axesTypes{ai}, '_field-', fnames{fi}, '_day-', num2str(di)])
-                                % Set X and YData
-                                [YData, XData] = selectDataUsingTime(app.ACT.metric.(axesTypes{ai}).(fnames{fi}).Data, app.ACT.metric.(axesTypes{ai}).(fnames{fi}).Time, StartDate, EndDate);
-                                if isempty(YData)
-                                    continue
+                        % ... mount/construct annotation patches, if annotation data exists ...
+                        if ismember('Annotation', app.ComponentList) && isfield(app.ACT.analysis.annotate, axesTypes{ai})
+                            % ... Plot the annotation data at each intensity level
+                            intLvls = unique(app.ACT.analysis.annotate.(axesTypes{ai}).Data);
+                            intLvls(intLvls == 0) = []; % zero willjust be white
+                            intLvls(isnan(intLvls)) = []; % nan values are to be excluded
+                            for intensity = max(intLvls):-1:min(intLvls)
+                                % -----
+                                % Check if component should mount
+                                if shouldComponentMount(app, ax, ['PatchAnnotation' titleCase(axesTypes{ai}) '_int-' num2str(intensity)])
+                                    % Get properties that need more elaborate calculation
+                                    [XData, YData, Color] = app_getAnnotationPatchProps(app, axesTypes{ai}, intensity, length(intLvls), StartDate, EndDate);
+                                    % Define the properties
+                                    props = { ...
+                                        'Tag', ['PatchAnnotation' titleCase(axesTypes{ai}) '_int-' num2str(intensity)]; ...
+                                        'XData', XData; ...
+                                        'YData', YData; ...
+                                        'FaceColor', Color; ...
+                                        'LineStyle', '-'; ...
+                                        'LineWidth', 1; ...
+                                        'EdgeColor', 'none'; ...
+                                        'PickableParts', 'none'; ...
+                                        };
+                                    % Mount component using the 'mount_patch' function
+                                    mountComponent(app, 'mount_patch', ax, props);
+                                    % Make sure this annotation object is on the bottom of the axis parent
+                                    ax.Children = [ax.Children(2:end); ax.Children(1)];
+                                else
+                                    % Get properties that need more elaborate calculation
+                                    [XData, YData, Color] = app_getAnnotationPatchProps(app, axesTypes{ai}, intensity, length(intLvls), StartDate, EndDate);
+                                    % Construct the component
+                                    constructComponent(app, ['PatchAnnotation' titleCase(axesTypes{ai}) '_int-' num2str(intensity)], ax, { ...
+                                        'XData', XData; ...
+                                        'YData', YData; ...
+                                        'FaceColor', Color; ...
+                                        });
                                 end
-                                % If the minimum value is zero or smaller, add 0.0001 so the log-scale does not get to -infinity
-                                YData = ifelse(min(YData) <= 0, YData+0.0001, YData);
-                                % Define the properties
-                                props = { ...
-                                    'Tag', ['PlotData-', axesTypes{ai}, '_field-', fnames{fi}, '_day-', num2str(di)]; ...
-                                    'XData', XData; ...
-                                    'YData', YData; ...
-                                    'Visible', ifelse(app.ACT.display.(axesTypes{ai}).field.(fnames{fi}).show, 'on', 'off'); ...
-                                    'Color', app.ACT.display.(axesTypes{ai}).field.(fnames{fi}).clr;
-                                    'LineWidth', 1; ...
-                                    };
-                                % Mount component using the 'mount_plot' function
-                                mountComponent(app, 'mount_plot', ax, props);
-                            else
-                                % Set X and YData
-                                [YData, XData] = selectDataUsingTime(app.ACT.metric.(axesTypes{ai}).(fnames{fi}).Data, app.ACT.metric.(axesTypes{ai}).(fnames{fi}).Time, StartDate, EndDate);
-                                if isempty(YData)
-                                    continue
+                            end 
+                        end
+                        % ---------------------------------------------------------
+                        % Data
+                        % -----
+                        if ismember('Data', app.ComponentList)
+                            % Get what fields exist in this data type
+                            fnames = fieldnames(app.ACT.metric.(axesTypes{ai}));
+                            % For each field ...
+                            for fi = 1:length(fnames)
+                                % -----
+                                % ... mount/construct a line plot
+                                % -----
+                                % Check if component should mount
+                                if shouldComponentMount(app, ax, ['PlotData-', axesTypes{ai}, '_field-', fnames{fi}, '_day-', num2str(di)])
+                                    % Set X and YData
+                                    [YData, XData] = selectDataUsingTime(app.ACT.metric.(axesTypes{ai}).(fnames{fi}).Data, app.ACT.metric.(axesTypes{ai}).(fnames{fi}).Time, StartDate, EndDate);
+                                    if isempty(YData)
+                                        continue
+                                    end
+                                    % If the minimum value is zero or smaller, add 0.0001 so the log-scale does not get to -infinity
+                                    YData = ifelse(min(YData) <= 0, YData+0.0001, YData);
+                                    % Define the properties
+                                    props = { ...
+                                        'Tag', ['PlotData-', axesTypes{ai}, '_field-', fnames{fi}, '_day-', num2str(di)]; ...
+                                        'XData', XData; ...
+                                        'YData', YData; ...
+                                        'Visible', ifelse(app.ACT.display.(axesTypes{ai}).field.(fnames{fi}).show, 'on', 'off'); ...
+                                        'Color', app.ACT.display.(axesTypes{ai}).field.(fnames{fi}).clr;
+                                        'LineWidth', 1; ...
+                                        };
+                                    % Mount component using the 'mount_plot' function
+                                    mountComponent(app, 'mount_plot', ax, props);
+                                else
+                                    % Set X and YData
+                                    [YData, XData] = selectDataUsingTime(app.ACT.metric.(axesTypes{ai}).(fnames{fi}).Data, app.ACT.metric.(axesTypes{ai}).(fnames{fi}).Time, StartDate, EndDate);
+                                    if isempty(YData)
+                                        continue
+                                    end
+                                    % If the minimum value is zero or smaller, add 0.0001 so the log-scale does not get to -infinity
+                                    YData = ifelse(min(YData) <= 0, YData+0.0001, YData);
+                                    % Construct the component
+                                    constructComponent(app, ['PlotData-', axesTypes{ai}, '_field-', fnames{fi}, '_day-', num2str(di)], ax, { ...
+                                        'XData', XData; ...
+                                        'YData', YData; ...
+                                        'Visible', ifelse(app.ACT.display.(axesTypes{ai}).field.(fnames{fi}).show, 'on', 'off'); ...
+                                        'Color', app.ACT.display.(axesTypes{ai}).field.(fnames{fi}).clr;
+                                        });
                                 end
-                                % If the minimum value is zero or smaller, add 0.0001 so the log-scale does not get to -infinity
-                                YData = ifelse(min(YData) <= 0, YData+0.0001, YData);
-                                % Construct the component
-                                constructComponent(app, ['PlotData-', axesTypes{ai}, '_field-', fnames{fi}, '_day-', num2str(di)], ax, { ...
-                                    'XData', XData; ...
-                                    'YData', YData; ...
-                                    'Visible', ifelse(app.ACT.display.(axesTypes{ai}).field.(fnames{fi}).show, 'on', 'off'); ...
-                                    'Color', app.ACT.display.(axesTypes{ai}).field.(fnames{fi}).clr;
-                                    });
                             end
                         end
                         app_reorderPlotComponents(app, ax, axesTypes{ai}, di)

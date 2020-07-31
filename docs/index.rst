@@ -138,3 +138,11 @@ Start learning how to use :ref:`the Cicada pipeline and process an Actigraphy Da
   :caption: Preprocess the Dataset
 
   prepoc-calibration.rst
+  prepoc-non-wear-detection.rst
+
+.. toctree::
+  :maxdepth: 2
+  :caption: Analyse the Dataset
+
+  analysis-annotate-acceleration-ggir.rst
+  analysis-annotate-light.rst

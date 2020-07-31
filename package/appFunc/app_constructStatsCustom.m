@@ -275,7 +275,7 @@ for fi = 1:length(fnames)
                     Color = [0.13, 0.38, 0.19];
                     Label = 'End date';
                 case 'hoursModVigAct'
-                    Text = ifelse(value == 0, '-', duration2str(value/24));
+                    Text = ifelse(isnan(value), '-', duration2str(value/24));
                     Color = [0.49, 0.18, 0.56];
                     Label = 'Mod/vig activity time';
                 case 'avEuclNormModVigAct'

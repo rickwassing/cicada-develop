@@ -7,27 +7,30 @@ ACT.times = datenum(t);
 ACT.xmin = ACT.times(1);
 ACT.xmax = ACT.times(end);
 % ---------------------------------------------------------
-% Change the time in annotation data
-t = datetime(ACT.analysis.annotate.acceleration.Time, 'ConvertFrom', 'datenum', 'TimeZone', ACT.timezone);
-t.TimeZone = newTimeZone;
-ACT.analysis.annotate.acceleration.Time = datenum(t);
-% ---------------------------------------------------------
 % Change the time in all metrics
 % Cut the metrics
 metrictypes = fieldnames(ACT.metric);
-for m = 1:length(metrictypes)
-    if isstruct(ACT.metric.(metrictypes{m}))
-        fnames = fieldnames(ACT.metric.(metrictypes{m}));
-        for f = 1:length(fnames)
-            t = datetime(ACT.metric.(metrictypes{m}).(fnames{f}).Time, 'ConvertFrom', 'datenum', 'TimeZone', ACT.timezone);
+for mi = 1:length(metrictypes)
+    if isstruct(ACT.metric.(metrictypes{mi}))
+        fnames = fieldnames(ACT.metric.(metrictypes{mi}));
+        for fi = 1:length(fnames)
+            t = datetime(ACT.metric.(metrictypes{mi}).(fnames{fi}).Time, 'ConvertFrom', 'datenum', 'TimeZone', ACT.timezone);
             t.TimeZone = newTimeZone;
-            ACT.metric.(metrictypes{m}).(fnames{f}).Time = datenum(t);
+            ACT.metric.(metrictypes{mi}).(fnames{fi}).Time = datenum(t);
         end
     else
-        t = datetime(ACT.metric.(metrictypes{m}).Time, 'ConvertFrom', 'datenum', 'TimeZone', ACT.timezone);
+        t = datetime(ACT.metric.(metrictypes{mi}).Time, 'ConvertFrom', 'datenum', 'TimeZone', ACT.timezone);
         t.TimeZone = newTimeZone;
-        ACT.metric.(metrictypes{m}).Time = datenum(t);
+        ACT.metric.(metrictypes{mi}).Time = datenum(t);
     end
+end
+% ---------------------------------------------------------
+% Change the time in annotation data
+anottypes = fieldnames(ACT.analysis.annotate);
+for ai = 1:length(anottypes)
+    t = datetime(ACT.analysis.annotate.(anottypes{ai}).Time, 'ConvertFrom', 'datenum', 'TimeZone', ACT.timezone);
+    t.TimeZone = newTimeZone;
+    ACT.analysis.annotate.(anottypes{ai}).Time = datenum(t);
 end
 % ---------------------------------------------------------
 % Change the time in all events

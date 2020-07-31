@@ -54,16 +54,22 @@ if ismember('customEvent', do)
     % For each event, calculate the average statistics
     for ei = 1:size(events, 1)
         % ---------------------------------------------------------
-        % Extract this event's Euclidean Norm
+        % Extract this events Euclidean Norm
         [euclNormMinOne, times] = selectDataUsingTime(ACT.metric.acceleration.euclNormMinOne.Data, ACT.metric.acceleration.euclNormMinOne.Time, events.onset(ei), events.onset(ei)+events.duration(ei));
-        annotate = selectDataUsingTime(ACT.analysis.annotate.acceleration.Data, ACT.analysis.annotate.acceleration.Time, events.onset(ei), events.onset(ei)+events.duration(ei));
         % insert NaNs for rejected segments
         euclNormMinOne(events2idx(ACT, times, 'Label', 'reject')) = nan;
-        annotate(events2idx(ACT, times, 'Label', 'reject')) = nan;
         % ---------------------------------------------------------
         % How much time and activity was spend in moderate to vigorous activity
-        ACT.stats.custom.(tableName).hoursModVigAct(ei, 1) = (sum(annotate >= 2) * ACT.epoch) / 3600;
-        ACT.stats.custom.(tableName).avEuclNormModVigAct(ei, 1) = nanmean(euclNormMinOne(annotate >= 2));
+        if isfield(ACT.analysis.annotate, 'acceleration')
+            annotate = selectDataUsingTime(ACT.analysis.annotate.acceleration.Data, ACT.analysis.annotate.acceleration.Time, events.onset(ei), events.onset(ei)+events.duration(ei));
+            % insert NaNs for rejected segments
+            annotate(events2idx(ACT, times, 'Label', 'reject')) = nan;
+            ACT.stats.custom.(tableName).hoursModVigAct(ei, 1) = (sum(annotate >= 3) * ACT.epoch) / 3600;
+            ACT.stats.custom.(tableName).avEuclNormModVigAct(ei, 1) = nanmean(euclNormMinOne(annotate >= 3));
+        else
+            ACT.stats.custom.(tableName).hoursModVigAct(ei, 1) = NaN;
+            ACT.stats.custom.(tableName).avEuclNormModVigAct(ei, 1) = NaN;
+        end
         % ---------------------------------------------------------
         % Calculate average Euclidean norm
         ACT.stats.custom.(tableName).avEuclNorm(ei, 1) = nanmean(euclNormMinOne);
@@ -98,7 +104,7 @@ if ismember('customEvent', do)
             fnames = fieldnames(ACT.metric.(datatypes{ti}));
             for fi = 1:length(fnames)
                 % ---------------------------------------------------------
-                % Extract this day's data and insert NaNs for rejected segments
+                % Extract this days data and insert NaNs for rejected segments
                 [data, times] = selectDataUsingTime(ACT.metric.(datatypes{ti}).(fnames{fi}).Data, ACT.metric.(datatypes{ti}).(fnames{fi}).Time, events.onset(ei), events.onset(ei)+events.duration(ei));
                 if isempty(data)
                     data = nan;

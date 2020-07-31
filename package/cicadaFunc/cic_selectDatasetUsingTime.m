@@ -28,9 +28,6 @@ ACT.pnts = length(ACT.times);
 ACT.xmin = ACT.times(1);
 ACT.xmax = ACT.times(end);
 % ---------------------------------------------------------
-% Cut the annotation data
-ACT.analysis.annotate.acceleration = getsampleusingtime(ACT.analysis.annotate.acceleration, startDate, endDate);
-% ---------------------------------------------------------
 % Cut the metrics
 metrictypes = fieldnames(ACT.metric);
 for mi = 1:length(metrictypes)
@@ -46,6 +43,12 @@ for mi = 1:length(metrictypes)
             ACT.metric.(metrictypes{mi}), ...
             startDate, endDate);
     end
+end
+% ---------------------------------------------------------
+% Cut the annotation data
+anottypes = fieldnames(ACT.analysis.annotate);
+for ai = 1:length(anottypes)
+    ACT.analysis.annotate.(anottypes{ai}) = getsampleusingtime(ACT.analysis.annotate.(anottypes{ai}), startDate, endDate);
 end
 % ---------------------------------------------------------
 % Cut the events

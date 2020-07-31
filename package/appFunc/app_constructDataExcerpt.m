@@ -134,14 +134,14 @@ for ai = 1:length(axesTypes)
             % ---------------------------------------------------------
             % Annotation
             % If annotation data exists ...
-            if any(app.MainApp.ACT.analysis.annotate.acceleration.Data ~= 0)
+            if isfield(app.MainApp.ACT.analysis.annotate, 'acceleration')
                 % ... Plot the annotation data at each intensity level
-                for intensity = 3:-1:0
+                for intensity = 4:-1:1
                     % Get properties that need more elaborate calculation
-                    [XData, YData, Color] = app_getAnnotationPatchProps(app.MainApp, intensity, StartDate, EndDate);
+                    [XData, YData, Color] = app_getAnnotationPatchProps(app.MainApp, 'acceleration', intensity, 4, StartDate, EndDate);
                     % Define the properties
                     props = { ...
-                        'Tag', ['PatchAnnotation_int-' num2str(intensity)]; ...
+                        'Tag', ['PatchAnnotationAcceleration_int-' num2str(intensity)]; ...
                         'XData', XData; ...
                         'YData', YData; ...
                         'FaceColor', Color; ...
@@ -226,6 +226,34 @@ for ai = 1:length(axesTypes)
         % Otherwise: axes contain other data types, e.g. light and temerature
         otherwise
             % ---------------------------------------------------------
+            % Annotation
+            % If annotation data exists ...
+            if isfield(app.MainApp.ACT.analysis.annotate, axesTypes{ai})
+                % ... Plot the annotation data at each intensity level
+                intLvls = unique(app.MainApp.ACT.analysis.annotate.(axesTypes{ai}).Data);
+                intLvls(intLvls == 0) = [];
+                intLvls(isnan(intLvls)) = [];
+                for intensity = max(intLvls):-1:min(intLvls)
+                    % Get properties that need more elaborate calculation
+                    [XData, YData, Color] = app_getAnnotationPatchProps(app.MainApp, axesTypes{ai}, intensity, length(intLvls), StartDate, EndDate);
+                    % Define the properties
+                    props = { ...
+                        'Tag', ['PatchAnnotation' titleCase(axesTypes{ai}) '_int-' num2str(intensity)]; ...
+                        'XData', XData; ...
+                        'YData', YData; ...
+                        'FaceColor', Color; ...
+                        'LineStyle', '-'; ...
+                        'LineWidth', 1; ...
+                        'EdgeColor', 'none'; ...
+                        'PickableParts', 'none'; ...
+                        };
+                    % Mount component using the 'mount_patch' function
+                    mountComponent(app.MainApp, 'mount_patch', ax, props);
+                    % Make sure this annotation object is on the bottom of the axis parent
+                    ax.Children = [ax.Children(2:end); ax.Children(1)];
+                end
+            end
+            % ---------------------------------------------------------
             % Data
             % -----
             % Get what fields exist in this data type
@@ -236,6 +264,9 @@ for ai = 1:length(axesTypes)
                 % -----
                 % Set X and YData
                 [YData, XData] = selectDataUsingTime(app.MainApp.ACT.metric.(axesTypes{ai}).(fnames{fi}).Data, app.MainApp.ACT.metric.(axesTypes{ai}).(fnames{fi}).Time, StartDate, EndDate);
+                if isempty(YData)
+                    continue
+                end
                 % If the minimum value is zero or smaller, add 0.0001 so the log-scale does not get to -infinity
                 YData = ifelse(min(YData) <= 0, YData+0.0001, YData);
                 % Define the properties

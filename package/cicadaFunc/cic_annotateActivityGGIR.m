@@ -13,6 +13,7 @@ ACT.analysis.settings.boutMetric  = params.boutMetric; % integer
 % ---------------------------------------------------------
 % Extract angle in z-axis and initialize sleep vector (sustainedInactive)
 ang = ACT.metric.acceleration.angle_z.Data;
+times = ACT.metric.acceleration.angle_z.Time;
 % insert NaNs for rejected data
 ang(events2idx(ACT, ACT.metric.acceleration.angle_z.Time, 'Label', 'reject')) = nan;
 % Initialize 'sustainedInactive vector'
@@ -40,12 +41,17 @@ else % no posture change with intervals of 5 minutes found
         sustainedInactive(1:end) = 0; % constant posture changes the entire time
     end
 end
+% -----
+% Initialize an empty a timeseries object
+ACT.analysis.annotate.acceleration = timeseries(ones(length(times), 1), times, 'Name', 'annotateAcceleration');
+ACT.analysis.annotate.acceleration.DataInfo.Units = 'a.u.';
+ACT.analysis.annotate.acceleration.TimeInfo.Units = 'days';
+ACT.analysis.annotate.acceleration.TimeInfo.Format = 'dd-mmm-yyyy HH:MM:SS';
+ACT.analysis.annotate.acceleration.TimeInfo.StartDate = '00-Jan-0000 00:00:00';
+
 % ---------------------------------------------------------
 % Save 'sustainedInactivity' as a timeseries in 'ACT.analysis.annotate'
-% First remove any epoch that was annotated as sustained inactive
-ACT.analysis.annotate.acceleration.Data(ACT.analysis.annotate.acceleration.Data == -1) = 0; 
-% Now add the sustained inactive epochs
-ACT.analysis.annotate.acceleration.Data(sustainedInactive == 1) = -1;
+ACT.analysis.annotate.acceleration.Data(sustainedInactive == 1) = 0;
 
 % ---------------------------------------------------------
 % PART 2 - FIND EPOCHS OF LIGHT, MODERATE AND VIGOROUS ACTIVITY
@@ -84,12 +90,9 @@ idxVigorousActivity = sustainedInactive ~= 1 & ...
     ACT.metric.acceleration.euclNormMinOne.Data >= params.thrAct_vig;
 % ---------------------------------------------------------
 % Save these activity levels as a timeseries in 'ACT.analysis.annotate'
-ACT.analysis.annotate.acceleration.Data(ACT.analysis.annotate.acceleration.Data == 1) = 0; % first remove the old annotations
-ACT.analysis.annotate.acceleration.Data(ACT.analysis.annotate.acceleration.Data == 2) = 0; 
-ACT.analysis.annotate.acceleration.Data(ACT.analysis.annotate.accelerationedu.Data == 3) = 0; 
-ACT.analysis.annotate.acceleration.Data(idxLightActivity)              = 1; % light activity
-ACT.analysis.annotate.acceleration.Data(idxMVPA)                       = 2; % moderate activity
-ACT.analysis.annotate.acceleration.Data(idxMVPA & idxVigorousActivity) = 3; % vigorous activity
+ACT.analysis.annotate.acceleration.Data(idxLightActivity)              = 2; % light activity
+ACT.analysis.annotate.acceleration.Data(idxMVPA)                       = 3; % moderate activity
+ACT.analysis.annotate.acceleration.Data(idxMVPA & idxVigorousActivity) = 4; % vigorous activity
 % ---------------------------------------------------------
 % Set saved to false
 ACT.saved = false;

@@ -63,7 +63,7 @@ for win = 1:maxWindows
         % If the standard deviation and range is below the threshold, then
         % this window can be scored as off-wrist.
         if stdwacc < offWristStd && rngwacc < offWristRng
-            nonWear(winEdges(1)+1:winEdges(2),ax) = 1;
+            nonWear(winEdges(1)+1:winEdges(2), ax) = 1;
         end
     end
 end

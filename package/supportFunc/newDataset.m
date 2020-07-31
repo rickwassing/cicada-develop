@@ -17,7 +17,6 @@ ACT.times     = zeros(0);
 ACT.timezone  = '';
 ACT.epoch     = zeros(0);
 ACT.data      = struct();
-ACT.analysis.events    = table();
 ACT.metric    = struct();
 ACT.analysis  = struct();
 ACT.stats     = struct();
@@ -55,6 +54,8 @@ ACT.info.phenotype  = struct();
 % ACT.data.breathing      = struct();
 % ACT.data.blood          = struct();
 
+ACT.analysis.annotate        = struct();
+ACT.analysis.events          = table();
 ACT.analysis.events.id       = zeros(0);
 ACT.analysis.events.onset    = zeros(0);
 ACT.analysis.events.duration = zeros(0);
@@ -62,6 +63,5 @@ ACT.analysis.events.label    = zeros(0);
 ACT.analysis.events.type     = zeros(0);
 
 ACT.analysis.settings = struct();
-ACT.analysis.annotate.acceleration = timeseries();
 
 end

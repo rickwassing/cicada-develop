@@ -33,10 +33,9 @@ switch boutMetric
         xt = x;
         boutcount = zeros(length(x), 1); % initialize zeros as long as there are epochs in the timewindow
         jmvpa = 1; % index for going stepwise through vector p
-        Lx = length(x); % Lx is length of vector x
         while jmvpa <= length(p) % go through all epochs that are possibly part of a bout
             endi = p(jmvpa)+boutduration;
-            if endi <= Lx % does bout fall without measurement?
+            if endi <= length(x) % does bout fall without measurement?
                 if sum(x(p(jmvpa):endi)) > boutduration*boutcriter
                     while sum(x(p(jmvpa):endi)) > (endi-p(jmvpa))*boutcriter && endi < Lx
                         endi = endi + 1;
@@ -70,8 +69,7 @@ switch boutMetric
         while jmvpa <= length(p)
             endi = p(jmvpa)+boutduration;
             if endi <= length(x) % does bout fall without measurement?
-                lengthbout = sum(x(p(jmvpa):endi));
-                if (lengthbout > (boutduration*boutcriter))
+                if (sum(x(p(jmvpa):endi)) > (boutduration*boutcriter))
                     xt(p(jmvpa):endi) = 2; % remember that this was a bout in r1t
                 else
                     x(p(jmvpa)) = 0;
@@ -109,8 +107,8 @@ switch boutMetric
         % look for breaks larger than 1 minute
         lookforbreaks = rollCellFun(@mean, x, (60/ws3), 'fill', true);
         % insert negative numbers to prevent these minutes to be counted in bouts
-        % in this way there will not be bouts breaks lasting longer than 1 minute
         xt(lookforbreaks == 0) = -(60/ws3) * boutduration;
+        % in this way there will not be bouts breaks lasting longer than 1 minute
         RM = rollCellFun(@mean, xt, boutduration, 'fill', true);
         p = find(RM > boutcriter);
         starti = round(boutduration/2);

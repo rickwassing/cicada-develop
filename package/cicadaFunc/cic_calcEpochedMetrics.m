@@ -14,20 +14,6 @@ ACT = g2count(ACT);
 % First, create a new time series for the epoched data
 step  = 1/(24*60*60/ACT.epoch);
 times = ACT.xmin:step:ACT.xmax;
-% -----
-% Initialize an empty a timeseries object, which will be used by other
-% preprocessing and analyses algorithms to indicate:
-% -2  = sleep (inactive while in bed)
-% -1  = inactive (inactive while out of bed)
-% 0   = not scored
-% 1   = light activity
-% 2   = moderate activity
-% 3   = vigorous activity
-ACT.analysis.annotate.acceleration = timeseries(zeros(length(times),1), times, 'Name', 'annotateAcceleration');
-ACT.analysis.annotate.acceleration.DataInfo.Units = 'a.u.';
-ACT.analysis.annotate.acceleration.TimeInfo.Units = 'days';
-ACT.analysis.annotate.acceleration.TimeInfo.Format = 'dd-mmm-yyyy HH:MM:SS';
-ACT.analysis.annotate.acceleration.TimeInfo.StartDate = '00-Jan-0000 00:00:00';
 
 % -----
 % Euclidean Norm Minus One

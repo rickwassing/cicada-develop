@@ -18,9 +18,9 @@ ACT.analysis.annotate.light.TimeInfo.StartDate = '00-Jan-0000 00:00:00';
 % ---------------------------------------------------------
 % Find the indices
 idxMod = ...
-    app.ACT.metric.light.(params.metric) >= params.threshold(1) && ...
-    app.ACT.metric.light.(params.metric) < params.threshold(2);
-idxBright = app.ACT.metric.light.(params.metric) >= params.threshold(2);
+    ACT.metric.light.(params.metric).Data >= params.threshold(1) & ...
+    ACT.metric.light.(params.metric).Data < params.threshold(2);
+idxBright = ACT.metric.light.(params.metric).Data >= params.threshold(2);
 % ---------------------------------------------------------
 % Set the annotation
 ACT.analysis.annotate.light.Data(idxMod) = 1;

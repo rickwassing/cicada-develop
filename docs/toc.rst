@@ -39,8 +39,8 @@ Edit the Dataset
 
 Preprocess the Dataset
 ======================
-- :ref:`Automatic calibration of acceleration data using GGIR <link>`
-- :ref:`Automatic detection of 'non-wear' time segments in acceleration data <link>`
+- :ref:`Automatic calibration of acceleration data using GGIR <preproc-calibration-top>`
+- :ref:`Automatic detection of 'non-wear' time segments in acceleration data <preproc-non-wear-detection-top>`
 
 .. _toc-analysis:
 

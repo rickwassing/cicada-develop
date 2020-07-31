@@ -1,19 +1,22 @@
-function [ACT, ids] = cic_undoAnnotation(ACT)
+function [ACT, ids] = cic_undoAnnotation(ACT, annotationType)
 % ---------------------------------------------------------
 % Undo annotation
-ACT.analysis.annotate.acceleration.Data = zeros(size(ACT.analysis.annotate.acceleration.Data));
+ACT.analysis.annotate = rmfield(ACT.analysis.annotate, annotationType);
+
 % ---------------------------------------------------------
-% Remove any existing sleep periods and waso events
+% If the acceleration annotation is removed, also remove any existing sleep periods and waso events
 ids = [];
-rm = selectEventsUsingTime(ACT.analysis.events, ACT.xmin, ACT.xmax, 'Label', 'sleepPeriod', 'Type', 'actigraphy');
-if ~isempty(rm)
-    [ACT, id] = cic_editEvents(ACT, 'delete', [], [], 'id', rm.id);
-    ids = [ids; id];
-end
-rm = selectEventsUsingTime(ACT.analysis.events, ACT.xmin, ACT.xmax, 'Label', 'waso', 'Type', 'actigraphy');
-if ~isempty(rm)
-    [ACT, id] = cic_editEvents(ACT, 'delete', [], [], 'id', rm.id);
-    ids = [ids; id];
+if strcmpi(annotationType, 'acceleration')
+    rm = selectEventsUsingTime(ACT.analysis.events, ACT.xmin, ACT.xmax, 'Label', 'sleepPeriod', 'Type', 'actigraphy');
+    if ~isempty(rm)
+        [ACT, id] = cic_editEvents(ACT, 'delete', [], [], 'id', rm.id);
+        ids = [ids; id];
+    end
+    rm = selectEventsUsingTime(ACT.analysis.events, ACT.xmin, ACT.xmax, 'Label', 'waso', 'Type', 'actigraphy');
+    if ~isempty(rm)
+        [ACT, id] = cic_editEvents(ACT, 'delete', [], [], 'id', rm.id);
+        ids = [ids; id];
+    end
 end
 
 % ---------------------------------------------------------
@@ -23,6 +26,6 @@ ACT.saved = false;
 % Write history
 ACT.history = char(ACT.history, '% ---------------------------------------------------------');
 ACT.history = char(ACT.history, '% Undo the annotation step');
-ACT.history = char(ACT.history, 'ACT = cic_undoAnnotation(ACT);');
+ACT.history = char(ACT.history, sprintf('ACT = cic_undoAnnotation(ACT, ''%s'');', annotationType));
 
 end
