@@ -87,8 +87,8 @@ Run Cicada as a Matlab application
 
 1. You're required to have a Matlab license.
 2. Download the code  `as a .zip file <https://github.com/rickwassing/cicada-develop/archive/master.zip>`_ or `clone the Cicada-develop GitHub repository <https://github.com/rickwassing/cicada-develop>`_. 
-2. Open Matlab and navigate to the path where the Cicada directory is located (or add the Cicada directory to the Matlab Search Path).
-3. Call the Cicada application in the Command Window:
+3. Open Matlab and navigate to the path where the Cicada directory is located (or add the Cicada directory to the Matlab Search Path).
+4. Call the Cicada application in the Command Window:
 
   .. code-block:: matlab
 

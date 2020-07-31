@@ -17,9 +17,3 @@ Please refer to the section 'Autocalibration method' with the methods section of
 **To autocalibrate the acceleration data using GGIR,**
 
 - click ``Preprocess`` > ``GGIR Automatic Calibration``.
-
-.. figure:: images/edit-change-epoch-length-1.png
-    :width: 232px
-    :align: center
-
-    Scroll throught the list of 'New Epoch Lengths' and select the appropriate one. Click 'Change', or 'Cancel' to abort.

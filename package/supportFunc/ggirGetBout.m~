@@ -24,7 +24,7 @@ parse(idxMVPA,varargin{:});
 boutcriter = idxMVPA.Results.boutcriter;
 boutClosed = idxMVPA.Results.boutClosed;
 boutMetric = idxMVPA.Results.boutMetric;
-ws3        = idxMVPA.Results.ws3;
+epoch      = idxMVPA.Results.ws3;
 
 idxMVPA = find(x == 1); % p are the indices for which the intensity criteria are met
 
@@ -43,7 +43,7 @@ switch boutMetric
                     select = idxMVPA(idxStart:find(idxMVPA < idxEnd, 1, 'last'));
                     jump = length(select);
                     xt(select) = 2; % remember that this was a bout
-                    boutcount(idxMVPA(idxStart):idxMVPA(find(idxMVPA < idxEnd,1,'last'))) = 1;
+                    boutcount(idxMVPA(idxStart):idxMVPA(find(idxMVPA < idxEnd, 1, 'last'))) = 1;
                 else
                     jump = 1;
                     x(idxMVPA(idxStart)) = 0;
@@ -87,16 +87,16 @@ switch boutMetric
         x(isnan(x)) = 0; % ignore NA values in the unlikely event that there are any
         xt = x;
         % look for breaks larger than 1 minute
-        lookforbreaks = rollCellFun(@mean, x, (60/ws3), 'fill', false);
+        lookforbreaks = rollCellFun(@mean, x, (60/epoch), 'fill', false);
         % insert negative numbers to prevent these minutes to be counted in bouts
-        xt(lookforbreaks == 0) = -(60/ws3) * boutduration;
+        xt(lookforbreaks == 0) = -(60/epoch) * boutduration;
         % in this way there will not be bouts breaks lasting longer than 1 minute
         RM = rollCellFun(@mean, xt, boutduration, 'fill', false);
         idxMVPA = find(RM > boutcriter);
-        starti = round(boutduration/2);
+        idxStart = round(boutduration/2);
         for gi = 1:boutduration
-            inde = idxMVPA-starti+(gi-1);
-            xt(inde(inde > 0 & inde < length(xt))) = 2;
+            idx = idxMVPA-idxStart+(gi-1);
+            xt(idx(idx > 0 & idx < length(xt))) = 2;
         end
         x(xt ~= 2) = 0;
         x(xt == 2) = 1;
@@ -105,15 +105,15 @@ switch boutMetric
         x(isnan(x)) = 0; % ignore NA values in the unlikely event that there are any
         xt = x;
         % look for breaks larger than 1 minute
-        lookforbreaks = rollCellFun(@mean, x, (60/ws3), 'fill', true);
+        lookforbreaks = rollCellFun(@mean, x, (60/epoch), 'fill', true);
         % insert negative numbers to prevent these minutes to be counted in bouts
-        xt(lookforbreaks == 0) = -(60/ws3) * boutduration;
+        xt(lookforbreaks == 0) = -(60/epoch) * boutduration;
         % in this way there will not be bouts breaks lasting longer than 1 minute
         RM = rollCellFun(@mean, xt, boutduration, 'fill', true);
         idxMVPA = find(RM > boutcriter);
-        starti = round(boutduration/2);
+        idxStart = round(boutduration/2);
         % only consider windows that at least start and end with value that meets criterium
-        tri = idxMVPA-starti;
+        tri = idxMVPA-idxStart;
         kep = find(tri > 0 & tri < (length(x)-(boutduration-1)));
         if ~isempty(kep)
             tri = tri(kep);
@@ -121,8 +121,8 @@ switch boutMetric
         idxMVPA = idxMVPA(x(tri) == 1 & x(tri+(boutduration-1)) == 1);
         % now mark all epochs that are covered by the remaining windows
         for gi = 1:boutduration
-            inde = idxMVPA-starti+(gi-1);
-            xt(inde(inde > 0 & inde < length(xt))) = 2;
+            idx = idxMVPA-idxStart+(gi-1);
+            xt(idx(idx > 0 & idx < length(xt))) = 2;
         end
         x(xt ~= 2) = 0;
         x(xt == 2) = 1;
