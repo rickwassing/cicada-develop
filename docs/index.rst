@@ -68,12 +68,12 @@ Getting Started
 Dependencies
 ------------
 
-You can download the standalone desktop application which does not require a Matlab license or any other software. However, if you want to contribute or adapt the code, a Matlab license is required.
+The standalone desktop application does not require a Matlab license or any other software.
 
 .. _index-usage:
 
-Cicada as a standalone application
-----------------------------------
+Run Cicada as a standalone application
+--------------------------------------
 
 1. Download the application installer from the Cicada GitHub repository.
 
@@ -82,10 +82,11 @@ Cicada as a standalone application
 
 2. [Describe installation process].
 
-Cicada as a Matlab application
-------------------------------
+Run Cicada as a Matlab application
+----------------------------------
 
-1. Download the code  `as a .zip file <https://github.com/rickwassing/cicada-develop/archive/master.zip>`_ or `clone the Cicada-develop GitHub repository <https://github.com/rickwassing/cicada-develop>`_. 
+1. You're required to have a Matlab license.
+2. Download the code  `as a .zip file <https://github.com/rickwassing/cicada-develop/archive/master.zip>`_ or `clone the Cicada-develop GitHub repository <https://github.com/rickwassing/cicada-develop>`_. 
 2. Open Matlab and navigate to the path where the Cicada directory is located (or add the Cicada directory to the Matlab Search Path).
 3. Call the Cicada application in the Command Window:
 
@@ -137,8 +138,8 @@ Start learning how to use :ref:`the Cicada pipeline and process an Actigraphy Da
   :maxdepth: 2
   :caption: Preprocess the Dataset
 
-  prepoc-calibration.rst
-  prepoc-non-wear-detection.rst
+  preproc-calibration.rst
+  preproc-non-wear-detection.rst
 
 .. toctree::
   :maxdepth: 2

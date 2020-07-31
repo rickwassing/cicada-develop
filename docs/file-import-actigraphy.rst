@@ -1,8 +1,8 @@
 .. _file-import-actigraphy-top:
 
-=================================
-Importing an Actigraphy recording
-=================================
+==============================
+Import an Actigraphy recording
+==============================
 
 .. note::
 

@@ -1,8 +1,8 @@
 .. _file-import-other-data-top:
 
-==========================================
-Importing data from other wearable devices
-==========================================
+=================================
+Import Data from Another Wearable
+=================================
 
 .. note::
 

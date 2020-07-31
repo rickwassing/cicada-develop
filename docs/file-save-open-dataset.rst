@@ -1,7 +1,7 @@
 .. _file-save-open-dataset-top:
 
 =======================
-Save and open a Dataset
+Save and Open a Dataset
 =======================
 
 **To save a Dataset (as),**

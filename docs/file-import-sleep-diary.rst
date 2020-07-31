@@ -1,8 +1,8 @@
 .. _file-import-sleep-diary-top:
 
-=======================
-Importing a sleep diary
-=======================
+====================
+Import a Sleep Diary
+====================
 
 **To import a sleep diary,**
 
