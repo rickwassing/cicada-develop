@@ -14,13 +14,13 @@ Import an Actigraphy recording
 
 
 .. figure:: images/file-import-actigraphy-1.png
-    :width: 607px
+    :width: 911px
     :align: center
 
     A new browse window will open for you to select the .bin file to import. Navigate to your Raw Data file, select it, and click 'Open'. Click 'Cancel' to abort.
 
 .. figure:: images/file-import-actigraphy-2.png
-    :width: 300px
+    :width: 401px
     :align: center
 
     Once the file is being imported, a dialogue window will show you the progress, and allows you to cancel the import. Depending on the size of your Raw Data file and computer specs, importing should take anywhere between 10-30 minutes. If you press the 'Cancel' button, you'll return to your previously open Dataset shortly. Otherwise, this is it, just wait.

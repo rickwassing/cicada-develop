@@ -6,7 +6,7 @@ The Cicada User Interface
 
 .. figure:: images/overview-interface-1.png
     :align: center
-    :width: 656px
+    :width: 1312px
 
     **The Cicada User Interface is made up of 5 main sections.**
 
@@ -71,7 +71,7 @@ You can interact with the user interface by the use of your mouse cursor, and a 
 
 .. figure:: images/overview-interface-4.png
     :align: center
-    :width: 608px
+    :width: 912px
     
     **Create New Event.** The portion of the data that you selected is shown in the top panel (1). To label the new event, select a pre-existing event label from the dropdown list, or specify a new custom event label (2). To create the event, press ``Create``, or use the ``Cancel`` button to abort (3).
 

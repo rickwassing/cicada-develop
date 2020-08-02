@@ -4,16 +4,14 @@ function ACT = cic_createDailyEvent(ACT, onset, duration, label, days)
 if ~isnumeric(onset)
     onset = mod(datenum(onset, 'HH:MM'), 1); % We'll assume that if onset is not a nummeric value in units 'day', it is specified as 'HH:MM'
 end
-% ---------------------------------------------------------
 % Repeat 'onset' for each day in the recording
 startDay = floor(ACT.xmin);
 endDay = ceil(ACT.xmax);
 onset = startDay + onset : endDay + onset;
 onset(onset < ACT.xmin | onset+(duration/24) > ACT.xmax) = [];
-% ---------------------------------------------------------
 % Remove the days that are not in 'days'
 daystring = {'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'};
-onset = onset(ismember(datestr(onset, 'ddd'), daystring(days == 1)));
+datestr(onset, 'ddd')
 % ---------------------------------------------------------
 % Add events
 ACT = cic_editEvents(ACT, 'add', onset, repmat(duration/24, length(onset), 1), 'Label', label, 'Type', 'customEvent');

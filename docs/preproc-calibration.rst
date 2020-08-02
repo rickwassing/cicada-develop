@@ -8,7 +8,7 @@ Cicada has implemented an algorithm adapted from the GGIR package to automatical
 
 .. note::
 
-    **Reference:** Van Hees VT, Fang Z, et al. Auto-calibration of accelerometer data for free-living physical activity assessment using local gravity and temperature: an evaluation on four continents. J Appl Physiol 2014.
+    **Reference:** Van Hees, Vincent T., et al. "Autocalibration of accelerometer data for free-living physical activity assessment using local gravity and temperature: an evaluation on four continents." Journal of Applied Physiology 117.7 (2014): 738-744.
 
 First, the algorithm aims to find data segments where there is (almost) no change in movement, i.e. where the standard deviation in the ``x``, ``y``, and ``z`` component of acceleration is less than ``sdCriterion = 0.013``. Then, the algorithm assumes that the mean acceleration for these stationary segments must be 1 g. Finaly, the algorithm iteratively finds the new ``offset`` and ``gain`` factors for each acceleration direction such that its deviation from 1 g is minimized.
 

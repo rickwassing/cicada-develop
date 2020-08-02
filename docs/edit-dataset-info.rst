@@ -9,7 +9,7 @@ Edit the Dataset Information
 - click ``Edit`` > ``Dataset information``.
 
 .. figure:: images/edit-dataset-info-1.png
-    :width: 271px
+    :width: 407px
     :align: center
 
     Change any value using the input fields. Click 'Save', or click 'Cancel' to abort.

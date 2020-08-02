@@ -11,7 +11,7 @@ Import a Sleep Diary
 **A sleep diary is imported in two main steps.**
 
 .. figure:: images/file-import-sleep-diary-1.png
-    :width: 670px
+    :width: 1006px
     :align: center
 
 1. Select the tabular Raw Data file, and inspect its contents
@@ -33,13 +33,13 @@ Select tabular Raw Data file
 - click the 'Browse' button in the 'Import Sleep Diary' tab
 
 .. figure:: images/file-import-sleep-diary-2.png
-    :width: 607px
+    :width: 911px
     :align: center
 
     A new browse window will open for you to select the file to import. Navigate to your Raw Data file, select it, and click 'Open'. Click 'Cancel' to abort.
 
 .. figure:: images/file-import-sleep-diary-3.png
-    :width: 670px
+    :width: 873px
     :align: center
 
     Once you have selected the Raw Data file, Cicada will try to read the file and shows the result in the 'Check Raw Data' panel. 
@@ -62,7 +62,7 @@ Select Variables
 - click on the ``Select Variables`` tab.
 
 .. figure:: images/file-import-sleep-diary-4.png
-    :width: 670px
+    :width: 1017px
     :align: center
 
 **1. The 7 predefined variables are listed in the 'Select Variables' panel (1).**
@@ -91,19 +91,19 @@ Select Variables
 - Next, specify the format of the Raw Data, e.g. the ``Date`` was formatted as 'dd/mm/yy', ``BedTime`` was formatted as 'HH:MM'.
 
 .. figure:: images/file-import-sleep-diary-5.png
-    :width: 294px
+    :width: 441px
     :align: center
 
     If the column header of any of the **required variables** is not specified, this message will be presented.
 
 .. figure:: images/file-import-sleep-diary-6.png
-    :width: 294px
+    :width: 441px
     :align: center
 
     If any of the **required variables** could not be 'parsed' (interpreted), this message will be presented.
 
 .. figure:: images/file-import-sleep-diary-7.png
-    :width: 294px
+    :width: 441px
     :align: center
 
     If the import settings file contains column numbers that do not corresponding valid column headers in the Raw Data file, than these column numbers will be removed. In that case, use the dropdown lists to select the appropriate column header. 

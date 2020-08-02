@@ -51,8 +51,8 @@ The data can be analysed in two ways. First, you can annotate each epoch of the 
 
 Annotation
 ----------
-- :ref:`Annotate acceleration data into ordinal activity levels using GGIR <link>`
-- :ref:`Annotate light data into ordinal exposure levels <link>`
+- :ref:`Annotate acceleration data into ordinal activity levels using GGIR <analysis-annotate-acceleration-ggir-top>`
+- :ref:`Annotate light data into ordinal exposure levels <analysis-annotate-light-top>`
 
 Events
 ------

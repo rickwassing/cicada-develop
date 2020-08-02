@@ -11,7 +11,7 @@ Often, the clock of the actigraph is synchronized with the clock of the computer
 - click ``Edit`` > ``Change Time Zone``.
 
 .. figure:: images/edit-change-time-zone-1.png
-    :width: 237px
+    :width: 355px
     :align: center
 
     Scroll throught the list of 'New Time Zones' and select the appropriate one. The new start date of the recording is shown below. Click 'Change', or 'Cancel' to abort.

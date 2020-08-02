@@ -9,7 +9,7 @@ Save and Open a Dataset
 - click ``File`` > ``Save Dataset (As)``.
 
 .. figure:: images/file-save-open-dataset-1.png
-    :width: 635px
+    :width: 953px
     :align: center
 
     A new browse window will open for you to specify the location and filename to save the Dataset to. Click 'Save' to save, or 'Cancel' to abort. 
@@ -24,7 +24,7 @@ Save and Open a Dataset
 - click ``File`` > ``Open Dataset``.
 
 .. figure:: images/file-save-open-dataset-2.png
-    :width: 607px
+    :width: 911px
     :align: center
 
     A new browse window will open for you to select the .mat file to open. Navigate to your Dataset file, select it, and click 'Open'. Click 'Cancel' to abort.
