@@ -102,18 +102,12 @@ To get started, read the pages listed in the 'OVERVIEW' section. These pages wil
 1. :ref:`define the key terms <overview-terms-top>`, 
 2. :ref:`explain how to use the Cicada user interface<overview-interface-top>`, 
 3. :ref:`guide you through the pipeline<overview-pipeline-top>`, 
-4. and discusses the 
+4. and discuss the 
   - :ref:`settings files<overview-settings-files-top>`, 
   - :ref:`datastructure<overview-act-structure-top>`,
   - :ref:`'package' directory<overview-package-top>`. 
   
   Then, if you want to know more, read about it in any specialised section listed below or in the sidemenu.
-
-.. toctree::
-  :maxdepth: 2
-  :caption: Contents
-
-  toc.rst
 
 .. toctree::
   :maxdepth: 2
