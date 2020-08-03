@@ -97,7 +97,7 @@ Run Cicada as a Matlab application
 Follow these quick intructions
 ------------------------------
 
-Start learning how to use :ref:`the Cicada pipeline and process an Actigraphy Dataset <overview-pipeline-top>`. You'll find more references to in-depth documentation in each respective section.
+I highly recommend to read the pages listed in the 'OVERVIEW' section. These pages will define the key terms, explain how to use the Cicada user interface, guide you through the pipeline, and discusses the settings files, datastructure and 'package' directory. All the other pages provide more in-depth explanation of each of the respective sections.
 
 .. toctree::
   :maxdepth: 2
@@ -110,11 +110,11 @@ Start learning how to use :ref:`the Cicada pipeline and process an Actigraphy Da
   :caption: Overview
 
   overview-terms.rst
-  overview-pipeline.rst
   overview-interface.rst
+  overview-pipeline.rst
   overview-settings-files.rst
-  overview-package.rst
   overview-act-structure.rst
+  overview-package.rst
 
 .. toctree::
   :maxdepth: 2

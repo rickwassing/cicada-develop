@@ -98,7 +98,7 @@ To manually edit an event, left-click on the event of interest in the data analy
 
 .. warning::
 
-    When you change the event onset, for example from ``07:30`` to ``08:00``, without changin the duration, the event offset will also be 30 minutes later. Similarly, if you change the duration of the event, for example from ``1h 0m`` to ``1h 30m``, wihtout changing the onset, the event offset will also be 30 minutes later. Adjust both the event onset and duration accordingly if you wish to keep the event offset fixed. Note that the original event offset is shown for reference.
+    When you change the event onset, for example from ``07:30`` to ``08:00``, without changing the duration, the event offset will also be 30 minutes later. Similarly, if you change the duration of the event, for example from ``1h 0m`` to ``1h 30m``, wihtout changing the onset, the event offset will also be 30 minutes later. Adjust both the event onset and duration accordingly if you wish to keep the event offset fixed. Note that the original event offset is shown for reference.
 
 .. _overview-interface-settings-panel:
 
