@@ -58,7 +58,7 @@ Events
 ------
 - :ref:`Use the mouse cursor to create new events <link>`
 - :ref:`Define Sleep Windows, explain SW type, and overlap <link>`
-- :ref:`Create repeated daily events given a time of day and duration <link>`
+- :ref:`Create repeated daily events given a time of day and duration <analysis-daily-events-top>`
 - :ref:`Create events that are relative to the onset or offset of other events <link>`
 - :ref:`Create 'sleep window' events using GGIR's automatic sleep period detection <link>`
 

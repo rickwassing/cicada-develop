@@ -147,3 +147,4 @@ Start learning how to use :ref:`the Cicada pipeline and process an Actigraphy Da
 
   analysis-annotate-acceleration-ggir.rst
   analysis-annotate-light.rst
+  analysis-daily-events.rst

@@ -1,29 +1,33 @@
-.. _analysis-annotate-acceleration-ggir-top:
+.. _analysis-daily-events-top:
 
-================================
-Annotate Acceleration Using GGIR
-================================
+==========================
+Create Custom Daily Events
+==========================
 
-Cicada uses an algorithm adapted from GGIR's ``identify_level.R`` function to annotate the Acceleration Metrics. First, the user has to specify a set of parameters. The 'activity treshold' (e.g. 0.10 g for 'moderate' activity) is used to identify Epochs in which the Acceleration Metric 'Euclidean Norm' is above 0.10 g. The parameters 'activity time' (e.g. 10 minutes) and 'bout criterion' (e.g. 80%) are then used to only keep those segments in which 80% of the Epochs within a 10 minute window are above 0.10 g. The entire segment is then labelled as 'moderate' activity. This is repeated for all activity levels. Any Epoch that has not met any of the criteria is labelled as 'low' activity. This way, each and every Epoch has an Annotation label.
+You may want to analyse the same part of the day, for all of the days in the recording. For example, you may have instructed your participants to excersize at a certain time of the day, or use a light-therapy wake-up lamp in the morning, or you might be interested in segments of the morning and afternoon when your participant commuted to work. We'll use the latter as an example now. The participant indicated to leave for work on Monday to Friday at 7:30 am and it takes about an hour to get to work. Let's create Daily Events for these segments.
 
-**To Annotate Acceleration Metrics with GGIR,**
+**To create daily Events,**
 
-- click ``Analyse`` > ``Annotate Epochs`` > ``Annotate Acceleration (GGIR)``.
+- click ``Analyse`` > ``Events`` > ``Create Daily Events``.
 
-.. figure:: images/analysis-annotate-acceleration-ggir-1.png
-    :width: 552px
+.. figure:: images/analysis-daily-events-1.png
+    :width: 419px
     :align: center
 
-    Accelerometry Annotation Using GGIR.
+1. Indicate an Event Label that is short, specific and informative, e.g. ``Commute``.
+2. Use the toggle buttons to select on which days this Event should be created, e.g. all weekdays.
+3. Use the up ``^`` and down ``v`` buttons, or type numeric values in the input fields, to indicate the onset of the Events, e.g. 7:30.
+4. Use the up ``^`` and down ``v`` buttons, or type numeric values in the input fields, to indicate the duration of the Events, e.g. 1h 0m. Note that the Event duration must be a positive non-zero value.
+5. Click ``Create`` to create the Daily Events, or use ``Cancel`` to abort.
 
-1. Sustained inactivity Epochs are defined as segments of at least ``5`` minutes in length where the consecutive change in the ``Angle`` Metric is less than ``5`` degrees. Adapt these two parameters for more or less stringent criteria.
-2. 'Low', 'Light', 'Moderate' and 'Vigorous' activity Epochs are defined by any of the 4 algorithms described below.
+.. figure:: images/analysis-daily-events-2.png
+    :width: 679px
+    :align: center
 
-.. note::
+    The new Custom Events are shown in the Event axes as turquoise bars every day at 7:30 to 8:30 am except for Saturday and Sunday (the first two panels in this example).
 
-    **Bout Metrics**
+You can **edit** or **delete** any of the single Events you just created, e.g. if the Commute was different on one day. 
 
-    1. The algorithm starts by finding the first epoch above the threshold. Then, it checks if the subsequent ``10`` minute segment contains at least ``80`` % epochs above the threshold. If FALSE, it skips to the next epoch that is above the threshold and starts again. If TRUE, (1) it expands the segment iteratively, one epoch at a time, until it contains not less than ``80`` % of epochs above the threshold, (2) it crops the segment from the first until the last epoch above the threshold, and (3) assigns the activity-level label for that segment. Next, it searches for the next epoch above the threshold after the identified segment, and starts again. If ``boutClosed`` is ``false``, only the epochs above the threshold within the segment are assigned the activity-level label. If ``boutClosed`` is ``true``, the entire segment is assigned the activity-level label.
-    2. For each epoch above the threshold, it checks if the subsequent ``10`` minute segment contains at least ``80`` % epochs above the threshold. If FALSE, it continues to the next epoch that is above the threshold. If TRUE, the entire segment is assigned the activity-level label, and then it continues to the next epoch that is above the threshold (which could be within the segment that was just itentified).
-    3. First, it finds intermediate segments between epochs above the threshold that are longer than 1 minute. These intermediate segments define the breaks between potential segments. The algorithm then calculates the percentage of epochs above the threshold for all potential segments using a ``10`` minute moving window. Any ``10`` minute segment that has at least ``80`` % of its epochs above the threshold is then assigned the activity-level label. This method does not allow breaks for more than 1 minute.
-    4. Similar as 3, except for one additional rule. It assigns the activity-level label to any ``10`` minute segment that (1) has at least ``80`` % of the epochs above the threshold and (2) do not have breaks over 1 minute, but in addition also (3) starts and ends with an epoch above the threshold.
+**To edit or delete a Custom Event,**
+
+follow the instructions :ref:`in this section on how to edit events <overview-interface-edit-events>`.
