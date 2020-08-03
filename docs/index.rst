@@ -107,7 +107,11 @@ To get started, read the pages listed in the 'OVERVIEW' section. These pages wil
   - :ref:`datastructure<overview-act-structure-top>`,
   - :ref:`'package' directory<overview-package-top>`. 
   
-  Then, if you want to know more, read about it in any specialised section listed below or in the sidemenu.
+.. figure:: https://www.alexhouse.net/sites/default/files/assets/images/read-all-about-it.png
+    :width: 95px
+    :align: center
+
+**Want more?** Read all about it in the specialised sections listed below or in the sidemenu.
 
 .. toctree::
   :maxdepth: 2
