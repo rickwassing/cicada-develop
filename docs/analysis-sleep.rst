@@ -41,8 +41,8 @@ WASO
 
 The 'wake-after-sleep-onset' events are any period, *within* the Sleep Period, where the participant is awake. *There are 2 possible types of WASO events*.
 
-1. **actigraphy**, defined as all the periods, *within* the Sleep Period, where one or more epochs are NOT annotated as 'sustained inactive'.
-2. **sleepDiary**, defined by the subjective estimate of *N*, the number of awakenings, and *T*, total time awake, such that there are *N* events, each with a duration of *T/N*.
+1. **actigraphy**, defined as all the periods, *within* the Sleep Period, where one or more epochs are *not* annotated as 'sustained inactive'.
+2. **sleepDiary**, defined by the subjective estimate of the number of awakenings (*N*), and total time awake (*T*), such that there are *N* events, each with a duration of *T/N*.
 
 .. note::
     
@@ -139,24 +139,24 @@ Cicada will use the Sleep Windows of the type that is shown in the Sleep Window 
 1. Select the appropriate Sleep Window Type from the dropdown menu, i.e. ``sleepDiary`` for this example,
 2. Click on the ``Apply`` button to confirm, or ``Cancel`` to abort.
 
-.. figure:: images/analysis-sleep-5.png
+.. figure:: images/analysis-sleep-6.png
     :width: 1312px
     :align: center
 
-    **Cicada has changed the Sleep Window Events to type ``sleepDiary``**, and it also automatically re-calculated the Sleep Period and WASO events.
+    **Cicada has changed the Sleep Window Events to type 'sleepDiary'**, and it also automatically re-calculated the Sleep Period and WASO events.
 
 However, still we can appreciate that the last Sleep Window does not align very well with what it should be. It seems that the ``lights off`` clock time should be an hour later, and the ``lights on`` clock time should be an hour earlier. Lets edit this.
 
 Edit Sleep Windows
 ==================
 
-**You can only edit Sleep Window Events of type ``manual``**, you cannot directly edit Sleep Window Events of other types. The reason for this is to maintain the original data integrity and to ensure repeatability of analysis pipelines. Furthermore, you cannot edit Sleep Period and WASO events as they are defined by the data.
+**You can only edit Sleep Window Events of type** ``manual``, you cannot directly edit Sleep Window Events of other types. The reason for this is to maintain the original data integrity and to ensure repeatability of analysis pipelines. Furthermore, you cannot edit Sleep Period and WASO events as they are defined by the data.
 
 So, in order for us to change the Sleep Window Events of type ``sleepDiary``, we must first convert them to type ``manual``.
 
-**To convert a group of Sleep Window Events to ``manual``,**
+**To convert a group of Sleep Window Events to** ``manual``,
 
-1. In the Sleep Window Type panel (settings panel), select the appropriate Sleep Window type.
+1. In the Sleep Window Type panel (settings panel), select ``manual``.
 2. Click the ``edit`` button indicated by the pencil-and-paper icon.
 
 .. warning::
@@ -178,15 +178,13 @@ Now we're ready to copy the ``sleepDiary`` Sleep Window events to the ``manual``
 2. click ``Apply``,
 3. Click the ``edit`` button indicated by the pencil-and-paper icon.
 
-Nothing apparent changed in the 'Data Analysis' Tab, the same Events are shown, however, the Sleep Window Type panel now has the value ``manual``. Now we can change any Event we like.
+Nothing apparent changed in the 'Data Analysis' Tab, the same Events are shown, however, the Events are now of type ``manual`` as is shown in the Sleep Window Type panel. Now we can change any Event we like.
 
-**As before, to edit an Event,**
-
-left-click on the event of interest in the data analysis panel, and follow the 'Edit Event' interface.
+**As before, to edit an Event,** left-click on the event of interest in the data analysis panel, and follow the 'Edit Event' interface.
 
 .. note::
 
     In this last example, we did not actually change the Sleep Window of type ``sleepDiary``, we just changed a copy of that event. In the sections on 'Sleep Statistics' you'll see that Cicada compares sleep variables based on Actigraphy with those from the sleep diary, the latter thus being unchanged. If you suspect that the times reported by the participant are not correct, you must edit these values in the sleep diary data file.
 
-Fantastic, you've accomplished something great, have a cookie before you continue
----------------------------------------------------------------------------------
+Fantastic, have a cookie before you continue
+--------------------------------------------

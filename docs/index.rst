@@ -147,3 +147,9 @@ Run Cicada as a Matlab application
   analysis-sleep.rst
   analysis-daily-events.rst
   analysis-relative-events.rst
+
+.. toctree::
+  :maxdepth: 2
+  :caption: Generate, Export Statistics
+
+  statistics.rst
