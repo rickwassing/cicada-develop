@@ -145,3 +145,4 @@ Run Cicada as a Matlab application
   analysis-annotate-acceleration-ggir.rst
   analysis-annotate-light.rst
   analysis-daily-events.rst
+  analysis-relative-events.rst

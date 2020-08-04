@@ -24,7 +24,7 @@ You may want to study segments that are before, during or after existing Events.
 
 .. Note::
 
-    In case you specified a new Event label that is used by Cicada, you'll see the error message 'Can't use Cicada's proprietary labels'. These labels are 'start', 'button', 'reject', 'sleepwindow', 'sleepperiod', and 'waso'.
+    In case you specify a new Event label that is used by Cicada, you'll see the error message 'Can't use Cicada's proprietary labels'. These labels are 'start', 'button', 'reject', 'sleepwindow', 'sleepperiod', and 'waso'.
 
 4. Specify the ``delay``, i.e. the difference between the onset of the new Custom Events and the onset/offset of the reference Events, e.g. ``-3h 30m`` in our example. Click the ``sign`` button to switch between positive and negative delays, and use the ``^`` up and ``v`` down buttons or directly type in the input fields to specify the delay hours and minutes.
 5. Specify the ``duration`` of the new Custom Events, e.g. ``3h 0m`` in our example. Note that the Event duration must be a positive non-zero value.
@@ -34,7 +34,7 @@ You may want to study segments that are before, during or after existing Events.
     :width: 441px
     :align: center
 
-    In case you specified a new Event label that already exists, a question dialogue will ask you to confirm that you want to add the new events to the existing set.
+    In case you specified an Event label that already exists, a question dialogue will ask you to confirm that you want to add the new events to the existing set.
 
 .. figure:: images/analysis-relative-events-2.png
     :width: 677px
