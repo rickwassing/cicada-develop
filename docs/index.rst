@@ -94,24 +94,7 @@ Run Cicada as a Matlab application
 
     >> cicada
 
-Follow these instructions
--------------------------
-
-To get started, read the pages listed in the 'OVERVIEW' section. These pages will,
-
-1. :ref:`define the key terms <overview-terms-top>`, 
-2. :ref:`explain how to use the Cicada user interface<overview-interface-top>`, 
-3. :ref:`guide you through the pipeline<overview-pipeline-top>`, 
-4. and discuss the 
-  - :ref:`settings files<overview-settings-files-top>`, 
-  - :ref:`datastructure<overview-act-structure-top>`,
-  - :ref:`'package' directory<overview-package-top>`. 
-  
-.. figure:: https://www.alexhouse.net/sites/default/files/assets/images/read-all-about-it.png
-    :width: 95px
-    :align: center
-
-**Want more?** Read all about it in the specialised sections listed below or in the sidemenu.
+**To get started, follow the instruction in the Overview section**
 
 .. toctree::
   :maxdepth: 2
@@ -123,6 +106,12 @@ To get started, read the pages listed in the 'OVERVIEW' section. These pages wil
   overview-settings-files.rst
   overview-act-structure.rst
   overview-package.rst
+  
+.. figure:: https://www.alexhouse.net/sites/default/files/assets/images/read-all-about-it.png
+    :width: 95px
+    :align: center
+
+**Want more?** Read all about it in the specialised sections listed below or in the sidemenu.
 
 .. toctree::
   :maxdepth: 2

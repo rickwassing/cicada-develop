@@ -1,7 +1,7 @@
 function [ACT, id] = cic_editEvents(ACT, method, onset, duration, varargin)
 % ---------------------------------------------------------
 % method:   'add',     add events
-%           'edit',    update one event given by the ID: 
+%           'edit',    update one event given by the ID:
 %                      provide argument 'id', <integer>
 %           'delete',  delete any event given some label or type, or both
 % onset:    Column vector, N-by-1
@@ -32,7 +32,10 @@ elseif sum(strcmpi(ACT.analysis.events.label, 'start')) > 1
     add.type = {''};
     ACT.analysis.events = [ACT.analysis.events; add];
 end
-    
+
+% Initialize ID as empty
+id = [];
+
 % ---------------------------------------------------------
 if ~strcmpi(method, 'delete') % 'onset' and 'duration' are not required for deleting events
     % Make sure onset and duration are not empty
@@ -57,11 +60,11 @@ switch method
     case 'add'
         % If the user wants to add an event, a 'label' and 'type' must be provided
         addParameter(p, 'label', [], ...
-        	@(x) validateattributes(x, {'char'}, {'nonempty'}) ...
-        );
+            @(x) validateattributes(x, {'char'}, {'nonempty'}) ...
+            );
         addParameter(p, 'type', [], ...
-        	@(x) validateattributes(x, {'char'}, {'nonempty'}) ...
-        );
+            @(x) validateattributes(x, {'char'}, {'nonempty'}) ...
+            );
         % Parse the variable arguments
         parse(p,varargin{:});
         % Create a new table with new events
@@ -82,15 +85,15 @@ switch method
     case 'edit'
         % If the user wants to edit an event, an 'id' must be provided
         addParameter(p,'id',[], ...
-            @(x) validateattributes(x, {'numeric'}, {'scalar', 'integer', 'nonzero', 'positive'}) ... 
-        );
+            @(x) validateattributes(x, {'numeric'}, {'scalar', 'integer', 'nonzero', 'positive'}) ...
+            );
         % 'Label' and 'Type' are optional
         addParameter(p,'label',[], ...
-        	@(x) validateattributes(x, {'char'}, {'nonempty'}) ...
-        );
+            @(x) validateattributes(x, {'char'}, {'nonempty'}) ...
+            );
         addParameter(p,'type',[], ...
-        	@(x) validateattributes(x, {'char'}, {'nonempty'}) ...
-        );
+            @(x) validateattributes(x, {'char'}, {'nonempty'}) ...
+            );
         % Parse the variable arguments
         parse(p,varargin{:});
         % Also, 'onset', and 'duration' must be scalars
@@ -111,17 +114,17 @@ switch method
     case 'delete'
         % If the user wants to delete an event, an 'id', 'label' and/or 'type' must be provided
         addParameter(p,'id', [] , ...
-            @(x) validateattributes(x, {'numeric'}, {'integer', 'nonzero', 'positive'}) ... 
-        );
+            @(x) validateattributes(x, {'numeric'}, {'integer', 'nonzero', 'positive'}) ...
+            );
         addParameter(p,'label',[], ...
             @(x) validateattributes(x, {'char'}, {'nonempty'}) ...
-        );
+            );
         addParameter(p,'type',[], ...
             @(x) validateattributes(x, {'char'}, {'nonempty'}) ...
-        );
+            );
         % Parse the variable arguments
         parse(p, varargin{:});
-
+        
         % If the user did not specify a label or type, do nothing
         if isempty(p.Results.id) && isempty(p.Results.label) && isempty(p.Results.type)
             return

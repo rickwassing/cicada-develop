@@ -95,7 +95,6 @@ switch class(app.Cursor.Parent)
         % Update the UserData of the 'DailyStats_PatchCurrentSelection' Component
         Component = findobj(app.GridLayoutDailyStats_Container.Children, 'Tag', 'DailyStats_PatchCurrentSelection');
         Component.UserData.select = min([ceil(app.Cursor.CurrentPoint(1, 2)), size(app.ACT.stats.daily, 1)]);
-        app.Cursor.CurrentPoint(1, 2)
         % Add 'Stats' to the Component list
         app.ComponentList = [app.ComponentList, {'Stats'}];
 end

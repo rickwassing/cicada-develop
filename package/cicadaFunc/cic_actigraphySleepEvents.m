@@ -49,6 +49,9 @@ sleepWindow = selectEventsUsingTime(ACT.analysis.events, select(1), select(2), '
 if isempty(sleepWindow)
     return
 end
+if ~isfield(ACT.analysis.annotate, 'acceleration')
+    return
+end
 % ---------------------------------------------------------
 % Calculate sleep period based on actigraphy
 sleepPeriod = struct();

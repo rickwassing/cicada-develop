@@ -15,12 +15,23 @@ You may want to analyse the same part of the day, for all of the days in the rec
     :align: center
 
 1. Indicate an Event Label that is short, specific and informative, e.g. ``Commute``.
+
+.. Note::
+
+    In case you specified a new Event label that is used by Cicada, you'll see the error message 'Can't use Cicada's proprietary labels'. These labels are 'start', 'button', 'reject', 'sleepwindow', 'sleepperiod', and 'waso'.
+
 2. Use the toggle buttons to select on which days this Event should be created, e.g. all weekdays.
 3. Use the up ``^`` and down ``v`` buttons, or type numeric values in the input fields, to indicate the onset of the Events, e.g. 7:30.
 4. Use the up ``^`` and down ``v`` buttons, or type numeric values in the input fields, to indicate the duration of the Events, e.g. 1h 0m. Note that the Event duration must be a positive non-zero value.
 5. Click ``Create`` to create the Daily Events, or use ``Cancel`` to abort.
 
 .. figure:: images/analysis-daily-events-2.png
+    :width: 441px
+    :align: center
+
+    In case you specified a new Event label that already exists, a question dialogue will ask you to confirm that you want to add the new events to the existing set.
+
+.. figure:: images/analysis-daily-events-3.png
     :width: 679px
     :align: center
 
