@@ -188,6 +188,8 @@ In addition to Annotating Acceleration Metrics, we can Annotate light Metics. [T
 
 :ref:`Read more... <index-top>`
 
+.. _overview-pipeline-sleep-window-events:
+
 Sleep Window Events
 ^^^^^^^^^^^^^^^^^^^
 
@@ -207,9 +209,9 @@ An important part of analysing the Dataset is to define Sleep Window Events. The
 
 :ref:`Read more... <index-top>`
 
-.. warning::
+.. note::
 
-    The GGIR sleep detection algorithm depends on the onset and offset of the 'analysis window', which is defined by the actogram start and end clock times shown in the settings panel. The default analysis window is '15:00' until '15:00' the next day. The sleep detection algorithm assumes to find one main Sleep Window between these two timepoints. Cicada uses 15:00 as an emperically derived cut point where it is highly unlikely, under normal circumstances, that a Sleep Window begins before 15:00 and ends after 15:00, or begins before 15:00 and ends after 15:00. *However, depending on your sample, e.g. shiftworkers, youth or sleep disorders, you may want to adjust this analysis window*.
+    The GGIR sleep detection algorithm is designed to detect Sleep Windows by identifying the largest segment in the *analysis window* in which the median absolute deviation of the angle is below 15 times its 10th percentile. The analysis window is defined by the Actogram start and end clock times shown in the settings panel.The default analysis window is '15:00' until '15:00' the next day. Cicada uses an emperically derived default analysis window of '15:00' until '15:00' the next day. It is highly unlikely, under normal circumstances, that a Sleep Window begins before 15:00 and ends after 15:00, or begins before 15:00 and ends after 15:00. *However, depending on your sample, e.g. shiftworkers, youth or sleep disorders, you may want to adjust this analysis window*.
 
 Custom Events
 ^^^^^^^^^^^^^

@@ -75,7 +75,7 @@ Select Variables
 
     - The Sleep Window Events are defined as ``Lights Out`` to ``Lights On``.
     - The Sleep Period Events are defined as ``Lights Out`` + ``Sleep Latency`` to ``Fin. Awake``.
-    - The WASO Events are defined by the combination of ``Awakenings`` and ``WASO``, such that each of the *N* = ``Awakenings``, WASO Events have a duration of ``WASO`` / ``Awakenings`` minutes.
+    - The WASO Events are defined by the combination of ``Awakenings`` (*N*) and ``WASO`` (*T*), such that there are *N* WASO events, each with a duration of *T/N*
 
 
 .. figure:: images/sleep-window-choice.png

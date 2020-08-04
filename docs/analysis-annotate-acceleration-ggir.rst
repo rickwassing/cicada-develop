@@ -18,6 +18,7 @@ Cicada uses an algorithm adapted from GGIR's ``identify_level.R`` function to an
 
 1. Sustained inactivity Epochs are defined as segments of at least ``5`` minutes in length where the consecutive change in the ``Angle`` Metric is less than ``5`` degrees. Adapt these two parameters for more or less stringent criteria.
 2. 'Low', 'Light', 'Moderate' and 'Vigorous' activity Epochs are defined by any of the 4 algorithms described below.
+3. Click ``Go`` to start the Annotation, or ``Cancel`` to abort.
 
 .. note::
 

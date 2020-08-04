@@ -8,7 +8,7 @@ You may want to study segments that are before, during or after existing Events.
 
 .. note::
 
-    Before we can create Custom Events that are relative to Sleep Window Events, we first have to :ref:`create Sleep Window Events <overview-pipeline-sleep-window-events>`.
+    Before we can create Custom Events that are relative to Sleep Window Events, you should of course first create Sleep Window Events.
 
 **To create Relative Events,**
 

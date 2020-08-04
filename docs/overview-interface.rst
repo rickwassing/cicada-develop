@@ -62,7 +62,7 @@ You can interact with the user interface by the use of your mouse cursor, and a 
 1. Left-click anywhere within the data panel to indicate the **onset** or **offset** of the event. A pink cursor will appear with a label showing the time in ``HH:MM``.
 2. Optionally, adjust the location of the cursor by pressing the ``left`` or ``right arrow`` keys on your keyboard.
 3. Lock-in this timepoint by pressing the ``enter`` key. The cursor will now appear in blue color.
-4. Left-click anywhere within the data panel, a pink cursor will appear, and again, adjust using the ``arrow`` keys. If this second timepoint (pink) is *after* the first timepoint (blue) then the first timepoint marks the event **onset** and the second marks the event **offset**; and *vice versa*.
+4. Again, left-click anywhere within the data panel and adjust using the ``arrow`` keys. If this second timepoint (pink) is *after* the first timepoint (blue) then the first timepoint marks the event **onset** and the second marks the event **offset**; and *vice versa*.
 5. If you're unhappy about your selection
     - press the ``escape`` or ``backspace`` key on your keyboard, all cursors will disappear, go to step 1.
 6. If you're happy about your selection
