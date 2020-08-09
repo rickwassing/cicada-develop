@@ -20,7 +20,12 @@ for di = 1:length(datatypes)
     if isstruct(ACT.data.(datatypes{di}))
         fnames = fieldnames(ACT.data.(datatypes{di}));
         for fi = 1:length(fnames)
+            % Crop the timeseries
             ACT.data.(datatypes{di}).(fnames{fi}) = getsampleusingtime(ACT.data.(datatypes{di}).(fnames{fi}), startDate, endDate);
+            % For some reason, the Interval is lost after cropping the timeseries
+            times = ACT.data.(datatypes{di}).(fnames{fi}).TimeInfo.Time;
+            % Force the timeseries to have uniform interval
+            ACT.data.(datatypes{di}).(fnames{fi}) = setuniformtime(ACT.data.(datatypes{di}).(fnames{fi}), 'StartTime', times(1), 'Interval', mean(diff(times)));
         end
     end
 end

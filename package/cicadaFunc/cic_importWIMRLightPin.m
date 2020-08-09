@@ -63,7 +63,7 @@ for fi = 1:length(fnames)
     ACT.data.light.(fnames{fi}).TimeInfo.Format = 'dd-mmm-yyyy HH:MM:SS';
     ACT.data.light.(fnames{fi}).TimeInfo.StartDate = '00-Jan-0000 00:00:00';
     % Force the timeseries to have uniform interval
-    ACT.data.light.(fnames{fi}) = setuniformtime(ACT.data.light.(fnames{fi}), 'StartTime', ACT.xmin, 'Interval', 1/srate);
+    ACT.data.light.(fnames{fi}) = setuniformtime(ACT.data.light.(fnames{fi}), 'StartTime', times(1), 'Interval', 1/srate);
 end
 
 % ---------------------------------------------------------

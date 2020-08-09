@@ -18,11 +18,15 @@ The aim of sleep analysis is to identify 'Sleep Windows', 'Sleep Periods', and '
 Sleep Window
 ------------
 
-The **Sleep Window** is a time period in which the participant has the opportunity to sleep (this period is sometimes also referred to as the Sleep Opportunity Window). There are two possible ways to define this window, (1) as the *time spent in bed* (in bed until rise time), or (2) the time period in which the research participant turned off the lights and shut their eyes with the *intention* to sleep (eyes closed until eyes open). It is up to you as the researcher to decide what applies best to your research question. *There are 3 possible types of Sleep Window Events, which we will discuss below*.
+The **Sleep Window** is a time period in which the participant has the opportunity to sleep (this period is sometimes also referred to as the Sleep Opportunity Window). *There are 3 possible types of Sleep Window Events, which we will discuss below*.
 
 1. **manual**, by creating new events using the cursor,
 2. **sleepDiary**, by importing a sleep diary, or
 3. **GGIR**, by using the GGIR Sleep Detection algorithm,
+
+.. note::
+
+    When you import a sleep diary, there are two possible ways to define the Sleep Window, (1) as the *time spent in bed* (in bed until rise time), or (2) the when the participant turned off the lights and shut their eyes with the *intention* to sleep (eyes closed until eyes open). It is up to you as the researcher to decide what applies best to your research question. Your choice affects the value of any sleep variable that is derived from the Sleep Window and Sleep Period, e.g. do you want sleep latency to be relative to the *time in bed* or to the time the participant *intended* to sleep?
 
 Sleep Period
 ------------

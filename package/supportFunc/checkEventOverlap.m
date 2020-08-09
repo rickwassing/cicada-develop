@@ -59,16 +59,20 @@ switch event.label
             message = {'Cancelled: you rejected a window that overlaps with an existing rejected window.'};
             return
         end
-        events = selectEventsUsingTime(app.ACT.analysis.events, event.onset, event.onset+event.duration, ...
-            'Label', 'sleepWindow', ...
-            'Type', app.ACT.analysis.settings.sleepWindowType, ...
-            'Enclosed', false);
-        % Do not check with events that have the same ID, as an event cannot overlap with itself
-        events(events.id == event.id, :) = [];
-        if ~isempty(events)
-            error = true;
-            message = {'Cancelled: you rejected a window that overlaps with an existing sleep window.'};
+        if ~isfield(app.ACT.analysis.settings, 'sleepWindowType')
             return
+        else
+            events = selectEventsUsingTime(app.ACT.analysis.events, event.onset, event.onset+event.duration, ...
+                'Label', 'sleepWindow', ...
+                'Type', app.ACT.analysis.settings.sleepWindowType, ...
+                'Enclosed', false);
+            % Do not check with events that have the same ID, as an event cannot overlap with itself
+            events(events.id == event.id, :) = [];
+            if ~isempty(events)
+                error = true;
+                message = {'Cancelled: you rejected a window that overlaps with an existing sleep window.'};
+                return
+            end
         end
 end
 end

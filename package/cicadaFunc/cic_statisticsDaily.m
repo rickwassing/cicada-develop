@@ -95,6 +95,28 @@ for di = 1:ACT.ndays+1
                 ACT.stats.daily.(['clockOnsetMax', titleCase(datatypes{ti}), titleCase(fnames{fi}), 'MovWin30m']){di, 1} = 'na';
             end
         end
+        
+        % ---------------------------------------------------------
+        % If annotation of this datatype is available, calculate the time spent in each annotation level
+        if isfield(ACT.analysis.annotate, datatypes{ti})
+            % Extract the names of the levels
+            if ~isfield(ACT.analysis.settings, [lower(datatypes{ti}), 'Levels'])
+                warning('Did not find the annotation levels for ''%s'' metrics\n> In cic_statisticsDaily (line 104)', datatypes{ti})
+                continue
+            end
+            levelsStr = ACT.analysis.settings.([lower(datatypes{ti}), 'Levels']);
+            levelsData = unique(ACT.analysis.annotate.(datatypes{ti}).Data);
+            if length(levelsStr) ~= length(levelsData)
+                warning('Number of annotation levels for ''%s'' metrics in data does not match with the user-defined levels\n> In cic_statisticsDaily (line 110)', datatypes{ti})
+                continue
+            end
+            [annotate, timesAnnot] = selectDataUsingTime(ACT.analysis.annotate.(datatypes{ti}).Data, ACT.analysis.annotate.(datatypes{ti}).Time, startDate, endDate);
+            % insert NaNs for rejected segments
+            annotate(events2idx(ACT, timesAnnot, 'Label', 'reject')) = nan;
+            for li = 1:length(levelsData)
+                ACT.stats.daily.(['hours', titleCase(levelsStr{li}), titleCase(datatypes{ti})])(di, 1) = (sum(annotate == levelsData(li)) * ACT.epoch) / 3600;
+            end
+        end
     end
 end
 

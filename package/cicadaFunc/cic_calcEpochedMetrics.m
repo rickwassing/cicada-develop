@@ -108,7 +108,7 @@ for di = 1:length(dataTypes)
             tmp = timetable(ACT.data.(dataTypes{di}).(fnames{fi}).Data, 'SampleRate', srate);
         end
         % Convert timetable back to timeseries
-        times = ACT.data.(dataTypes{di}).(fnames{fi}).Time(1) + seconds(tmp.Time) / (60*60*24);
+        times = seconds(tmp.Time) / (60*60*24) + ACT.data.(dataTypes{di}).(fnames{fi}).Time(1);
         ACT.metric.(dataTypes{di}).(fnames{fi}) = timeseries(tmp{:, :}, times, 'Name', [dataTypes{di}, '-', fnames{fi}]);
         ACT.metric.(dataTypes{di}).(fnames{fi}).DataInfo.Units = ACT.data.(dataTypes{di}).(fnames{fi}).DataInfo.Units;
         ACT.metric.(dataTypes{di}).(fnames{fi}).TimeInfo.Units = 'days';

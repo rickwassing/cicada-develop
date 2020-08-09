@@ -398,8 +398,14 @@ app.AvStats_SlpOnsetLatActValue.Text = duration2str(app.ACT.stats.average.(selec
 app.AvStats_WakeAfterSlpOnsetActValue.Text = duration2str(app.ACT.stats.average.(select).avWakeAfterSlpOnsetAct/(24*60));
 app.AvStats_FinAwakeActValue.Text = app.ACT.stats.average.(select).avClockFinAwakeAct;
 app.AvStats_LightsOnActValue.Text = app.ACT.stats.average.(select).avClockLightsOnAct;
-app.AvStats_TotSlpTimeActValue.Text = duration2str(app.ACT.stats.average.(select).avTotSlpTimeAct/(24*60));
 app.AvStats_SlpWindowActValue.Text = duration2str(app.ACT.stats.average.(select).avSlpWindowAct/(24*60));
+app.AvStats_SlpPeriodActValue.Text = duration2str(app.ACT.stats.average.(select).avSlpPeriodAct/(24*60));
+app.AvStats_SlpTimeActValue.Text = duration2str(app.ACT.stats.average.(select).avTotSlpTimeAct/(24*60));
+if ~isnan(app.ACT.stats.average.(select).avSlpEffSlpPeriodAct)
+    app.AvStats_SlpEffSlpPeriodActValue.Text = sprintf('%.0f%%', app.ACT.stats.average.(select).avSlpEffSlpPeriodAct);
+else
+    app.AvStats_SlpEffSlpPeriodActValue.Text = '-';
+end
 if ~isnan(app.ACT.stats.average.(select).avSlpEffSlpTimeAct)
     app.AvStats_SlpEffSlpTimeActValue.Text = sprintf('%.0f%%', app.ACT.stats.average.(select).avSlpEffSlpTimeAct);
 else
@@ -407,33 +413,21 @@ else
 end
 % ---------------------------------------------------------
 % Set Text values of the Sleep Diary variables
-if ~isfield(app.ACT.stats.sleep, 'sleepDiary')
+if ~isfield(app.ACT.stats.sleep, 'sleepDiary') || ~app.ACT.stats.sleep.compareAverage
     app.AvStats_LegendDiaryLabel.Visible = 'off';
     app.AvStats_LightsOutDiaryValue.Visible = 'off';
     app.AvStats_SlpOnsetLatDiaryValue.Visible = 'off';
     app.AvStats_WakeAfterSlpOnsetDiaryValue.Visible = 'off';
     app.AvStats_FinAwakeDiaryValue.Visible = 'off';
     app.AvStats_LightsOnDiaryValue.Visible = 'off';
-    app.AvStats_TotSlpTimeDiaryValue.Visible = 'off';
     app.AvStats_SlpWindowDiaryValue.Visible = 'off';
+    app.AvStats_SlpPeriodDiaryValue.Visible = 'off';
+    app.AvStats_SlpTimeDiaryValue.Visible = 'off';
+    app.AvStats_SlpEffSlpPeriodDiaryValue.Visible = 'off';
     app.AvStats_SlpEffSlpTimeDiaryValue.Visible = 'off';
     app.AvStats_MismatchLabel.Visible = 'off';
-    app.AvStats_MismatchSleepTimeValue.Visible = 'off';
     app.AvStats_MismatchSleepPeriodValue.Visible = 'off';
-    return
-elseif ~app.ACT.stats.sleep.compareAverage
-    app.AvStats_LegendDiaryLabel.Visible = 'off';
-    app.AvStats_LightsOutDiaryValue.Visible = 'off';
-    app.AvStats_SlpOnsetLatDiaryValue.Visible = 'off';
-    app.AvStats_WakeAfterSlpOnsetDiaryValue.Visible = 'off';
-    app.AvStats_FinAwakeDiaryValue.Visible = 'off';
-    app.AvStats_LightsOnDiaryValue.Visible = 'off';
-    app.AvStats_TotSlpTimeDiaryValue.Visible = 'off';
-    app.AvStats_SlpWindowDiaryValue.Visible = 'off';
-    app.AvStats_SlpEffSlpTimeDiaryValue.Visible = 'off';
-    app.AvStats_MismatchLabel.Visible = 'off';
     app.AvStats_MismatchSleepTimeValue.Visible = 'off';
-    app.AvStats_MismatchSleepPeriodValue.Visible = 'off';
     return
 else
     app.AvStats_LegendDiaryLabel.Visible = 'on';
@@ -442,12 +436,14 @@ else
     app.AvStats_WakeAfterSlpOnsetDiaryValue.Visible = 'on';
     app.AvStats_FinAwakeDiaryValue.Visible = 'on';
     app.AvStats_LightsOnDiaryValue.Visible = 'on';
-    app.AvStats_TotSlpTimeDiaryValue.Visible = 'on';
     app.AvStats_SlpWindowDiaryValue.Visible = 'on';
+    app.AvStats_SlpPeriodDiaryValue.Visible = 'on';
+    app.AvStats_SlpTimeDiaryValue.Visible = 'on';
+    app.AvStats_SlpEffSlpPeriodDiaryValue.Visible = 'on';
     app.AvStats_SlpEffSlpTimeDiaryValue.Visible = 'on';
     app.AvStats_MismatchLabel.Visible = 'on';
-    app.AvStats_MismatchSleepTimeValue.Visible = 'on';
     app.AvStats_MismatchSleepPeriodValue.Visible = 'on';
+    app.AvStats_MismatchSleepTimeValue.Visible = 'on';
 end
 
 % ---------------------------------------------------------
@@ -457,27 +453,19 @@ app.AvStats_SlpOnsetLatDiaryValue.Text = duration2str(app.ACT.stats.average.(sel
 app.AvStats_WakeAfterSlpOnsetDiaryValue.Text = duration2str(app.ACT.stats.average.(select).avWakeAfterSlpOnsetDiary/(24*60));
 app.AvStats_FinAwakeDiaryValue.Text = app.ACT.stats.average.(select).avClockFinAwakeDiary;
 app.AvStats_LightsOnDiaryValue.Text = app.ACT.stats.average.(select).avClockLightsOnDiary;
-app.AvStats_TotSlpTimeDiaryValue.Text = duration2str(app.ACT.stats.average.(select).avTotSlpTimeDiary/(24*60));
 app.AvStats_SlpWindowDiaryValue.Text = duration2str(app.ACT.stats.average.(select).avSlpWindowDiary/(24*60));
+app.AvStats_SlpPeriodDiaryValue.Text = duration2str(app.ACT.stats.average.(select).avSlpPeriodDiary/(24*60));
+app.AvStats_SlpTimeDiaryValue.Text = duration2str(app.ACT.stats.average.(select).avTotSlpTimeDiary/(24*60));
+if ~isnan(app.ACT.stats.average.(select).avSlpEffSlpPeriodDiary)
+    app.AvStats_SlpEffSlpPeriodDiaryValue.Text = sprintf('%.0f%%', app.ACT.stats.average.(select).avSlpEffSlpPeriodDiary);
+else
+    app.AvStats_SlpEffSlpPeriodDiaryValue.Text = '-';
+end
 if ~isnan(app.ACT.stats.average.(select).avSlpEffSlpTimeDiary)
     app.AvStats_SlpEffSlpTimeDiaryValue.Text = sprintf('%.0f%%', app.ACT.stats.average.(select).avSlpEffSlpTimeDiary);
 else
     app.AvStats_SlpEffSlpTimeDiaryValue.Text = '-';
 end
-
-% ---------------------------------------------------------
-% Set Text values of the Sleep Time Mismatch
-mismatch = app.ACT.stats.average.(select).avSleepTimeMismatch;
-if mismatch > 0
-    mismatch = sprintf('%s', duration2str(abs(mismatch)/(24*60)));
-elseif mismatch < 0
-    mismatch = sprintf('-%s', duration2str(abs(mismatch)/(24*60)));
-elseif ~isnan(app.ACT.stats.average.(select).avTotSlpTimeAct) && ~isnan(app.ACT.stats.average.(select).avTotSlpTimeDiary)
-    mismatch = 'no mismatch';
-else
-    mismatch = '-';
-end
-app.AvStats_MismatchSleepTimeValue.Text = mismatch;
 
 % ---------------------------------------------------------
 % Set Text values of the Sleep Period Mismatch
@@ -492,5 +480,19 @@ else
     mismatch = '-';
 end
 app.AvStats_MismatchSleepPeriodValue.Text = mismatch;
+
+% ---------------------------------------------------------
+% Set Text values of the Sleep Time Mismatch
+mismatch = app.ACT.stats.average.(select).avSleepTimeMismatch;
+if mismatch > 0
+    mismatch = sprintf('%s', duration2str(abs(mismatch)/(24*60)));
+elseif mismatch < 0
+    mismatch = sprintf('-%s', duration2str(abs(mismatch)/(24*60)));
+elseif ~isnan(app.ACT.stats.average.(select).avTotSlpTimeAct) && ~isnan(app.ACT.stats.average.(select).avTotSlpTimeDiary)
+    mismatch = 'no mismatch';
+else
+    mismatch = '-';
+end
+app.AvStats_MismatchSleepTimeValue.Text = mismatch;
 
 end

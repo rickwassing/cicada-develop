@@ -88,8 +88,8 @@ end
 datatypes = ACT.display.order;
 for di = 1:length(datatypes)
     fnames = fieldnames(ACT.metric.(datatypes{di}));
-    for fi = 1:length(fnames)
-        for select = {'all', 'week', 'weekend'}
+    for select = {'all', 'week', 'weekend'}
+        for fi = 1:length(fnames)
             % ---------------------------------------------------------
             % Extract the data and insert NaNs for rejected data
             [data, times] = selectDataUsingTime(ACT.metric.(datatypes{di}).(fnames{fi}).Data, ACT.metric.(datatypes{di}).(fnames{fi}).Time, ACT.xmin, ACT.xmax, 'Select', select{:});
@@ -122,9 +122,29 @@ for di = 1:length(datatypes)
                 ACT.stats.average.(select{:}).(['clockOnsetMax', titleCase(datatypes{di}), titleCase(fnames{fi}), 'MovWin30m']) = 'na';
             end
         end
+        % ---------------------------------------------------------
+        % If annotation of this datatype is available, calculate the time spent in each annotation level
+        if isfield(ACT.analysis.annotate, datatypes{di})
+            % Extract the names of the levels
+            if ~isfield(ACT.analysis.settings, [lower(datatypes{di}), 'Levels'])
+                warning('Did not find the annotation levels for ''%s'' metrics\n> In cic_statisticsAverage (line 130)', datatypes{di})
+                continue
+            end
+            levelsStr = ACT.analysis.settings.([lower(datatypes{di}), 'Levels']);
+            levelsData = unique(ACT.analysis.annotate.(datatypes{di}).Data);
+            if length(levelsStr) ~= length(levelsData)
+                warning('Number of annotation levels for ''%s'' metrics in data does not match with the user-defined levels\n> In cic_statisticsAverage (line 136)', datatypes{di})
+                continue
+            end
+            [annotate, times] = selectDataUsingTime(ACT.analysis.annotate.(datatypes{di}).Data, ACT.analysis.annotate.(datatypes{di}).Time, ACT.xmin, ACT.xmax, 'Select', select{:});
+            % insert NaNs for rejected segments
+            annotate(events2idx(ACT, times, 'Label', 'reject')) = nan;
+            for li = 1:length(levelsData)
+                ACT.stats.average.(select{:}).(['hours', titleCase(levelsStr{li}), titleCase(datatypes{di})]) = sum(annotate == levelsData(li)) / ((length(times)) / 24);
+            end
+        end
     end
 end
-
 % ---------------------------------------------------------
 % If a sleep window type exists, continue to calculate average sleep statistics
 if isfield(ACT.analysis.settings, 'sleepWindowType') && isfield(ACT.stats, 'sleep')

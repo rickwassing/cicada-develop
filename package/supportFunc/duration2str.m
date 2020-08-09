@@ -8,11 +8,11 @@ end
 days = floor(duration);
 hours = floor((duration-days)*24);
 minutes = round((((duration-days)*24)-hours)*60);
-if minutes > 59
+while minutes >= 60
     hours = hours+1;
     minutes = minutes-60;
 end
-if hours > 24
+while hours >= 24
     days = days+1;
     hours = hours-24;
 end

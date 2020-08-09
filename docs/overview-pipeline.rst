@@ -193,7 +193,9 @@ In addition to Annotating Acceleration Metrics, we can Annotate light Metics. [T
 Sleep Window Events
 ^^^^^^^^^^^^^^^^^^^
 
-An important part of analysing the Dataset is to define Sleep Window Events. They can be created manually, imported from a sleep diary, or we can define Sleep Window Events by using an algorithm. 
+An important part of analysing the Dataset is to define Sleep Window Events. They can be created manually, imported from a sleep diary, or we can define Sleep Window Events by using an algorithm.
+
+:ref:`Refer to the section on sleep analysis for in-depth guidelines <analysis-sleep-top>`
 
 **To manually create Sleep Window Events,**
 
@@ -211,7 +213,7 @@ An important part of analysing the Dataset is to define Sleep Window Events. The
 
 .. note::
 
-    The GGIR sleep detection algorithm is designed to detect Sleep Windows by identifying the largest segment in the *analysis window* in which the median absolute deviation of the angle is below 15 times its 10th percentile. The analysis window is defined by the Actogram start and end clock times shown in the settings panel.The default analysis window is '15:00' until '15:00' the next day. Cicada uses an emperically derived default analysis window of '15:00' until '15:00' the next day. It is highly unlikely, under normal circumstances, that a Sleep Window begins before 15:00 and ends after 15:00, or begins before 15:00 and ends after 15:00. *However, depending on your sample, e.g. shiftworkers, youth or sleep disorders, you may want to adjust this analysis window*.
+    The GGIR sleep detection algorithm is designed to detect Sleep Windows by identifying the largest segment in the *analysis window* in which the median absolute deviation of the angle is below 15 times its 10th percentile. The analysis window is defined by the Actogram start and end clock times shown in the settings panel. Cicada uses an emperically derived default analysis window of '15:00' until '15:00' the next day. It is highly unlikely, under normal circumstances, that a Sleep Window begins before 15:00 and ends after 15:00. *However, depending on your sample, e.g. shiftworkers, youth or sleep disorders, you may want to adjust this analysis window*.
 
 Custom Events
 ^^^^^^^^^^^^^
@@ -259,13 +261,7 @@ Exporting Statistics
 Exporting Report
 ----------------
 
-This is not developed yet, sorry
-
-**To export a report,**
-
-- click ``File`` > ``Export`` > ``Report``.
-
-:ref:`Read more... <index-top>`
+This is not developed yet, sorry.
 
 Exporting Matlab code
 ---------------------
@@ -279,4 +275,4 @@ Cicada automatically logs all the steps that we have performed within the softwa
 :ref:`Read more... <index-top>`
 
 Fantastic, you're done, have a cookie before you continue
----------------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

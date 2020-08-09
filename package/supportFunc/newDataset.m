@@ -61,7 +61,6 @@ ACT.analysis.events.onset    = zeros(0);
 ACT.analysis.events.duration = zeros(0);
 ACT.analysis.events.label    = zeros(0);
 ACT.analysis.events.type     = zeros(0);
-
 ACT.analysis.settings = struct();
 
 end

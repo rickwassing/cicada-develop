@@ -2,12 +2,11 @@ function ACT = cic_annotateLight(ACT, params)
 % ---------------------------------------------------------
 % Initialize variables and save the thresholds to the stucture
 ACT.analysis.settings.lightMetric = params.metric;       % string
-ACT.analysis.settings.lightDim    = params.threshold(1); % lux
-ACT.analysis.settings.lightBright = params.threshold(2); % lux
+ACT.analysis.settings.lightThreshold = params.threshold; % lux
+ACT.analysis.settings.lightLevels = {'dim', 'mod', 'bright'}; % string
 % ---------------------------------------------------------
 % First, create a new time series for the epoched data
-step  = 1/(24*60*60/ACT.epoch);
-times = ACT.xmin:step:ACT.xmax;
+times = ACT.metric.light.(params.metric).Time;
 % ---------------------------------------------------------
 % Create a timeseries in 'ACT.analysis.annotate.light'
 ACT.analysis.annotate.light = timeseries(zeros(length(times),1), times, 'Name', 'annotateLight');

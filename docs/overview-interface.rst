@@ -71,9 +71,9 @@ You can interact with the user interface by the use of your mouse cursor, and a 
 
 .. figure:: images/overview-interface-4.png
     :align: center
-    :width: 912px
+    :width: 1062px
     
-    **Create New Event.** The portion of the data that you selected is shown in the top panel (1). To label the new event, select a pre-existing event label from the dropdown list, or specify a new custom event label (2). To create the event, press ``Create``, or use the ``Cancel`` button to abort (3).
+    **Create New Event.** The portion of the data that you selected is shown as a blue box in panel (1). Use panels (2) and (3) to adjust the onset and duration of the to-be-created Event. Use panel (4) to label the new Event, i.e. select a pre-existing event label from the dropdown list, or specify a new custom event label. To create the event, press ``Create``, or use the ``Cancel`` button to abort (5).
 
 .. note::
 
@@ -92,9 +92,9 @@ To manually edit an event, left-click on the event of interest in the data analy
 
 .. figure:: images/overview-interface-5.png
     :align: center
-    :width: 451px
+    :width: 1062px
 
-    **Edit Event**. You can edit the event label, its onset and duration. Use the dropdown menu to reassign an event label, or select ``Custom Label`` to specify your own short, specific and informative event label (1). Change the onset of the event (2) or the duration of the event (3). Delete this single event by using the ``Delete`` button, or confirm any changes with the ``Edit`` button, or abort with ``Cancel`` (4).
+    **Edit Event**. Edittin an Event is very similar to creating one. The light blue box in panel (1) shows the timepoints of the to-be-changed Event. Use panels (2), (3) and (4) to modify the onset, duration and label of the Event. To edit the Event, press ``Edit``; to remove the event from the Dataset, press ``Delete``; or use the ``Cancel`` button to abort (5)
 
 .. warning::
 
@@ -137,7 +137,7 @@ Sleep Window Types
 
 Sleep windows can be defined in various ways. Refer to the section on :ref:`sleep analysis <link>` for in-depth instructions. For example, the user may manually create sleep window events, import a sleep diary, or use the GGIR sleep detection algorithm to define sleep windows. While all of these events have the label ``sleepWindow``, their types differ (respectively ``manual``, ``sleepDiary`` and ``GGIR``). If there are multiple Sleep Window types, this panel must be used to select which type of Sleep Windows are used to calculate statistics. 
 
-1. Select the appropriate sSleep Window type from the dropdown list, 
+1. Select the appropriate Sleep Window type from the dropdown list, 
 2. then click ``Apply`` for this setting to take effect.
 
 Edit Sleep Windows created by algorithms or imported from a file
@@ -146,7 +146,8 @@ Edit Sleep Windows created by algorithms or imported from a file
 Sleep window events that are created by algorithms or imported from a file cannot be manually editted directly. The reason for this is to maintain the original data integrity and to ensure repeatability of analysis pipelines. To edit a sleep window event created by an algorithm or imported from file,
 
 1. first select the appropriate sleep window type from the dropdown menu, 
-2. then click the ``edit`` button.
+2. click ``apply``,
+3. then click the ``edit`` button.
 
 Cicada will now copy all sleep window events of this type reassign their type to ``manual`` sleep window events. These events can now be editted as described :ref:`before <overview-interface-edit-events>`.
 
@@ -158,8 +159,9 @@ Delete Sleep Windows of a common type
 When you want to delete the entire set of Sleep Window Events of the same type,
 
 1. first select the appropriate Sleep Window type from the dropdown list, 
-2. then press the ``delete`` button,
-3. in the confirmation dialogue, press ``Yes, delete`` to confirm, or ``No, cancel`` to abort.
+2. click ``apply``,
+3. then press the ``delete`` button,
+4. in the confirmation dialogue, press ``Yes, delete`` to confirm, or ``No, cancel`` to abort.
 
 Delete Annotation Types
 -----------------------

@@ -1,6 +1,6 @@
 {
 	"importSettings": {
-		"sleepDiary": "/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-develop/settings/exampleSleepDiary.json"
+		"sleepDiary": "/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-develop/settings/demoSleepDiary.json"
 	},
 	"display": {
 		"actogramStartClock": "15:00",

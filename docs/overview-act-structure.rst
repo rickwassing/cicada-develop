@@ -45,15 +45,16 @@ This section provides a detailed overview of all the fields in the ``ACT`` Datas
     - **metric.acceleration.bpFiltEuclNorm** [timeseries] Euclidean normal bandpass filtered between 0.2 and 15 Hz using a 4th order Butterworth filter
     - **metric.acceleration.angle_z** [timeseries] angle of the Accelerometry device in the z-axis, given by ``atan(z / sqrt(x^2 + y^2)) / (pi/180)``, where ``x``, ``y`` and ``z`` are median acceleration values obtained in moving windows of length ``ACT.epoch``
 - **ACT.analysis** [struct] contains all Annotation and Events
-    - **analysis.annotation** [struct] contains all Annotatation timeseries
-        - **annotation.acceleration** [timeseries] contains Annotation of 'acceleration' Metrics
-        - **annotation.(measurement)** [timeseries] e.g. ``analysis.annotation.light`` contains Annotation of 'light' Metrics
+    - **analysis.annotate** [struct] contains all Annotatation timeseries
+        - **annotate.acceleration** [timeseries] contains Annotation of 'acceleration' Metrics
+        - **annotate.(measurement)** [timeseries] e.g. ``analysis.annotate.light`` contains Annotation of 'light' Metrics
     - **analysis.events** [table] contains all events
         - **events.id** [int] unique identifier
         - **events.onset** [datenum] onset of event
         - **events.duration** [double] duration of event in days
         - **events.label** [cell] event label
         - **events.type** [cell] event type
+    - **analysis.settings** [struct] contains all parameter values used in the analysis
 - **ACT.stats** [struct] contains all output from statistics
     - **stats.average** [struct] contains all average statistics
         - **average.all** [table] contains average statistics across all days

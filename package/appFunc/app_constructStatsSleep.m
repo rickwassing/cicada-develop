@@ -385,11 +385,11 @@ for si = 1:size(app.ACT.stats.sleep.actigraphy, 1)
                 ActValue = duration2str(app.ACT.stats.sleep.actigraphy.(fnames{fi})(si)/(24*60));
                 if sum(idx) == 1; DiaryValue = duration2str(app.ACT.stats.sleep.sleepDiary.(fnames{fi})(idx)/(24*60)); else; DiaryValue = '-'; end
             case 'slpWindow'
-                Label = 'Sleep Win';
+                Label = 'Slp Window';
                 ActValue = duration2str(app.ACT.stats.sleep.actigraphy.(fnames{fi})(si)/(24*60));
                 if sum(idx) == 1; DiaryValue = duration2str(app.ACT.stats.sleep.sleepDiary.(fnames{fi})(idx)/(24*60)); else; DiaryValue = '-'; end
             case 'slpEffSlpTime'
-                Label = 'SE_TST';
+                Label = 'SE slpTime';
                 ActValue = app.ACT.stats.sleep.actigraphy.(fnames{fi})(si);
                 ActValue = ifelse(isnan(ActValue), '-', sprintf('%.1f%%', ActValue));
                 if sum(idx) == 1
@@ -399,7 +399,7 @@ for si = 1:size(app.ACT.stats.sleep.actigraphy, 1)
                     DiaryValue = '-';
                 end
             case 'slpEffSlpPeriod'
-                Label = 'SE_TSP';
+                Label = 'SE slpPer';
                 ActValue = app.ACT.stats.sleep.actigraphy.(fnames{fi})(si);
                 ActValue = ifelse(isnan(ActValue), '-', sprintf('%.1f%%', ActValue));
                 if sum(idx) == 1

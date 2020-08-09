@@ -49,7 +49,7 @@ if isempty(metric)
 end
 
 % Define a vector indicating which samples are in the same epochs across all the days
-windows = mod(ceil(times*24*60*(60/ACT.epoch)), 24*60*(60/ACT.epoch));
+windows = mod(round(times*24*60*(60/ACT.epoch)), 24*60*(60/ACT.epoch));
 % Calculate the mean metric for each individual epoch of the day across all days
 % The first index relates to the first epoch of the day, e.g. 0:00:00 - 0:00:05, etc.
 % However if the number of unique windows is equal to the length of

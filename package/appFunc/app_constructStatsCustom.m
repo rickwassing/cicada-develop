@@ -7,7 +7,7 @@ if ~isfield(app.ACT.stats, 'custom')
 end
 
 % Construct the Tab
-Tab = app_constructTab(app, ['Tab_Custom-', Title], ['Stats: ', Title]);
+Tab = app_constructTab(app, ['Tab_Custom-', Title], Title);
 tableName = lower(matlab.lang.makeValidName(Title));
 GridLayoutContainer = findobj(Tab.Children, 'Tag', 'TabGridLayoutContainerPanel');
 
@@ -86,119 +86,133 @@ if doPlotTimeseries
     % ---------------------------------------------------------
     % Light
     % ---------------------------------------------------------
-    % Panel
+    % Check if this datatype exists, and select the first Light Metric
     % -----
-    % Check if component should mount
-    if shouldComponentMount(app, GridLayoutContainer, ['CustomStats_AverageLightPanel-', Title])
-        % Set Layout
-        Layout = app.DataPanel.Layout;
-        Layout.Row = 1;
-        Layout.Column = [5, 8];
-        % Define the properties
-        props = {...
-            'Tag', ['CustomStats_AverageLightPanel-', Title]; ...
-            'Title', 'Average Light - 5m mov win'; ...
-            'FontSize', 10; ...
-            'FontWeight', 'bold'; ...
-            'BackgroundColor', [1, 1, 1]; ...
-            'Layout', Layout; ...
-            };
-        % Mount component using the 'mount_uipanel' function
-        mountComponent(app, 'mount_uipanel', GridLayoutContainer, props);
+    if ismember('light', fieldnames(app.ACT.metric))
+        fnames = fieldnames(app.ACT.metric.light);
+        fname = titleCase(fnames{1});
+        % -----
+        % Panel
+        % -----
+        % Check if component should mount
+        if shouldComponentMount(app, GridLayoutContainer, ['CustomStats_AverageLightPanel-', Title])
+            % Set Layout
+            Layout = app.DataPanel.Layout;
+            Layout.Row = 1;
+            Layout.Column = [5, 8];
+            % Define the properties
+            props = {...
+                'Tag', ['CustomStats_AverageLightPanel-', Title]; ...
+                'Title', 'Average Light - 5m mov win'; ...
+                'FontSize', 10; ...
+                'FontWeight', 'bold'; ...
+                'BackgroundColor', [1, 1, 1]; ...
+                'Layout', Layout; ...
+                };
+            % Mount component using the 'mount_uipanel' function
+            mountComponent(app, 'mount_uipanel', GridLayoutContainer, props);
+        end
+        % -----
+        % Extract parent panel object to use for its children
+        parent = findobj(GridLayoutContainer.Children, 'Tag', ['CustomStats_AverageLightPanel-', Title]);
+        % -----
+        % GridLayout
+        % -----
+        % Check if component should mount
+        if shouldComponentMount(app, parent, ['CustomStats_AverageLightGridlayout-', Title])
+            % Define the properties
+            props = {...
+                'Tag', ['CustomStats_AverageLightGridlayout-', Title]; ...
+                'ColumnWidth', {'1x'}; ...
+                'RowHeight', {'1x'}; ...
+                'Padding', [3, 3, 3, 3]; ...
+                };
+            % Mount component using the 'mount_uigridlayout' function
+            mountComponent(app, 'mount_uigridlayout', parent, props);
+        end
+        % -----
+        % Extract parent panel object to use for its children
+        parent = findobj(parent.Children, 'Tag', ['CustomStats_AverageLightGridlayout-', Title]);
+        % -----
+        % Patch, Text and Markers
+        % -----
+        pnts = min(cellfun(@(t) t.length, app.ACT.analysis.custom.(tableName).(['light', fname, 'MovWin5m'])));
+        data = nanmean(cell2mat(cellfun(@(t) asrow(t.Data(1:pnts)), app.ACT.analysis.custom.(tableName).(['light', fname, 'MovWin5m']), 'UniformOutput', false)));
+        times = ((0:pnts-1).*app.ACT.epoch/(60*60*24))';
+        [~, idxMin] = min(data);
+        [~, idxMax] = max(data);
+        app_constructStatsAverageDayGraph(app, parent, timeseries(ascolumn(data), times), ...
+            ['light', fname, 'MovWin5m'], 'lux', 1, ...
+            datestr(times(idxMax), 'HH:MM'), ...
+            datestr(times(idxMin), 'HH:MM'), ...
+            max(data), ...
+            min(data));
     end
-    % -----
-    % Extract parent panel object to use for its children
-    parent = findobj(GridLayoutContainer.Children, 'Tag', ['CustomStats_AverageLightPanel-', Title]);
-    % -----
-    % GridLayout
-    % -----
-    % Check if component should mount
-    if shouldComponentMount(app, parent, ['CustomStats_AverageLightGridlayout-', Title])
-        % Define the properties
-        props = {...
-            'Tag', ['CustomStats_AverageLightGridlayout-', Title]; ...
-            'ColumnWidth', {'1x'}; ...
-            'RowHeight', {'1x'}; ...
-            'Padding', [3, 3, 3, 3]; ...
-            };
-        % Mount component using the 'mount_uigridlayout' function
-        mountComponent(app, 'mount_uigridlayout', parent, props);
-    end
-    % -----
-    % Extract parent panel object to use for its children
-    parent = findobj(parent.Children, 'Tag', ['CustomStats_AverageLightGridlayout-', Title]);
-    % -----
-    % Patch, Text and Markers
-    % -----
-    pnts = min(cellfun(@(t) t.length, app.ACT.analysis.custom.(tableName).idespecMovWin5m));
-    data = nanmean(cell2mat(cellfun(@(t) asrow(t.Data(1:pnts)), app.ACT.analysis.custom.(tableName).lightWidespecMovWin5m, 'UniformOutput', false)));
-    times = ((0:pnts-1).*app.ACT.epoch/(60*60*24))';
-    [~, idxMin] = min(data);
-    [~, idxMax] = max(data);
-    app_constructStatsAverageDayGraph(app, parent, timeseries(ascolumn(data), times), ...
-        'lightWidespecMovWin5m', 'lux', 1, ...
-        datestr(times(idxMax), 'HH:MM'), ...
-        datestr(times(idxMin), 'HH:MM'), ...
-        max(data), ...
-        min(data));
     % ---------------------------------------------------------
     % Temperature
     % ---------------------------------------------------------
-    % Panel
+    % Check if this datatype exists, and select the first Light Metric
     % -----
-    % Check if component should mount
-    if shouldComponentMount(app, GridLayoutContainer, ['CustomStats_AverageTemperaturePanel-', Title])
-        % Set Layout
-        Layout = app.DataPanel.Layout;
-        Layout.Row = 1;
-        Layout.Column = [9, 12];
-        % Define the properties
-        props = {...
-            'Tag', ['CustomStats_AverageTemperaturePanel-', Title]; ...
-            'Title', 'Average Temperature - 5m mov win'; ...
-            'FontSize', 10; ...
-            'FontWeight', 'bold'; ...
-            'BackgroundColor', [1, 1, 1]; ...
-            'Layout', Layout; ...
-            };
-        % Mount component using the 'mount_uipanel' function
-        mountComponent(app, 'mount_uipanel', GridLayoutContainer, props);
+    if ismember('temperature', fieldnames(app.ACT.metric))
+        fnames = fieldnames(app.ACT.metric.temperature);
+        fname = titleCase(fnames{1});
+        % -----
+        % Panel
+        % -----
+        % Check if component should mount
+        if shouldComponentMount(app, GridLayoutContainer, ['CustomStats_AverageTemperaturePanel-', Title])
+            % Set Layout
+            Layout = app.DataPanel.Layout;
+            Layout.Row = 1;
+            Layout.Column = [9, 12];
+            % Define the properties
+            props = {...
+                'Tag', ['CustomStats_AverageTemperaturePanel-', Title]; ...
+                'Title', 'Average Temperature - 5m mov win'; ...
+                'FontSize', 10; ...
+                'FontWeight', 'bold'; ...
+                'BackgroundColor', [1, 1, 1]; ...
+                'Layout', Layout; ...
+                };
+            % Mount component using the 'mount_uipanel' function
+            mountComponent(app, 'mount_uipanel', GridLayoutContainer, props);
+        end
+        % -----
+        % Extract parent panel object to use for its children
+        parent = findobj(GridLayoutContainer.Children, 'Tag', ['CustomStats_AverageTemperaturePanel-', Title]);
+        % -----
+        % GridLayout
+        % -----
+        % Check if component should mount
+        if shouldComponentMount(app, parent, ['CustomStats_AverageTemperatureGridlayout-', Title])
+            % Define the properties
+            props = {...
+                'Tag', ['CustomStats_AverageTemperatureGridlayout-', Title]; ...
+                'ColumnWidth', {'1x'}; ...
+                'RowHeight', {'1x'}; ...
+                'Padding', [3, 3, 3, 3]; ...
+                };
+            % Mount component using the 'mount_uigridlayout' function
+            mountComponent(app, 'mount_uigridlayout', parent, props);
+        end
+        % -----
+        % Extract parent panel object to use for its children
+        parent = findobj(parent.Children, 'Tag', ['CustomStats_AverageTemperatureGridlayout-', Title]);
+        % -----
+        % Patch, Text and Markers
+        % -----
+        pnts = min(cellfun(@(t) t.length, app.ACT.analysis.custom.(tableName).(['temperature', fname, 'MovWin5m'])));
+        data = nanmean(cell2mat(cellfun(@(t) asrow(t.Data(1:pnts)), app.ACT.analysis.custom.(tableName).(['temperature', fname, 'MovWin5m']), 'UniformOutput', false)));
+        times = ((0:pnts-1).*app.ACT.epoch/(60*60*24))';
+        [~, idxMin] = min(data);
+        [~, idxMax] = max(data);
+        app_constructStatsAverageDayGraph(app, parent, timeseries(ascolumn(data), times), ...
+            ['temperature', fname, 'MovWin5m'], '*C', 1, ...
+            datestr(times(idxMax), 'HH:MM'), ...
+            datestr(times(idxMin), 'HH:MM'), ...
+            max(data), ...
+            min(data));
     end
-    % -----
-    % Extract parent panel object to use for its children
-    parent = findobj(GridLayoutContainer.Children, 'Tag', ['CustomStats_AverageTemperaturePanel-', Title]);
-    % -----
-    % GridLayout
-    % -----
-    % Check if component should mount
-    if shouldComponentMount(app, parent, ['CustomStats_AverageTemperatureGridlayout-', Title])
-        % Define the properties
-        props = {...
-            'Tag', ['CustomStats_AverageTemperatureGridlayout-', Title]; ...
-            'ColumnWidth', {'1x'}; ...
-            'RowHeight', {'1x'}; ...
-            'Padding', [3, 3, 3, 3]; ...
-            };
-        % Mount component using the 'mount_uigridlayout' function
-        mountComponent(app, 'mount_uigridlayout', parent, props);
-    end
-    % -----
-    % Extract parent panel object to use for its children
-    parent = findobj(parent.Children, 'Tag', ['CustomStats_AverageTemperatureGridlayout-', Title]);
-    % -----
-    % Patch, Text and Markers
-    % -----
-    pnts = min(cellfun(@(t) t.length, app.ACT.analysis.custom.(tableName).temperatureWristMovWin5m));
-    data = nanmean(cell2mat(cellfun(@(t) asrow(t.Data(1:pnts)), app.ACT.analysis.custom.(tableName).temperatureWristMovWin5m, 'UniformOutput', false)));
-    times = ((0:pnts-1).*app.ACT.epoch/(60*60*24))';
-    [~, idxMin] = min(data);
-    [~, idxMax] = max(data);
-    app_constructStatsAverageDayGraph(app, parent, timeseries(ascolumn(data), times), ...
-        'temperatureWristMovWin5m', '*C', 1, ...
-        datestr(times(idxMax), 'HH:MM'), ...
-        datestr(times(idxMin), 'HH:MM'), ...
-        max(data), ...
-        min(data));
 end
 % ---------------------------------------------------------
 % Table 
@@ -290,58 +304,44 @@ for fi = 1:length(fnames)
                     Text = ifelse(isnan(value), '-', sprintf('%.0f mg', value*1000));
                     Color = [0.49, 0.18, 0.56];
                     Label = 'Min activity (5m mov win)';
-                case 'clockOnsetMinEuclNormMovWin5m'
+                case 'delayOnsetMinEuclNormMovWin5m'
                     Text = ifelse(strcmp(value{:}, 'na'), '-', value{:});
                     Color = [0.49, 0.18, 0.56];
-                    Label = 'Clock onset min act';
+                    Label = 'Delay onset min act';
                 case 'maxEuclNormMovWin5m'
                     Text = ifelse(isnan(value), '-', sprintf('%.0f mg', value*1000));
                     Color = [0.49, 0.18, 0.56];
                     Label = 'Max activity (5m mov win)';
-                case 'clockOnsetMaxEuclNormMovWin5m'
+                case 'delayOnsetMaxEuclNormMovWin5m'
                     Text = ifelse(strcmp(value{:}, 'na'), '-', value{:});
                     Color = [0.49, 0.18, 0.56];
-                    Label = 'Clock onset max act';
-                case 'avLightWidespec'
-                    Text = sprintf('%.0f lux', value);
-                    Color = [0.15, 0.15, 0.15];
-                    Label = 'Light - mean';
-                case 'minLightWidespecMovWin5m'
-                    Text = sprintf('%.0f lux', value);
-                    Color = [0.15, 0.15, 0.15];
-                    Label = 'Min';
-                case 'clockOnsetMinLightWidespecMovWin5m'
-                    Text = ifelse(strcmp(value{:}, 'na'), '-', value{:});
-                    Color = [0.15, 0.15, 0.15];
-                    Label = 'Clock onset min';
-                case 'maxLightWidespecMovWin5m'
-                    Text = sprintf('%.0f lux', value);
-                    Color = [0.15, 0.15, 0.15];
-                    Label = 'Min';
-                case 'clockOnsetMaxLightWidespecMovWin5m'
-                    Text = ifelse(strcmp(value{:}, 'na'), '-', value{:});
-                    Color = [0.15, 0.15, 0.15];
-                    Label = 'Clock onset max';
-                case 'avTemperatureWrist'
-                    Text = sprintf('%.0f *C', value);
-                    Color = [0.15, 0.15, 0.15];
-                    Label = 'Temperature - mean';
-                case 'minTemperatureWristMovWin5m'
-                    Text = sprintf('%.0f *C', value);
-                    Color = [0.15, 0.15, 0.15];
-                    Label = 'Min';
-                case 'clockOnsetMinTemperatureWristMovWin5m'
-                    Text = ifelse(strcmp(value{:}, 'na'), '-', value{:});
-                    Color = [0.15, 0.15, 0.15];
-                    Label = 'Clock onset min';
-                case 'maxTemperatureWristMovWin5m'
-                    Text = sprintf('%.0f *C', value);
-                    Color = [0.15, 0.15, 0.15];
-                    Label = 'Max';
-                case 'clockOnsetMaxTemperatureWristMovWin5m'
-                    Text = ifelse(strcmp(value{:}, 'na'), '-', value{:});
-                    Color = [0.15, 0.15, 0.15];
-                    Label = 'Clock onset max';
+                    Label = 'Delay onset max act';
+                otherwise
+                    if strRegexpCheck(fnames{fi}, 'hours')
+                        Text = ifelse(value == 0, '-', duration2str(value/24));
+                        Color = [0.15, 0.15, 0.15];
+                        Label = fnames{fi};
+                    elseif strRegexpCheck(fnames{fi}, 'min')
+                        Text = ifelse(isnan(value), '-', sprintf('%.0f', value));
+                        Color = [0.15, 0.15, 0.15];
+                        Label = 'Min';
+                    elseif strRegexpCheck(fnames{fi}, 'max')
+                        Text = ifelse(isnan(value), '-', sprintf('%.0f', value));
+                        Color = [0.15, 0.15, 0.15];
+                        Label = 'Max';
+                    elseif strRegexpCheck(fnames{fi}, 'delay')
+                        Text = ifelse(strcmp(value{:}, 'na'), '-', value{:});
+                        Color = [0.15, 0.15, 0.15];
+                        Label = 'Delay';
+                    elseif isnumeric(value)
+                        Text = ifelse(isnan(value), '-', sprintf('%.0f', value));
+                        Color = [0.15, 0.15, 0.15];
+                        Label = fnames{fi};
+                    elseif iscell(value)
+                        Text = ifelse(strcmp(value{:}, 'na'), '-', value{:});
+                        Color = [0.15, 0.15, 0.15];
+                        Label = fnames{fi};
+                    end
             end
             props = {...
                 'Tag', ['CustomStats_Value-', fnames{fi}, '_event-', num2str(ei)]; ...
@@ -363,10 +363,21 @@ for fi = 1:length(fnames)
         Layout = app.DataPanel.Layout;
         Layout.Row = fi;
         Layout.Column = 1;
+        % Set FontWeight
+        if strRegexpCheck(Label, '^Min')
+            FontWeight = 'normal';
+        elseif strRegexpCheck(Label, '^Max')
+            FontWeight = 'normal';
+        elseif strRegexpCheck(Label, '^Delay')
+            FontWeight = 'normal';
+        else
+            FontWeight = 'bold';
+        end
         % Define the properties
         props = {...
             'Tag', ['CustomStats_Label-', fnames{fi}]; ...
             'Text', Label; ...
+            'FontWeight', FontWeight; ...
             'HorizontalAlignment', 'right'; ...
             'Layout', Layout; ...
             };
