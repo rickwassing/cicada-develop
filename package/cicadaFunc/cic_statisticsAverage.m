@@ -68,19 +68,27 @@ ACT.stats.average.weekend.avEuclNorm = nanmean(euclNormMinOne(idxWeekend));
 if isfield(ACT.analysis.annotate, 'acceleration')
     annotate = ACT.analysis.annotate.acceleration.Data;
     annotate(events2idx(ACT, ACT.analysis.annotate.acceleration.Time, 'Label', 'reject')) = NaN;
+    % All days
+    ACT.stats.average.all.hoursSustInact = (sum(annotate == 0) * ACT.epoch / 3600) / (ACT.xmax-ACT.xmin); % hours per day
+    ACT.stats.average.all.avEuclNormSustInact = nanmean(euclNormMinOne(annotate == 0));
+    ACT.stats.average.all.hoursLightAct = (sum(annotate == 2) * ACT.epoch / 3600) / (ACT.xmax-ACT.xmin); % hours per day
+    ACT.stats.average.all.avEuclNormLightAct = nanmean(euclNormMinOne(annotate == 2));
     ACT.stats.average.all.hoursModVigAct = (sum(annotate >= 3) * ACT.epoch / 3600) / (ACT.xmax-ACT.xmin); % hours per day
     ACT.stats.average.all.avEuclNormModVigAct = nanmean(euclNormMinOne(annotate >= 3));
+    % Week days
+    ACT.stats.average.week.hoursSustInact = sum(annotate(~idxWeekend) == 0) / ((sum(~idxWeekend)) / 24); % # hours per day
+    ACT.stats.average.week.avEuclNormSustInact = nanmean(euclNormMinOne(annotate == 0 & ~idxWeekend));
+    ACT.stats.average.week.hoursLightAct = sum(annotate(~idxWeekend) == 2) / ((sum(~idxWeekend)) / 24); % # hours per day
+    ACT.stats.average.week.avEuclNormLightAct = nanmean(euclNormMinOne(annotate == 2 & ~idxWeekend));
     ACT.stats.average.week.hoursModVigAct = sum(annotate(~idxWeekend) >= 3) / ((sum(~idxWeekend)) / 24); % # hours per day
     ACT.stats.average.week.avEuclNormModVigAct = nanmean(euclNormMinOne(annotate >= 3 & ~idxWeekend));
+    % Weekend days
+    ACT.stats.average.weekend.hoursSustInact = sum(annotate(idxWeekend) == 0) / ((sum(idxWeekend)) / 24);
+    ACT.stats.average.weekend.avEuclNormSustInact = nanmean(euclNormMinOne(annotate == 0 & idxWeekend));
+    ACT.stats.average.weekend.hoursLightAct = sum(annotate(idxWeekend) == 2) / ((sum(idxWeekend)) / 24);
+    ACT.stats.average.weekend.avEuclNormLightAct = nanmean(euclNormMinOne(annotate == 2 & idxWeekend));
     ACT.stats.average.weekend.hoursModVigAct = sum(annotate(idxWeekend) >= 3) / ((sum(idxWeekend)) / 24);
     ACT.stats.average.weekend.avEuclNormModVigAct = nanmean(euclNormMinOne(annotate >= 3 & idxWeekend));
-else
-    ACT.stats.average.all.hoursModVigAct = NaN;
-    ACT.stats.average.all.avEuclNormModVigAct = NaN;
-    ACT.stats.average.week.hoursModVigAct = NaN;
-    ACT.stats.average.week.avEuclNormModVigAct = NaN;
-    ACT.stats.average.weekend.hoursModVigAct = NaN;
-    ACT.stats.average.weekend.avEuclNormModVigAct = NaN;
 end
 
 % ---------------------------------------------------------

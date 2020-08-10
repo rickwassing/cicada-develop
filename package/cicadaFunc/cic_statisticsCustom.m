@@ -24,11 +24,12 @@ for ei = 1:size(events, 1)
         annotate = selectDataUsingTime(ACT.analysis.annotate.acceleration.Data, ACT.analysis.annotate.acceleration.Time, events.onset(ei), events.onset(ei)+events.duration(ei));
         % insert NaNs for rejected segments
         annotate(events2idx(ACT, times, 'Label', 'reject')) = nan;
+        ACT.stats.custom.(tableName).hoursSustInact(ei, 1) = (sum(annotate == 0) * ACT.epoch) / 3600;
+        ACT.stats.custom.(tableName).avEuclNormSustInact(ei, 1) = nanmean(euclNormMinOne(annotate == 0));
+        ACT.stats.custom.(tableName).hoursLightAct(ei, 1) = (sum(annotate == 2) * ACT.epoch) / 3600;
+        ACT.stats.custom.(tableName).avEuclNormLightAct(ei, 1) = nanmean(euclNormMinOne(annotate == 2));
         ACT.stats.custom.(tableName).hoursModVigAct(ei, 1) = (sum(annotate >= 3) * ACT.epoch) / 3600;
         ACT.stats.custom.(tableName).avEuclNormModVigAct(ei, 1) = nanmean(euclNormMinOne(annotate >= 3));
-    else
-        ACT.stats.custom.(tableName).hoursModVigAct(ei, 1) = NaN;
-        ACT.stats.custom.(tableName).avEuclNormModVigAct(ei, 1) = NaN;
     end
     % ---------------------------------------------------------
     % Calculate average Euclidean norm

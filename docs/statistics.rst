@@ -117,7 +117,11 @@ Definition of average Statistics
 - **intraDailyVariability**. Activity level synchronization to zeitgeber's 24h day–night cycle, calculated as ``sum(diff(euclNorm)^2) * nSamples / sum((avEuclNorm - euclNorm)^2) * (nSamples-1)``.
 - **[min/max]EuclNormMovWin5h**. The mimumum/maximum average Euclidean Norm across all days using a 5h moving window.
 - **clockOnset[Min/Max]EuclNormMovWin5h**. The clock onset of the minimum/maximum 5h of averaged Euclidean Norm across all days.
+- **hoursSustInact**. Average number of hours per day spend in sustained inactivity.
+- **hoursLightAct**. Average number of hours per day spend in light activity.
 - **hoursModVigAct**. Average number of hours per day spend in moderate-to-vigorous activity.
+- **avEuclNormSustInact**. Average Euclidean Norm during segments of sustained inactivity.
+- **avEuclNormLightAct**. Average Euclidean Norm during segments of light activity.
 - **avEuclNormModVigAct**. Average Euclidean Norm during segments of moderate-to-vigorous activity.
 - **av(DataType)(Metric)**. The grand-average of the datatype's Metric (e.g. Temperature Wrist), excluding rejected segments.
 - **[min/max](DataType)(Metric)MovWin30m**. The mimumum/maximum average Metric across all days using a 30m moving window.
@@ -151,6 +155,8 @@ Definition of Daily Statistics
 - **avEuclNorm**. This day's grand-average of the Euclidean Norm, excluding rejected segments.
 - **[min/max]EuclNormMovWin5h**. The mimumum/maximum average Euclidean Norm for this day using a 5h moving window.
 - **clockOnset[Min/Max]EuclNormMovWin5h**. The clock onset of the minimum/maximum 5h of averaged Euclidean Norm for this day.
+- **hoursSustInact**. Number of hours spend in sustained inactivity on this day.
+- **hoursLightAct**. Number of hours spend in light activity on this day.
 - **hoursModVigAct**. Number of hours spend in moderate-to-vigorous activity on this day.
 - **avEuclNormModVigAct**. Average Euclidean Norm during segments of moderate-to-vigorous activity on this day.
 - **av(DataType)(Metric)**. This day's grand-average of the datatype's Metric (e.g. Temperature Wrist), excluding rejected segments.
@@ -185,6 +191,8 @@ Definition of Custom Statistics
 - **onset**. Date and clock time of the Custom Event onset.
 - **offset**. Date and clock time of the Custom Event offset.
 - **avEuclNorm-**. Grand-average of the Euclidean Norm, excluding rejected segments during this Custom Event.
+- **hoursSustInact**. Number of hours spend in sustained inactivity within this Custom Event.
+- **hoursLightAct**. Number of hours spend in light activity within this Custom Event.
 - **hoursModVigAct**. Number of hours spend in moderate-to-vigorous activity within this Custom Event.
 - **avEuclNormModVigAct**. Average Euclidean Norm during segments of moderate-to-vigorous activity within this Custom Event.
 - **[min/max]EuclNormMovWin5m**. The mimumum/maximum average Euclidean Norm during this Custom Event using a 5m (minute) moving window.
