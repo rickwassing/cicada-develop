@@ -113,8 +113,8 @@ Definition of average Statistics
 
 - **avEuclNorm**. The grand-average of the Euclidean Norm, excluding rejected segments.
 - **hoursReject**. Total ``sum`` of the duration of all Reject Events.
-- **interDailyStability**. The frequency and extent of transitions between periods of rest and activity, calculated as ``(sum((euclNormPerHour - grandMeanEuclNorm)^2) * nDataPoints) / (nansum((euclNormMinOne - grandMeanEuclNorm)^2) * nDataPoints)``
-- **intraDailyVariability**. Activity level synchronization to zeitgeber's 24h day–night cycle, calculated as ``(sum(diff(euclNormMinOne)^2) * nDataPoints) / (sum((grandMeanEuclNorm - euclNormMinOne)^2) * (nDataPoints-1))``.
+- **interDailyStability**. The frequency and extent of transitions between periods of rest and activity, calculated as ``sum((euclNormPerHr - avEuclNorm)^2) * nSamples / sum((euclNorm - avEuclNorm)^2) * nSamples``
+- **intraDailyVariability**. Activity level synchronization to zeitgeber's 24h day–night cycle, calculated as ``sum(diff(euclNorm)^2) * nSamples / sum((avEuclNorm - euclNorm)^2) * (nSamples-1)``.
 - **[min/max]EuclNormMovWin5h**. The mimumum/maximum average Euclidean Norm across all days using a 5h moving window.
 - **clockOnset[Min/Max]EuclNormMovWin5h**. The clock onset of the minimum/maximum 5h of averaged Euclidean Norm across all days.
 - **hoursModVigAct**. Average number of hours per day spend in moderate-to-vigorous activity.
