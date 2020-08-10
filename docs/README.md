@@ -36,8 +36,8 @@ The standalone desktop application does not require a Matlab license or any othe
 
 1. Download the application installer from the Cicada GitHub repository.
 
--   `Download for MS Windows <here>`
--   `Download for MacOS <here>`
+-   [Download for MS Windows]()
+-   [Download for MacOS]()
 
 2. [Describe installation process].
 

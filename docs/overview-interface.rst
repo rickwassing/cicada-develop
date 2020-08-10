@@ -184,14 +184,16 @@ Single events can be deleted as described in the section on :ref:`editing Events
 3. in the confirmation dialogue, press ``Yes, delete`` to confirm, or ``No, cancel`` to abort.
 
 Advanced users and contributors
-===============================
+-------------------------------
 
 This section below if for advanced users only or for those who'd like to contribute to Cicada.
 
 Cicada User Inferface Management
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Cicada user interface is comprised of various 'Components', e.g. ``uipannel``, ``uiaxes``, or ``plot`` objects (note that the terms 'Component' and 'Object' can be used interchangably, but here I refer to them as Components). Each Component has properties, e.g. ``Position``, ``XLim``, or ``XData``, and their values are dicated by the data in the ``ACT`` structure. For example, the user can change the analysis window through the Cicada GUI and this will trigger the event function to update the ``ACT.startdate`` and ``ACT.enddate`` value. At the end of each event, the ``lifecycle()`` function is called, which is based on the lifecycle method of [React, a JavaScript library for building user inferfaces](https://reactjs.org). The ``lifecycle()`` function is comprised of the following sequence of sub-functions:
+The Cicada user interface is comprised of various 'Components', e.g. ``uipannel``, ``uiaxes``, or ``plot`` objects (note that the terms 'Component' and 'Object' can be used interchangably, but here I refer to them as Components). Each Component has properties, e.g. ``Position``, ``XLim``, or ``XData``, and their values are dicated by the data in the ``ACT`` structure. For example, the user can change the analysis window through the Cicada GUI and this will trigger the event function to update the ``ACT.startdate`` and ``ACT.enddate`` value. At the end of each event, the ``lifecycle()`` function is called, which is based on the lifecycle method of [`React, a JavaScript library for building user inferfaces`_. The ``lifecycle()`` function is comprised of the following sequence of sub-functions:
+
+.. _`React, a JavaScript library for building user inferfaces`: https://reactjs.org
 
 - **mapStateToProps(app)**. Maps the current state of the ``ACT`` data structure to 'mount', i.e. create, Components if they don't exist yet, or to create a copy of the relevant Component properties with updated values. Importantly, these properties are not updated here but later in the lifecycle. This construction of Components is processed by the ``app_construct*`` functions which contain the sub-functions ``shouldComponentMount()``, ``mountComponent()`` and ``constructComponent()`` (see below). For optimization purposes, only those Components that are a member of the component-groups in `app.ComponentList` are mapped.
 - **app_construct[.](app, ~)**. This set of functions is organized by Component groups. For example, ``app_constructDataPanel()`` is responsible for constructing all the components in the main panel in the Data Analysis tab. For each of the required Components, the function ``shouldComponentMount()`` is called, which checks if the Component, identified by its ``Tag`` property, already exists or not. If not, the Component properties are constructed in a cell array called ``props``, and the function ``mountComponent()`` is called. If the Component exists, the relevant properties are constructed and the function ``constructComponent()`` is called.
