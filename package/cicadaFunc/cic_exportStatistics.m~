@@ -49,21 +49,30 @@ REC.recEndDate = datestr(ACT.xmax, 'dd/mm/yyyy HH:MM');
 % ABOUT THE ANNOTATION ANALYSIS
 if isfield(ACT.analysis, 'settings') && isfield(ACT.analysis, 'annotate')
     if isfield(ACT.analysis.annotate, 'acceleration')
-        REC.annotAccBoutCrit      = ACT.analysis.settings.boutCrit;
-        REC.annotAccBoutClosed    = ACT.analysis.settings.boutClosed;
-        REC.annotAccBoutMetric    = ACT.analysis.settings.boutMetric;
+        REC.annotAccboutCrit       = ACT.analysis.settings.boutCrit;
+        REC.annotAccboutClosed     = ACT.analysis.settings.boutClosed;
+        REC.annotAccboutMetric     = ACT.analysis.settings.boutMetric;
         REC.annotAccThrInactAngle = ACT.analysis.settings.inactAngle;
         REC.annotAccThrInactTime  = ACT.analysis.settings.inactTime;
         REC.annotAccThrActTime    = ACT.analysis.settings.actTime;
         REC.annotAccThrActLig     = ACT.analysis.settings.actLight;
-        REC.annotAccThrActMod     = ACT.analysis.settings.actModerate;
-        REC.annotAccThrActVig     = ACT.analysis.settings.actVigorous;
+        REC.annotAccThrActod     = ACT.analysis.settings.actModerate;
+        REC.annotAccThrAct_vig     = ACT.analysis.settings.actVigorous;
     end
     if isfield(ACT.analysis.annotate, 'light')
-        REC.annotLightMetric    = ACT.analysis.settings.lightMetric;
-        REC.annotLightThrMod    = ACT.analysis.settings.lightThreshold(1);
-        REC.annotLightThrBright = ACT.analysis.settings.lightThreshold(2);
+        REC.annotLightMetric = ACT.analysis.settings.lightMetric;
+        REC.
     end
+else
+    REC.boutCrit       = nan;
+    REC.boutClosed     = nan;
+    REC.boutMetric     = nan;
+    REC.thrInact_angle = nan;
+    REC.thrInact_time  = nan;
+    REC.thrAct_time    = nan;
+    REC.thrAct_lig     = nan;
+    REC.thrAct_mod     = nan;
+    REC.thrAct_vig     = nan;
 end
 
 % Write the average stats from all days

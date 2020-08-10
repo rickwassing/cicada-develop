@@ -100,70 +100,114 @@ Custom Stats
 
 For each set of Custom Events with the same label, Cicada calculates the average Acceleration (Euclidean Norm), and average Metrics from other available data types across all Events using 5m moving windows (top panels), which are then used to find the maximum (dark-red up-triagles) and minimum (blue down-triangles) values and their onset relative to the start of the Events (delay). This example shows relative Events referenced to 3h and 30m before the onset of each Sleep Window with a duration of 3h, i.e. 'presleep activity'. Whereas the average Acceleration and temperature does not seem to have a particular trend, the average light Metric shows that, on average, the particant was exposed 93 lux of light about 2h 30m before the onset of the Sleep Window, and to very low levels of light up to 1h 30m before the onset of the Sleep Window. Finally, the bottom panel shows all Statistics for each Custom Event in the set.
 
-===================
-Export Statistics
-===================
-
-Before showing how to export the Statistics, lets define them first.
+=====================
+Statistics Definition
+=====================
 
 Definition of average Statistics
 --------------------------------
 
-- **hoursReject**. Total duration of all Reject Events.
-- **interDailyStability**. The frequency and extent of transitions between periods of rest and activity.
-- **intraDailyVariability**. rhythm's synchronization to zeitgeber's 24h day–night cycle
-- **avEuclNorm**. The grand-average of the Euclidean Norm.
-- **maxEuclNormMovWin5h**. 
-- **clockOnsetMaxEuclNormMovWin5h**.
-- **minEuclNormMovWin5h**.
-- **clockOnsetMinEuclNormMovWin5h**.
-- **hoursModVigAct**.
-- **avEuclNormModVigAct**.
-- **avLightWidespec**.
-- **minLightWidespecMovWin30m**.
-- **clockOnsetMinLightWidespecMovWin30m**.
-- **maxLightWidespecMovWin30m**.
-- **clockOnsetMaxLightWidespecMovWin30m**.
-- **avTemperatureWrist**.
-- **minTemperatureWristMovWin30m**.
-- **clockOnsetMinTemperatureWristMovWin30m**.
-- **maxTemperatureWristMovWin30m**.
-- **clockOnsetMaxTemperatureWristMovWin30m**.
-- **slpCount-**.
-- **slpAcrossNoon**.
-- **avClockLightsOutAct**.
-- **avClockLightsOnAct**.
-- **avClockSlpOnsetAct**.
-- **avClockFinAwakeAct**.
-- **avSlpOnsetLatAct**.
-- **avAwakeningAct**.
-- **avWakeAfterSlpOnsetAct**.
-- **avTotSlpTimeAct**.
-- **avSlpPeriodAct**.
-- **avSlpWindowAct**.
-- **avSlpEffSlpTimeAct**.
-- **avSlpEffSlpPeriodAct**.
-- **avAwakePerHourAct**.
-- **avClockLightsOutDiary**.
-- **avClockLightsOnDiary**.
-- **avClockSlpOnsetDiary**.
-- **avClockFinAwakeDiary**.
-- **avSlpOnsetLatDiary**.
-- **avAwakeningDiary**.
-- **avWakeAfterSlpOnsetDiary**.
-- **avTotSlpTimeDiary**.
-- **avSlpPeriodDiary**.
-- **avSlpWindowDiary**.
-- **avSlpEffSlpTimeDiary**.
-- **avSlpEffSlpPeriodDiary**.
-- **avAwakePerHourDiary**.
-- **avSleepTimeMismatch**.
-- **avSleepPeriodMismatch**.
+.. note::
 
+    Average statistics are calculated across all days in the recording, *and* also across all week- and weekend days in the recording.
 
-- ``Lights Out`` and ``Lights On`` determine the ``Sleep Window``
-- ``SOL`` indicates the sleep onset latency and determines sleep onset
-- Sleep onset and ``FA`` (Final Awakening) determine the ``Sleep Period``
-- ``WASO`` indicates time awake within the ``Sleep Period``
-- ``Sleep Time`` (Total Sleep Time) is calculated as ``Sleep Period`` - ``WASO``
-- Sleep efficiency ``SE`` is calculated as 100 x ``Sleep Time`` / ``Sleep Window``, and as 100 x ``Sleep Period`` / ``Sleep Window``.
+- **avEuclNorm**. The grand-average of the Euclidean Norm, excluding rejected segments.
+- **hoursReject**. Total ``sum`` of the duration of all Reject Events.
+- **interDailyStability**. The frequency and extent of transitions between periods of rest and activity, calculated as ``(sum((euclNormPerHour - grandMeanEuclNorm)^2) * nDataPoints) / (nansum((euclNormMinOne - grandMeanEuclNorm)^2) * nDataPoints)``
+- **intraDailyVariability**. Activity level synchronization to zeitgeber's 24h day–night cycle, calculated as ``(sum(diff(euclNormMinOne)^2) * nDataPoints) / (sum((grandMeanEuclNorm - euclNormMinOne)^2) * (nDataPoints-1))``.
+- **[min/max]EuclNormMovWin5h**. The mimumum/maximum average Euclidean Norm across all days using a 5h moving window.
+- **clockOnset[Min/Max]EuclNormMovWin5h**. The clock onset of the minimum/maximum 5h of averaged Euclidean Norm across all days.
+- **hoursModVigAct**. Average number of hours per day spend in moderate-to-vigorous activity.
+- **avEuclNormModVigAct**. Average Euclidean Norm during segments of moderate-to-vigorous activity.
+- **av(DataType)(Metric)**. The grand-average of the datatype's Metric (e.g. Temperature Wrist), excluding rejected segments.
+- **[min/max](DataType)(Metric)MovWin30m**. The mimumum/maximum average Metric across all days using a 30m moving window.
+- **clockOnset[Min/Max](DataType)(Metric)MovWin30m**. The clock onset of the minimum/maximum 30m of averaged Metric across all days.
+- **hours(AnnotationLevel)(Metric)**. Average number of hours per day spent in this Annotation level for this Metric, e.g. ``hoursDimLight`` indicate the average number of hours spent in dim light per day.
+- **slpCount**. Number of Sleep Windows in the recording.
+- **slpAcrossNoon**. Number of Sleep Windows to overlap with 12:00 pm in the recording.
+- **avClockLightsOut[Act/Diary]**. Average clock time of the the Sleep Window onsets (``Lights Out``) of type Actigraphy or Diary.
+- **avClockLightsOn[Act/Diary]**. Average clock time of the Sleep Window offsets (``Lights On``) of type Actigraphy or Diary.
+- **avClockSlpOnset[Act/Diary]**. Average clock time of the Sleep Period onsets of type Actigraphy or Diary. The Actigraphy Sleep Period onset corresponds to the first epoch Annotated as ``sustained inactive`` within the Sleep Window. The Diary Sleep Period onset corresponds to ``Lights Out`` + ``Sleep Onset Latency``.
+- **avClockFinAwake[Act/Diary]**. Average clock time of the Sleep Period offsets of type Actigraphy or Diary. The Actigraphy Sleep Period onset corresponds to the last epoch Annotated as ``sustained inactive`` within the Sleep Window. The Diary Sleep Period onset corresponds to the ``Final awakening`` clock time.
+- **avSlpOnsetLat[Act/Diary]**. Average duration in minutes between the onsets of the Sleep Window and Sleep Period, i.e. ``Sleep Onset`` - ``Lights Out``.
+- **avAwakening[Act/Diary]**. Average number of awakenings within the Sleep Periods. The Actigraphy number of awakenings are the number of segments *not* Annotated as ``sustained inactive`` during the Sleep Periods. The Diary number of awakenings correspond to the estamated ``Awakenings``.
+- **avWakeAfterSlpOnset[Act/Diary]**. The average duration of awakenings within the Sleep Periods in minutes. The Actigraphy WASO is the ``sum`` of the duration of the segments *not* Annotated as ``sustained inactive``, averaged across all Sleep Periods. The Diary WASO is the average ``WASO`` estimate across all Sleep Periods.
+- **avSlpWindow[Act/Diary]**. The average duration of the Sleep Windows in minutes, i.e. ``avClockLightsOn - avClockLightsOut``.
+- **avSlpPeriod[Act/Diary]**. The average duration of the Sleep Periods in minutes, i.e. ``avClockFinAwake - avClockSlpOnset``.
+- **avTotSlpTime[Act/Diary]**. The average total sleep time in minutes calculated as ``avSlpPeriod - avWakeAfterSlpOnset``.
+- **avSlpEffSlpTime[Act/Diary]**. The average sleep efficiency calculated as ``100 * avTotSlpTime / avSlpWindow``.
+- **avSlpEffSlpPeriod[Act/Diary]**. The average sleep efficiency calculated as ``100 * avSlpPeriod / avSlpWindow``.
+- **avAwakePerHour[Act/Diary]**. The average number of awakenings per hour spend in the Sleep Period, calculated as ``60 * avAwakening / avSlpPeriod``.
+- **avSleepTimeMismatch**. Difference between the average total sleep time estimates from Diary and Actigraphy, i.e. ``avTotSlpTimeDiary - avTotSlpTimeAct``.
+- **avSleepPeriodMismatch**. Difference between the average Sleep Period estimates from Diary and Actigraphy i.e. ``avSlpPeriodDiary - avSlpPeriodAct``.
+
+Definition of Daily Statistics
+------------------------------
+
+- **date**. Date of the day (midnight to midnight) for which the Statistics are calculated
+- **day**. Day of the week.
+- **hoursValidData**. Total number of hours with valid data on this day.
+- **hoursReject**. Total ``sum`` of the duration of all Reject Events on this day.
+- **avEuclNorm**. This day's grand-average of the Euclidean Norm, excluding rejected segments.
+- **[min/max]EuclNormMovWin5h**. The mimumum/maximum average Euclidean Norm for this day using a 5h moving window.
+- **clockOnset[Min/Max]EuclNormMovWin5h**. The clock onset of the minimum/maximum 5h of averaged Euclidean Norm for this day.
+- **hoursModVigAct**. Number of hours spend in moderate-to-vigorous activity on this day.
+- **avEuclNormModVigAct**. Average Euclidean Norm during segments of moderate-to-vigorous activity on this day.
+- **av(DataType)(Metric)**. This day's grand-average of the datatype's Metric (e.g. Temperature Wrist), excluding rejected segments.
+- **[min/max](DataType)(Metric)MovWin30m**. The mimumum/maximum average Metric for this day using a 30m moving window.
+- **clockOnset[Min/Max](DataType)(Metric)MovWin30m**. The clock onset of the minimum/maximum 30m of averaged Metric for this DataType on this day.
+- **hours(AnnotationLevel)(Metric)**. Average number of hours spent in this Annotation level for this Metric on this day, e.g. ``hoursDimLight`` indicate the average number of hours spent in dim light per day.
+- **slpAcrossNoon**. Boolean indicator whether this day's Sleep Window overlaps with 12:00 pm.
+
+Definition of Sleep Statistics
+------------------------------
+
+- **slpCount**. Counter indicating this Sleep Window's index.
+- **eventOrigin**. The origin of the Sleep Windows, ``manual``, ``sleepDiary`` or ``GGIR``.
+- **day**. The day of the week of ``Lights On``, i.e. the day when this Sleep Window ended.
+- **clockLightsOut**. Date and clock time of ``Lights Out``, start of the Sleep Window.
+- **clockLightsOn**. Date and clock time of ``Lights On``, end of the Sleep Window.
+- **clockSlpOnset**. Date and clock time of ``Sleep Onset``, start of the Sleep Period.
+- **clockFinAwake**. Date and clock time of ``Final Awakening``, end of the Sleep Period.
+- **slpOnsetLat**. Duration in minutes between the onset of the Sleep Window and Sleep Period, i.e. ``Sleep Onset`` - ``Lights Out``.
+- **nAwakening**. Number of awakenings within the Sleep Period. The Actigraphy number of awakenings are the number of segments *not* Annotated as ``sustained inactive`` during the Sleep Periods. The Diary number of awakenings correspond to the estamated ``Awakenings``.
+- **wakeAfterSlpOnset**. Duration of awakenings within the Sleep Period in minutes. The Actigraphy WASO is the ``sum`` of the duration of the segments *not* Annotated as ``sustained inactive``. The Diary WASO is the average ``WASO`` estimate.
+- **slpWindow**. Duration of the Sleep Window in minutes, i.e. ``clockLightsOn - clockLightsOut``.
+- **slpPeriod**. Duration of the Sleep Period in minutes, i.e. ``clockFinAwake - clockSlpOnset``.
+- **totSlpTime**. Total sleep time in minutes calculated as ``slpPeriod - wakeAfterSlpOnset``.
+- **slpEffSlpTime**. Sleep efficiency calculated as ``100 * totSlpTime / slpWindow``.
+- **slpEffSlpPeriod**. Sleep efficiency calculated as ``100 * slpPeriod / slpWindow``.
+- **awakePerHour**. The number of awakenings per hour spend in the Sleep Period, calculated as ``60 * nAwakening / slpPeriod``.
+
+Definition of Custom Statistics
+-------------------------------
+
+- **onset**. Date and clock time of the Custom Event onset.
+- **offset**. Date and clock time of the Custom Event offset.
+- **avEuclNorm-**. Grand-average of the Euclidean Norm, excluding rejected segments during this Custom Event.
+- **hoursModVigAct**. Number of hours spend in moderate-to-vigorous activity within this Custom Event.
+- **avEuclNormModVigAct**. Average Euclidean Norm during segments of moderate-to-vigorous activity within this Custom Event.
+- **[min/max]EuclNormMovWin5m**. The mimumum/maximum average Euclidean Norm during this Custom Event using a 5m (minute) moving window.
+- **delayOnset[Min/Max]EuclNormMovWin5m**. The delay of the onset in 'HH:MM' of the minimum/maximum 5m of averaged Euclidean Norm relative to the onset of this Custom Event.
+- **av(DataType)(Metric)**. The grand-average of the datatype's Metric (e.g. Temperature Wrist), excluding rejected segments during this Custom Event.
+- **[min/max](DataType)(Metric)MovWin5m**. The mimumum/maximum average Metric aduring this Custom Event using a 5m moving window.
+- **delayOnset[Min/Max](DataType)(Metric)MovWin5m**. The delay of the onset in 'HH:MM' of the minimum/maximum 5m of averaged Metric relative to the onset of this Custom Event.
+- **hours(AnnotationLevel)(Metric)**. Average number of hours spent in this Annotation level for this Metric during this Custom Event, e.g. ``hoursDimLight`` indicate the average number of hours spent in dim light.
+
+=================
+Export Statistics
+=================
+
+**To export all Statistics,**
+
+- click ``File`` > ``Export`` > ``Statistics``.
+
+.. figure:: images/statistics-6.png
+    :width: 953px
+    :align: center
+
+    A new browse window will open for you to specify the location and filename to save the Statistics to. Click 'Save' to save, or 'Cancel' to abort.
+
+.. note::
+
+    The Statistics are saved as a comma-separated-values (.CSV) files, one for each category of Statistics. The filename you specified using the browse window will be appended with the following name-value pairs. Average Statistics will be saved to ``[fname]_average-all.csv``, ``[fname]_average-week.csv`` and ``[fname]_average-weekend.csv``. Dialy Statistics will be saved to ``[fname]_daily.csv``. Sleep Statistics to ``[fname]_sleep-actigraphy.csv`` and ``[fname]_average-sleepdiary.csv`` if available. Custom Statistics to ``[fname]_custom-[customEventLabel].csv``.
