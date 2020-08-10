@@ -269,10 +269,10 @@ Cicada automatically logs all the steps that we have performed within the softwa
 - click ``File`` > ``Export`` > ``Matlab Code``.
 - Specify the location and filename to save the code to.
 - Click 'Save' to save, or 'Cancel' to abort.
-
-.. figure:: images/cake-is-a-lie.png
-    :width: 95px
-    :align: center
     
 Fantastic, have some cake before you continue
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. figure:: images/cake-is-a-lie.png
+    :width: 95px
+    :align: left

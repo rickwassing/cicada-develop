@@ -154,7 +154,7 @@ Cicada will use the Sleep Windows of the type that is shown in the Sleep Window 
 However, still we can appreciate that the last Sleep Window does not align very well with what it should be. It seems that the ``lights off`` clock time should be an hour later, and the ``lights on`` clock time should be an hour earlier. Lets edit this.
 
 Edit Sleep Windows
-==================
+------------------
 
 **You can only edit Sleep Window Events of type** ``manual``, you cannot directly edit Sleep Window Events of other types. The reason for this is to maintain the original data integrity and to ensure repeatability of analysis pipelines. Furthermore, you cannot edit Sleep Period and WASO events as they are defined by the data.
 
@@ -192,9 +192,9 @@ Nothing apparent changed in the 'Data Analysis' Tab, the same Events are shown, 
 
     In this last example, we did not actually change the Sleep Window of type ``sleepDiary``, we just changed a copy of that event. In the sections on 'Sleep Statistics' you'll see that Cicada compares sleep variables based on Actigraphy with those from the sleep diary, the latter thus being unchanged. If you suspect that the times reported by the participant are not correct, you must edit these values in the sleep diary data file.
 
-.. figure:: images/cake-is-a-lie.png
-    :width: 95px
-    :align: center
-    
 Fantastic, have some cake before you continue
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. figure:: images/cake-is-a-lie.png
+    :width: 95px
+    :align: left
