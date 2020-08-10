@@ -192,5 +192,9 @@ Nothing apparent changed in the 'Data Analysis' Tab, the same Events are shown, 
 
     In this last example, we did not actually change the Sleep Window of type ``sleepDiary``, we just changed a copy of that event. In the sections on 'Sleep Statistics' you'll see that Cicada compares sleep variables based on Actigraphy with those from the sleep diary, the latter thus being unchanged. If you suspect that the times reported by the participant are not correct, you must edit these values in the sleep diary data file.
 
-Fantastic, have a cookie before you continue
---------------------------------------------
+.. figure:: images/cake-is-a-lie.png
+    :width: 95px
+    :align: center
+    
+Fantastic, have some cake before you continue
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

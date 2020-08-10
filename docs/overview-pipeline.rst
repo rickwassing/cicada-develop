@@ -207,8 +207,6 @@ An important part of analysing the Dataset is to define Sleep Window Events. The
 
 - click ``Analyse`` > ``Events`` > ``GGIR Sleep Detection``.
 
-:ref:`Read more... <analysis-sleep-create-sleep-window-ggir>`
-
 .. note::
 
     The GGIR sleep detection algorithm is designed to detect Sleep Windows by identifying the largest segment in the *analysis window* in which the median absolute deviation of the angle is below 15 times its 10th percentile. The analysis window is defined by the Actogram start and end clock times shown in the settings panel. Cicada uses an emperically derived default analysis window of '15:00' until '15:00' the next day. It is highly unlikely, under normal circumstances, that a Sleep Window begins before 15:00 and ends after 15:00. *However, depending on your sample, e.g. shiftworkers, youth or sleep disorders, you may want to adjust this analysis window*.
@@ -237,13 +235,9 @@ Calculating Statistics
 
 Once we're done with Annotating the Dataset and creating all the Events that define segments of interest, we can calculate Statistics. The Statistics are calculated as averages across the entire Dataset, for each day in the Dataset (midnight-to-midnight), for each Sleep Window Event, and for each Custom Event. The Epoch Annotation's are used to calculate the time spent in each level of Annotation, e.g. time spent in 'light' activity, or time with 'bright' light exposure. Not only does Cicada calculate average Metrics for these segments, for some Metrics it will also calculate the clock onset of the maximal and minimal value. 
 
-Please refer to this section for a :ref:`comprehensive overview of all Statistics and a description of how they are calculated <statistics-top>`.
-
-**To calculate Statistics,**
+It is highly recommended to read the a :ref:`comprehensive overview of all Statistics and a description of how they are calculated <statistics-top>`. Otherwise use this quick step, **to generate the Statistics, **
 
 - click ``Statistics`` > ``Generate Statistics``.
-
-:ref:`Read more... <statistics-top>`
 
 Exporting Statistics
 --------------------
@@ -253,6 +247,8 @@ All Statistics can be exported to comma-separated-value (.CSV) files which can t
 **To export Statistics,**
 
 - click ``File`` > ``Export`` > ``Statistics``.
+- Specify the location and filename to save the Dataset to.
+- Click 'Save' to save, or 'Cancel' to abort.
 
 .. note::
 
@@ -271,6 +267,12 @@ Cicada automatically logs all the steps that we have performed within the softwa
 **To export the Matlab code,**
 
 - click ``File`` > ``Export`` > ``Matlab Code``.
+- Specify the location and filename to save the code to.
+- Click 'Save' to save, or 'Cancel' to abort.
 
-Fantastic, you're done, have a cookie before you continue
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. figure:: images/cake-is-a-lie.png
+    :width: 95px
+    :align: center
+    
+Fantastic, have some cake before you continue
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
