@@ -320,10 +320,10 @@ for fi = 1:length(fnames)
         case 'clockOnsetMinEuclNormMovWin5h'
             Text = ifelse(strcmp(value{:}, 'na'), '-', value{:}(regexp(value{:}, '[0-9]+:[0-9]+'):end));
             Color = [0.49, 0.18, 0.56];
-        case 'hoursModVigAct'
+        case {'hoursSustInact', 'hoursLightAct', 'hoursModVigAct'}
             Text = ifelse(value == 0, '-', duration2str(value/24));
             Color = [0.49, 0.18, 0.56];
-        case 'avEuclNormModVigAct'
+        case {'avEuclNormSustInact', 'avEuclNormLightAct', 'avEuclNormModVigAct'}
             Text = ifelse(isnan(value), '-', sprintf('%.0f mg', value*1000));
             Color = [0.49, 0.18, 0.56];
         case 'slpAcrossNoon'

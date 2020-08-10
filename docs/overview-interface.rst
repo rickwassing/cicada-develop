@@ -122,7 +122,7 @@ Display Settings
     - The ``Height`` of the respective axes for each data type is relative to each other. In this example the acceleration axis is 2 times the height of the light and temperature axes.
     - The ``Length`` of the actogram determines the number of days that are displayed in one view, i.e. without scrolling.
     - The ``Plot`` dropdown menu determines whether a single or a double day is shown in each panel. Note that when viewing double days, the second day in the first panel is equal to the first day in the second panel, etc.
-    - The ``Clock`` inputs set the start and end time for each data segment, i.e. horizontal axis. This is mainly used for display purposes only. However, currently, the only algorithm that depends on this setting is the :ref:`GGIR sleep detection algorithm <link>`.
+    - The ``Clock`` inputs set the start and end time for each data segment, i.e. horizontal axis. This is mainly used for display purposes only. However, currently, the only algorithm that depends on this setting is the :ref:`GGIR sleep detection algorithm <analysis-sleep-create-sleep-window-ggir>`.
     - The ``Range`` inputs sets the minimum and maximum limits of the vertical axis.
     - The ``Log`` check-box sets the scale of the vertical axis to 'linear' or 'logarithmic (base 10)'.
 - Other data types, e.g. 'light' or 'temperature'
@@ -135,7 +135,7 @@ Display Settings
 Sleep Window Types
 ------------------
 
-Sleep windows can be defined in various ways. Refer to the section on :ref:`sleep analysis <link>` for in-depth instructions. For example, the user may manually create sleep window events, import a sleep diary, or use the GGIR sleep detection algorithm to define sleep windows. While all of these events have the label ``sleepWindow``, their types differ (respectively ``manual``, ``sleepDiary`` and ``GGIR``). If there are multiple Sleep Window types, this panel must be used to select which type of Sleep Windows are used to calculate statistics. 
+Sleep windows can be defined in various ways. Refer to the section on :ref:`sleep analysis <analysis-sleep-top>` for in-depth instructions. For example, the user may manually create sleep window events, import a sleep diary, or use the GGIR sleep detection algorithm to define sleep windows. While all of these events have the label ``sleepWindow``, their types differ (respectively ``manual``, ``sleepDiary`` and ``GGIR``). If there are multiple Sleep Window types, this panel must be used to select which type of Sleep Windows are used to calculate statistics. 
 
 1. Select the appropriate Sleep Window type from the dropdown list, 
 2. then click ``Apply`` for this setting to take effect.
@@ -166,7 +166,7 @@ When you want to delete the entire set of Sleep Window Events of the same type,
 Delete Annotation Types
 -----------------------
 
-Different thresholding methods can be used to Annotate the various data types. Refer to the section on :ref:`Annotation <link>` for in-depth instructions. 
+Different thresholding methods can be used to Annotate the various data types. Refer to the section on :ref:`Annotating Acceleration <analysis-annotate-acceleration-ggir-top>` and :ref:`Annotating Light <analysis-annotate-light-top>` for in-depth instructions. 
 
 To delete Annotations of the same type, 
 
@@ -177,7 +177,7 @@ To delete Annotations of the same type,
 Delete Multiple Events
 ----------------------
 
-Single events can be deted as described in the section on :ref:`editing Events <overview-interface-edit-events>`, but it may be more convenient to delete all events with the same label at once. To do so,
+Single events can be deleted as described in the section on :ref:`editing Events <overview-interface-edit-events>`, but it may be more convenient to delete all events with the same label at once. To do so,
 
 1. first select the appropriate Event label from the dropdown menu, 
 2. then click the ``delete`` button,

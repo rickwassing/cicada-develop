@@ -99,6 +99,8 @@ follow the instructions :ref:`in this section on how to import a sleep diary <fi
     
 Cicada has now added all Sleep Window Events from the sleep diary. Note that the 'Sleep Window Type' value in the Settings Panel has now changed to ``sleepDiary``. The ``manual`` Sleep Window that we created earlier still exists in the Dataset, it's just not shown.
 
+.. _analysis-sleep-create-sleep-window-ggir:
+
 **To create Sleep Window Events using GGIR's sleep detection algorithm,**
 
 1. click ``Analyse`` > ``Events`` > ``GGIR Sleep Detection``.
