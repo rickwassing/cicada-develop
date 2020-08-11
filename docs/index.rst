@@ -72,21 +72,21 @@ The standalone desktop application does not require a paid Matlab license or any
 
 .. toctree::
   :maxdepth: 1
-  :caption: Run Cicada as a standalone application
+  :caption: Run Cicada standalone
 
   installation-standalone-macos.rst
 
-Run Cicada as a Matlab application
-----------------------------------
+Run Cicada in Matlab
+--------------------
 
 1. You're required to have Matlab R2018b or later.
 2. Download the code  `as a .zip file <https://github.com/rickwassing/cicada-develop/archive/master.zip>`_ or `clone the Cicada-develop GitHub repository <https://github.com/rickwassing/cicada-develop>`_. 
 3. Open Matlab and navigate to the path where the Cicada directory is located (or add the Cicada directory to the Matlab Search Path).
 4. Call the Cicada application in the Command Window:
 
-  .. code-block:: matlab
+.. code-block:: matlab
 
-    >> cicada
+  >> cicada
 
 **To get started, follow the instruction in the Overview section**
 
