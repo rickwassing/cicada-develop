@@ -68,7 +68,7 @@ Getting Started
 Dependencies
 ------------
 
-The standalone desktop application does not require a Matlab license or any other software.
+The standalone desktop application does not require a paid Matlab license or any other software.
 
 .. _index-usage:
 

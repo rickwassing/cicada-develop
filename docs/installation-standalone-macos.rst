@@ -93,7 +93,7 @@ Edit your bash settings file
 
 If the result is empty, it is undefined, otherwise it is defined.
 
-3. There is a hidden file called '.bash_profile' in your home folder, i.e. /Users/[your-username]/.bash_profile, open this file in a plain text editor.
+3. There may be a hidden file called '.bash_profile' in your home folder, i.e. '/Users/[your-username]/.bash_profile'. Open this file in a plain text editor. If you can't see hidden files in the Finder window, press ``Command+Shift+Dot`` to show hidden files (and again to hide them). If this file does not exist, create a new empty plain-text file with the name '.bash_profile' (no extension).
 4. If the environment variable was **undefined**, add this line to the file
 
 .. code-block::
