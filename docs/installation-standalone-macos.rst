@@ -12,22 +12,23 @@ Install Cicada for MacOS
 
 2. Unzip and open the downloaded folder 'cicada-app-installers-master'.
 
-.. figure:: images/installation-standalone-macos-2.png
-    :width: 555px
-    :align: center
 3. Open the 'install-cicada-0.1.2_MacOs' App.
 
 .. figure:: images/installation-standalone-macos-4.png
     :width: 862 px
     :align: center
 
-5. The installer will first download a Matlab Runtime Installer. Matlab Runtime is a free software that enables the execution of compiled Matlab applications, such as Cicada.
-
 .. figure:: images/installation-standalone-macos-3.png
     :width: 552px
     :align: center
 
 4. You may be prompted with the request to allow Java to make changes to your system. Enter your username and password for the Admin User on your Mac.
+
+.. figure:: images/installation-standalone-macos-2.png
+    :width: 555px
+    :align: center
+
+5. The installer will first download a Matlab Runtime Installer. Matlab Runtime is a free software that enables the execution of compiled Matlab applications, such as Cicada.
 
 .. figure:: images/installation-standalone-macos-5.png
     :width: 862 px
@@ -83,40 +84,26 @@ Before we can run Cicada from the Finder window, we need to tell your Mac where 
 Edit your bash profile
 ----------------------
 
-1. Open the 'Terminal' app, which is located in '/Applications/Utilities/Terminal'.
-2. Check whether the ``DYLD_LIBRARY_PATH`` environment variable is defined by typing
+- Open the 'Terminal' app, which is located in '/Applications/Utilities/Terminal'.
+- Check whether the ``DYLD_LIBRARY_PATH`` environment variable is defined by typing
 
 .. code-block::
 
     $ echo $DYLD_LIBRARY_PATH
 
-3. If the result is empty, it is undefined, otherwise it is defined.
-4. There may be a hidden file called '.bash_profile' in your home folder, i.e. '/Users/[your-username]/.bash_profile'. Open this file in a plain text editor. If you can't see hidden files in the Finder window, press ``Command+Shift+Dot`` to show hidden files (and again to hide them). If this file does not exist, create a new empty plain-text file with the name '.bash_profile' (no extension).
-5. If the environment variable was **undefined**, add this line to the file
+- If the result is empty, it is undefined, otherwise it is defined.
+- There may be a hidden file called '.bash_profile' in your home folder, i.e. '/Users/[your-username]/.bash_profile'. Open this file in a plain text editor. If you can't see hidden files in the Finder window, press ``Command+Shift+Dot`` to show hidden files (and again to hide them). If this file does not exist, create a new empty plain-text file with the name '.bash_profile' (no extension).
+- If the environment variable was **undefined**, add this line to the file
 
 .. code-block::
 
     export DYLD_LIBRARY_PATH=/Applications/MATLAB/MATLAB_Runtime/v97/runtime/maci64:/Applications/MATLAB/MATLAB_Runtime/v97/sys/os/maci64:/Applications/MATLAB/MATLAB_Runtime/v97/bin/maci64
 
-6. If the environment variable was **defined**, add this line to the file
+- If the environment variable was **defined**, add this line to the file
 
 .. code-block::
 
     export DYLD_LIBRARY_PATH=${DYLD_LIBRARY_PATH}:/Applications/MATLAB/MATLAB_Runtime/v97/runtime/maci64:/Applications/MATLAB/MATLAB_Runtime/v97/sys/os/maci64:/Applications/MATLAB/MATLAB_Runtime/v97/bin/maci64
 
-7. Restart your Mac.
-8. Start Cicada. Once you have specified the location of the Matlab Runtime Software, you can simply start Cicada from the Finder by navigating to /Applications/Cicada/application and open Cicada.app.
-
-now what
-
-.. code-block::
-
-    $ echo $DYLD_LIBRARY_PATH
-
-.. code-block:: bash
-
-    $ echo $DYLD_LIBRARY_PATH
-
-.. code-block:: matlab
-
-    $ echo $DYLD_LIBRARY_PATH
+- Restart your Mac.
+- Start Cicada. Once you have specified the location of the Matlab Runtime Software, you can simply start Cicada from the Finder by navigating to /Applications/Cicada/application and open Cicada.app.
