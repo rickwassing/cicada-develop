@@ -4,7 +4,7 @@
 Create Custom Relative Events
 =============================
 
-You may want to study segments that are before, during or after existing Events. For example, you may be interested in the activity levels prior to sleep so you can understand the impact of this presleep activity on various sleep variables. In this example we will create Custom Relative Events that start 3h 30m prior to each Sleep Window Event with a duration of 3h.
+You may want to study segments that are before, during or after existing Events. For example, you may be interested in the activity levels prior to sleep so you can understand the impact of this pre-sleep activity on various sleep variables. In this example we will create Custom Relative Events that start 3h 30m prior to each Sleep Window Event with a duration of 3h.
 
 .. note::
 

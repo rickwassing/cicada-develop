@@ -11,7 +11,7 @@ The Cicada Pipeline
 Why Do We Need Cicada?
 ======================
 
-Indeed, a good question, because there are already a few good packages available that can process and analyse actigraphy data (`GGIR`_ for instance). However, there is currently---to my knowledge---no graphical user interfaces (GUIs) available to do so. Secondly, most packages are focussed on analysing data from one wearable device, while in some research, multiple wearable devices are used simultaneously. Cicada aims to solve both issues by providing a (hopefully intuitive) way of visualizing and analysing data from various wearable devices.
+Indeed, a good question, because there are already a few good packages available that can process and analyse Actigraphy data (`GGIR`_ for instance). However, there is currently---to my knowledge---no graphical user interfaces (GUIs) available to do so. Secondly, most packages are focussed on analyzing data from one wearable device, while in some research, multiple wearable devices are used simultaneously. Cicada aims to solve both issues by providing a (hopefully intuitive) way of visualizing and analyzing data from various wearable devices.
 
 .. _`GGIR`: https://cran.r-project.org/web/packages/GGIR/index.html
 
@@ -51,12 +51,12 @@ The start and end date of the **Actigraphy recording** is used to crop the impor
 Now the Cicada gets buzzing
 ---------------------------
 
-Every time you import Raw Data, the Cicada then calculates predefined Metrics in common Epochs. This accomplishes two things. First, often the Raw Data cannot be readily interpreted, e.g. accelaration values in 3D, or a raw ECG trace don't mean much, it is the Euclidean norm or the heart-rate that is meaningful. Secondly, Cicada calculates these Metrics in a common timeframe which is dictated by the Epoch length. These various timeseries can then be synchronised and analysed together.
+Every time you import Raw Data, the Cicada then calculates predefined Metrics in common Epochs. This accomplishes two things. First, often the Raw Data cannot be readily interpreted, e.g. Accelaration values in 3D, or a raw ECG trace don't mean much, it is the Euclidean norm or the heart-rate that is meaningful. Secondly, Cicada calculates these Metrics in a common timeframe which is dictated by the Epoch length. These various timeseries can then be synchronized and analysed together.
 
 Saving and loading a Dataset
 ----------------------------
 
-Once an actigraphy recording is imported, it is stored in a Dataset called ``ACT``. *For advanced users, this is a variable of class* ``struct`` *and contains the fields listed in the section on* :ref:`the 'ACT' data structure <overview-act-structure-top>`. 
+Once an Actigraphy recording is imported, it is stored in a Dataset called ``ACT``. *For advanced users, this is a variable of class* ``struct`` *and contains the fields listed in the section on* :ref:`the 'ACT' data structure <overview-act-structure-top>`. 
 
 **To save (or save-as) the Dataset,**
 
@@ -88,7 +88,7 @@ It is somewhat subjective, but you may want to change the way the Epoched Metric
 Editing the Dataset
 -------------------
 
-Before we start analysing the Dataset, you may want to add, edit or remove a few things in the Dataset. For example, you can specify the study name, the condition and session number, crop the Dataset in time, change the time zone, or specify a different Epoch length.
+Before we start analyzing the Dataset, you may want to add, edit or remove a few things in the Dataset. For example, you can specify the study name, the condition and session number, crop the Dataset in time, change the time zone, or specify a different Epoch length.
 
 **To edit any information about the study, participant or recording,**
 
@@ -164,7 +164,7 @@ Reject Events can be defined manually, or Cicada can automatically detect them b
 
 :ref:`follow the instructions in the section on how to edit events <overview-interface-edit-events>`.
 
-Analysing the Dataset
+Analyzing the Dataset
 ---------------------
 
 Now we can start to Annotate the Epoched Metrics and create Events. These two types of Analyses will define segments of the Dataset which are selected to calculate Statistics for. 
@@ -172,7 +172,7 @@ Now we can start to Annotate the Epoched Metrics and create Events. These two ty
 Annotation
 ^^^^^^^^^^
 
-Cicada uses an algorithm adapted from GGIR's ``identify_level.R`` function to annotate the Acceleration Metrics. There are 4 different algorithms that work slightly different, but in general the 'activity treshold' (e.g. 0.10 g for 'moderate' activity) is used to identify Epochs in which the Acceleration Metric 'Euclidean Norm' is above 0.10 g. The parameters 'activity time' (e.g. 10 minutes) and 'bout criterion' (e.g. 80%) are then used to only keep those segments in which 80% of the Epochs within a 10 minute window are above 0.10 g. The entire segment is then labelled as 'moderate' activity. This is repeated for all activity levels. Any Epoch that has not met any of the criteria is labelled as 'low' activity. This way, each and every Epoch has an Annotation label.
+Cicada uses an algorithm adapted from GGIR's ``identify_level.R`` function to annotate the Acceleration Metrics. There are 4 different algorithms that work slightly different, but in general the 'activity threshold' (e.g. 0.10 g for 'moderate' activity) is used to identify Epochs in which the Acceleration Metric 'Euclidean Norm' is above 0.10 g. The parameters 'activity time' (e.g. 10 minutes) and 'bout criterion' (e.g. 80%) are then used to only keep those segments in which 80% of the Epochs within a 10 minute window are above 0.10 g. The entire segment is then labelled as 'moderate' activity. This is repeated for all activity levels. Any Epoch that has not met any of the criteria is labelled as 'low' activity. This way, each and every Epoch has an Annotation label.
 
 **To Annotate Acceleration Metrics with GGIR,**
 
@@ -193,7 +193,7 @@ In addition to Annotating Acceleration Metrics, we can Annotate light Metics. Ea
 Sleep Window Events
 ^^^^^^^^^^^^^^^^^^^
 
-An important part of analysing the Dataset is to define Sleep Window Events. They can be created manually, imported from a sleep diary, or we can define Sleep Window Events by using an algorithm. Please refer to the section on :ref:`sleep analysis <analysis-sleep-top>` for in-depth instructions (highly recommended). Otherwise, use the quick instructions in the following sections to create Sleep Window Events.
+An important part of analyzing the Dataset is to define Sleep Window Events. They can be created manually, imported from a sleep diary, or we can define Sleep Window Events by using an algorithm. Please refer to the section on :ref:`sleep analysis <analysis-sleep-top>` for in-depth instructions (highly recommended). Otherwise, use the quick instructions in the following sections to create Sleep Window Events.
 
 **To manually create Sleep Window Events,**
 
@@ -209,12 +209,12 @@ An important part of analysing the Dataset is to define Sleep Window Events. The
 
 .. note::
 
-    The GGIR sleep detection algorithm is designed to detect Sleep Windows by identifying the largest segment in the *analysis window* in which the median absolute deviation of the angle is below 15 times its 10th percentile. The analysis window is defined by the Actogram start and end clock times shown in the settings panel. Cicada uses an emperically derived default analysis window of '15:00' until '15:00' the next day. It is highly unlikely, under normal circumstances, that a Sleep Window begins before 15:00 and ends after 15:00. *However, depending on your sample, e.g. shiftworkers, youth or sleep disorders, you may want to adjust this analysis window*.
+    The GGIR sleep detection algorithm is designed to detect Sleep Windows by identifying the largest segment in the *analysis window* in which the median absolute deviation of the angle is below 15 times its 10th percentile. The analysis window is defined by the actogram start and end clock times shown in the settings panel. Cicada uses an empirically derived default analysis window of '15:00' until '15:00' the next day. It is highly unlikely, under normal circumstances, that a Sleep Window begins before 15:00 and ends after 15:00. *However, depending on your sample, e.g. shift-workers, youth or sleep disorders, you may want to adjust this analysis window*.
 
 Custom Events
 ^^^^^^^^^^^^^
 
-In addition to creating Custom Events manually, which is described in the section on :ref:`creating events <overview-interface-create-events>`, Cicada has two more ways to create Custom Events. In some use-cases, you may want to analyse the same part of the day, for all of the days in the recording. For example, your study might have instructed participants to excersize, every morning between 10:00 am and 11:30 am. To create Statistics for specifically these time segments, we can define 'Daily Events' with the 'onset' at ``10:00``, 'duration' ``1h 30m`` and 'label' ``Morning Excersize``.
+In addition to creating Custom Events manually, which is described in the section on :ref:`creating events <overview-interface-create-events>`, Cicada has two more ways to create Custom Events. In some use-cases, you may want to analyse the same part of the day, for all of the days in the recording. For example, your study might have instructed participants to exercise, every morning between 10:00 am and 11:30 am. To create Statistics for specifically these time segments, we can define 'Daily Events' with the 'onset' at ``10:00``, 'duration' ``1h 30m`` and 'label' ``Morning Exercise``.
 
 **To Create Daily Events,**
 
@@ -252,7 +252,7 @@ All Statistics can be exported to comma-separated-value (.CSV) files which can t
 
 .. note::
 
-    The Statistics are saved as a comma-separated-values (.CSV) files, one for each category of Statistics. The filename you specified using the browse window will be appended with the following name-value pairs. Average Statistics will be saved to ``[fname]_average-all.csv``, ``[fname]_average-week.csv`` and ``[fname]_average-weekend.csv``. Dialy Statistics will be saved to ``[fname]_daily.csv``. Sleep Statistics to ``[fname]_sleep-actigraphy.csv`` and ``[fname]_average-sleepdiary.csv`` if available. Custom Statistics to ``[fname]_custom-[customEventLabel].csv``.
+    The Statistics are saved as a comma-separated-values (.CSV) files, one for each category of Statistics. The filename you specified using the browse window will be appended with the following name-value pairs. Average Statistics will be saved to ``[fname]_average-all.csv``, ``[fname]_average-week.csv`` and ``[fname]_average-weekend.csv``. Daily Statistics will be saved to ``[fname]_daily.csv``. Sleep Statistics to ``[fname]_sleep-actigraphy.csv`` and ``[fname]_average-sleepdiary.csv`` if available. Custom Statistics to ``[fname]_custom-[customEventLabel].csv``.
 
 Exporting Report
 ----------------

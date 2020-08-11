@@ -89,22 +89,23 @@ We need to tell your Mac (just this once) where the Matlab Runtime Software is l
     $ echo $DYLD_LIBRARY_PATH
 
 3. If the result is empty, it is **undefined** and we'll create that environment variable, otherwise it is **defined** and we'll append that variable.
-4. This environment variable should be stored in a hidden file called '.bash_profile' in your home folder, i.e. '/Users/[your-username]/. User the Finder window to navigate to your home folder and use ``Command+Shift+Dot`` to toggle hidden files visible. If '.bash_profile' does not exist yet, continue to step 5, otherwise continue to step 9.
+4. This environment variable should be stored in a hidden file called '.bash_profile' in your home folder, i.e. '/Users/[your-username]/.bash_profile'. Use the Finder window to navigate to your home folder and use ``Command+Shift+Dot`` to toggle hidden files visible. If '.bash_profile' does not exist yet, continue to step 5, otherwise continue to step 9.
 5. Open the 'TextEdit' app, and create a new empty document.
 6. Click 'Format' > 'Make Plain Text' if this is not already a plain-text document.
-7. Click 'File' > 'Save', type ``.bash_profile`` in the Save As field, and Select your home folder (indicated by the house icon) as the location. Make sure to un-tick the option 'if no extension is provided, use ".txt"'. Click 'Save'.
+7. Click 'File' > 'Save', and type ``.bash_profile`` in the 'Save As' field, and Select your home folder (indicated by the house icon) as the location. Make sure to un-tick the option 'if no extension is provided, use ".txt"'. Click 'Save'.
 
 .. figure:: images/installation-standalone-macos-9.png
     :width: 572px
     :align: center
 
-8. The following warnig message appears, but that's ok, click 'Use "."'
+8. The following warning message appears, but that's ok, click 'Use "."'
 
 .. figure:: images/installation-standalone-macos-10.png
     :width: 532px
     :align: center
 
-9. If the environment variable was 
+9. If the environment variable was
+
     - **undefined**, add this line to the '.bash_profile' file
 
     .. code-block:: bash

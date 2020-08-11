@@ -52,7 +52,7 @@ Select tabular Raw Data file
 
 .. note::
 
-    If for any reason the Raw Data cannot be read, an error message will appear. Please understand that for as many people in the world, there are as many ways a sleep diary can be formatted. Cicada is most likely not equiped to do it all. However, **please don't hessitate to send me a de-identified copy of the tabular Raw Data file you want to import, and I'll have a look into how to import it.**
+    If for any reason the Raw Data cannot be read, an error message will appear. Please understand that for as many people in the world, there are as many ways a sleep diary can be formatted. Cicada is most likely not equipped to do it all. However, **please don't hesitate to send me a de-identified copy of the tabular Raw Data file you want to import, and I'll have a look into how to import it.**
 
 Select Variables
 ================

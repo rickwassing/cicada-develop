@@ -9,7 +9,7 @@ Each time Cicada starts, it loads the settings file in ``./settings/CicadaSettin
 Default Import Settings
 =======================
 
-Some Raw Data that can be imported into Cicada require some guidance on how Cicada should read the file that contains the Raw Data. For instance, a sleep diary can have many different formats, and Cicada is not smart enought to know all of them by heart. The individual import settings are stored in separate JSON settings files (see below). The location of the file **that should be used by default** is stored in the main Cicada Settings file in an 'object' called 'importSettings'. 
+Some Raw Data that can be imported into Cicada require some guidance on how Cicada should read the file that contains the Raw Data. For instance, a sleep diary can have many different formats, and Cicada is not smart enough to know all of them by heart. The individual import settings are stored in separate JSON settings files (see below). The location of the file **that should be used by default** is stored in the main Cicada Settings file in an 'object' called 'importSettings'. 
 
 .. code-block:: json
 
@@ -37,8 +37,8 @@ In the example below,
 - the actogram start and end clock are set to ``15:00``, 
 - the actogram with is a ``single`` day, 
 - the number of panels shown in one view without scrolling is ``7``, 
-- the relative height (rowspan) of the acceleration Metric axes is ``2``, 
-- the accleration data is ``not`` shown on a logarithmic scale, 
+- the relative height (row-span) of the acceleration Metric axes is ``2``, 
+- the Accleration data is ``not`` shown on a logarithmic scale, 
 - the range is ``0`` to ``1``, 
 - the default view is ``euclNorm``. 
 - In case you select ``Counts`` as the metric to display, 
@@ -134,7 +134,7 @@ Let's assume we have a tabular Raw Data file that contains the following column 
 8. **Rise time**, specified as 'HH:MM' 24h clock time, e.g. ``8:00``
 9. **Sleep quality**, specified as ordinal values between 1-5, e.g. ``3``
 
-The sleep diary import settings file must specify how the Raw Data maps to the expected 7 predefined variables. In the example below, you can see how the format in which the Raw Data is stored is specfied in ``"format": {}``, and how the available columns in the Raw Data is mapped to the 7 variables in ``"idx": {}``. Here you can see that the researcher decided to use 'bed time' and 'rise time' to define the Sleep Windows (``lightsOut`` and ``lightsOn`` are column 3 and 8 respectively). Also, you can see that the Raw Data did not contain any information about the number of awakenings or WASO (their value is ``null``).
+The sleep diary import settings file must specify how the Raw Data maps to the expected 7 predefined variables. In the example below, you can see how the format in which the Raw Data is stored is specified in ``"format": {}``, and how the available columns in the Raw Data is mapped to the 7 variables in ``"idx": {}``. Here you can see that the researcher decided to use 'bed time' and 'rise time' to define the Sleep Windows (``lightsOut`` and ``lightsOn`` are column 3 and 8 respectively). Also, you can see that the Raw Data did not contain any information about the number of awakenings or WASO (their value is ``null``).
 
 .. code-block:: json
 

@@ -4,7 +4,7 @@
 Create Custom Daily Events
 ==========================
 
-You may want to analyse the same part of the day, for all of the days in the recording. For example, you may have instructed your participants to excersize at a certain time of the day, or use a light-therapy wake-up lamp in the morning, or you might be interested in segments of the morning and afternoon when your participant commuted to work. We'll use the latter as an example now. The participant indicated to leave for work on Monday to Friday at 7:30 am and it takes about an hour to get to work. Let's create Daily Events for these segments.
+You may want to analyse the same part of the day, for all of the days in the recording. For example, you may have instructed your participants to exercise at a certain time of the day, or use a light-therapy wake-up lamp in the morning, or you might be interested in segments of the morning and afternoon when your participant commuted to work. We'll use the latter as an example now. The participant indicated to leave for work on Monday to Friday at 7:30 am and it takes about an hour to get to work. Let's create Daily Events for these segments.
 
 **To create daily Events,**
 

@@ -31,5 +31,5 @@ WIMR Light Pin
     :width: 212px
     :align: center
 
-    The Raw Data has been imported in their raw format, i.e. sampling rate is 1/120 Hz, the Epoched Metrics are calulated as upsampled values, and the settings panel now shows all Metrics from where you can change the range, color, and order, and indicate which Metrics to show or hide.
+    The Raw Data has been imported in their raw format, i.e. sampling rate is 1/120 Hz, the Epoched Metrics are calculated as upsampled values, and the settings panel now shows all Metrics from where you can change the range, color, and order, and indicate which Metrics to show or hide.
     

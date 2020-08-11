@@ -8,7 +8,7 @@
 Cicada
 ======
 
-Cicada is an open source software for analysing actigraphy and data from other wearable devices.
+Cicada is an open source software for analyzing actigraphy and data from other wearable devices.
 
 .. _index-version:
 
@@ -105,7 +105,7 @@ Run Cicada in Matlab
     :width: 95px
     :align: center
 
-**Want more?** Read all about it in the specialised sections listed below or in the sidemenu.
+**Want more?** Read all about it in the specialized sections listed below or in the side menu.
 
 .. toctree::
   :maxdepth: 2

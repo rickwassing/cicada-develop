@@ -107,7 +107,7 @@ Cicada has now added all Sleep Window Events from the sleep diary. Note that the
 
 .. Note::
 
-    The GGIR sleep detection algorithm is designed to detect Sleep Windows by identifying the largest segment in the *analysis window* in which the median absolute deviation of the angle is below 15 times its 10th percentile. The analysis window is defined by the Actogram start and end clock times shown in the settings panel. Cicada uses an emperically derived default analysis window of '15:00' until '15:00' the next day. It is highly unlikely, under normal circumstances, that a Sleep Window begins before 15:00 and ends after 15:00. *However, depending on your sample, e.g. shiftworkers, youth or sleep disorders, you may want to adjust this analysis window*.
+    The GGIR sleep detection algorithm is designed to detect Sleep Windows by identifying the largest segment in the *analysis window* in which the median absolute deviation of the angle is below 15 times its 10th percentile. The analysis window is defined by the Actogram start and end clock times shown in the settings panel. Cicada uses an empirically derived default analysis window of '15:00' until '15:00' the next day. It is highly unlikely, under normal circumstances, that a Sleep Window begins before 15:00 and ends after 15:00. *However, depending on your sample, e.g. shift-workers, youth or sleep disorders, you may want to adjust this analysis window*.
 
 .. figure:: images/analysis-sleep-4.png
     :width: 1312px
@@ -134,7 +134,7 @@ So far, we have created all 3 types of Sleep Window Events. But there are no Sle
 
     **Sleep Period and WASO events shown if Annotation of Acceleration Metrics is available.**
 
-Cicada will automatically create Sleep Period and WASO events each time you define a Sleep Window *and* Annotation of Acceleration is available, *or* when you Annotate the Acceleration *and* at least one Sleep Window is defined. The Sleep Period Events are shown in the 'Data Analysis' tab as blue bars, the WASO events are shown as light blue bars. Note that the onset and offset of the Sleep Period conincides with the first and last epoch, *within* the Sleep Window, annotated as 'sustained inactive'. Also note that a new panel appeared in the Settings Panel, titled 'Annotation Type', where you can delete the Annotation.
+Cicada will automatically create Sleep Period and WASO events each time you define a Sleep Window *and* Annotation of Acceleration is available, *or* when you Annotate the Acceleration *and* at least one Sleep Window is defined. The Sleep Period Events are shown in the 'Data Analysis' tab as blue bars, the WASO events are shown as light blue bars. Note that the onset and offset of the Sleep Period coincides with the first and last epoch, *within* the Sleep Window, annotated as 'sustained inactive'. Also note that a new panel appeared in the Settings Panel, titled 'Annotation Type', where you can delete the Annotation.
 
 When we inspect the Sleep Window Events of type ``GGIR``, you can appreciate that they do not align very much with what the Sleep Windows should be. This likely due to the frequent increased activity segments throughout the night. *Especially if your sample consists of participants with sleep disorders, the GGIR sleep detection algorithm may not be the most appropriate way to define Sleep Windows*.
 

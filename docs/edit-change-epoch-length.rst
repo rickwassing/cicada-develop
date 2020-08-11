@@ -14,4 +14,4 @@ The default Epoch length that is used to calculate Metrics in a common timeframe
     :width: 348px
     :align: center
 
-    Scroll throught the list of 'New Epoch Lengths' and select the appropriate one. Click 'Change', or 'Cancel' to abort.
+    Scroll through the list of 'New Epoch Lengths' and select the appropriate one. Click 'Change', or 'Cancel' to abort.

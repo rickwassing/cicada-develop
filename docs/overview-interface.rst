@@ -16,7 +16,7 @@ The Cicada User Interface
     - The 'View' menu is used to switch which Metric is displayed as the Acceleration Metric.
     - The 'Preprocess' menu concerns all Data processing steps that may be necessary before Analysis.
     - The 'Analysis' menu lists all options to Annotate each Epoch according to some thresholding method, or to define Events. Either way, the labels of these Annotated Epochs/Events are used to select segments of the Dataset for calculating Statistics.
-    - The 'Statistics' menu calculates average and daily Statistics, and if applicable, also calulates Statistics for Sleep Window Events and Custom Events.
+    - The 'Statistics' menu calculates average and daily Statistics, and if applicable, also calculates Statistics for Sleep Window Events and Custom Events.
     - The 'Window' menu is used as a patch for an open issue (`#4 on GitHub <https://github.com/rickwassing/cicada-develop/issues>`_). Whenever data panels are mispositioned, use this menu to realign them.
     - The 'Help' menu shows information about the software, the author, and the associated license, and provides a link to these documents.
 2. **Information Panel.** Shows all the information regarding the study, participant and recording (see :ref:`below <overview-interface-information-panel>`).
@@ -37,14 +37,14 @@ Information Panel
     :align: center
     :width: 248px
     
-    **Information panel.** The asterisk (*) at the end of the filename indicates that the file is currently not saved. I trust that the rest speaks for itself and does not require further expanation.
+    **Information panel.** The asterisk (*) at the end of the filename indicates that the file is currently not saved. I trust that the rest speaks for itself and does not require further explanation.
 
 .. _overview-interface-data-analysis-tab:
 
 Data Analysis Tab and Panels
 ============================
 
-The data is partitioned into single or double day segments according to the details in the settings panel (see :ref:`below <overview-interface-settings-panel>`). Each panel displays the epoched metrics for each segment.
+The data is partitioned into single or double day segments according to the details in the settings panel (see :ref:`below <overview-interface-settings-panel>`). Each panel displays the Epoched Metrics for each segment.
 
 .. figure:: images/overview-interface-3.png
     :align: center
@@ -88,17 +88,17 @@ To manually edit an event, left-click on the event of interest in the data analy
 
 .. note::
 
-    Events that are of type ``manual``, ``reject`` or ``customEvent`` can be manually editted. Events that are created by algorithms or are imported from files have a different event type, and cannot be manually editted. The reason for this is to maintain the original data integrity and to ensure repeatability of analysis pipelines. To edit an event created by an algorithm or imported from file, use the appropriate ``edit`` button to reassign the event type to ``manual`` (see :ref:`below <overview-interface-edit-sleep-window>`).
+    Events that are of type ``manual``, ``reject`` or ``customEvent`` can be manually edited. Events that are created by algorithms or are imported from files have a different event type, and cannot be edited manually. The reason for this is to maintain the original data integrity and to ensure repeatability of analysis pipelines. To edit an event created by an algorithm or imported from file, use the appropriate ``edit`` button to reassign the event type to ``manual`` (see :ref:`below <overview-interface-edit-sleep-window>`).
 
 .. figure:: images/overview-interface-5.png
     :align: center
     :width: 1062px
 
-    **Edit Event**. Edittin an Event is very similar to creating one. The light blue box in panel (1) shows the timepoints of the to-be-changed Event. Use panels (2), (3) and (4) to modify the onset, duration and label of the Event. To edit the Event, press ``Edit``; to remove the event from the Dataset, press ``Delete``; or use the ``Cancel`` button to abort (5)
+    **Edit Event**. Editing an Event is very similar to creating one. The light blue box in panel (1) shows the timepoints of the to-be-changed Event. Use panels (2), (3) and (4) to modify the onset, duration and label of the Event. To edit the Event, press ``Edit``; to remove the event from the Dataset, press ``Delete``; or use the ``Cancel`` button to abort (5)
 
 .. warning::
 
-    When you change the event onset, for example from ``07:30`` to ``08:00``, without changing the duration, the event offset will also be 30 minutes later. Similarly, if you change the duration of the event, for example from ``1h 0m`` to ``1h 30m``, wihtout changing the onset, the event offset will also be 30 minutes later. Adjust both the event onset and duration accordingly if you wish to keep the event offset fixed. Note that the original event offset is shown for reference.
+    When you change the event onset, for example from ``07:30`` to ``08:00``, without changing the duration, the event offset will also be 30 minutes later. Similarly, if you change the duration of the event, for example from ``1h 0m`` to ``1h 30m``, without changing the onset, the event offset will also be 30 minutes later. Adjust both the event onset and duration accordingly if you wish to keep the event offset fixed. Note that the original event offset is shown for reference.
 
 .. _overview-interface-settings-panel:
 
@@ -143,13 +143,13 @@ Sleep windows can be defined in various ways. Refer to the section on :ref:`slee
 Edit Sleep Windows created by algorithms or imported from a file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Sleep window events that are created by algorithms or imported from a file cannot be manually editted directly. The reason for this is to maintain the original data integrity and to ensure repeatability of analysis pipelines. To edit a sleep window event created by an algorithm or imported from file,
+Sleep window events that are created by algorithms or imported from a file cannot be manually edited directly. The reason for this is to maintain the original data integrity and to ensure repeatability of analysis pipelines. To edit a sleep window event created by an algorithm or imported from file,
 
 1. first select the appropriate sleep window type from the dropdown menu, 
 2. click ``apply``,
 3. then click the ``edit`` button.
 
-Cicada will now copy all sleep window events of this type reassign their type to ``manual`` sleep window events. These events can now be editted as described :ref:`before <overview-interface-edit-events>`.
+Cicada will now copy all sleep window events of this type reassign their type to ``manual`` sleep window events. These events can now be edited as described :ref:`before <overview-interface-edit-events>`.
 
 .. _overview-interface-delete-annotation-type:
 
@@ -188,12 +188,12 @@ Advanced users and contributors
 
 This section below if for advanced users only or for those who'd like to contribute to Cicada.
 
-Cicada User Inferface Management
+Cicada User Interface Management
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Cicada user interface is comprised of various 'Components', e.g. ``uipannel``, ``uiaxes``, or ``plot`` objects (note that the terms 'Component' and 'Object' can be used interchangably, but here I refer to them as Components). Each Component has properties, e.g. ``Position``, ``XLim``, or ``XData``, and their values are dicated by the data in the ``ACT`` structure. For example, the user can change the analysis window through the Cicada GUI and this will trigger the event function to update the ``ACT.startdate`` and ``ACT.enddate`` value. At the end of each event, the ``lifecycle()`` function is called, which is based on the lifecycle method of [`React, a JavaScript library for building user inferfaces`_. The ``lifecycle()`` function is comprised of the following sequence of sub-functions:
+The Cicada user interface is comprised of various 'Components', e.g. ``uipannel``, ``uiaxes``, or ``plot`` objects (note that the terms 'Component' and 'Object' can be used interchangeably, but here I refer to them as Components). Each Component has properties, e.g. ``Position``, ``XLim``, or ``XData``, and their values are dictated by the data in the ``ACT`` structure. For example, the user can change the analysis window through the Cicada GUI and this will trigger the event function to update the ``ACT.startdate`` and ``ACT.enddate`` value. At the end of each event, the ``lifecycle()`` function is called, which is based on the lifecycle method of [`React, a JavaScript library for building user interfaces`_. The ``lifecycle()`` function is comprised of the following sequence of sub-functions:
 
-.. _`React, a JavaScript library for building user inferfaces`: https://reactjs.org
+.. _`React, a JavaScript library for building user interfaces`: https://reactjs.org
 
 - **mapStateToProps(app)**. Maps the current state of the ``ACT`` data structure to 'mount', i.e. create, Components if they don't exist yet, or to create a copy of the relevant Component properties with updated values. Importantly, these properties are not updated here but later in the lifecycle. This construction of Components is processed by the ``app_construct*`` functions which contain the sub-functions ``shouldComponentMount()``, ``mountComponent()`` and ``constructComponent()`` (see below). For optimization purposes, only those Components that are a member of the component-groups in `app.ComponentList` are mapped.
 - **app_construct[.](app, ~)**. This set of functions is organized by Component groups. For example, ``app_constructDataPanel()`` is responsible for constructing all the components in the main panel in the Data Analysis tab. For each of the required Components, the function ``shouldComponentMount()`` is called, which checks if the Component, identified by its ``Tag`` property, already exists or not. If not, the Component properties are constructed in a cell array called ``props``, and the function ``mountComponent()`` is called. If the Component exists, the relevant properties are constructed and the function ``constructComponent()`` is called.
@@ -239,7 +239,7 @@ Menu items and their call-alone functions
     [ACT, importSettings, err, msg] = cic_importSleepDiarySettings(ACT, fullpath); % Path to .JSON settings file
     [ACT, err, msg] = cic_parseSleepDiary(ACT, rawSleepDiary, importSettings);
     ACT = cic_diarySleepEvents(ACT); % Generate events in 'ACT.analysis.events' from sleep diary
-    ACT = cic_actigraphySleepEvents(ACT); % Genererate sleep period and waso events if annotation is available
+    ACT = cic_actigraphySleepEvents(ACT); % Generate sleep period and waso events if annotation is available
 
 **File > Export > Statistics**
 
@@ -303,7 +303,7 @@ Menu items and their call-alone functions
 .. code-block:: matlab
 
     ACT = cic_ggirAnnotation(ACT, params); % Parameters used in algorithm [struct]
-    ACT = cic_actigraphySleepEvents(ACT); % Genererate sleep period and waso events if sleep windows are available
+    ACT = cic_actigraphySleepEvents(ACT); % Generate sleep period and waso events if sleep windows are available
 
 **Analysis > Events > Create Daily Events**
 
@@ -328,7 +328,7 @@ Menu items and their call-alone functions
 .. code-block:: matlab
 
     ACT = cic_ggirSleepPeriodDetection(ACT);
-    ACT = cic_actigraphySleepEvents(ACT); % Genererate sleep period and waso events if annotation is available
+    ACT = cic_actigraphySleepEvents(ACT); % Generate sleep period and waso events if annotation is available
 
 **Statistics > Generate Statistics**
 
