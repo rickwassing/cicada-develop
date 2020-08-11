@@ -70,15 +70,11 @@ Dependencies
 
 The standalone desktop application does not require a paid Matlab license or any other software.
 
-.. _index-usage:
+.. toctree::
+  :maxdepth: 1
+  :caption: Run Cicada as a standalone application
 
-Run Cicada as a standalone application
---------------------------------------
-
-- `On MS Windows <here>`_
-- `On MacOS <installation-standalone-macos-top>`_
-
-2. [Describe installation process].
+  installation-standalone-macos.rst
 
 Run Cicada as a Matlab application
 ----------------------------------
