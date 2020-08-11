@@ -1,0 +1,268 @@
+<deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
+  <configuration build-checksum="93711818" file="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-develop/Cicada.prj" location="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-develop" name="Cicada" preferred-package-location="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app/dist" preferred-package-type="package.type.app" target="target.ezdeploy.standalone" target-name="Application Compiler">
+    <param.appname>Cicada</param.appname>
+    <param.icon>${PROJECT_ROOT}/Cicada_resources/icon.icns</param.icon>
+    <param.icons>
+      <file>${PROJECT_ROOT}/Cicada_resources/icon_48.png</file>
+      <file>${PROJECT_ROOT}/Cicada_resources/icon_32.png</file>
+      <file>${PROJECT_ROOT}/Cicada_resources/icon_24.png</file>
+      <file>${PROJECT_ROOT}/Cicada_resources/icon_16.png</file>
+    </param.icons>
+    <param.version>1.2</param.version>
+    <param.authnamewatermark>Rick Wassing</param.authnamewatermark>
+    <param.email>rick.wassing@sydney.edu.au</param.email>
+    <param.company>Woolcock Institute of Medical Research</param.company>
+    <param.summary>Cicada is an open source software to analyse actigraphy and other wearable devices.</param.summary>
+    <param.description>Version 0.1.2 (beta). 
+
+Warning. Cicada is still in development. Anything may change at any time and the software should not be considered stable.
+
+License. This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</param.description>
+    <param.screenshot>${PROJECT_ROOT}/package/images/CicadaSplash.png</param.screenshot>
+    <param.guid />
+    <param.installpath.string>/Cicada/</param.installpath.string>
+    <param.installpath.combo>option.installpath.systemwideapp</param.installpath.combo>
+    <param.logo>${PROJECT_ROOT}/package/images/CicadaLogo.png</param.logo>
+    <param.install.notes>-----
+Please refer to the documentation for a full description of the installation process at
+https://cicada-actigraphy-suite.readthedocs.io</param.install.notes>
+    <param.target.install.notes>In the following directions, replace MR/v97 by the directory on the target machine where MATLAB is installed, or MR by the directory where the MATLAB Runtime is installed.
+
+If the environment variable DYLD_LIBRARY_PATH is undefined, set it to the following string:
+
+MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci64
+
+If it is defined, set it to the following:
+
+${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci64</param.target.install.notes>
+    <param.intermediate>/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app/testing</param.intermediate>
+    <param.files.only>/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app/end-user</param.files.only>
+    <param.output>/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app</param.output>
+    <param.logdir>/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app</param.logdir>
+    <param.enable.clean.build>false</param.enable.clean.build>
+    <param.user.defined.mcr.options />
+    <param.target.type>subtarget.standalone</param.target.type>
+    <param.support.packages />
+    <param.web.mcr>false</param.web.mcr>
+    <param.package.mcr>true</param.package.mcr>
+    <param.no.mcr>false</param.no.mcr>
+    <param.web.mcr.name>MyAppInstaller_web</param.web.mcr.name>
+    <param.package.mcr.name>install-cicada-0.1.2_MacOs</param.package.mcr.name>
+    <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
+    <param.windows.command.prompt>false</param.windows.command.prompt>
+    <param.create.log>false</param.create.log>
+    <param.log.file />
+    <param.native.matlab>false</param.native.matlab>
+    <param.checkbox>false</param.checkbox>
+    <param.example />
+    <param.help.text>Syntax 
+	  -? 
+	 
+ Input Arguments 
+	 -?  print help on how to use the application 
+	 input arguments</param.help.text>
+    <unset>
+      <param.guid />
+      <param.installpath.combo />
+      <param.enable.clean.build />
+      <param.user.defined.mcr.options />
+      <param.target.type />
+      <param.support.packages />
+      <param.no.mcr />
+      <param.web.mcr.name />
+      <param.no.mcr.name />
+      <param.windows.command.prompt />
+      <param.create.log />
+      <param.log.file />
+      <param.native.matlab />
+      <param.checkbox />
+      <param.example />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}/cicada.mlapp</file>
+    </fileset.main>
+    <fileset.resources>
+      <file>${PROJECT_ROOT}/package/appFunc/app_askToSaveDataset.m</file>
+      <file>${PROJECT_ROOT}/package/appFunc/app_askToUndoAnalysis.m</file>
+      <file>${PROJECT_ROOT}/package/appFunc/app_askToUndoStatistics.m</file>
+      <file>${PROJECT_ROOT}/package/appFunc/app_constructCursor.m</file>
+      <file>${PROJECT_ROOT}/package/appFunc/app_constructDataExcerpt.m</file>
+      <file>${PROJECT_ROOT}/package/appFunc/app_constructDataPanel.m</file>
+      <file>${PROJECT_ROOT}/package/appFunc/app_constructInterval.m</file>
+      <file>${PROJECT_ROOT}/package/appFunc/app_constructSettingsPanel.m</file>
+      <file>${PROJECT_ROOT}/package/appFunc/app_constructSettingsPanelInput.m</file>
+      <file>${PROJECT_ROOT}/package/appFunc/app_constructSingleEvents.m</file>
+      <file>${PROJECT_ROOT}/package/appFunc/app_constructStaticComponents.m</file>
+      <file>${PROJECT_ROOT}/package/appFunc/app_constructStatsAverage.m</file>
+      <file>${PROJECT_ROOT}/package/appFunc/app_constructStatsAverageDayGraph.m</file>
+      <file>${PROJECT_ROOT}/package/appFunc/app_constructStatsCustom.m</file>
+      <file>${PROJECT_ROOT}/package/appFunc/app_constructStatsDaily.m</file>
+      <file>${PROJECT_ROOT}/package/appFunc/app_constructStatsSleep.m</file>
+      <file>${PROJECT_ROOT}/package/appFunc/app_constructTab.m</file>
+      <file>${PROJECT_ROOT}/package/appFunc/app_getAnnotationPatchProps.m</file>
+      <file>${PROJECT_ROOT}/package/appFunc/app_getCursorYData.m</file>
+      <file>${PROJECT_ROOT}/package/appFunc/app_getDataAxisProps.m</file>
+      <file>${PROJECT_ROOT}/package/appFunc/app_getDataPanelProps.m</file>
+      <file>${PROJECT_ROOT}/package/appFunc/app_getEventPatchProps.m</file>
+      <file>${PROJECT_ROOT}/package/appFunc/app_getGridLayoutSettingsPanelRowHeight.m</file>
+      <file>${PROJECT_ROOT}/package/appFunc/app_reorderPlotComponents.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_actigraphySleepEvents.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_annotateActivityGGIR.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_annotateLight.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_calcEpochedMetrics.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_changeTimeZone.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_checkDataset.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_createDailyEvent.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_createRelativeEvent.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_diarySleepEvents.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_editEvents.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_editInformation.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_exportStatistics.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_getDays.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_ggirAutomaticCalibration.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_ggirDetectNonWear.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_ggirSleepPeriodDetection.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_importGeneActivBin.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_importSleepDiary.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_importSleepDiarySettings.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_importWIMRLightPin.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_loadmat.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_parseSleepDiary.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_savemat.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_selectDatasetUsingTime.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_statistics.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_statisticsAverage.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_statisticsCustom.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_statisticsDaily.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_statisticsSleep.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_undoAnalysis.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_undoAnnotation.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_undoStatistics.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_updatePipe.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_version.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_writeHistory.m</file>
+      <file>${PROJECT_ROOT}/package/guis/about.mlapp</file>
+      <file>${PROJECT_ROOT}/package/guis/annotateActivityGGIR.mlapp</file>
+      <file>${PROJECT_ROOT}/package/guis/annotateLight.mlapp</file>
+      <file>${PROJECT_ROOT}/package/guis/changeEpochLength.mlapp</file>
+      <file>${PROJECT_ROOT}/package/guis/changeTimeZone.mlapp</file>
+      <file>${PROJECT_ROOT}/package/guis/createDailyEvent.mlapp</file>
+      <file>${PROJECT_ROOT}/package/guis/createEvent.mlapp</file>
+      <file>${PROJECT_ROOT}/package/guis/createRelativeEvent.mlapp</file>
+      <file>${PROJECT_ROOT}/package/guis/depricated_editEvent.mlapp</file>
+      <file>${PROJECT_ROOT}/package/guis/editDatasetInfo.mlapp</file>
+      <file>${PROJECT_ROOT}/package/guis/editEvent.mlapp</file>
+      <file>${PROJECT_ROOT}/package/guis/emptyApp.mlapp</file>
+      <file>${PROJECT_ROOT}/package/guis/importSleepDiary.mlapp</file>
+      <file>${PROJECT_ROOT}/package/guis/selectColor.mlapp</file>
+      <file>${PROJECT_ROOT}/package/guis/selectData.mlapp</file>
+      <file>${PROJECT_ROOT}/package/images/CicadaGuiLogo.png</file>
+      <file>${PROJECT_ROOT}/package/images/CicadaIcon.png</file>
+      <file>${PROJECT_ROOT}/package/images/CicadaLogo.png</file>
+      <file>${PROJECT_ROOT}/package/images/CicadaSplash.png</file>
+      <file>${PROJECT_ROOT}/package/images/colormap_batlow.mat</file>
+      <file>${PROJECT_ROOT}/package/images/colormap_davos.mat</file>
+      <file>${PROJECT_ROOT}/package/images/iconEdit.png</file>
+      <file>${PROJECT_ROOT}/package/images/iconTrash.png</file>
+      <file>${PROJECT_ROOT}/package/mountFunc/mount_barh.m</file>
+      <file>${PROJECT_ROOT}/package/mountFunc/mount_colormap.m</file>
+      <file>${PROJECT_ROOT}/package/mountFunc/mount_colororder.m</file>
+      <file>${PROJECT_ROOT}/package/mountFunc/mount_patch.m</file>
+      <file>${PROJECT_ROOT}/package/mountFunc/mount_plot.m</file>
+      <file>${PROJECT_ROOT}/package/mountFunc/mount_sleepClock.m</file>
+      <file>${PROJECT_ROOT}/package/mountFunc/mount_text.m</file>
+      <file>${PROJECT_ROOT}/package/mountFunc/mount_uiaxes.m</file>
+      <file>${PROJECT_ROOT}/package/mountFunc/mount_uibutton.m</file>
+      <file>${PROJECT_ROOT}/package/mountFunc/mount_uidropdown.m</file>
+      <file>${PROJECT_ROOT}/package/mountFunc/mount_uigridlayout.m</file>
+      <file>${PROJECT_ROOT}/package/mountFunc/mount_uilabel.m</file>
+      <file>${PROJECT_ROOT}/package/mountFunc/mount_uipanel.m</file>
+      <file>${PROJECT_ROOT}/package/mountFunc/mount_uitab.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/ascolumn.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/asrow.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/averagePerWindow.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/blink.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/checkEventOverlap.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/checkEventOverlapWithManualSleepWindow.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/checkProprietaryEventLabel.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/cicadaLogo.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/closeWaitbar.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/convertDatestr.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/deleteComponent.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/duration2str.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/events2idx.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/g2count.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/getAvEventTime.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/getAvMetric.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/getBouts.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/getDefaultDisplaySettings.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/getM5L5.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/getSleepAcrossNoon.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/ggirDailyStabilityVariability.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/ggirGetBout.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/ggirGetBout.m~</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/ggirSleepPeriodDetection.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/ifelse.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/importGeneActivBin.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/isbetween.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/map.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/max2epochs.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/newDataset.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/parseSleepDiaryDate.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/parseSleepDiaryDateTime.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/remainingTime.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/removeChar.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/removeOffsetGain.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/reorderPlotEvents.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/rollCellFun.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/round2minute.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/selectDataUsingTime.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/selectEventsUsingTime.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/showWaitbar.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/softCopyStructure.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/stdPerWindow.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/strRegexpCheck.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/struct2json.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/titleCase.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/updateDisplaySettings.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/waso2bouts.m</file>
+      <file>${PROJECT_ROOT}/settings/CicadaSettings.json</file>
+      <file>${PROJECT_ROOT}/settings/demoSleepDiary.json</file>
+    </fileset.resources>
+    <fileset.package />
+    <fileset.depfun />
+    <build-deliverables>
+      <file location="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app/testing" name="run_Cicada.sh" optional="false">/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app/testing/run_Cicada.sh</file>
+      <file location="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app/testing" name="splash.png" optional="false">/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app/testing/splash.png</file>
+      <file location="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app/testing" name="readme.txt" optional="true">/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app/testing/readme.txt</file>
+      <file location="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app/testing" name="Cicada.app" optional="false">/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app/testing/Cicada.app</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>/Applications/MATLAB_R2019b.app</root>
+      <toolboxes>
+        <toolbox name="neuralnetwork" />
+      </toolboxes>
+      <toolbox>
+        <neuralnetwork>
+          <enabled>true</enabled>
+        </neuralnetwork>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>true</unix>
+      <mac>true</mac>
+      <windows>false</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.15.5</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>maci64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
