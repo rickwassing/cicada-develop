@@ -72,7 +72,7 @@ Run Cicada using the Terminal
 
 3. Start Cicada by running the ``run_Cicada.sh`` script with the location of the Matlab Runtime Software as the first argument,
 
-.. code-block:: matlab
+.. code-block:: bash
 
     $ sh run_Cicada.sh /Applications/MATLAB/MATLAB_Runtime/v97
 
@@ -84,26 +84,26 @@ Before we can run Cicada from the Finder window, we need to tell your Mac where 
 Edit your bash profile
 ----------------------
 
-- Open the 'Terminal' app, which is located in '/Applications/Utilities/Terminal'.
-- Check whether the ``DYLD_LIBRARY_PATH`` environment variable is defined by typing
+1. Open the 'Terminal' app, which is located in '/Applications/Utilities/Terminal'.
+2. Check whether the ``DYLD_LIBRARY_PATH`` environment variable is defined by typing
 
-.. code-block::
+.. code-block:: bash
 
     $ echo $DYLD_LIBRARY_PATH
 
-- If the result is empty, it is undefined, otherwise it is defined.
-- There may be a hidden file called '.bash_profile' in your home folder, i.e. '/Users/[your-username]/.bash_profile'. Open this file in a plain text editor. If you can't see hidden files in the Finder window, press ``Command+Shift+Dot`` to show hidden files (and again to hide them). If this file does not exist, create a new empty plain-text file with the name '.bash_profile' (no extension).
-- If the environment variable was **undefined**, add this line to the file
+3. If the result is empty, it is undefined, otherwise it is defined.
+4. There may be a hidden file called '.bash_profile' in your home folder, i.e. '/Users/[your-username]/.bash_profile'. Open this file in a plain text editor. If you can't see hidden files in the Finder window, press ``Command+Shift+Dot`` to show hidden files (and again to hide them). If this file does not exist, create a new empty plain-text file with the name '.bash_profile' (no extension).
+5. If the environment variable was **undefined**, add this line to the file
 
-.. code-block::
+.. code-block:: bash
 
     export DYLD_LIBRARY_PATH=/Applications/MATLAB/MATLAB_Runtime/v97/runtime/maci64:/Applications/MATLAB/MATLAB_Runtime/v97/sys/os/maci64:/Applications/MATLAB/MATLAB_Runtime/v97/bin/maci64
 
-- If the environment variable was **defined**, add this line to the file
+6. If the environment variable was **defined**, add this line to the file
 
-.. code-block::
+.. code-block:: bash
 
     export DYLD_LIBRARY_PATH=${DYLD_LIBRARY_PATH}:/Applications/MATLAB/MATLAB_Runtime/v97/runtime/maci64:/Applications/MATLAB/MATLAB_Runtime/v97/sys/os/maci64:/Applications/MATLAB/MATLAB_Runtime/v97/bin/maci64
 
-- Restart your Mac.
-- Start Cicada. Once you have specified the location of the Matlab Runtime Software, you can simply start Cicada from the Finder by navigating to /Applications/Cicada/application and open Cicada.app.
+7. Restart your Mac.
+8. Start Cicada. Once you have specified the location of the Matlab Runtime Software, you can simply start Cicada from the Finder by navigating to /Applications/Cicada/application and open Cicada.app.
