@@ -65,13 +65,13 @@ Run Cicada using the Terminal
 1. Open the 'Terminal' app, which is located in '/Applications/Utilities/Terminal'.
 2. Change directory to the Cicada installation location by typing,
 
-.. code-block::
+.. code-block:: bash
 
     $ cd /Applications/Cicada/application
 
 3. Start Cicada by running the ``run_Cicada.sh`` script with the location of the Matlab Runtime Software as the first argument,
 
-.. code-block::
+.. code-block:: matlab
 
     $ sh run_Cicada.sh /Applications/MATLAB/MATLAB_Runtime/v97
 
@@ -106,3 +106,17 @@ Edit your bash profile
 
 7. Restart your Mac.
 8. Start Cicada. Once you have specified the location of the Matlab Runtime Software, you can simply start Cicada from the Finder by navigating to /Applications/Cicada/application and open Cicada.app.
+
+now what
+
+.. code-block::
+
+    $ echo $DYLD_LIBRARY_PATH
+
+.. code-block:: bash
+
+    $ echo $DYLD_LIBRARY_PATH
+
+.. code-block:: matlab
+
+    $ echo $DYLD_LIBRARY_PATH
