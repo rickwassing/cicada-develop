@@ -75,10 +75,8 @@ The standalone desktop application does not require a Matlab license or any othe
 Run Cicada as a standalone application
 --------------------------------------
 
-1. Download the application installer from the Cicada GitHub repository.
-
-  - `Download for MS Windows <here>`_
-  - `Download for MacOS <here>`_
+- `On MS Windows <here>`_
+- `On MacOS <installation-standalone-macos-top>`_
 
 2. [Describe installation process].
 
