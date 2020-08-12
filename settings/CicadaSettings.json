@@ -1,6 +1,7 @@
 {
+	"firstRun": 1,
 	"importSettings": {
-		"sleepDiary": "/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-develop/settings/demoSleepDiary.json"
+		"sleepDiary": "/Applications/Cicada/settings/KarolinskaSleepDiary.json"
 	},
 	"display": {
 		"actogramStartClock": "15:00",

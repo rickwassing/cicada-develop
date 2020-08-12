@@ -12,8 +12,10 @@ ACT = g2count(ACT);
 % and 'g.metric.R' from the R package GGIR version 1.9-2
 % -----
 % First, create a new time series for the epoched data
+maxWindows = floor(ACT.pnts/(ACT.srate*ACT.epoch));
 step  = 1/(24*60*60/ACT.epoch);
 times = ACT.xmin:step:ACT.xmax;
+times(maxWindows+1:end) = [];
 
 % -----
 % Euclidean Norm Minus One

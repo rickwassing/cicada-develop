@@ -197,7 +197,7 @@ In addition to Annotating Acceleration Metrics, we can Annotate light Metics. Ea
 Sleep Window Events
 ^^^^^^^^^^^^^^^^^^^
 
-An important part of analyzing the Dataset is to define Sleep Window Events. They can be created manually, imported from a sleep diary, or we can define Sleep Window Events by using an algorithm. Please refer to the section on :ref:`sleep analysis <analysis-sleep-top>` for in-depth instructions (highly recommended). Otherwise, use the quick instructions in the following sections to create Sleep Window Events.
+An important part of analyzing the Dataset is to define Sleep Window Events. They can be created manually, imported from a sleep diary, or we can define Sleep Window Events by using an algorithm. Please refer to :ref:`the section on sleep analysis <analysis-sleep-top>` for in-depth instructions (highly recommended). Otherwise, use the quick instructions in the following sections to create Sleep Window Events.
 
 **To manually create Sleep Window Events,**
 
@@ -205,7 +205,7 @@ An important part of analyzing the Dataset is to define Sleep Window Events. The
 
 **To import a sleep diary,**
 
-:ref:`follow the instructions in the section on importing sleep diaries <index-top>`.
+:ref:`follow the instructions in the section on importing sleep diaries <file-import-sleep-diary-top>`.
 
 **To create Sleep Window Events using GGIR's sleep detection algorithm,**
 

@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="835180109" file="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-develop/Cicada.prj" location="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-develop" name="Cicada" preferred-package-location="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers" preferred-package-type="package.type.app" target="target.ezdeploy.standalone" target-name="Application Compiler">
+  <configuration build-checksum="278283963" file="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-develop/Cicada.prj" location="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-develop" name="Cicada" preferred-package-location="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers" preferred-package-type="package.type.app" target="target.ezdeploy.standalone" target-name="Application Compiler">
     <param.appname>Cicada</param.appname>
     <param.icon>${PROJECT_ROOT}/Cicada_resources/icon.icns</param.icon>
     <param.icons>
@@ -8,7 +8,7 @@
       <file>${PROJECT_ROOT}/Cicada_resources/icon_24.png</file>
       <file>${PROJECT_ROOT}/Cicada_resources/icon_16.png</file>
     </param.icons>
-    <param.version>0.1</param.version>
+    <param.version>0.1.2</param.version>
     <param.authnamewatermark>Rick Wassing</param.authnamewatermark>
     <param.email>rick.wassing@sydney.edu.au</param.email>
     <param.company />
@@ -52,7 +52,7 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
     <param.package.mcr.name>install-cicada-0.1.2_MacOs</param.package.mcr.name>
     <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
     <param.windows.command.prompt>false</param.windows.command.prompt>
-    <param.create.log>true</param.create.log>
+    <param.create.log>false</param.create.log>
     <param.log.file>cicada-log</param.log.file>
     <param.native.matlab>false</param.native.matlab>
     <param.checkbox>false</param.checkbox>
@@ -77,6 +77,7 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
       <param.no.mcr />
       <param.no.mcr.name />
       <param.windows.command.prompt />
+      <param.create.log />
       <param.native.matlab />
       <param.checkbox />
       <param.example />
@@ -115,6 +116,7 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_annotateActivityGGIR.m</file>
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_annotateLight.m</file>
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_calcEpochedMetrics.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_calcEpochedMetrics.m~</file>
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_changeTimeZone.m</file>
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_checkDataset.m</file>
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_createDailyEvent.m</file>
@@ -154,7 +156,6 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
       <file>${PROJECT_ROOT}/package/guis/createDailyEvent.mlapp</file>
       <file>${PROJECT_ROOT}/package/guis/createEvent.mlapp</file>
       <file>${PROJECT_ROOT}/package/guis/createRelativeEvent.mlapp</file>
-      <file>${PROJECT_ROOT}/package/guis/depricated_editEvent.mlapp</file>
       <file>${PROJECT_ROOT}/package/guis/editDatasetInfo.mlapp</file>
       <file>${PROJECT_ROOT}/package/guis/editEvent.mlapp</file>
       <file>${PROJECT_ROOT}/package/guis/emptyApp.mlapp</file>
@@ -205,7 +206,6 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
       <file>${PROJECT_ROOT}/package/supportFunc/getSleepAcrossNoon.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/ggirDailyStabilityVariability.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/ggirGetBout.m</file>
-      <file>${PROJECT_ROOT}/package/supportFunc/ggirGetBout.m~</file>
       <file>${PROJECT_ROOT}/package/supportFunc/ggirSleepPeriodDetection.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/ifelse.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/importGeneActivBin.m</file>
@@ -231,8 +231,6 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
       <file>${PROJECT_ROOT}/package/supportFunc/titleCase.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/updateDisplaySettings.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/waso2bouts.m</file>
-      <file>${PROJECT_ROOT}/settings/CicadaSettings.json</file>
-      <file>${PROJECT_ROOT}/settings/demoSleepDiary.json</file>
     </fileset.resources>
     <fileset.package />
     <fileset.depfun />

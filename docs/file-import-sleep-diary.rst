@@ -17,8 +17,33 @@ Import a Sleep Diary
 1. Select the tabular Raw Data file, and inspect its contents
 2. Specify how the Raw Data maps to 7 predefined variables, and inspect the to-be-imported data
 
-Select tabular Raw Data file
-============================
+First time to import a sleep diary
+==================================
+
+If this is the first time you import a sleep diary, the message below will appear and you'll have to create or locate a 'sleep diary import settings file'. This is a file that tells Cicada how to read your sleep diary data.
+
+.. figure:: images/file-import-sleep-diary-2.png
+    :width: 441px
+    :align: center
+
+- If you already have a 'sleep diary import settings file', then you can use the 'Browse' button to locate it. The file you selected will then be used from now on.
+- But, it is most likely that you don't have such a settings file yet.
+    - To create one, click 'Create New'
+    - Navigate to the Cicada installation location, e.g. 'C:\Program Files\Cicada' or '/Applications/Cicada'
+    - Create a new folder named 'settings'
+    - Create a new file with the name of the type of sleep diary you want to import, e.g. 'KarolinskaSleepDiary', or 'CarneyConsensusSleepDiary', click 'Save'.
+    - The message below shows that this settings file will be used from now on.
+
+.. figure:: images/file-import-sleep-diary-3.png
+    :width: 441px
+    :align: center
+
+.. note::
+
+    This new 'sleep diary import settings file' you just created has default values on how to read your sleep diary data, and will certainly result in some warnings. *Don't worry, just click 'Ok' on any warning. We'll get to that later*.
+
+1. Select tabular Raw Data file
+===============================
 
 .. note::
 
@@ -32,17 +57,17 @@ Select tabular Raw Data file
 
 - click the 'Browse' button in the 'Import Sleep Diary' tab
 
-.. figure:: images/file-import-sleep-diary-2.png
+.. figure:: images/file-import-sleep-diary-4.png
     :width: 911px
     :align: center
 
-    A new browse window will open for you to select the file to import. Navigate to your Raw Data file, select it, and click 'Open'. Click 'Cancel' to abort.
+- A new browse window will open for you to select the file to import. Navigate to your Raw Data file, select it, and click 'Open'. Click 'Cancel' to abort.
 
-.. figure:: images/file-import-sleep-diary-3.png
+.. figure:: images/file-import-sleep-diary-5.png
     :width: 873px
     :align: center
 
-    Once you have selected the Raw Data file, Cicada will try to read the file and shows the result in the 'Check Raw Data' panel. 
+- Once you have selected the Raw Data file, Cicada will try to read the file and shows the result in the 'Check Raw Data' panel and will show a warning if there was some problem in reading the file.
 
 **To confirm that the Raw Data has been read correctly,**
 
@@ -52,16 +77,16 @@ Select tabular Raw Data file
 
 .. note::
 
-    If for any reason the Raw Data cannot be read, an error message will appear. Please understand that for as many people in the world, there are as many ways a sleep diary can be formatted. Cicada is most likely not equipped to do it all. However, **please don't hesitate to send me a de-identified copy of the tabular Raw Data file you want to import, and I'll have a look into how to import it.**
+    Please understand that for as many people in the world, there are as many ways a sleep diary can be formatted. If Cicada is currently not equipped to read your data file, then please don't hesitate to send me a de-identified copy of the tabular Raw Data file you want to import, and I'll have a look into how to import it.
 
-Select Variables
-================
+2. Select Variables
+===================
 
 **Once you have confirmed that the Raw Data is read correctly, we can continue to step 2: to specify how the Raw Data maps to 7 predefined variables.**
 
 - click on the ``Select Variables`` tab.
 
-.. figure:: images/file-import-sleep-diary-4.png
+.. figure:: images/file-import-sleep-diary-6.png
     :width: 1017px
     :align: center
 
@@ -90,19 +115,19 @@ Select Variables
 - If any non-required variable is not available, click the ``Select...`` item in the dropdown list, e.g. ``# awakenings`` and ``WASO`` is not available in our example. 
 - Next, specify the format of the Raw Data, e.g. the ``Date`` was formatted as 'dd/mm/yy', ``BedTime`` was formatted as 'HH:MM'.
 
-.. figure:: images/file-import-sleep-diary-5.png
+.. figure:: images/file-import-sleep-diary-7.png
     :width: 441px
     :align: center
 
     If the column header of any of the **required variables** is not specified, this message will be presented.
 
-.. figure:: images/file-import-sleep-diary-6.png
+.. figure:: images/file-import-sleep-diary-8.png
     :width: 441px
     :align: center
 
     If any of the **required variables** could not be 'parsed' (interpreted), this message will be presented.
 
-.. figure:: images/file-import-sleep-diary-7.png
+.. figure:: images/file-import-sleep-diary-9.png
     :width: 441px
     :align: center
 
