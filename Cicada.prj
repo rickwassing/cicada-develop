@@ -8,7 +8,7 @@
       <file>${PROJECT_ROOT}/Cicada_resources/icon_24.png</file>
       <file>${PROJECT_ROOT}/Cicada_resources/icon_16.png</file>
     </param.icons>
-    <param.version>0.1</param.version>
+    <param.version>0.1.2</param.version>
     <param.authnamewatermark>Rick Wassing</param.authnamewatermark>
     <param.email>rick.wassing@sydney.edu.au</param.email>
     <param.company />
@@ -38,7 +38,7 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
     <param.intermediate>/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing</param.intermediate>
     <param.files.only>/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/files</param.files.only>
     <param.output>/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers</param.output>
-    <param.logdir>/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/log</param.logdir>
+    <param.logdir>/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/log</param.logdir>
     <param.enable.clean.build>false</param.enable.clean.build>
     <param.user.defined.mcr.options />
     <param.target.type>subtarget.standalone</param.target.type>
@@ -60,13 +60,7 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
 	 
  Input Arguments 
 	 -?  print help on how to use the application 
-	 input arguments 
- Description 
- 	 Version 0.1.2 (beta)
-
-Warning. Cicada is still in development. Anything may change at any time and the software should not be considered stable.
-
-License. This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</param.help.text>
+	 input arguments</param.help.text>
     <unset>
       <param.company />
       <param.guid />

@@ -16,5 +16,5 @@ Install Cicada for Windows
 Start Cicada
 ============
 
-1. Navigate to the Cicada installation folder, i.e. 'C:\Program Files\Cicada'.
+1. Navigate to the Cicada installation folder, i.e. 'C:\\Program Files\\Cicada'.
 2. open 'Cicada.exe'.
