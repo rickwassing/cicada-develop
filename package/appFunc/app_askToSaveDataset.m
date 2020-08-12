@@ -1,4 +1,4 @@
-function result = app_askToSaveDatset(app, event)
+function result = app_askToSaveDataset(app, event)
 
 % Initialize result to be true
 result = true;
