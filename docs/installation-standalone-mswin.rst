@@ -1,4 +1,4 @@
-.. _installation-standalone-macos-top:
+.. _installation-standalone-mswin-top:
 
 ==========================
 Install Cicada for Windows

@@ -75,7 +75,7 @@ The standalone desktop application does not require a paid Matlab license or any
   :caption: Run Cicada standalone
 
   installation-standalone-macos.rst
-  installation-standalone-windows.rst
+  installation-standalone-mswin.rst
 
 Run Cicada in Matlab
 --------------------
