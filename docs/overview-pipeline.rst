@@ -29,7 +29,7 @@ While Cicada can process Raw Data from various wearable devices, it requires an 
 
 .. warning::
 
-    There is currently a bug in Matlab on MacOS where any dialog box to select files and folders appears *behind* the Cicada window. Simply click anywhere in the Cicada window to show the dialogue box. This issue is listed as issue #5 on the Cicada-develope GitHub repository. 
+    There is currently a bug in Matlab on MacOS where any dialog box to select files and folders appears *behind* the Cicada window. Simply click anywhere in the Cicada window to show the dialogue box. This issue is listed as issue #5 on the Cicada-develop GitHub repository. 
 
 **To import an Actigraphy recording,**
 
@@ -55,7 +55,7 @@ The start and end date of the **Actigraphy recording** is used to crop the impor
 Now the Cicada gets buzzing
 ---------------------------
 
-Every time you import Raw Data, the Cicada then calculates predefined Metrics in common Epochs. This accomplishes two things. First, often the Raw Data cannot be readily interpreted, e.g. Accelaration values in 3D, or a raw ECG trace don't mean much, it is the Euclidean norm or the heart-rate that is meaningful. Secondly, Cicada calculates these Metrics in a common timeframe which is dictated by the Epoch length. These various timeseries can then be synchronized and analysed together.
+Every time you import Raw Data, the Cicada then calculates predefined Metrics in common Epochs. This accomplishes two things. First, often the Raw Data cannot be readily interpreted, e.g. Acceleration values in 3D, or a raw ECG trace don't mean much, it is the Euclidean norm or the heart-rate that is meaningful. Secondly, Cicada calculates these Metrics in a common timeframe which is dictated by the Epoch length. These various timeseries can then be synchronized and analysed together.
 
 Saving and loading a Dataset
 ----------------------------
@@ -73,7 +73,7 @@ Once an Actigraphy recording is imported, it is stored in a Dataset called ``ACT
 :ref:`Read more... <file-save-open-dataset-top>`
 
 Changing the display settings
-----------------------------
+-----------------------------
 
 It is somewhat subjective, but you may want to change the way the Epoched Metrics are displayed in the data analysis tab. You can change 
 

@@ -13,8 +13,6 @@ if ~isnumeric(startDate) && ~isnumeric(endDate)
 end
 % ---------------------------------------------------------
 % Cut the raw data
-times = ACT.times;
-[~, ACT.times] = selectDataUsingTime(ACT.data.acceleration.x.Data, times, startDate, endDate);
 datatypes = fieldnames(ACT.data);
 for di = 1:length(datatypes)
     if isstruct(ACT.data.(datatypes{di}))
@@ -29,9 +27,10 @@ for di = 1:length(datatypes)
         end
     end
 end
-ACT.pnts = length(ACT.times);
-ACT.xmin = ACT.times(1);
-ACT.xmax = ACT.times(end);
+ACT.times = ACT.data.acceleration.x.Time;
+ACT.pnts  = length(ACT.times);
+ACT.xmin  = ACT.times(1);
+ACT.xmax  = ACT.times(end);
 % ---------------------------------------------------------
 % Cut the metrics
 metrictypes = fieldnames(ACT.metric);

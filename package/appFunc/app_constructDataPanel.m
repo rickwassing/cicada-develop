@@ -1,4 +1,3 @@
-
 function app_constructDataPanel(app)
 
 % For each day ...
