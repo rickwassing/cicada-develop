@@ -20,7 +20,7 @@ Install Cicada for MacOS
 4. The warning above may appear, but don't worry, click 'Open'.
 5. You may be prompted with the request to allow Java to make changes to your system. Enter your username and password for the Admin User on your Mac.
 
-.. figure:: images/installation-standalone-macos-03.png
+.. figure:: images/installation-standalone-macos-3.png
     :width: 555px
     :align: center
 
@@ -78,18 +78,18 @@ We need to tell your Mac (just this once) where the Matlab Runtime Software is l
 4. This environment variable should be stored in a hidden file called '.bash_profile' in your home folder, i.e. '/Users/[your-username]/.bash_profile'. Use the Finder window to navigate to your home folder and use ``Command+Shift+Dot`` to toggle hidden files visible. If '.bash_profile' does not exist yet, continue to step 5, otherwise continue to step 9.
 5. Open the 'TextEdit' app, and create a new empty document.
 6. Click 'Format' > 'Make Plain Text' if this is not already a plain-text document.
-7. Click 'File' > 'Save', and type ``.bash_profile`` in the 'Save As' field, and Select your home folder (indicated by the house icon) as the location. Make sure to un-tick the option 'if no extension is provided, use ".txt"'. Click 'Save'.
 
 .. figure:: images/installation-standalone-macos-5.png
     :width: 572px
     :align: center
 
-8. The following warning message appears, but that's ok, click 'Use "."'
+7. Click 'File' > 'Save', and type ``.bash_profile`` in the 'Save As' field, and Select your home folder (indicated by the house icon) as the location. Make sure to un-tick the option 'if no extension is provided, use ".txt"'. Click 'Save'.
 
 .. figure:: images/installation-standalone-macos-6.png
     :width: 532px
     :align: center
 
+8. The warning message above may appear, but that's ok, click 'Use "."'
 9. If the environment variable was
 
     - **undefined**, add this line to the '.bash_profile' file
