@@ -239,7 +239,7 @@ Calculating Statistics
 
 Once we're done with Annotating the Dataset and creating all the Events that define segments of interest, we can calculate Statistics. The Statistics are calculated as averages across the entire Dataset, for each day in the Dataset (midnight-to-midnight), for each Sleep Window Event, and for each Custom Event. The Epoch Annotation's are used to calculate the time spent in each level of Annotation, e.g. time spent in 'light' activity, or time with 'bright' light exposure. Not only does Cicada calculate average Metrics for these segments, for some Metrics it will also calculate the clock onset of the maximal and minimal value. 
 
-It is highly recommended to read the a :ref:`comprehensive overview of all Statistics and a description of how they are calculated <statistics-top>`. Otherwise use this quick step, **to generate the Statistics, **
+It is highly recommended to read the a :ref:`comprehensive overview of all Statistics and a description of how they are calculated <statistics-top>`. Otherwise use this quick step, **to generate the Statistics,**
 
 - click ``Statistics`` > ``Generate Statistics``.
 

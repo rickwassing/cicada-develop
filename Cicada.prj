@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="278283963" file="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-develop/Cicada.prj" location="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-develop" name="Cicada" preferred-package-location="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers" preferred-package-type="package.type.app" target="target.ezdeploy.standalone" target-name="Application Compiler">
+  <configuration file="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-develop/Cicada.prj" location="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-develop" name="Cicada" target="target.ezdeploy.standalone" target-name="Application Compiler">
     <param.appname>Cicada</param.appname>
     <param.icon>${PROJECT_ROOT}/Cicada_resources/icon.icns</param.icon>
     <param.icons>
@@ -13,13 +13,11 @@
     <param.email>rick.wassing@sydney.edu.au</param.email>
     <param.company />
     <param.summary>Cicada is an open source software to analyse actigraphy and other wearable devices.</param.summary>
-    <param.description>Version 0.1.2 (beta). 
+    <param.description>Version 0.1.2 (beta)
 
 Warning. Cicada is still in development. Anything may change at any time and the software should not be considered stable.
 
-License. This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
-
-Acknowledgements. This work is developed by researchers from the Woolcock Institute of Medical Research, Sydney, Australia, with support from the University of Sydney and the Australian National Health and Research Council.</param.description>
+License. This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</param.description>
     <param.screenshot>${PROJECT_ROOT}/package/images/CicadaSplash.png</param.screenshot>
     <param.guid />
     <param.installpath.string>/Cicada/</param.installpath.string>
@@ -38,9 +36,9 @@ If it is defined, set it to the following:
 
 ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci64</param.target.install.notes>
     <param.intermediate>/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing</param.intermediate>
-    <param.files.only>/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/end-user</param.files.only>
+    <param.files.only>/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/files</param.files.only>
     <param.output>/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers</param.output>
-    <param.logdir>/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers</param.logdir>
+    <param.logdir>/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/log</param.logdir>
     <param.enable.clean.build>false</param.enable.clean.build>
     <param.user.defined.mcr.options />
     <param.target.type>subtarget.standalone</param.target.type>
@@ -48,12 +46,12 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
     <param.web.mcr>true</param.web.mcr>
     <param.package.mcr>false</param.package.mcr>
     <param.no.mcr>false</param.no.mcr>
-    <param.web.mcr.name>install-cicada-0.1.2_MacOs</param.web.mcr.name>
-    <param.package.mcr.name>install-cicada-0.1.2_MacOs</param.package.mcr.name>
+    <param.web.mcr.name>install-Cicada-0.1.2_MacOS</param.web.mcr.name>
+    <param.package.mcr.name>MyAppInstaller_mcr</param.package.mcr.name>
     <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
     <param.windows.command.prompt>false</param.windows.command.prompt>
     <param.create.log>false</param.create.log>
-    <param.log.file>cicada-log</param.log.file>
+    <param.log.file />
     <param.native.matlab>false</param.native.matlab>
     <param.checkbox>false</param.checkbox>
     <param.example />
@@ -62,7 +60,13 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
 	 
  Input Arguments 
 	 -?  print help on how to use the application 
-	 input arguments</param.help.text>
+	 input arguments 
+ Description 
+ 	 Version 0.1.2 (beta)
+
+Warning. Cicada is still in development. Anything may change at any time and the software should not be considered stable.
+
+License. This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</param.help.text>
     <unset>
       <param.company />
       <param.guid />
@@ -75,9 +79,11 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
       <param.web.mcr />
       <param.package.mcr />
       <param.no.mcr />
+      <param.package.mcr.name />
       <param.no.mcr.name />
       <param.windows.command.prompt />
       <param.create.log />
+      <param.log.file />
       <param.native.matlab />
       <param.checkbox />
       <param.example />
@@ -116,7 +122,6 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_annotateActivityGGIR.m</file>
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_annotateLight.m</file>
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_calcEpochedMetrics.m</file>
-      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_calcEpochedMetrics.m~</file>
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_changeTimeZone.m</file>
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_checkDataset.m</file>
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_createDailyEvent.m</file>
@@ -231,6 +236,7 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
       <file>${PROJECT_ROOT}/package/supportFunc/titleCase.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/updateDisplaySettings.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/waso2bouts.m</file>
+      <file>${PROJECT_ROOT}/settings/CicadaSettings.json</file>
     </fileset.resources>
     <fileset.package />
     <fileset.depfun />
