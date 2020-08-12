@@ -43,7 +43,7 @@ You can either run Cicada from the Terminal, or if you want to run Cicada simply
 Run Cicada from the Finder Window
 ---------------------------------
 
-1. Navigating to '/Applications/Cicada/application' and open 'Cicada.app'.
+1. Navigate to the Cicada installation folder, i.e. '/Applications/Cicada/application' and open 'Cicada.app'.
 2. If this does not work, this probably means that your Mac does not know where to find the Matlab Runtime Software. Follow the instructions below or open Cicada from the 'Terminal' app.
 
 Run Cicada using the Terminal
