@@ -27,6 +27,10 @@ While Cicada can process Raw Data from various wearable devices, it requires an 
 
     The only Actigraph that is currently supported in Cicada is the 'ActivInsight GeneActiv'. This is because I only had access to data from this device. Please, if you have raw data from another Actigraph, send me a de-identified copy so I can implement an import function for that device. Most appreciated.
 
+.. warning::
+
+    There is currently a bug in Matlab on MacOS where any dialog box to select files and folders appears *behind* the Cicada window. Simply click anywhere in the Cicada window to show the dialogue box. This issue is listed as issue #5 on the Cicada-develope GitHub repository. 
+
 **To import an Actigraphy recording,**
 
 - click ``File`` > ``Import Actigraphy`` > and select your device type of choice.
