@@ -215,7 +215,12 @@ for di = 1:app.ACT.ndays
                         if shouldComponentMount(app, ax, ['PatchCounts_day-', num2str(di)])
                             % Set X and YData
                             [YData, XData] = selectDataUsingTime(app.ACT.metric.acceleration.counts.Data, app.ACT.metric.acceleration.counts.Time, StartDate, EndDate);
-                            YData(end) = NaN;
+                            if isempty(YData)
+                                YData =  [NaN, NaN];
+                                XData = [NaN, NaN];
+                            else
+                                YData(end) = NaN;
+                            end
                             % Define the properties
                             props = { ...
                                 'Tag', ['PatchCounts_day-', num2str(di)]; ...
@@ -234,7 +239,12 @@ for di = 1:app.ACT.ndays
                         else
                             % Set X and YData
                             [YData, XData] = selectDataUsingTime(app.ACT.metric.acceleration.counts.Data, app.ACT.metric.acceleration.counts.Time, StartDate, EndDate);
-                            YData(end) = NaN;
+                            if isempty(YData)
+                                YData =  [NaN, NaN];
+                                XData = [NaN, NaN];
+                            else
+                                YData(end) = NaN;
+                            end
                             % Construct the component
                             constructComponent(app, ['PatchCounts_day-', num2str(di)], ax, { ...
                                 'Visible', ifelse(strcmpi(app.ACT.display.acceleration.view, 'counts'), 'on', 'off'); ...
@@ -250,7 +260,12 @@ for di = 1:app.ACT.ndays
                         if shouldComponentMount(app, ax, ['PatchEuclNorm_day-', num2str(di)])
                             % Set X and YData
                             [YData, XData] = selectDataUsingTime(app.ACT.metric.acceleration.bpFiltEuclNorm.Data, app.ACT.metric.acceleration.bpFiltEuclNorm.Time, StartDate, EndDate);
-                            YData(end) = NaN;
+                            if isempty(YData)
+                                YData =  [NaN, NaN];
+                                XData = [NaN, NaN];
+                            else
+                                YData(end) = NaN;
+                            end
                             % Define the properties
                             props = { ...
                                 'Tag', ['PatchEuclNorm_day-', num2str(di)]; ...
@@ -269,7 +284,12 @@ for di = 1:app.ACT.ndays
                         else
                             % Set X and YData
                             [YData, XData] = selectDataUsingTime(app.ACT.metric.acceleration.bpFiltEuclNorm.Data, app.ACT.metric.acceleration.bpFiltEuclNorm.Time, StartDate, EndDate);
-                            YData(end) = NaN;
+                            if isempty(YData)
+                                YData =  [NaN, NaN];
+                                XData = [NaN, NaN];
+                            else
+                                YData(end) = NaN;
+                            end
                             % Construct the component
                             constructComponent(app, ['PatchEuclNorm_day-', num2str(di)], ax, { ...
                                 'Visible', ifelse(strcmpi(app.ACT.display.acceleration.view, 'euclNorm'), 'on', 'off'); ...
@@ -285,7 +305,12 @@ for di = 1:app.ACT.ndays
                         if shouldComponentMount(app, ax, ['PatchAngle_day-', num2str(di)])
                             % Set X and YData
                             [YData, XData] = selectDataUsingTime(app.ACT.metric.acceleration.angle_z.Data, app.ACT.metric.acceleration.angle_z.Time, StartDate, EndDate);
-                            YData(end) = NaN;
+                            if isempty(YData)
+                                YData =  [NaN, NaN];
+                                XData = [NaN, NaN];
+                            else
+                                YData(end) = NaN;
+                            end
                             % Define the properties
                             props = { ...
                                 'Tag', ['PatchAngle_day-', num2str(di)]; ...
@@ -304,7 +329,12 @@ for di = 1:app.ACT.ndays
                         else
                             % Set X and YData
                             [YData, XData] = selectDataUsingTime(app.ACT.metric.acceleration.angle_z.Data, app.ACT.metric.acceleration.angle_z.Time, StartDate, EndDate);
-                            YData(end) = NaN;
+                            if isempty(YData)
+                                YData =  [NaN, NaN];
+                                XData = [NaN, NaN];
+                            else
+                                YData(end) = NaN;
+                            end
                             % Construct the component
                             constructComponent(app, ['PatchAngle_day-', num2str(di)], ax, { ...
                                 'Visible', ifelse(strcmpi(app.ACT.display.acceleration.view, 'angle'), 'on', 'off'); ...

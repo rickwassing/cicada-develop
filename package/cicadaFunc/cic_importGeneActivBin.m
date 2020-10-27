@@ -1,4 +1,7 @@
 function ACT = cic_importGeneActivBin(fullpath, varargin)
+
+% EDIT 27 OCT 2020 by Rick Wassing, line 116
+
 % ---------------------------------------------------------
 % Get a brand new dataset
 ACT = newDataset();
@@ -110,7 +113,11 @@ end
 % ---------------------------------------------------------
 % Store the time variables
 ACT.pnts  = length(times);
-ACT.srate = str2double(header{3,1}.Measurement_Frequency(1:end-2));
+% EDIT 27 OCT 2020 by Rick Wassing
+% The header information is not always accurate, so rather calculate
+% sampling rate from the timeseries vector to be sure
+% ACT.srate = str2double(header{3,1}.Measurement_Frequency(1:end-2));
+ACT.srate = round(1/(mean(diff(times))*60*60*24));
 ACT.xmin  = times(1);
 ACT.xmax  = times(end);
 % ---------------------------------------------------------

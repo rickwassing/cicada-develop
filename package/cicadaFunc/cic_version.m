@@ -1,2 +1,2 @@
 function cicadaVersion = cic_version()
-cicadaVersion = '0.1.2 (beta)';
+cicadaVersion = '0.1.3 (beta)';

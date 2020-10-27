@@ -86,7 +86,7 @@ NWT.type = zeros(size(NWT.onset));
 wear = [WT;NWT];
 % ---------------------------------------------------------
 % Transform the onset in samples to datetime
-wear.onset    = ACT.times(wear.onset)';
+wear.onset    = ascolumn(ACT.times(wear.onset));
 % Calculate the duration of each period in seconds
 wear.duration = wear.duration ./ ACT.srate;
 % Sort the table by the onset
