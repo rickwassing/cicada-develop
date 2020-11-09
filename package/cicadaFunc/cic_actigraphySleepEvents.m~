@@ -48,10 +48,10 @@ end
 % ---------------------------------------------------------
 % Select all sleep windows 
 sleepWindow = selectEventsUsingTime(ACT.analysis.events, select(1), select(2), 'Label', 'sleepWindow', 'Type', ACT.analysis.settings.sleepWindowType);
-napWindow = selectEventsUsingTime(ACT.analysis.events, select(1), select(2), 'Label', 'napWindow', 'Type', 'manual');
+napWindow = selectEventsUsingTime(ACT.analysis.events, select(1), select(2), 'Label', 'sleepWindow', 'Type', ACT.analysis.settings.sleepWindowType);
 % ---------------------------------------------------------
 % If there are no sleep windows, return
-if isempty(sleepWindow) && isempty(napWindow)
+if isempty(sleepWindow) &&
     return
 end
 if ~isfield(ACT.analysis.annotate, 'acceleration')
@@ -60,7 +60,6 @@ end
 % ---------------------------------------------------------
 % Calculate sleep period based on actigraphy
 sleepPeriod = struct();
-napPeriod = struct();
 waso = struct();
 waso.onset = [];
 waso.duration = [];
@@ -74,30 +73,12 @@ for si = 1:size(sleepWindow, 1)
     waso.onset = [waso.onset; time(o)];
     waso.duration = [waso.duration; (d*ACT.epoch)/(24*60*60)];
 end
-for si = 1:size(napWindow, 1)
-    [annotate, time] = selectDataUsingTime(ACT.analysis.annotate.acceleration.Data, ACT.analysis.annotate.acceleration.Time, napWindow.onset(si), napWindow.onset(si) + napWindow.duration(si));
-    napPeriod.onset(si, 1) = time(find(annotate == 0, 1, 'first'));
-    napPeriod.duration(si, 1) = time(find(annotate == 0, 1, 'last')) - napPeriod.onset(si, 1);
-    % Get all Awakenings
-    [annotate, time] = selectDataUsingTime(ACT.analysis.annotate.acceleration.Data, ACT.analysis.annotate.acceleration.Time, napPeriod.onset(si), napPeriod.onset(si) + napPeriod.duration(si));
-    [o, d] = getBouts(annotate > 0);
-    waso.onset = [waso.onset; time(o)];
-    waso.duration = [waso.duration; (d*ACT.epoch)/(24*60*60)];
-end
 % ---------------------------------------------------------
 % Add the new sleepPeriod and WASO events
-if isfield(sleepPeriod, 'onset')
-    [ACT, id] = cic_editEvents(ACT, 'add', sleepPeriod.onset, sleepPeriod.duration, 'Label', 'sleepPeriod', 'Type', 'actigraphy');
-    ids = [ids; id];
-end
-if isfield(napPeriod, 'onset')
-    [ACT, id] = cic_editEvents(ACT, 'add', napPeriod.onset, napPeriod.duration, 'Label', 'napPeriod', 'Type', 'actigraphy');
-    ids = [ids; id];
-end
-if isfield(waso, 'onset')
-    [ACT, id] = cic_editEvents(ACT, 'add', waso.onset, waso.duration, 'Label', 'waso', 'Type', 'actigraphy');
-    ids = [ids; id];
-end
+[ACT, id] = cic_editEvents(ACT, 'add', sleepPeriod.onset, sleepPeriod.duration, 'Label', 'sleepPeriod', 'Type', 'actigraphy');
+ids = [ids; id];
+[ACT, id] = cic_editEvents(ACT, 'add', waso.onset, waso.duration, 'Label', 'waso', 'Type', 'actigraphy');
+ids = [ids; id];
 % ---------------------------------------------------------
 % Set saved to false
 ACT.saved = false;

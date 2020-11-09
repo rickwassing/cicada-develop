@@ -11,6 +11,8 @@ o.reject = [];
 o.waso = [];
 o.sleepPeriod = [];
 o.sleepWindow = [];
+o.napPeriod = [];
+o.napWindow = [];
 for ch = 1:length(parent.Children)
     % Check if this is indeed an event
     if ~strcmpi(parent.Children(ch).Tag(1:5), 'Event')
@@ -33,7 +35,7 @@ for ch = 1:length(parent.Children)
 end
 
 idx = [];
-for field = {'other', 'start', 'leastActivity', 'mostActivity', 'button', 'customEvent', 'reject', 'waso', 'sleepPeriod', 'sleepWindow'}
+for field = {'other', 'start', 'leastActivity', 'mostActivity', 'button', 'customEvent', 'reject', 'waso', 'sleepPeriod', 'sleepWindow', 'napPeriod', 'napWindow'}
     idx = [idx; o.(field{:})'];
 end
 

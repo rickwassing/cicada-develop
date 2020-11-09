@@ -8,6 +8,12 @@ switch event.label{:}
     case 'sleepPeriod'
         Color = app.SleepPeriodButton.BackgroundColor;
         Visible = ifelse(strcmp(event.type{:}, 'actigraphy'), 'on', 'off');
+    case 'napWindow'
+        Color = app.SleepWindowButton.BackgroundColor;
+        Visible = 'on';
+    case 'napPeriod'
+        Color = app.SleepPeriodButton.BackgroundColor;
+        Visible = 'on';
     case 'waso'
         Color = [94, 146, 243]/255;
         Visible = ifelse(strcmp(event.type{:}, 'actigraphy'), 'on', 'off');
