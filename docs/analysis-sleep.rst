@@ -9,11 +9,7 @@ Sleep Analysis
 Introduction
 ============
 
-The aim of sleep analysis is to identify 'Sleep Windows', 'Sleep Periods', and 'WASO' events. 
-
-.. figure:: images/sleep-window-choice.png
-    :width: 752px
-    :align: center
+The aim of sleep analysis is to identify 'Sleep Windows', 'Sleep Periods', and 'WASO' events. Furthermore, Cicada allows you to distinguish between a full night's sleep and naps. For the latter, these are called 'Nap Windows' and 'Nap Periods' and can only be defined manually. 
 
 Sleep Window
 ------------
@@ -23,6 +19,10 @@ The **Sleep Window** is a time period in which the participant has the opportuni
 1. **manual**, by creating new events using the cursor,
 2. **sleepDiary**, by importing a sleep diary, or
 3. **GGIR**, by using the GGIR Sleep Detection algorithm,
+
+.. figure:: images/sleep-window-choice.png
+    :width: 752px
+    :align: center
 
 .. note::
 

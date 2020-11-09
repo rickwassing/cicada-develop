@@ -62,7 +62,7 @@ This section provides a detailed overview of all the fields in the ``ACT`` Datas
         - **average.weekend** [table] contains average statistics across weekend days
     - **stats.daily** [table] contains daily statistics
     - **stats.sleep** [struct] contains statistics for Sleep Window and Sleep Period Events
-        - **sleep.actigraphy** [table] contains statistics for Sleep Window and Sleep Period Events of type ``actigraphy``
+        - **sleep.actigraphy** [table] contains statistics for Sleep/Nap Window and Sleep/Nap Period Events of type ``actigraphy``
         - **sleep.sleepDiary** [table] contains statistics for Sleep Window and Sleep Period Events of type ``sleepDiary``
     - **stats.custom** [struct] contains statistics for Custom Events
         - **custom.(label)** [table] contains statistics for Custom Events identified by ``label``

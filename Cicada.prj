@@ -8,12 +8,12 @@
       <file>${PROJECT_ROOT}/Cicada_resources/icon_24.png</file>
       <file>${PROJECT_ROOT}/Cicada_resources/icon_16.png</file>
     </param.icons>
-    <param.version>0.1.2</param.version>
+    <param.version>0.1.3</param.version>
     <param.authnamewatermark>Rick Wassing</param.authnamewatermark>
     <param.email>rick.wassing@sydney.edu.au</param.email>
     <param.company />
     <param.summary>Cicada is an open source software to analyse actigraphy and other wearable devices.</param.summary>
-    <param.description>Version 0.1.2 (beta)
+    <param.description>Version 0.1.3 (beta)
 
 Warning. Cicada is still in development. Anything may change at any time and the software should not be considered stable.
 
@@ -46,7 +46,7 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
     <param.web.mcr>true</param.web.mcr>
     <param.package.mcr>false</param.package.mcr>
     <param.no.mcr>false</param.no.mcr>
-    <param.web.mcr.name>install-Cicada-0.1.2_MacOS</param.web.mcr.name>
+    <param.web.mcr.name>install-Cicada-0.1.3_MacOS</param.web.mcr.name>
     <param.package.mcr.name>MyAppInstaller_mcr</param.package.mcr.name>
     <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
     <param.windows.command.prompt>false</param.windows.command.prompt>
@@ -60,7 +60,13 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
 	 
  Input Arguments 
 	 -?  print help on how to use the application 
-	 input arguments</param.help.text>
+	 input arguments 
+ Description 
+ 	 Version 0.1.3 (beta)
+
+Warning. Cicada is still in development. Anything may change at any time and the software should not be considered stable.
+
+License. This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</param.help.text>
     <unset>
       <param.company />
       <param.guid />
@@ -244,8 +250,14 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
     <matlab>
       <root>/Applications/MATLAB_R2019b.app</root>
       <toolboxes>
+        <toolbox name="matlabcoder" />
         <toolbox name="neuralnetwork" />
       </toolboxes>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
       <toolbox>
         <neuralnetwork>
           <enabled>true</enabled>
@@ -261,7 +273,7 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
       <vista>false</vista>
       <linux>false</linux>
       <solaris>false</solaris>
-      <osver>10.15.5</osver>
+      <osver>10.15.7</osver>
       <os32>false</os32>
       <os64>true</os64>
       <arch>maci64</arch>
