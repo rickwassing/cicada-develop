@@ -172,7 +172,7 @@ Definition of Sleep Statistics
 - **slpType**. The type of sleep, ``nap`` or ``night``.
 - **slpCount**. Counter indicating this Sleep Window's index.
 - **eventOrigin**. The origin of the Sleep Windows, ``manual``, ``sleepDiary`` or ``GGIR``.
-- **dayLightsOn **. The day of the week of ``Lights On``, i.e. the day when this Sleep Window ended.
+- **dayLightsOn**. The day of the week of ``Lights On``, i.e. the day when this Sleep Window ended.
 - **clockLightsOut**. Date and clock time of ``Lights Out``, start of the Sleep Window.
 - **clockLightsOn**. Date and clock time of ``Lights On``, end of the Sleep Window.
 - **clockSlpOnset**. Date and clock time of ``Sleep Onset``, start of the Sleep Period.
