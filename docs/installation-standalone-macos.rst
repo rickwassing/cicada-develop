@@ -11,7 +11,7 @@ Install Cicada for MacOS
     :align: center
 
 2. Unzip and open the downloaded folder 'cicada-app-installers-master'.
-3. Open the 'install-cicada-0.1.2_MacOs' App by holding ``Control`` while you click on the file, and select 'Open'.
+3. Open the 'install-cicada-x.x.x_MacOs' App by holding ``Control`` while you click on the file, and select 'Open'.
 
 .. figure:: images/installation-standalone-macos-2.png
     :width: 532px
