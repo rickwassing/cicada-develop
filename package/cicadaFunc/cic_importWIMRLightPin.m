@@ -29,7 +29,14 @@ rawData = readtable(fullpath, opts);
 rawData.Properties.VariableNames(1:length(varNames)) = matlab.lang.makeValidName(varNames);
 % ---------------------------------------------------------
 % Process the data
-rawData.Date = datenum(rawData.Date, 'yy-mm-dd');
+% -----
+% EDIT: RW 02/12/2020, the date-string is not always in the same format,
+% but always in the order year, month, day. When the CSV is opened in
+% excel, the day is interpreted as the year, so extract the last 2 digits.
+YY = cellfun(@(datestr) datestr(1:2), rawData.Date, 'UniformOutput', false);
+MM = cellfun(@(datestr) datestr(4:5), rawData.Date, 'UniformOutput', false);
+DD = cellfun(@(datestr) datestr(end-1:end), rawData.Date, 'UniformOutput', false);
+rawData.Date = datenum(cellfun(@(dd, mm, yy) [dd, '/', mm, '/', yy], DD, MM, YY, 'UniformOutput', false), 'dd/mm/yy');
 rawData.Time = mod(datenum(rawData.Time, 'HH:MM:SS'), 1);
 % -----
 % Initialize 'times' vector
