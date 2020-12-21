@@ -38,6 +38,9 @@ for di = 1:ACT.ndays+1
         ACT.stats.daily.clockOnsetMinEuclNormMovWin5h(di, 1) ...
         ] = getM10L5(ACT, di);
     % ---------------------------------------------------------
+    % Relative amplitude
+    ACT.stats.daily.relAmpl(di, 1) = (ACT.stats.daily.maxEuclNormMovWin10h(di, 1) - ACT.stats.daily.minEuclNormMovWin5h(di, 1)) / (ACT.stats.daily.maxEuclNormMovWin10h(di, 1) + ACT.stats.daily.minEuclNormMovWin5h(di, 1));
+    % ---------------------------------------------------------
     % How much time and activity was spend in moderate to vigorous activity in hours
     if isfield(ACT.analysis.annotate, 'acceleration')
         [annotate, timesAnnot] = selectDataUsingTime(ACT.analysis.annotate.acceleration.Data, ACT.analysis.annotate.acceleration.Time, startDate, endDate);
