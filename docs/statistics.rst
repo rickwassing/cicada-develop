@@ -115,7 +115,8 @@ Definition of average Statistics
 - **hoursReject**. Total sum of the duration of all Reject Events.
 - **interDailyStability**. The frequency and extent of transitions between periods of rest and activity, calculated as ``sum((euclNormPerHr - avEuclNorm)^2) * nSamples / sum((euclNorm - avEuclNorm)^2) * nSamples``
 - **intraDailyVariability**. Activity level synchronization to zeitgeber's 24h day–night cycle, calculated as ``sum(diff(euclNorm)^2) * nSamples / sum((avEuclNorm - euclNorm)^2) * (nSamples-1)``.
-- **[min/max]EuclNormMovWin5h**. The minimum/maximum average Euclidean Norm across all days using a 5h moving window.
+- **[min/max]EuclNormMovWin[10/5]h**. The minimum/maximum average Euclidean Norm across all days using a 10h or 5h moving window (a.k.a. M10 and L5).
+- **relAmpl**. Relative amplitude given by (M10 - L5) / (M10 + L5). See DOI: 10.3109/07420529908998724)
 - **clockOnset[Min/Max]EuclNormMovWin5h**. The clock onset of the minimum/maximum 5h of averaged Euclidean Norm across all days.
 - **hoursSustInact**. Average number of hours per day spend in sustained inactivity.
 - **hoursLightAct**. Average number of hours per day spend in light activity.
@@ -133,10 +134,12 @@ Definition of average Statistics
 - **avClockLightsOut[Act/Diary]**. Average clock time of the the Sleep Window onsets (``Lights Out``) of type Actigraphy or Diary.
 - **avClockLightsOn[Act/Diary]**. Average clock time of the Sleep Window offsets (``Lights On``) of type Actigraphy or Diary.
 - **avClockSlpOnset[Act/Diary]**. Average clock time of the Sleep Period onsets of type Actigraphy or Diary. The Actigraphy Sleep Period onset corresponds to the first epoch Annotated as ``sustained inactive`` within the Sleep Window. The Diary Sleep Period onset corresponds to ``Lights Out`` + ``Sleep Onset Latency``.
+- **avClockMidSleep[Act/Diary]**. Average clock time of the sleep mid-point across all Sleep Periods of type Actigraphy or Diary. 
 - **avClockFinAwake[Act/Diary]**. Average clock time of the Sleep Period offsets of type Actigraphy or Diary. The Actigraphy Sleep Period onset corresponds to the last epoch Annotated as ``sustained inactive`` within the Sleep Window. The Diary Sleep Period onset corresponds to the ``Final awakening`` clock time.
 - **avSlpOnsetLat[Act/Diary]**. Average duration in minutes between the onsets of the Sleep Window and Sleep Period, i.e. ``Sleep Onset`` - ``Lights Out``.
 - **avAwakening[Act/Diary]**. Average number of awakenings within the Sleep Periods. The Actigraphy number of awakenings are the number of segments *not* Annotated as ``sustained inactive`` during the Sleep Periods. The Diary number of awakenings correspond to the estimated ``Awakenings``.
 - **avWakeAfterSlpOnset[Act/Diary]**. The average duration of awakenings within the Sleep Periods in minutes. The Actigraphy WASO is the sum of the duration of the segments *not* Annotated as ``sustained inactive``, averaged across all Sleep Periods. The Diary WASO is the average ``WASO`` estimate across all Sleep Periods.
+- **avSnoozeTime**. Average duration of the time between final awakening and lights on in minutes, calculated as ``avClockLightsOn - avClockFinAwake[Act/Diary]``
 - **avSlpWindow[Act/Diary]**. The average duration of the Sleep Windows in minutes, i.e. ``avClockLightsOn - avClockLightsOut``.
 - **avSlpPeriod[Act/Diary]**. The average duration of the Sleep Periods in minutes, i.e. ``avClockFinAwake - avClockSlpOnset``.
 - **avTotSlpTime[Act/Diary]**. The average total sleep time in minutes calculated as ``avSlpPeriod - avWakeAfterSlpOnset``.
@@ -154,7 +157,8 @@ Definition of Daily Statistics
 - **hoursValidData**. Total number of hours with valid data on this day.
 - **hoursReject**. Total sum of the duration of all Reject Events on this day.
 - **avEuclNorm**. This day's grand-average of the Euclidean Norm, excluding rejected segments.
-- **[min/max]EuclNormMovWin5h**. The minimum/maximum average Euclidean Norm for this day using a 5h moving window.
+- **[min/max]EuclNormMovWin[10/5]h**. The minimum/maximum average Euclidean Norm across all days using a 10h or 5h moving window (a.k.a. M10 and L5).
+- **relAmpl**. Relative amplitude given by (M10 - L5) / (M10 + L5). See DOI: 10.3109/07420529908998724)
 - **clockOnset[Min/Max]EuclNormMovWin5h**. The clock onset of the minimum/maximum 5h of averaged Euclidean Norm for this day.
 - **hoursSustInact**. Number of hours spend in sustained inactivity on this day.
 - **hoursLightAct**. Number of hours spend in light activity on this day.
@@ -176,10 +180,12 @@ Definition of Sleep Statistics
 - **clockLightsOut**. Date and clock time of ``Lights Out``, start of the Sleep Window.
 - **clockLightsOn**. Date and clock time of ``Lights On``, end of the Sleep Window.
 - **clockSlpOnset**. Date and clock time of ``Sleep Onset``, start of the Sleep Period.
+- **clockMidSleep**. Date and clock time of the sleep mid-point, ``Sleep Onset + 0.5 * Sleep Period``. 
 - **clockFinAwake**. Date and clock time of ``Final Awakening``, end of the Sleep Period.
 - **slpOnsetLat**. Duration in minutes between the onset of the Sleep Window and Sleep Period, i.e. ``Sleep Onset`` - ``Lights Out``.
 - **nAwakening**. Number of awakenings within the Sleep Period. The Actigraphy number of awakenings are the number of segments *not* Annotated as ``sustained inactive`` during the Sleep Periods. The Diary number of awakenings correspond to the estimated ``Awakenings``.
 - **wakeAfterSlpOnset**. Duration of awakenings within the Sleep Period in minutes. The Actigraphy WASO is the sum of the duration of the segments *not* Annotated as ``sustained inactive``. The Diary WASO is the average ``WASO`` estimate.
+- **snoozeTime**. Duration of the time between ``Final Awakening`` and ``Lights On`` in minutes.
 - **slpWindow**. Duration of the Sleep Window in minutes, i.e. ``clockLightsOn - clockLightsOut``.
 - **slpPeriod**. Duration of the Sleep Period in minutes, i.e. ``clockFinAwake - clockSlpOnset``.
 - **totSlpTime**. Total sleep time in minutes calculated as ``slpPeriod - wakeAfterSlpOnset``.

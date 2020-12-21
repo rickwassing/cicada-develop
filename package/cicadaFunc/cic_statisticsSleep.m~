@@ -108,9 +108,8 @@ end
                 res.nAwakening(s, 1) = size(waso, 1);
                 res.wakeAfterSlpOnset(s, 1) = sum(waso.duration) * 24*60;
             end
-            % ---------------------------------------------------------
             % Snooze time
-            res.snoozeTime(s, 1) = ((events.onset(s)+events.duration(s)) - (slpPeriods.onset+slpPeriods.duration)) * (24*60);
+            res.snoozeTime(s, 1) = ((events.onset(s)+events.duration(s)) - (slpPeriods.onset+slpPeriods.duration)
             % ---------------------------------------------------------
             % Total sleep time = (final awakening - sleep onset) - wake after sleep onset
             res.totSlpTime(s, 1) = (datenum(res.clockFinAwake{s,1}, 'dd/mm/yyyy HH:MM') - datenum(res.clockSlpOnset{s,1}, 'dd/mm/yyyy HH:MM')) *24*60 - res.wakeAfterSlpOnset(s,1);

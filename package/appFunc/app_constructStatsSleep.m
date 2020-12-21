@@ -350,6 +350,16 @@ for si = 1:size(app.ACT.stats.sleep.actigraphy, 1)
                 else
                     DiaryValue = ''; 
                 end
+            case 'clockMidSleep'
+                Label = 'Mid Slp';
+                ActValue = app.ACT.stats.sleep.actigraphy.(fnames{fi}){si};
+                if strcmpi(ActValue, 'na'); ActValue = '-'; else; ActValue = convertDatestr(ActValue, 'dd/mm/yyyy HH:MM', 'HH:MM'); end
+                if sum(idx) == 1
+                    DiaryValue = app.ACT.stats.sleep.sleepDiary.(fnames{fi}){idx};
+                    if strcmpi(DiaryValue, 'na'); DiaryValue = '-'; else; DiaryValue = convertDatestr(DiaryValue, 'dd/mm/yyyy HH:MM', 'HH:MM'); end
+                else
+                    DiaryValue = ''; 
+                end
             case 'clockFinAwake'
                 Label = 'FA';
                 ActValue = app.ACT.stats.sleep.actigraphy.(fnames{fi}){si};
@@ -376,6 +386,10 @@ for si = 1:size(app.ACT.stats.sleep.actigraphy, 1)
                 end
             case 'wakeAfterSlpOnset'
                 Label = 'WASO';
+                ActValue = duration2str(app.ACT.stats.sleep.actigraphy.(fnames{fi})(si)/(24*60));
+                if sum(idx) == 1; DiaryValue = duration2str(app.ACT.stats.sleep.sleepDiary.(fnames{fi})(idx)/(24*60)); else; DiaryValue = '-'; end
+            case 'snoozeTime'
+                Label = 'snooze';
                 ActValue = duration2str(app.ACT.stats.sleep.actigraphy.(fnames{fi})(si)/(24*60));
                 if sum(idx) == 1; DiaryValue = duration2str(app.ACT.stats.sleep.sleepDiary.(fnames{fi})(idx)/(24*60)); else; DiaryValue = '-'; end
             case 'totSlpTime'

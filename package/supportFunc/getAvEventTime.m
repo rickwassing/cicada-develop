@@ -76,10 +76,12 @@ end
 if strcmp(eventMetric, 'duration')
     time = mean(events.duration);
     return
-% If the user requests the average onset of offset: take the modulus to get
+% If the user requests the average onset, midpoint or offset: take the modulus to get
 % the onset/offset time for each day, irrespective of the date.
 elseif strcmp(eventMetric, 'onset')
     times = mod(events.onset, 1);
+elseif strcmp(eventMetric, 'midpoint')
+    times = mod(events.onset + (events.duration / 2), 1);
 elseif strcmp(eventMetric, 'offset')
     times = mod(events.onset + events.duration, 1);
 end
