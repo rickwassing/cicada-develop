@@ -27,13 +27,15 @@ Component.UserData.props = props;
 % * ISSUE 4
 % *****
 if destructurise
+    warning('off', 'all')
     DestrComponent = struct(Component);
     DestrComponent.Axes.UserData.input = 'cursor';
     DestrComponent.Axes.UserData.type = '';
     DestrComponent.Axes.ButtonDownFcn = {@app.EventListener};
     if isempty(Component.XTickLabel)
-        DestrComponent.Axes.Position = DestrComponent.Axes.Position + [0, -5, 0, 5];
+        DestrComponent.Axes.Position = DestrComponent.Axes.Position + [0, -5, 0, 5]; %#ok<STRNU>
     end
+    warning('on', 'all')
 end
 
 end % EOF

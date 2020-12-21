@@ -4,10 +4,8 @@ function [dateTime, err, msg] = parseSleepDiaryDateTime(thisDate, thisTime, form
 err = false;
 msg = '';
 
-% -----
-% First check whether 'thisTime' is of type numeric, if so, convert directly
+% First check whether 'thisTime' is of type cellstring, if so, convert directly
 if isnumeric(thisTime)
-    % If 'thisTime' only encodes time, and not the date, get the date from 'thisDate'
     if all(thisTime < 1)
         try
             % Initialize 'dateTime' as an empty cell array
@@ -20,8 +18,8 @@ if isnumeric(thisTime)
                     thisDate{di} = datenum(thisDate{di}, 'dd/mm/yyyy');
                     % Add the date and time together (minus one day if 'thisTime' is after 15:00)
                     dateTime{di} = thisDate{di} + ...    % The date
-                        (thisTime(di) < (15/24))-1 + ... % Subtract a day if after 15:00
-                        thisTime(di);                    % And add the time
+                        (thisTime{di} < (15/24))-1 + ... % Subtract a day if after 15:00
+                        thisTime{di};                    % And add the time
                     % Convert the date-time to 'dd/mm/yyyy HH:MM'
                     dateTime{di} = datestr(dateTime{di}, 'dd/mm/yyyy HH:MM');
                 else
@@ -33,21 +31,11 @@ if isnumeric(thisTime)
             % The conversion resulted in an error
             dateTime = nan(size(thisTime));
             err = true;
-            msg = 'Error in parseSleepDiaryDateTime (lines 20 or 26). Date-time formatting failed';
+            msg = 'Error in parseSleepDiaryDateTime (lines 52 or 54). Date-time formatting failed';
         end
     else
-        % Parse 'thisTime' 
-        try
-            dateTime = datestr(thisTime, 'dd/mm/yyyy HH:MM');
-        catch
-            % The conversion resulted in an error
-            dateTime = nan(size(thisTime));
-            err = true;
-            msg = 'Error in parseSleepDiaryDateTime (lines 41). Date-time formatting failed';
-        end
     end
-    % -----
-    % Else, 'thisTime' is a string and if it includes a day, month, and a year, then we can parse
+    % Else, if the string 'thisTime' includes a day, month, and a year, then we can parse
     % the date-time without using the 'thisDate' variable to indicate the date.
 elseif ...
         strRegexpCheck(format, 'd') && ...
@@ -71,10 +59,9 @@ elseif ...
         % The conversion resulted in an error
         dateTime = nan(size(thisTime));
         err = true;
-        msg = 'Error in parseSleepDiaryDateTime (line 64). Date-time formatting failed';
+        msg = 'Error in parseSleepDiaryDateTime (line 21). Date-time formatting failed';
     end
     
-    % -----
     % Otherwise, if the string 'thisTime' does not include a day, month and year,
     % then we have to parse the date-number with 'thisDate' to indicate the date.
     % In this case, we make the following assumption: 'thisDate' indicates the
@@ -111,6 +98,6 @@ else
         % The conversion resulted in an error
         dateTime = nan(size(thisTime));
         err = true;
-        msg = 'Error in parseSleepDiaryDateTime (lines 98 or 104). Date-time formatting failed';
+        msg = 'Error in parseSleepDiaryDateTime (lines 52 or 54). Date-time formatting failed';
     end
 end

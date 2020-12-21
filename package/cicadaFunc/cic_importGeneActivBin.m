@@ -53,8 +53,10 @@ for h = 1:length(header)
                 end
             case 'Height'
                 ACT.info.height = str2double(header{h,1}.Height);
+                if isnan(ACT.info.height); ACT.info.height = zeros(0); end
             case 'Weight'
                 ACT.info.weight = str2double(header{h,1}.Weight);
+                if isnan(ACT.info.weight); ACT.info.weight = zeros(0); end
             case 'Handedness_Code'
                 switch strtrim(header{h,1}.Handedness_Code)
                     case {'Right', 'right', 'R', 'r'}

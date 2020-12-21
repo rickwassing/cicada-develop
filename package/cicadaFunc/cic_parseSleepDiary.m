@@ -13,7 +13,7 @@ items = rawTable.Properties.VariableNames;
 if isempty(importSettings.idx.date)
     ACT.analysis.sleepDiary.date = nan(size(rawTable, 1), 1);
     err = true;
-    msg = 'The ''date'' variable is required, but its column index in the import settings is empty. Please set the appropriate column index.';
+    msg = 'The ''date'' variable is required, but its column index in the import settings is empty. Please select the appropriate variable.';
 else
     [ACT.analysis.sleepDiary.date, parseErr] = parseSleepDiaryDate(rawTable.(items{importSettings.idx.date}), importSettings.format.date, 'dd/mm/yyyy');
     if parseErr
@@ -26,7 +26,7 @@ end
 if isempty(importSettings.idx.lightsOut)
     ACT.analysis.sleepDiary.lightsOut = nan(size(rawTable, 1), 1);
     err = true;
-    msg = 'The ''lightsOut'' variable is required, but its column index in the import settings is empty. Please set the appropriate column index.';
+    msg = 'The ''lightsOut'' variable is required, but its column index in the import settings is empty. Please select the appropriate variable.';
 else
     [ACT.analysis.sleepDiary.lightsOut, parseErr] = parseSleepDiaryDateTime(ACT.analysis.sleepDiary.date, rawTable.(items{importSettings.idx.lightsOut}), importSettings.format.lightsOut);
     if parseErr
@@ -72,7 +72,7 @@ end
 if isempty(importSettings.idx.lightsOn)
     ACT.analysis.sleepDiary.lightsOn = nan(size(rawTable, 1), 1);
     err = true;
-    msg = 'The ''lightsOn'' variable is required, but its column index in the import settings is empty. Please set the appropriate column index.';
+    msg = 'The ''lightsOn'' variable is required, but its column index in the import settings is empty. Please select the appropriate variable.';
 else
     [ACT.analysis.sleepDiary.lightsOn, parseErr] = parseSleepDiaryDateTime(ACT.analysis.sleepDiary.date, rawTable.(items{importSettings.idx.lightsOn}), importSettings.format.lightsOn);
     if parseErr

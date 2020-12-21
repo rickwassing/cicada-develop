@@ -72,10 +72,12 @@ end
 % -----
 % Plot max value
 % -----
+% If this is M10L5, add 5 hours to winSize for the M10 duration
+add = ifelse(winSize == 5, 5, 0);
 % Check if component should mount
 if shouldComponentMount(app, parent, [GridLayout.Tag, '_Plot-max', varName])
     % Get XData and YData
-    XData = [mod(datenum(clockOnsetMax, 'HH:MM'), 1), mod(datenum(clockOnsetMax, 'HH:MM'), 1)+winSize/24];
+    XData = [mod(datenum(clockOnsetMax, 'HH:MM'), 1), mod(datenum(clockOnsetMax, 'HH:MM'), 1)+(winSize+add)/24];
     YData = [maxValue, maxValue];
     if any(XData > 1)
         XData = [XData-1, NaN, XData];
@@ -97,7 +99,7 @@ if shouldComponentMount(app, parent, [GridLayout.Tag, '_Plot-max', varName])
     mountComponent(app, 'mount_plot', parent, props);
 else
     % Get XData and YData
-    XData = [mod(datenum(clockOnsetMax, 'HH:MM'), 1), mod(datenum(clockOnsetMax, 'HH:MM'), 1)+winSize/24];
+    XData = [mod(datenum(clockOnsetMax, 'HH:MM'), 1), mod(datenum(clockOnsetMax, 'HH:MM'), 1)+(winSize+add)/24];
     YData = [maxValue, maxValue];
     if any(XData > 1)
         XData = [XData-1, NaN, XData];

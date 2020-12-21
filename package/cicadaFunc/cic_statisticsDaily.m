@@ -29,14 +29,14 @@ for di = 1:ACT.ndays+1
     % Average euclidean norm across entire day
     ACT.stats.daily.avEuclNorm(di, 1) = nanmean(euclNormMinOne);
     % ---------------------------------------------------------
-    % Most and least activity in 5 hour moving windows
+    % Most (10h) and least (5h) activity
     % Note, this function returns datenum's which are converted to datestr at the end of this function
     [...
-        ACT.stats.daily.maxEuclNormMovWin5h(di, 1), ...
-        ACT.stats.daily.clockOnsetMaxEuclNormMovWin5h(di, 1), ...
+        ACT.stats.daily.maxEuclNormMovWin10h(di, 1), ...
+        ACT.stats.daily.clockOnsetMaxEuclNormMovWin10h(di, 1), ...
         ACT.stats.daily.minEuclNormMovWin5h(di, 1), ...
         ACT.stats.daily.clockOnsetMinEuclNormMovWin5h(di, 1) ...
-        ] = getM5L5(ACT, di);
+        ] = getM10L5(ACT, di);
     % ---------------------------------------------------------
     % How much time and activity was spend in moderate to vigorous activity in hours
     if isfield(ACT.analysis.annotate, 'acceleration')
@@ -123,9 +123,9 @@ end
 
 % ---------------------------------------------------------
 % Transform the clock onset max and min euclidean norm to date strings
-idxNan = isnan(ACT.stats.daily.clockOnsetMaxEuclNormMovWin5h);
-ACT.stats.daily.clockOnsetMaxEuclNormMovWin5h = cellstr(datestr(ACT.stats.daily.clockOnsetMaxEuclNormMovWin5h, 'dd/mm/yyyy HH:MM'));
-ACT.stats.daily.clockOnsetMaxEuclNormMovWin5h(idxNan) = {'na'};
+idxNan = isnan(ACT.stats.daily.clockOnsetMaxEuclNormMovWin10h);
+ACT.stats.daily.clockOnsetMaxEuclNormMovWin10h = cellstr(datestr(ACT.stats.daily.clockOnsetMaxEuclNormMovWin10h, 'dd/mm/yyyy HH:MM'));
+ACT.stats.daily.clockOnsetMaxEuclNormMovWin10h(idxNan) = {'na'};
 
 idxNan = isnan(ACT.stats.daily.clockOnsetMinEuclNormMovWin5h);
 ACT.stats.daily.clockOnsetMinEuclNormMovWin5h = cellstr(datestr(ACT.stats.daily.clockOnsetMinEuclNormMovWin5h, 'dd/mm/yyyy HH:MM'));

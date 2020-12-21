@@ -68,6 +68,8 @@ for si = 1:size(sleepWindow, 1)
     [annotate, time] = selectDataUsingTime(ACT.analysis.annotate.acceleration.Data, ACT.analysis.annotate.acceleration.Time, sleepWindow.onset(si), sleepWindow.onset(si) + sleepWindow.duration(si));
     % Check if there is any sleep this interval
     if ~any(annotate == 0)
+        sleepPeriod.onset(si, 1) = NaN;
+        sleepPeriod.duration(si, 1) = 0;
         continue
     end % Ok, we have at least one epoch of sleep
     sleepPeriod.onset(si, 1) = time(find(annotate == 0, 1, 'first'));
@@ -82,7 +84,8 @@ for si = 1:size(napWindow, 1)
     [annotate, time] = selectDataUsingTime(ACT.analysis.annotate.acceleration.Data, ACT.analysis.annotate.acceleration.Time, napWindow.onset(si), napWindow.onset(si) + napWindow.duration(si));
     % Check if there is any sleep this interval
     if ~any(annotate == 0)
-        continue
+        napPeriod.onset(si, 1) = 
+        napPeriod.duration(si, 1) = 0;
     end
     napPeriod.onset(si, 1) = time(find(annotate == 0, 1, 'first'));
     napPeriod.duration(si, 1) = time(find(annotate == 0, 1, 'last')) - napPeriod.onset(si, 1);
