@@ -180,7 +180,13 @@ for di = 1:size(app.ACT.stats.daily, 1)
             YData = ceil(XData) - floor(app.ACT.xmin);
             YData = ifelse(strcmpi(varName{:}, 'MinEuclNormMovWin5h'), [YData+1.33, YData+1.33, NaN, YData+0.33, YData+0.33, NaN], [YData + 0.66, YData + 0.66, NaN, YData - 0.33, YData - 0.33, NaN]);
             XData = mod(XData, 1) * 24;
-            XData = [XData-24, XData - 24 + 5, NaN, XData, XData + 5, NaN];
+            XData = [...
+                XData-24, ...
+                XData - 24 + ifelse(strcmpi(varName{:}, 'MinEuclNormMovWin5h'), 5, 10), ...
+                NaN, ...
+                XData, ...
+                XData + ifelse(strcmpi(varName{:}, 'MinEuclNormMovWin5h'), 5, 10), ...
+                NaN]; %#ok<AGROW>
             % -----
             % Check if component should mount
             if shouldComponentMount(app, parent, ['DailyStats_Plot' varName{:} '_day-', num2str(di)])
@@ -319,6 +325,9 @@ for fi = 1:length(fnames)
             Color = [0.49, 0.18, 0.56];
         case 'clockOnsetMinEuclNormMovWin5h'
             Text = ifelse(strcmp(value{:}, 'na'), '-', value{:}(regexp(value{:}, '[0-9]+:[0-9]+'):end));
+            Color = [0.49, 0.18, 0.56];
+        case 'relAmpl'
+            Text = ifelse(isnan(value), '-', sprintf('%.2f', value));
             Color = [0.49, 0.18, 0.56];
         case {'hoursSustInact', 'hoursLightAct', 'hoursModVigAct'}
             Text = ifelse(value == 0, '-', duration2str(value/24));

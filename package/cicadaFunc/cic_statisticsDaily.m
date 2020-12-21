@@ -1,5 +1,7 @@
 function ACT = cic_statisticsDaily(ACT)
-
+% ---------------------------------------------------------
+% Do not show the warning that a new row is added to a table
+warning('off', 'all')
 % ---------------------------------------------------------
 % Create a new table
 ACT.stats.daily = table();
@@ -133,5 +135,9 @@ ACT.stats.daily.clockOnsetMaxEuclNormMovWin10h(idxNan) = {'na'};
 idxNan = isnan(ACT.stats.daily.clockOnsetMinEuclNormMovWin5h);
 ACT.stats.daily.clockOnsetMinEuclNormMovWin5h = cellstr(datestr(ACT.stats.daily.clockOnsetMinEuclNormMovWin5h, 'dd/mm/yyyy HH:MM'));
 ACT.stats.daily.clockOnsetMinEuclNormMovWin5h(idxNan) = {'na'};
+
+% ---------------------------------------------------------
+% Turn back on the warnings
+warning('on', 'all')
 
 end
