@@ -18,27 +18,31 @@
 % 	}
 %
 
-function struct2json(S, jsonFileName)
+function struct2json(S, jsonFileName, verbose)
+if nargin < 3
+    verbose = false;
+end
 if nargin == 2
     fid = fopen(jsonFileName,'w');
 else
     fid = 0;
+    verbose = true;
 end
 sep = ',';
 for i = 1:length(S)
     if i == length(S)
         sep = '';
     end
-    fprintf('{\n');
+    if verbose;      fprintf('{\n'); end
     if fid ~= 0; fprintf(fid,'{\n'); end
-    writeElement(fid, S(i), fieldnames(S(i)), '');
-    fprintf('}%s\n', sep);
+    writeElement(fid, S(i), fieldnames(S(i)), '', verbose);
+    if verbose;      fprintf('}%s\n', sep); end
     if fid ~= 0; fprintf(fid,'}%s\n', sep); end
 end
 if fid ~= 0; fclose(fid); end
 end
 
-function writeElement(fid, S, fnames, tabs)
+function writeElement(fid, S, fnames, tabs, verbose)
 
 tabs = sprintf('%s\t', tabs);
 
@@ -49,33 +53,33 @@ for j = 1:length(fnames)
     end
     if isstruct(S.(fnames{j}))
         if length(S.(fnames{j})) == 1
-            fprintf('%s"%s": {\n', tabs, fnames{j});
-            if fid ~= 0; fprintf(fid,'%s"%s": {\n', tabs, fnames{j}); end
-            writeElement(fid, S.(fnames{j}), fieldnames(S.(fnames{j})), tabs)
-            fprintf('%s}%s\n', tabs, sep_j);
-            if fid ~= 0; fprintf(fid,'%s}%s\n', tabs, sep_j); end
+            if verbose;       fprintf('%s"%s": {\n', tabs, fnames{j}); end
+            if fid ~= 0; fprintf(fid, '%s"%s": {\n', tabs, fnames{j}); end
+            writeElement(fid, S.(fnames{j}), fieldnames(S.(fnames{j})), tabs, verbose)
+            if verbose;       fprintf('%s}%s\n', tabs, sep_j); end
+            if fid ~= 0; fprintf(fid, '%s}%s\n', tabs, sep_j); end
         else
-            fprintf('%s"%s": [\n', tabs, fnames{j});
-            if fid ~= 0; fprintf(fid,'%s"%s": [\n', tabs, fnames{j}); end
+            if verbose;       fprintf('%s"%s": [\n', tabs, fnames{j}); end
+            if fid ~= 0; fprintf(fid, '%s"%s": [\n', tabs, fnames{j}); end
             tabs = sprintf('%s\t', tabs);
             sep_k = ',';
             for k = 1:length(S.(fnames{j}))
                 if k == length(S.(fnames{j}))
                     sep_k = '';
                 end
-                fprintf('%s{\n', tabs);
-                if fid ~= 0; fprintf(fid,'%s{\n', tabs); end
-                writeElement(fid, S.(fnames{j})(k), fieldnames(S.(fnames{j})(k)), tabs)
-                fprintf('%s}%s\n', tabs, sep_k);
-                if fid ~= 0; fprintf(fid,'%s}%s\n', tabs, sep_k); end
+                if verbose;       fprintf('%s{\n', tabs); end
+                if fid ~= 0; fprintf(fid, '%s{\n', tabs); end
+                writeElement(fid, S.(fnames{j})(k), fieldnames(S.(fnames{j})(k)), tabs, verbose)
+                if verbose;       fprintf('%s}%s\n', tabs, sep_k); end
+                if fid ~= 0; fprintf(fid, '%s}%s\n', tabs, sep_k); end
             end
             tabs = sprintf('%s\b', tabs);
-            fprintf('%s]%s\n', tabs, sep_j);
-            if fid ~= 0; fprintf(fid,'%s]%s\n', tabs, sep_j); end
+            if verbose;       fprintf('%s]%s\n', tabs, sep_j); end
+            if fid ~= 0; fprintf(fid, '%s]%s\n', tabs, sep_j); end
         end
     else
         if isempty(S.(fnames{j}))
-            fprintf('%s"%s": null%s\n', tabs, fnames{j}, sep_j);
+            if verbose;       fprintf('%s"%s": null%s\n', tabs, fnames{j}, sep_j); end
             if fid ~= 0; fprintf(fid, '%s"%s": null%s\n', tabs, fnames{j}, sep_j); end
         elseif length(S.(fnames{j})) == 1 || ischar(S.(fnames{j}))
             val = S.(fnames{j});
@@ -83,14 +87,14 @@ for j = 1:length(fnames)
                 val = val{:};
             end
             if isnumeric(val)
-                fprintf('%s"%s": %g%s\n', tabs, fnames{j}, val, sep_j);
+                if verbose;       fprintf('%s"%s": %g%s\n', tabs, fnames{j}, val, sep_j); end
                 if fid ~= 0; fprintf(fid, '%s"%s": %g%s\n', tabs, fnames{j}, val, sep_j); end
             else
-                fprintf('%s"%s": "%s"%s\n', tabs, fnames{j}, val, sep_j);
+                if verbose;       fprintf('%s"%s": "%s"%s\n', tabs, fnames{j}, val, sep_j); end
                 if fid ~= 0; fprintf(fid, '%s"%s": "%s"%s\n', tabs, fnames{j}, val, sep_j); end
             end
         else
-            fprintf('%s"%s": [\n', tabs, fnames{j});
+            if verbose;       fprintf('%s"%s": [\n', tabs, fnames{j}); end
             if fid ~= 0; fprintf(fid, '%s"%s": [\n', tabs, fnames{j}); end
             sep_k = ',';
             for k = 1:length(S.(fnames{j}))
@@ -103,17 +107,17 @@ for j = 1:length(fnames)
                     val = S.(fnames{j})(k);
                 end
                 if isnumeric(val)
-                    fprintf('%s\t%g%s\n', tabs, val, sep_k);
+                    if verbose;       fprintf('%s\t%g%s\n', tabs, val, sep_k); end
                     if fid ~= 0; fprintf(fid, '%s\t%g%s\n', tabs, val, sep_k); end
                 elseif isempty(val)
-                    fprintf('%s\tnull%s\n', tabs, sep_k);
+                    if verbose;       fprintf('%s\tnull%s\n', tabs, sep_k); end
                     if fid ~= 0; fprintf(fid, '%s\tnull%s\n', tabs, sep_k); end
                 else
-                    fprintf('%s\t"%s"%s\n', tabs, val, sep_k);
+                    if verbose;       fprintf('%s\t"%s"%s\n', tabs, val, sep_k); end
                     if fid ~= 0; fprintf(fid, '%s\t"%s"%s\n', tabs, val, sep_k); end
                 end
             end
-            fprintf('%s]%s\n', tabs, sep_j);
+            if verbose;       fprintf('%s]%s\n', tabs, sep_j); end
             if fid ~= 0; fprintf(fid, '%s]%s\n', tabs, sep_j); end
         end
     end
