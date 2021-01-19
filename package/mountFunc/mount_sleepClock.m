@@ -86,7 +86,10 @@ end
             t = t(1):1/60:t(2);
         elseif t(1) > t(2)
             t = [t(1):1/60:24, 1/60:1/60:t(2)];
+        elseif t(1) == t(2)
+            t = 0;
         else
+            h = [];
             skip = true;
         end
         if ~skip
