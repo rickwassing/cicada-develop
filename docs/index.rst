@@ -17,7 +17,7 @@ Version 0.1.4 (beta)
 
 .. warning::
 
-  Cicada is still in development. Anything may change at any time and the software should not be considered stable.
+  Cicada is still in development and currently does not work in Matlab 2020(a/b). Anything may change at any time and the software should not be considered stable.
 
 .. _index-authors:
 
