@@ -4,7 +4,7 @@ This repository contains the source files for Cicada, an open source software fo
 
 ## Versioning
 
-We use [semantic versioning](http://semver.org/). Current version is 0.1.4. Cicada is still in  development and currently does not work in Matlab 2020(a/b). Anything may change at any time and the software should not be considered stable.
+We use [semantic versioning](http://semver.org/). Current version is 0.1.5. Cicada is still in  development and currently does not work in Matlab 2020(a/b). Anything may change at any time and the software should not be considered stable.
 
 ## Authors
 
