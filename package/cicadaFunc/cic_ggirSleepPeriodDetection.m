@@ -43,6 +43,23 @@ for d = 1:ACT.ndays
             end
         end
     end
+    % - check this interval does not start or end with NaN's
+    if isnan(angle(idxStartDate))
+        idxValidDate = find(~isnan(angle(idxStartDate:idxEndDate)), 1, 'first');
+        if isempty(idxValidDate) % there is no non-NaN value
+            continue
+        end
+        idxStartDate = idxStartDate + idxValidDate - 1;
+    end
+    if isnan(angle(idxEndDate))
+        idxValidDate = find(~isnan(angle(idxStartDate:idxEndDate)), 1, 'last');
+        idxEndDate = idxStartDate + idxValidDate - 1;
+    end
+    % Make sure we have enough data
+    winSize = idxEndDate - idxStartDate;
+    if winSize < (3*3600/ACT.epoch)
+        continue
+    end
     % ---------------------------------------------------------
     % (2) Determine the sleep onset and final awakening times
     [idxSleepPeriodOnset, idxSleepPeriodOffset] = ggirSleepPeriodDetection(angle(idxStartDate:idxEndDate), ACT.epoch);
@@ -57,7 +74,7 @@ for d = 1:ACT.ndays
     onsetCloseToBoundary = idxSleepPeriodOnset <= (3600/ACT.epoch);
     offsetCloseToBoundary = idxSleepPeriodOffset >= winSize - (3600/ACT.epoch);
     iterCount = 0;
-    while (onsetCloseToBoundary || offsetCloseToBoundary) && iterCount <= 10
+    while (onsetCloseToBoundary || offsetCloseToBoundary) && iterCount < 10
         % Enlarge the window size with one hour (3600/epoch length in seconds)
         if onsetCloseToBoundary && offsetCloseToBoundary
             idxStartDate = idxStartDate - 3600/ACT.epoch; if idxStartDate < 1; idxStartDate = 1; iterCount = 10; end
@@ -67,10 +84,18 @@ for d = 1:ACT.ndays
         elseif offsetCloseToBoundary
             idxEndDate   = idxEndDate   + 3600/ACT.epoch; if idxEndDate > length(angle); idxEndDate = length(angle); iterCount = 10; end
         end
-        % Recalculate the sleep period 
-        [idxSleepPeriodOnset, idxSleepPeriodOffset] = ggirSleepPeriodDetection(angle(idxStartDate:idxEndDate), ACT.epoch);
+        if isnan(angle(idxStartDate))
+            idxValidDate = find(~isnan(angle(idxStartDate:idxEndDate)), 1, 'first');
+            idxStartDate = idxStartDate + idxValidDate - 1;
+        end
+        if isnan(angle(idxEndDate))
+            idxValidDate = find(~isnan(angle(idxStartDate:idxEndDate)), 1, 'last');
+            idxEndDate = idxStartDate + idxValidDate - 1;
+        end
         % Update the window size
         winSize = idxEndDate - idxStartDate;
+        % Recalculate the sleep period 
+        [idxSleepPeriodOnset, idxSleepPeriodOffset] = ggirSleepPeriodDetection(angle(idxStartDate:idxEndDate), ACT.epoch);
         % Update the logical variables
         onsetCloseToBoundary = idxSleepPeriodOnset <= (3600/ACT.epoch);
         offsetCloseToBoundary = idxSleepPeriodOffset >= winSize - (3600/ACT.epoch);

@@ -1,6 +1,7 @@
 function [idxInBedStart, idxInBedEnd] = ggirSleepPeriodDetection(angle, epoch)
 
 % Initialize constant variables.
+angle           = asrow(angle);
 window          = (5*60) / epoch;  % 5 minute window converted to samples
 inBedThres      = 15;              % 15 times the 10th percentile of the median absolute deviation of the angle
 inBedBlockSize  = (30*60) / epoch; % 30 minute window converted to samples. Used to find periods that are probable in-bed periods
@@ -39,8 +40,8 @@ if constrain2range
 end
 % Initialize 'noMovement' as a vector of zeros
 noMovement = zeros(1,length(rollMedAbsDiffAngle));
-% Those indices where the angle change is below the threshold are timepoints 
-% where the subject is potentially in bed
+% Those indices where the angle change is below the threshold and where the
+% data is valid are timepoints where the subject is potentially in bed
 noMovement(rollMedAbsDiffAngle < inBedThres) = 1;
 % Convert this dichotomous vector to index numbers
 idxInBedStart = find(diff([0,noMovement,0]) == 1);  % start of blocks in bed
@@ -57,7 +58,7 @@ if isempty(idxInBedStart)
     return
 end
 
-% Initialize 'inBedTime' as a vector of NaN's
+% Initialize 'inBedTime' as a vector of zeros's
 inBed = zeros(1,length(rollMedAbsDiffAngle));
 % Record these blocks in the 'inBed' vector
 for m = 1:length(idxInBedStart)
@@ -65,6 +66,8 @@ for m = 1:length(idxInBedStart)
 end
 % Fill up gaps in between 2 in-bed blocks, if the gap is less than 60 minutes
 outBed = double(inBed == 0);
+outBed(1:find(inBed == 1, 1, 'first')-1) = 0;
+outBed(find(inBed == 1, 1, 'last')+1:end) = 0;
 idxOutBedStart = find(diff([0,outBed,0]) == 1); % start of blocks out of bed
 idxOutBedEnd = find(diff([0,outBed,0]) == -1);  % end of blocks out of bed
 % Only keep those blocks that are shorter than outBedBlockSize
@@ -86,9 +89,17 @@ nonwear = isnan(rollCellFun(funcHandle, angle, window, 'Fill', false));
 for b = 1:length(idxInBedStart)
     pctNan = sum(nonwear(idxInBedStart(b):idxInBedEnd(b)-1)) / (idxInBedEnd(b) - idxInBedStart(b));
     if pctNan > 0.9
-        idxInBedEnd(b) = 0;
+        idxInBedEnd(b) = NaN;
     end
 end
+% Remove those instances where the non-wear block was mistaken for an
+% in-bed block
+idxInBedStart(isnan(idxInBedEnd)) = [];
+idxInBedEnd(isnan(idxInBedEnd)) = [];
+if isempty(idxInBedStart)
+    return
+end
+% Return the longest in-bed block
 [~,longestInBed] = max(idxInBedEnd - idxInBedStart);
 
 idxInBedStart = idxInBedStart(longestInBed);
