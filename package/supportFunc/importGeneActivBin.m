@@ -10,7 +10,7 @@ function [header, time, xyz, light, button, prop_val] = importGeneActivBin(fname
 %
 % HDR is a Mx1 cell array containing M header pages (each of them a struct)
 %
-% TIME is an Nx1 vector of measurement times. The times are expressed as 
+% TIME is an Nx1 vector of measurement times. The times are expressed as
 % serial date numbers (see help datenum)
 %
 % XYZ is a Nx3 matrix of calibrated accelerometer measurements. The columns
@@ -21,7 +21,7 @@ function [header, time, xyz, light, button, prop_val] = importGeneActivBin(fname
 % BUT is a Nx1 vector of button status values (1 on / 0 off)
 %
 % 'key1', 'key2' are names of page properties that should be extracted (and
-% interpolated) from each data page. For instance 
+% interpolated) from each data page. For instance
 %
 %
 % (c) German Gomez-Herrero
@@ -59,34 +59,35 @@ while isempty(C{1})
 end
 
 % Read header pages
-header = cell(NB_HEADER_PAGES, 1); 
+header = cell(NB_HEADER_PAGES, 1);
 header_page_count = 1;
 page_name = C{1}{1};
 while ~strcmpi(page_name, DATA_PAGE_NAME)
-    C = textscan(fid, '%[^\r\n:*]: %[^\r\n]');     
+    C = textscan(fid, '%[^\r\n:*]: %[^\r\n]');
     header{header_page_count} = cell2struct(C{2}, ...
-        strrep(C{1}(1:numel(C{2})), ' ', '_'), 1);  
+        strrep(C{1}(1:numel(C{2})), ' ', '_'), 1);
     header{header_page_count}.Page_Name = page_name;
     if strcmpi(page_name, CALIBRATION_PAGE_NAME)
-        x_gain = str2double(header{header_page_count}.x_gain);  
-        y_gain = str2double(header{header_page_count}.y_gain);  
-        z_gain = str2double(header{header_page_count}.z_gain);  
-        x_offset = str2double(header{header_page_count}.x_offset);  
-        y_offset = str2double(header{header_page_count}.y_offset);  
-        z_offset = str2double(header{header_page_count}.z_offset);  
-        volts = str2double(header{header_page_count}.Volts); 
-        lux =  str2double(header{header_page_count}.Lux); 
+        x_gain = str2double(header{header_page_count}.x_gain);
+        y_gain = str2double(header{header_page_count}.y_gain);
+        z_gain = str2double(header{header_page_count}.z_gain);
+        x_offset = str2double(header{header_page_count}.x_offset);
+        y_offset = str2double(header{header_page_count}.y_offset);
+        z_offset = str2double(header{header_page_count}.z_offset);
+        volts = str2double(header{header_page_count}.Volts);
+        lux =  str2double(header{header_page_count}.Lux);
     end
     if numel(C{2})<numel(C{1})
-        page_name = C{1}{end};                
+        page_name = C{1}{end};
         header_page_count = header_page_count + 1;
     else
         % We have reached the end of the file
-         xyz = [];
-         light = [];
-         button = [];
-         prop_val = [];
-         time = [];
+        xyz = [];
+        light = [];
+        button = [];
+        prop_val = [];
+        time = [];
+        fclose(fid);
         return;
     end
 end
@@ -94,7 +95,7 @@ header(header_page_count+1:end) = [];
 
 if isfield(header{end},'Number_of_Pages')
     nb_pages_in_header = true;
-    nb_pages = str2double(header{end}.Number_of_Pages); 
+    nb_pages = str2double(header{end}.Number_of_Pages);
 else
     nb_pages_in_header = false;
     nb_pages = NB_DATA_PAGES;
@@ -130,12 +131,12 @@ while strcmpi(page_name, DATA_PAGE_NAME)
     [prop_idx, prop_loc] = ismember(C{1}(1:end-1), data_props);
     [prop_loc, idx] = sort(prop_loc(prop_idx));
     prop_idx = find(prop_idx);
-    prop_idx = prop_idx(idx);   
+    prop_idx = prop_idx(idx);
     prop_val(data_page_count, prop_loc) = str2double(C{2}(prop_idx));
     
     % Get the measurement time
     time(data_page_count) = datenum(C{2}(ismember(C{1}(1:end-1), TIME_NAME)), ...
-        TIME_FORMAT);    
+        TIME_FORMAT);
     
     % Get the measurement frequency
     freq(data_page_count) = str2double(C{2}(ismember(C{1}(1:end-1), ...
@@ -159,7 +160,7 @@ if ~isempty(page_name)
 end
 if nb_pages_in_header && data_page_count ~= nb_pages
     warning('Only %d data pages were found although %d pages are annotated in the header', ...
-        data_page_count, nb_pages);    
+        data_page_count, nb_pages);
     xyz      = xyz(1:300*data_page_count, :);
     light    = light(1:300*data_page_count, :);
     button   = button(1:300*data_page_count, :);

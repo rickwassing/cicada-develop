@@ -8,7 +8,7 @@ ACT = newDataset();
 % ---------------------------------------------------------
 % Read .bin file and convert to .mat variables
 [header, times, xyz, light, button, prop_val] = importGeneActivBin(fullpath);
-if strcmpi(header, 'cancel')
+if any(strcmpi(header, 'cancel')) || isempty(xyz)
     return
 end
 button = diff([0; button > 0.5]) == 1;
@@ -181,8 +181,8 @@ ACT.xmax = times(end);
 ACT.analysis.events = table();
 if any(button)
     ACT.analysis.events.id       = [1;(2:length(find(button))+1)'];
-    ACT.analysis.events.onset    = [times(1);round2minute(times(button))];
-    ACT.analysis.events.duration = zeros(sum(button)+1,1);
+    ACT.analysis.events.onset    = [times(1);ascolumn(round2minute(times(button)))];
+    ACT.analysis.events.duration = zeros(sum(button)+1, 1);
     ACT.analysis.events.label    = [{'start'};repmat({'button'},length(find(button)),1)];
     ACT.analysis.events.type     = [{''};repmat({'button'},length(find(button)),1)];
 else
