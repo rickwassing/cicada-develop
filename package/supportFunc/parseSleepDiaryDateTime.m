@@ -8,7 +8,7 @@ msg = '';
 % First check whether 'thisTime' is of type numeric, if so, convert directly
 if isnumeric(thisTime)
     % If 'thisTime' only encodes time, and not the date, get the date from 'thisDate'
-    if all(thisTime < 1)
+    if all(thisTime(~isnan(thisTime)) < 1)
         try
             % Initialize 'dateTime' as an empty cell array
             dateTime = cell(length(thisTime), 1);
@@ -38,7 +38,7 @@ if isnumeric(thisTime)
     else
         % Parse 'thisTime' 
         try
-            dateTime = datestr(thisTime, 'dd/mm/yyyy HH:MM');
+            dateTime = cellstr(datestr(thisTime, 'dd/mm/yyyy HH:MM'));
         catch
             % The conversion resulted in an error
             dateTime = nan(size(thisTime));
