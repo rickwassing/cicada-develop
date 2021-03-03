@@ -112,6 +112,7 @@ time = nan(nb_pages, 1);
 freq = nan(nb_pages, 1);
 pct = 0;
 
+error_occurred = false;
 while strcmpi(page_name, DATA_PAGE_NAME)
     if nb_pages_in_header
         if ((data_page_count/nb_pages)-pct) > 0.01
@@ -135,24 +136,35 @@ while strcmpi(page_name, DATA_PAGE_NAME)
     prop_val(data_page_count, prop_loc) = str2double(C{2}(prop_idx));
     
     % Get the measurement time
-    time(data_page_count) = datenum(C{2}(ismember(C{1}(1:end-1), TIME_NAME)), ...
-        TIME_FORMAT);
+    prop_idx = ismember(C{1}(1:end-1), TIME_NAME);
+    if any(prop_idx)
+        time(data_page_count) = datenum(C{2}(prop_idx), ...
+            TIME_FORMAT);
+    end
     
     % Get the measurement frequency
-    freq(data_page_count) = str2double(C{2}(ismember(C{1}(1:end-1), ...
-        MEASUREMENT_FREQ_NAME)));
+    prop_idx = ismember(C{1}(1:end-1), MEASUREMENT_FREQ_NAME);
+    if any(prop_idx)
+        freq(data_page_count) = str2double(C{2}(prop_idx));
+    end
     
     % Get the measurements
     meas_idx = (data_page_count-1)*300+1:(data_page_count*300);
-    [xyz(meas_idx,:), light(meas_idx), button(meas_idx)] = hex2xyz(C{1}{end});
-    
+    try
+        [xyz(meas_idx,:), light(meas_idx), button(meas_idx)] = hex2xyz(C{1}{end});
+    catch ME
+        error_occurred = true;
+    end
     % Check the page name
     page_name = textscan(fid, '%[^\r\n]',1);
-    if ~isempty(page_name{1})
+    if ~isempty(page_name{1}) && ~error_occurred
         page_name = page_name{1};
         data_page_count = data_page_count + 1;
+    elseif ~error_occurred
+        page_name = '';
     else
         page_name = '';
+        data_page_count = data_page_count - 1;
     end
 end
 if ~isempty(page_name)
@@ -168,7 +180,6 @@ if nb_pages_in_header && data_page_count ~= nb_pages
     time     = time(1:data_page_count, 1);
     freq     = freq(1:data_page_count, 1);
 end
-
 showWaitbar('Calibrating data', -1, 'off');
 
 % Interpolate the time
@@ -209,26 +220,13 @@ xyz = (xyz*100 - repmat([x_offset, y_offset, z_offset], ...
     data_page_count*300, 1);
 light = floor(light*lux/volts);
 
-% Cut from the first whole 15-minute epoch
-idx = find(diff(mod(time,1/(24*4))) < 0,1,'first');
-% if the index is exactly '15 x 60 x srate' long, then the data collection
-% was started on exactly a fifteen-minute time point. So nothing to do,
-% otherwise cut the data from the first whole 15 minutes perdiod.
-if idx ~= 15*60*round(mean(freq))
-    time(1:idx)       = [];
-    xyz(1:idx,:)      = [];
-    light(1:idx)      = [];
-    button(1:idx)     = [];
-    prop_val(1:idx,:) = [];
-end
-
 end
 
 
 function [xyz, light, button] = hex2xyz(hstr)
 % Hexadecimal to decimal conversion of data values
 n_bytes = floor(numel(hstr)/2);
-n_meas = n_bytes/6;
+n_meas = floor(n_bytes/6);
 hstr = reshape(hstr(1:n_bytes*2), 2, n_bytes)';
 bin_values = dec2bin(hex2dec(hstr))';
 bin_values = reshape(bin_values, 1, n_bytes*8);

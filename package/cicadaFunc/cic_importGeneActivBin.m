@@ -1,6 +1,6 @@
 function ACT = cic_importGeneActivBin(fullpath, varargin)
 
-% EDIT 27 OCT 2020 by Rick Wassing, line 116
+% EDIT 27 OCT 2020 by Rick Wassing, see line 116
 
 % ---------------------------------------------------------
 % Get a brand new dataset

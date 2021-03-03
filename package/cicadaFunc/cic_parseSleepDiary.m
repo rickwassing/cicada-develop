@@ -86,7 +86,12 @@ end
 [row, col] = find(ismissing(ACT.analysis.sleepDiary));
 requiredMissing = unique(row(col == 1 | col == 2 | col == 7));
 ACT.analysis.sleepDiary(requiredMissing, :) = [];
-
+% ---------------------------------------------------------
+% Remove rows that have negative sleep window duration
+if ~isempty(ACT.analysis.sleepDiary.lightsOut)
+    sleepWindowDuration = datenum(ACT.analysis.sleepDiary.lightsOn, 'dd/mm/yyyy HH:MM') - datenum(ACT.analysis.sleepDiary.lightsOut, 'dd/mm/yyyy HH:MM');
+    ACT.analysis.sleepDiary(sleepWindowDuration < 0, :) = [];
+end
 % ---------------------------------------------------------
 % Write history
 ACT.history = char(ACT.history, '% -----');
