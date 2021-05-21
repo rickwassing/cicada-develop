@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration file="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-develop/Cicada.prj" location="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-develop" name="Cicada" target="target.ezdeploy.standalone" target-name="Application Compiler">
+  <configuration file="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-develop/Cicada.prj" location="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-develop" name="Cicada" preferred-package-location="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers" preferred-package-type="package.type.app" target="target.ezdeploy.standalone" target-name="Application Compiler">
     <param.appname>Cicada</param.appname>
     <param.icon>${PROJECT_ROOT}/Cicada_resources/icon.icns</param.icon>
     <param.icons>
@@ -8,12 +8,12 @@
       <file>${PROJECT_ROOT}/Cicada_resources/icon_24.png</file>
       <file>${PROJECT_ROOT}/Cicada_resources/icon_16.png</file>
     </param.icons>
-    <param.version>0.1.3</param.version>
+    <param.version>0.1.6</param.version>
     <param.authnamewatermark>Rick Wassing</param.authnamewatermark>
     <param.email>rick.wassing@sydney.edu.au</param.email>
     <param.company />
     <param.summary>Cicada is an open source software to analyse actigraphy and other wearable devices.</param.summary>
-    <param.description>Version 0.1.3 (beta)
+    <param.description>Version 0.1.6 (beta)
 
 Warning. Cicada is still in development. Anything may change at any time and the software should not be considered stable.
 
@@ -35,10 +35,10 @@ MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci64
 If it is defined, set it to the following:
 
 ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci64</param.target.install.notes>
-    <param.intermediate>/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing</param.intermediate>
-    <param.files.only>/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/files</param.files.only>
-    <param.output>/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers</param.output>
-    <param.logdir>/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/log</param.logdir>
+    <param.intermediate>/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing</param.intermediate>
+    <param.files.only>/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/end-user-files</param.files.only>
+    <param.output>/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/packaged-installers</param.output>
+    <param.logdir>/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/log</param.logdir>
     <param.enable.clean.build>false</param.enable.clean.build>
     <param.user.defined.mcr.options />
     <param.target.type>subtarget.standalone</param.target.type>
@@ -46,7 +46,7 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
     <param.web.mcr>true</param.web.mcr>
     <param.package.mcr>false</param.package.mcr>
     <param.no.mcr>false</param.no.mcr>
-    <param.web.mcr.name>install-Cicada-0.1.3_MacOS</param.web.mcr.name>
+    <param.web.mcr.name>install-Cicada-0.1.6_MacOS</param.web.mcr.name>
     <param.package.mcr.name>MyAppInstaller_mcr</param.package.mcr.name>
     <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
     <param.windows.command.prompt>false</param.windows.command.prompt>
@@ -62,7 +62,7 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
 	 -?  print help on how to use the application 
 	 input arguments 
  Description 
- 	 Version 0.1.3 (beta)
+ 	 Version 0.1.6 (beta)
 
 Warning. Cicada is still in development. Anything may change at any time and the software should not be considered stable.
 
@@ -239,24 +239,33 @@ License. This work is licensed under a Creative Commons Attribution-ShareAlike 4
       <file>${PROJECT_ROOT}/settings/CicadaSettings.json</file>
     </fileset.resources>
     <fileset.package />
-    <fileset.depfun />
+    <fileset.depfun>
+      <file>${PROJECT_ROOT}/package/supportFunc/defaultCicadaSettings.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/getM10L5.m</file>
+    </fileset.depfun>
     <build-deliverables>
-      <file location="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing" name="Cicada.app" optional="false">/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing/Cicada.app</file>
-      <file location="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing" name="readme.txt" optional="true">/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing/readme.txt</file>
-      <file location="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing" name="run_Cicada.sh" optional="false">/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing/run_Cicada.sh</file>
-      <file location="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing" name="splash.png" optional="false">/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing/splash.png</file>
+      <file location="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing" name="readme.txt" optional="true">/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing/readme.txt</file>
+      <file location="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing" name="splash.png" optional="false">/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing/splash.png</file>
+      <file location="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing" name="run_Cicada.sh" optional="false">/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing/run_Cicada.sh</file>
+      <file location="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing" name="Cicada.app" optional="false">/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing/Cicada.app</file>
     </build-deliverables>
     <workflow />
     <matlab>
       <root>/Applications/MATLAB_R2019b.app</root>
       <toolboxes>
         <toolbox name="matlabcoder" />
+        <toolbox name="fixedpoint" />
         <toolbox name="neuralnetwork" />
       </toolboxes>
       <toolbox>
         <matlabcoder>
           <enabled>true</enabled>
         </matlabcoder>
+      </toolbox>
+      <toolbox>
+        <fixedpoint>
+          <enabled>true</enabled>
+        </fixedpoint>
       </toolbox>
       <toolbox>
         <neuralnetwork>
@@ -273,7 +282,7 @@ License. This work is licensed under a Creative Commons Attribution-ShareAlike 4
       <vista>false</vista>
       <linux>false</linux>
       <solaris>false</solaris>
-      <osver>10.15.7</osver>
+      <osver>10.16</osver>
       <os32>false</os32>
       <os64>true</os64>
       <arch>maci64</arch>
