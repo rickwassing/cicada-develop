@@ -170,7 +170,7 @@ end
 if shouldComponentMount(app, parent.UserData.FieldSettingsPanel, ['FieldSettingsGridLayout_', type])
     parent.UserData.FieldSettingsGridLayout = uigridlayout(parent.UserData.FieldSettingsPanel);
     parent.UserData.FieldSettingsGridLayout.Tag = ['FieldSettingsGridLayout_', type];
-    parent.UserData.FieldSettingsGridLayout.RowHeight = repmat(18, 1, length(fnames));
+    parent.UserData.FieldSettingsGridLayout.RowHeight = repmat({18}, 1, length(fnames));
     parent.UserData.FieldSettingsGridLayout.ColumnWidth = {'1x', 46, 18, 18, 18};
     parent.UserData.FieldSettingsGridLayout.RowSpacing = 3;
     parent.UserData.FieldSettingsGridLayout.ColumnSpacing = 3;
