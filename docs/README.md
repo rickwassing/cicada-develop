@@ -4,11 +4,11 @@ This repository contains the source files for Cicada, an open source software fo
 
 ## Versioning
 
-We use [semantic versioning](http://semver.org/). Current version is 0.1.5. Cicada is still in  development and currently does not work in Matlab 2020(a/b). Anything may change at any time and the software should not be considered stable.
+We use [semantic versioning](http://semver.org/). Current version is 0.1.6. Cicada is still in development and currently does not work in Matlab 2020 or later. Anything may change at any time and the software should not be considered stable.
 
 ## Authors
 
--   **Rick Wassing**, rick.wassing@sydney.edu.au, Woolcock Institute of Medical Research, The University of Sydney, Australia
+- **Rick Wassing**, rick.wassing@sydney.edu.au, Woolcock Institute of Medical Research, The University of Sydney, Australia
 
 > ### Your help is more than welcome!
 >
@@ -23,8 +23,8 @@ We use [semantic versioning](http://semver.org/). Current version is 0.1.5. Cica
 In building Cicada, I have translated and adopted functionality from other open-source projects.
 I would kindly thank:
 
--   Vincent T. van Hees and colleagues for their pioneering work on GGIR, an R-package to process actigraphy data. [Visit the GGIR CRAN repository](https://cran.r-project.org/web/packages/GGIR/index.html).
--   Maxim Osipov, Bart Te Lindert, and German Gómez-Herrero for their work on the [Actant Activity Analysis Toolbox](https://github.com/btlindert/actant-1) and GeneActiv .bin file import functions.
+- Vincent T. van Hees and colleagues for their pioneering work on GGIR, an R-package to process actigraphy data. [Visit the GGIR CRAN repository](https://cran.r-project.org/web/packages/GGIR/index.html).
+- Maxim Osipov, Bart Te Lindert, and German Gómez-Herrero for their work on the [Actant Activity Analysis Toolbox](https://github.com/btlindert/actant-1) and GeneActiv .bin file import functions.
 
 ## Documentation
 
