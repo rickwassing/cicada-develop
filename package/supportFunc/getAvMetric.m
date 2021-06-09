@@ -44,7 +44,9 @@ end
 % Return if the requested days are not available
 if isempty(metric) 
     value     = NaN;
-    timeOnset = 'NaN';
+    timeOnset = 'na';
+    metricPerWin = timeseries(NaN, 0);
+    metricPerWin.TimeInfo.Units = 'days';
     return
 end
 

@@ -56,7 +56,8 @@ for ei = 1:size(events, 1)
         ACT.stats.custom.(tableName).delayOnsetMinEuclNormMovWin5m{ei, 1} = 'na';
         ACT.stats.custom.(tableName).maxEuclNormMovWin5m(ei, 1) = NaN;
         ACT.stats.custom.(tableName).delayOnsetMaxEuclNormMovWin5m{ei, 1} = 'na';
-        ACT.analysis.custom.(tableName).euclNormMovWin5m{ei, :} = NaN;
+        ACT.analysis.custom.(tableName).euclNormMovWin5m{ei, :} = timeseries(NaN, 0);
+        ACT.analysis.custom.(tableName).euclNormMovWin5m{ei, :}.TimeInfo.Units = 'days';
     end
     % ---------------------------------------------------------
     % Average and variability of other data
@@ -97,7 +98,8 @@ for ei = 1:size(events, 1)
                 ACT.stats.custom.(tableName).(['delayOnsetMin', titleCase(datatypes{ti}), titleCase(fnames{fi}), 'MovWin5m']){ei, 1} = 'na';
                 ACT.stats.custom.(tableName).(['max', titleCase(datatypes{ti}), titleCase(fnames{fi}), 'MovWin5m'])(ei, 1) = NaN;
                 ACT.stats.custom.(tableName).(['delayOnsetMax', titleCase(datatypes{ti}), titleCase(fnames{fi}), 'MovWin5m']){ei, 1} = 'na';
-                ACT.analysis.custom.(tableName).([lower(datatypes{ti}), titleCase(fnames{fi}), 'MovWin5m']){ei, :} = NaN;
+                ACT.analysis.custom.(tableName).([lower(datatypes{ti}), titleCase(fnames{fi}), 'MovWin5m']){ei, :} = timeseries(NaN, 0);
+                ACT.analysis.custom.(tableName).([lower(datatypes{ti}), titleCase(fnames{fi}), 'MovWin5m']){ei, :}.TimeInfo.Units = 'days';
             end
         end
         % ---------------------------------------------------------

@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration file="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-develop/Cicada.prj" location="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-develop" name="Cicada" preferred-package-location="/Users/Mac-n-Cheese/Documents/Projects/2019_actigraphy-gui/cicada-app-installers" preferred-package-type="package.type.app" target="target.ezdeploy.standalone" target-name="Application Compiler">
+  <configuration build-checksum="1422338968" file="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-develop/Cicada.prj" location="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-develop" name="Cicada" preferred-package-location="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/packaged-installers" preferred-package-type="package.type.app" target="target.ezdeploy.standalone" target-name="Application Compiler">
     <param.appname>Cicada</param.appname>
     <param.icon>${PROJECT_ROOT}/Cicada_resources/icon.icns</param.icon>
     <param.icons>
@@ -8,12 +8,12 @@
       <file>${PROJECT_ROOT}/Cicada_resources/icon_24.png</file>
       <file>${PROJECT_ROOT}/Cicada_resources/icon_16.png</file>
     </param.icons>
-    <param.version>0.1.6</param.version>
+    <param.version>0.1.7</param.version>
     <param.authnamewatermark>Rick Wassing</param.authnamewatermark>
     <param.email>rick.wassing@sydney.edu.au</param.email>
     <param.company />
     <param.summary>Cicada is an open source software to analyse actigraphy and other wearable devices.</param.summary>
-    <param.description>Version 0.1.6 (beta)
+    <param.description>Version 0.1.7 (beta)
 
 Warning. Cicada is still in development. Anything may change at any time and the software should not be considered stable.
 
@@ -46,7 +46,7 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
     <param.web.mcr>true</param.web.mcr>
     <param.package.mcr>false</param.package.mcr>
     <param.no.mcr>false</param.no.mcr>
-    <param.web.mcr.name>install-Cicada-0.1.6_MacOS</param.web.mcr.name>
+    <param.web.mcr.name>install-Cicada-0.1.7_MacOS</param.web.mcr.name>
     <param.package.mcr.name>MyAppInstaller_mcr</param.package.mcr.name>
     <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
     <param.windows.command.prompt>false</param.windows.command.prompt>
@@ -62,7 +62,7 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
 	 -?  print help on how to use the application 
 	 input arguments 
  Description 
- 	 Version 0.1.6 (beta)
+ 	 Version 0.1.7 (beta)
 
 Warning. Cicada is still in development. Anything may change at any time and the software should not be considered stable.
 

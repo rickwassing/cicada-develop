@@ -35,7 +35,7 @@ for ch = 1:length(parent.Children)
 end
 
 idx = [];
-for field = {'other', 'start', 'leastActivity', 'mostActivity', 'button', 'customEvent', 'reject', 'waso', 'sleepPeriod', 'sleepWindow', 'napPeriod', 'napWindow'}
+for field = {'other', 'start', 'leastActivity', 'mostActivity', 'button', 'reject', 'customEvent', 'waso', 'sleepPeriod', 'sleepWindow', 'napPeriod', 'napWindow'}
     idx = [idx; o.(field{:})'];
 end
 

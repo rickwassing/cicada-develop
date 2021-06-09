@@ -3,6 +3,12 @@ function app_constructStatsAverageDayGraph(app, GridLayout, timeSeries, varName,
 % Extract the window size from the variable name
 winSize = ifelse(strRegexpCheck(varName, '5h'), 5, ifelse(strRegexpCheck(varName, '30m'), 0.5, 0));
 
+if strcmpi(clockOnsetMax, 'na')
+    clockOnsetMax = '00:00';
+end
+if strcmpi(clockOnsetMin, 'na')
+    clockOnsetMin = '00:00';
+end
 % ---------------------------------------------------------
 % UIAxes
 % -----

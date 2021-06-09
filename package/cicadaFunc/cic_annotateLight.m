@@ -36,7 +36,7 @@ ACT.history = char(ACT.history, '% ---------------------------------------------
 ACT.history = char(ACT.history, '% Annotate the light data');
 ACT.history = char(ACT.history, '% -----');
 ACT.history = char(ACT.history, '% Define the parameters');
-ACT.history = char(ACT.history, sprintf('params.metric = %s; %% name of the metric', params.metric));
+ACT.history = char(ACT.history, sprintf('params.metric = ''%s''; %% name of the metric', params.metric));
 ACT.history = char(ACT.history, sprintf('params.threshold = [%i, %i]; %% lux', params.threshold(1), params.threshold(2)));
 ACT.history = char(ACT.history, '% -----');
 ACT.history = char(ACT.history, '% Call the annotation function');

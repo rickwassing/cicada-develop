@@ -143,6 +143,8 @@ for di = 1:length(datatypes)
                 ACT.stats.average.(select{:}).(['clockOnsetMin', titleCase(datatypes{di}), titleCase(fnames{fi}), 'MovWin30m']) = 'na';
                 ACT.stats.average.(select{:}).(['max', titleCase(datatypes{di}), titleCase(fnames{fi}), 'MovWin30m']) = NaN;
                 ACT.stats.average.(select{:}).(['clockOnsetMax', titleCase(datatypes{di}), titleCase(fnames{fi}), 'MovWin30m']) = 'na';
+                ACT.analysis.average.(select{:}).([lower(datatypes{di}), titleCase(fnames{fi}), 'MovWin30m']) = timeseries(NaN, 0);
+                ACT.analysis.average.(select{:}).([lower(datatypes{di}), titleCase(fnames{fi}), 'MovWin30m']).TimeInfo.Units = 'days';
             end
         end
         % ---------------------------------------------------------
