@@ -2,7 +2,9 @@ function ACT = g2count(ACT)
 
 % Calculate Counts from accelerometer data
 % filter z-accelerometer data
-[b, a] = butter(5, [3/(ACT.srate/2) 11/(ACT.srate/2)], 'bandpass');
+cutoffFreq = [3/(ACT.srate/2) 11/(ACT.srate/2)];
+cutoffFreq(2) = min([0.99, 11/(ACT.srate/2)]);
+[b, a] = butter(5, cutoffFreq, 'bandpass');
 z_filt = filtfilt(b, a, ACT.data.acceleration.z.Data);
 
 % convert data to 128 bins between 0 and 5

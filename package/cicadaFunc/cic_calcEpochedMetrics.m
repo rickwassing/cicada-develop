@@ -31,7 +31,9 @@ ACT.metric.acceleration.euclNormMinOne.TimeInfo.Format = 'dd-mmm-yyyy HH:MM:SS';
 ACT.metric.acceleration.euclNormMinOne.TimeInfo.StartDate = '00-Jan-0000 00:00:00';
 % -----
 % Bandpass filtered Euclidean Norm @ 0.2 - 14.95 Hz
-[b, a] = butter(4, [0.2/(ACT.srate/2) 14.95/(ACT.srate/2)], 'bandpass');
+cutoffFreq = [0.2/(ACT.srate/2) 14.95/(ACT.srate/2)];
+cutoffFreq(2) = min([0.99, 14.95/(ACT.srate/2)]);
+[b, a] = butter(4, cutoffFreq, 'bandpass');
 tmp_x = filtfilt(b, a, ACT.data.acceleration.x.Data);
 tmp_y = filtfilt(b, a, ACT.data.acceleration.y.Data);
 tmp_z = filtfilt(b, a, ACT.data.acceleration.z.Data);
