@@ -24,18 +24,18 @@ for h = 1:length(header)
     for f = 1:length(fnames)
         switch fnames{f}
             case 'TimeZone'
-                ACT.timezone = strsplit(header{h}.TimeZone, 'GMT ');
+                ACT.timezone = strsplit(header{3}.Time_Zone, 'GMT ');
                 ACT.timezone = ACT.timezone{2};
             case 'DeviceUniqueSerialCode'
-                ACT.info.serial = strtrim(header{h,1}.DeviceUniqueSerialCode);
+                ACT.info.serial = strtrim(header{h,1}.Device_Unique_Serial_Code);
             case 'StudyCentre'
-                ACT.info.institute = strtrim(header{h,1}.StudyCentre);
+                ACT.info.institute = strtrim(header{h,1}.Study_Centre);
             case 'InvestigatorID'
-                ACT.info.researcher = strtrim(header{h,1}.InvestigatorID);
+                ACT.info.researcher = strtrim(header{h,1}.Investigator_ID);
             case 'SubjectCode'
-                ACT.info.subject = strtrim(header{h,1}.SubjectCode);
+                ACT.info.subject = strtrim(header{h,1}.Subject_Code);
             case 'DateOfBirth'
-                ACT.info.dob = strtrim(header{h,1}.DateOfBirth);
+                ACT.info.dob = strtrim(header{h,1}.Date_of_Birth);
                 % Must convert Date of Birth to a date object
                 try
                     ACT.info.dob = datestr(datenum(ACT.info.dob), 'dd/mm/yyyy');
@@ -58,7 +58,7 @@ for h = 1:length(header)
                 ACT.info.weight = str2double(header{h,1}.Weight);
                 if isnan(ACT.info.weight); ACT.info.weight = zeros(0); end
             case 'HandednessCode'
-                switch strtrim(header{h,1}.HandednessCode)
+                switch strtrim(header{h,1}.Handedness_Code)
                     case {'Right', 'right', 'R', 'r'}
                         ACT.info.handedness = 'right';
                     case {'Left', 'left', 'L', 'l'}
@@ -66,8 +66,8 @@ for h = 1:length(header)
                     otherwise
                         ACT.info.handedness = 'not specified';
                 end
-            case 'DeviceLocationCode'
-                switch lower(strtrim(header{h,1}.DeviceLocationCode))
+            case 'DeviceLocation_Code'
+                switch lower(strtrim(header{h,1}.Device_Location_Code))
                     case 'right wrist'
                         ACT.info.deviceLoc = 'right wrist';
                     case 'left wrist'
@@ -93,18 +93,18 @@ for h = 1:length(header)
                     otherwise
                         ACT.info.deviceLoc = 'not specified';
                 end
-            case 'xGain'
-                ACT.etc.cal.x_gain = str2double(header{h,1}.xGain);
-            case 'yGain'
-                ACT.etc.cal.y_gain = str2double(header{h,1}.yGain);
-            case 'zGain'
-                ACT.etc.cal.z_gain = str2double(header{h,1}.zGain);
-            case 'xOffset'
-                ACT.etc.cal.x_offset = str2double(header{h,1}.xOffset);
-            case 'yOffset'
-                ACT.etc.cal.y_offset = str2double(header{h,1}.yOffset);
-            case 'zOffset'
-                ACT.etc.cal.z_offset = str2double(header{h,1}.zOffset);
+            case 'x_gain'
+                ACT.etc.cal.x_gain = str2double(header{h,1}.x_gain);
+            case 'y_gain'
+                ACT.etc.cal.y_gain = str2double(header{h,1}.y_gain);
+            case 'z_gain'
+                ACT.etc.cal.z_gain = str2double(header{h,1}.z_gain);
+            case 'x_offset'
+                ACT.etc.cal.x_offset = str2double(header{h,1}.x_offset);
+            case 'y_offset'
+                ACT.etc.cal.y_offset = str2double(header{h,1}.y_offset);
+            case 'z_offset'
+                ACT.etc.cal.z_offset = str2double(header{h,1}.z_offset);
             case 'Volts'
                 ACT.etc.cal.volts = str2double(header{h,1}.Volts);
             case 'Lux'

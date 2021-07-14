@@ -65,15 +65,15 @@ page_name = C{1}{1};
 while ~strcmpi(page_name, DATA_PAGE_NAME)
     C = textscan(fid, '%[^\r\n:*]: %[^\r\n]');
     header{header_page_count} = cell2struct(C{2}, ...
-        strrep(C{1}(1:numel(C{2})), ' ', '_'), 1);
+        matlab.lang.makeValidName(C{1}(1:numel(C{2}))), 1);
     header{header_page_count}.Page_Name = page_name;
     if strcmpi(page_name, CALIBRATION_PAGE_NAME)
-        x_gain = str2double(header{header_page_count}.x_gain);
-        y_gain = str2double(header{header_page_count}.y_gain);
-        z_gain = str2double(header{header_page_count}.z_gain);
-        x_offset = str2double(header{header_page_count}.x_offset);
-        y_offset = str2double(header{header_page_count}.y_offset);
-        z_offset = str2double(header{header_page_count}.z_offset);
+        x_gain = str2double(header{header_page_count}.xGain);
+        y_gain = str2double(header{header_page_count}.yGain);
+        z_gain = str2double(header{header_page_count}.zGain);
+        x_offset = str2double(header{header_page_count}.xOffset);
+        y_offset = str2double(header{header_page_count}.yOffset);
+        z_offset = str2double(header{header_page_count}.zOffset);
         volts = str2double(header{header_page_count}.Volts);
         lux =  str2double(header{header_page_count}.Lux);
     end
@@ -93,9 +93,9 @@ while ~strcmpi(page_name, DATA_PAGE_NAME)
 end
 header(header_page_count+1:end) = [];
 
-if isfield(header{end},'Number_of_Pages')
+if isfield(header{end},'NumberOfPages')
     nb_pages_in_header = true;
-    nb_pages = str2double(header{end}.Number_of_Pages);
+    nb_pages = str2double(header{end}.NumberOfPages);
 else
     nb_pages_in_header = false;
     nb_pages = NB_DATA_PAGES;
