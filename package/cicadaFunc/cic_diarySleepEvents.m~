@@ -55,6 +55,6 @@ end
 ACT = cic_editEvents(ACT, 'add', waso.onset, waso.duration, 'Label', 'waso', 'Type', 'sleepDiary');
 % Remove any out of bouds events
 sleepDiaryEventIdx = strcmpi(ACT.analysis.events.type, 'sleepDiary');
-outOfBounds = ACT.analysis.events.onset < ACT.xmin | ACT.analysis.events.onset+ACT.analysis.events.duration > ACT.xmax;
-ACT.analysis.events(sleepDiaryEventIdx & outOfBounds, :) = [];
+
+
 end
