@@ -113,7 +113,11 @@ end
             res.snoozeTime(s, 1) = ((events.onset(s)+events.duration(s)) - (slpPeriods.onset+slpPeriods.duration)) * (24*60);
             % ---------------------------------------------------------
             % Total sleep time = (final awakening - sleep onset) - wake after sleep onset
-            res.totSlpTime(s, 1) = (datenum(res.clockFinAwake{s,1}, 'dd/mm/yyyy HH:MM') - datenum(res.clockSlpOnset{s,1}, 'dd/mm/yyyy HH:MM')) *24*60 - res.wakeAfterSlpOnset(s,1);
+            if isnan(res.nAwakening(s, 1))
+                res.totSlpTime(s, 1) = (datenum(res.clockFinAwake{s,1}, 'dd/mm/yyyy HH:MM') - datenum(res.clockSlpOnset{s,1}, 'dd/mm/yyyy HH:MM')) *24*60;
+            else
+                res.totSlpTime(s, 1) = (datenum(res.clockFinAwake{s,1}, 'dd/mm/yyyy HH:MM') - datenum(res.clockSlpOnset{s,1}, 'dd/mm/yyyy HH:MM')) *24*60 - res.wakeAfterSlpOnset(s,1);
+            end
             % Time spend in sleep state, regardless of night time awakenings
             res.slpPeriod(s, 1) = slpPeriods.duration*24*60;
             % Time spend between eyes closed and eyes open
@@ -128,6 +132,5 @@ end
         res.awakePerHour = res.nAwakening ./ (res.slpPeriod/60);
         
     end
-
 end
 
