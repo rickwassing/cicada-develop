@@ -37,7 +37,13 @@ end
 % ---------------------------------------------------------
 % Try to parse the sleep onset latency, we assume an integer in minutes
 try
-    ACT.analysis.sleepDiary.sleepLatency = round(double(rawTable.(items{importSettings.idx.sleepLatency})));
+    if strcmpi(importSettings.format.sleepLatency, 'minutes')
+        ACT.analysis.sleepDiary.sleepLatency = round(double(rawTable.(items{importSettings.idx.sleepLatency})));
+    elseif strcmpi(importSettings.format.sleepLatency, 'HH:MM')
+        ACT.analysis.sleepDiary.sleepLatency = round(mod(datenum(rawTable.(items{importSettings.idx.sleepLatency}), 'HH:MM'), 1) * 24*60);
+    else
+        ACT.analysis.sleepDiary.sleepLatency = nan(size(rawTable, 1), 1);
+    end
 catch
     ACT.analysis.sleepDiary.sleepLatency = nan(size(rawTable, 1), 1);
     % Sleep Latency is not required, so do not trow an error
@@ -53,7 +59,13 @@ end
 % ---------------------------------------------------------
 % Try to parse wake after sleep onset, we assume an integer in minutes
 try
-    ACT.analysis.sleepDiary.waso = round(double(rawTable.(items{importSettings.idx.waso})));
+    if strcmpi(importSettings.format.waso, 'minutes')
+        ACT.analysis.sleepDiary.waso = round(double(rawTable.(items{importSettings.idx.waso})));
+    elseif strcmpi(importSettings.format.waso, 'HH:MM')
+        ACT.analysis.sleepDiary.waso = round(mod(datenum(rawTable.(items{importSettings.idx.waso}), 'HH:MM'), 1) * 24*60);
+    else
+        ACT.analysis.sleepDiary.waso = nan(size(rawTable, 1), 1);
+    end
 catch
     ACT.analysis.sleepDiary.waso = nan(size(rawTable, 1), 1);
     % WASO is not required, so do not trow an error

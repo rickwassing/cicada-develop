@@ -5,6 +5,9 @@ if exist(fullpath, 'file') == 0
     % File could not be found, so create default import settings
     importSettings.format.date = 'dd/mm/yyyy';
     importSettings.format.lightsOut = 'HH:MM';
+    importSettings.format.sleepLatency = 'minutes';
+    importSettings.format.awakenings = 'integer';
+    importSettings.format.waso = 'minutes';
     importSettings.format.finAwake = 'HH:MM';
     importSettings.format.lightsOn = 'HH:MM';
     importSettings.idx.date = [];
@@ -33,6 +36,15 @@ else
         err = false;
         msg = '';
     end
+end
+if ~isfield(importSettings.format, 'sleepLatency')
+    importSettings.format.sleepLatency = 'minutes';
+end
+if ~isfield(importSettings.format, 'waso')
+    importSettings.format.waso = 'minutes';
+end
+if ~isfield(importSettings.format, 'awakenings')
+    importSettings.format.waso = 'integer';
 end
 ACT.analysis.settings.importSleepDiarySettings = importSettings;
 % ---------------------------------------------------------
