@@ -40,7 +40,13 @@ try
     if strcmpi(importSettings.format.sleepLatency, 'minutes')
         ACT.analysis.sleepDiary.sleepLatency = round(double(rawTable.(items{importSettings.idx.sleepLatency})));
     elseif strcmpi(importSettings.format.sleepLatency, 'HH:MM')
-        ACT.analysis.sleepDiary.sleepLatency = round(mod(datenum(rawTable.(items{importSettings.idx.sleepLatency}), 'HH:MM'), 1) * 24*60);
+        for i = 1:length(rawTable.(items{importSettings.idx.sleepLatency}))
+            try
+                ACT.analysis.sleepDiary.sleepLatency(i, 1) = round(mod(datenum(rawTable.(items{importSettings.idx.sleepLatency})(i), 'HH:MM'), 1) * 24*60);
+            catch
+                ACT.analysis.sleepDiary.sleepLatency(i, 1) = NaN;
+            end
+        end
     else
         ACT.analysis.sleepDiary.sleepLatency = nan(size(rawTable, 1), 1);
     end
@@ -62,7 +68,13 @@ try
     if strcmpi(importSettings.format.waso, 'minutes')
         ACT.analysis.sleepDiary.waso = round(double(rawTable.(items{importSettings.idx.waso})));
     elseif strcmpi(importSettings.format.waso, 'HH:MM')
-        ACT.analysis.sleepDiary.waso = round(mod(datenum(rawTable.(items{importSettings.idx.waso}), 'HH:MM'), 1) * 24*60);
+        for i = 1:length(rawTable.(items{importSettings.idx.waso}))
+            try
+                ACT.analysis.sleepDiary.waso(i, 1) = round(mod(datenum(rawTable.(items{importSettings.idx.waso})(i), 'HH:MM'), 1) * 24*60);
+            catch
+                ACT.analysis.sleepDiary.waso(i, 1) = NaN;
+            end
+        end
     else
         ACT.analysis.sleepDiary.waso = nan(size(rawTable, 1), 1);
     end

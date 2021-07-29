@@ -5,14 +5,19 @@ ACT = cic_editEvents(ACT, 'delete', [], [], 'Label', 'sleepWindow', 'Type', 'sle
 ACT = cic_editEvents(ACT, 'delete', [], [], 'Label', 'sleepPeriod', 'Type', 'sleepDiary');
 ACT = cic_editEvents(ACT, 'delete', [], [], 'Label', 'waso', 'Type', 'sleepDiary');
 % ---------------------------------------------------------
-% Set the sleep window type to sleep diary
-ACT.analysis.settings.sleepWindowType = 'sleepDiary';
-% ---------------------------------------------------------
 % Add sleep windows, the period between lights out and on
 sleepWindow.onset = datenum(ACT.analysis.sleepDiary.lightsOut, 'dd/mm/yyyy HH:MM');
 sleepWindow.duration = datenum(ACT.analysis.sleepDiary.lightsOn, 'dd/mm/yyyy HH:MM') - sleepWindow.onset;
+outOfBounds = sleepWindow.onset < ACT.xmin | sleepWindow.onset+sleepWindow.duration > ACT.xmax;
+if all(outOfBounds)
+    return
+end
+% ---------------------------------------------------------
 % add the events
 ACT = cic_editEvents(ACT, 'add', sleepWindow.onset, sleepWindow.duration, 'Label', 'sleepWindow', 'Type', 'sleepDiary');
+% ---------------------------------------------------------
+% Set the sleep window type to sleep diary
+ACT.analysis.settings.sleepWindowType = 'sleepDiary';
 % ---------------------------------------------------------
 % Update the pipeline
 ACT = cic_updatePipe(ACT, 'preproc');
