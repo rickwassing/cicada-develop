@@ -353,6 +353,7 @@ if shouldComponentMount(app, parent, 'SleepWindowTypeInput')
     end
     % Set Value
     if isfield(app.ACT.analysis.settings, 'sleepWindowType')
+        Items = unique([Items; {app.ACT.analysis.settings.sleepWindowType}]);
         Value = app.ACT.analysis.settings.sleepWindowType;
     else
         Value = Items{1};
@@ -379,6 +380,7 @@ else
     end
     % Set Value
     if isfield(app.ACT.analysis.settings, 'sleepWindowType')
+        Items = unique([Items; {app.ACT.analysis.settings.sleepWindowType}]);
         Value = app.ACT.analysis.settings.sleepWindowType;
     else
         Value = Items{1};

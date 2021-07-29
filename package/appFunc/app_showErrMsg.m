@@ -14,6 +14,10 @@ delete(app.createRelativeEventApp);
 delete(app.editEventApp);
 delete(app.selectColorApp);
 % ----------------------------------------
+% clean the lifecycle
+app.Components = {};
+app.ComponentList = {};
+% ----------------------------------------
 % Construct error message
 errmsg = {ME.message};
 for si = 1:length(ME.stack)

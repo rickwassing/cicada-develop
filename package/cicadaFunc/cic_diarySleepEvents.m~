@@ -50,14 +50,13 @@ end
 tmpDiary = ACT.analysis.sleepDiary;
 tmpDiary(~idx, :) = [];
 waso = struct(); cnt = 0;
-for wi = 1:length(tmpDiary.awakenings)
+for wi = 5%1:length(tmpDiary.awakenings)
     for bi = 1:tmpDiary.awakenings(wi)
         cnt = cnt+1;
-        slpPerOnset = datenum(tmpDiary.lightsOut(wi), 'dd/mm/yyyy HH:MM');
-        slpPerDur = datenum(tmpDiary.lightsOn(wi), 'dd/mm/yyyy HH:MM') - datenum(tmpDiary.lightsOut(wi), 'dd/mm/yyyy HH:MM');
-        waso.onset(cnt, 1) = slpPerOnset + bi * (slpPerDur/(tmpDiary.awakenings(wi)+1)) - tmpDiary.waso(wi) / (24*60*2);
+        waso.onset(cnt, 1) = sleepPeriod.onset(wi) + bi * (sleepPeriod.duration(wi)/(tmpDiary.awakenings(wi)+1)) - tmpDiary.waso(wi) / (24*60*2);
         waso.duration(cnt, 1) = (tmpDiary.waso(wi) / tmpDiary.awakenings(wi)) / (24*60);
     end
+    datestr(waso.onset, 'dd/mm/yyyy HH:MM')
 end
 % Add the events
 ACT = cic_editEvents(ACT, 'add', waso.onset, waso.duration, 'Label', 'waso', 'Type', 'sleepDiary');
