@@ -16,6 +16,8 @@ for fi = 1:length(fnames)
     if isstruct(value)
         % do nothing
         continue
+    elseif isnumeric(value) && isempty(value)
+        continue
     elseif ischar(value) || isstring(value)
         if isempty(deblank(value))
             continue
