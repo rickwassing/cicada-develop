@@ -1,6 +1,6 @@
 {
 	"importSettings": {
-		"sleepDiary": "S:/Sleep/SleepSoftware/cicada/latest/settings/SleepDiarySettings.json"
+		"sleepDiary": "/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-develop/settings/SleepDiarySettings.json"
 	},
 	"display": {
 		"actogramStartClock": "15:00",
