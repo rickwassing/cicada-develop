@@ -59,9 +59,11 @@ for wi = 1:length(tmpDiary.awakenings)
         waso.duration(cnt, 1) = (tmpDiary.waso(wi) / tmpDiary.awakenings(wi)) / (24*60);
     end
 end
-% Add the events
-ACT = cic_editEvents(ACT, 'add', waso.onset, waso.duration, 'Label', 'waso', 'Type', 'sleepDiary');
-% Remove any out of bouds events
+% Add the events (if there were any awakenings)
+if isfield(waso, 'onset')
+    ACT = cic_editEvents(ACT, 'add', waso.onset, waso.duration, 'Label', 'waso', 'Type', 'sleepDiary');
+end
+% Remove any out of bounds events
 sleepDiaryEventIdx = strcmpi(ACT.analysis.events.type, 'sleepDiary');
 outOfBounds = ACT.analysis.events.onset < ACT.xmin | ACT.analysis.events.onset+ACT.analysis.events.duration > ACT.xmax;
 ACT.analysis.events(sleepDiaryEventIdx & outOfBounds, :) = [];
