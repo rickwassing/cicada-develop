@@ -69,6 +69,6 @@ ACT.history = char(ACT.history, '% ---------------------------------------------
 ACT.history = char(ACT.history, '% Select a subset of the dataset between two timepoints');
 ACT.history = char(ACT.history, sprintf('startDate = ''%s'';', datestr(startDate, 'dd/mm/yyyy HH:MM')));
 ACT.history = char(ACT.history, sprintf('endDate = ''%s'';', datestr(endDate, 'dd/mm/yyyy HH:MM')));
-ACT.history = char(ACT.history, 'ACT = cic_selectDatasetUsingTime(ACT, startDate, endDate, ''dd/mm/yyyy HH:MM'');');
+ACT.history = char(ACT.history, 'ACT = cic_selectDatasetUsingTime(ACT, startDate, endDate, ''format'', ''dd/mm/yyyy HH:MM'');');
 
 end % EOF

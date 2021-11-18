@@ -138,8 +138,12 @@ while strcmpi(page_name, DATA_PAGE_NAME)
     % Get the measurement time
     prop_idx = ismember(C{1}(1:end-1), TIME_NAME);
     if any(prop_idx)
+        try
         time(data_page_count) = datenum(C{2}(prop_idx), ...
             TIME_FORMAT);
+        catch ME
+            error_occurred = true;
+        end
     end
     
     % Get the measurement frequency

@@ -116,6 +116,6 @@ ACT.history = char(ACT.history, sprintf('params.boutClosed = %i; %% logical', pa
 ACT.history = char(ACT.history, sprintf('params.boutMetric = %i; %% integer [1 to 4]', params.boutMetric));
 ACT.history = char(ACT.history, '% -----');
 ACT.history = char(ACT.history, '% Call the annotation function');
-ACT.history = char(ACT.history, 'ACT = cic_ggirAnnotation(ACT, params);');
+ACT.history = char(ACT.history, 'ACT = cic_annotateActivityGGIR(ACT, params);');
 
 end % EOF
