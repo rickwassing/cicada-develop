@@ -10,11 +10,11 @@
 	},
 	"idx": {
 		"date": 1,
-		"lightsOut": 2,
-		"sleepLatency": 4,
-		"awakenings": 5,
-		"waso": 6,
-		"finAwake": 7,
+		"lightsOut": 3,
+		"sleepLatency": 5,
+		"awakenings": null,
+		"waso": null,
+		"finAwake": 6,
 		"lightsOn": 8
 	}
 }
