@@ -1,0 +1,48 @@
+function ACT = cic_exportMetrics(ACT, fullpath)
+
+% Initialize empty table
+MET = table();
+
+% Extract all the metric types, e.g. accelerometry, light, temperature etc.
+fnames = fieldnames(ACT.metric);
+
+% If there are no metrics, then throw and error
+if isempty(fnames)
+    error('Dataset does not contain any metrics')
+end
+
+% For each metric type...
+for i = 1:length(fnames)
+    % ... extract the names of the metric
+    metNames = fieldnames(ACT.metric.(fnames{i}));
+    % For each metric name...
+    for j = 1:length(metNames)
+        % ... extract the timeseries (time and data)
+        t = ACT.metric.(fnames{i}).(metNames{j}).Time;
+        % Before extracting the data, first check sampling rate, should be equal to ACT.epoch
+        thisEpoch = mean(diff(t))*24*60*60;
+        if not(thisEpoch >= ACT.epoch - 10e-6 && thisEpoch <= ACT.epoch + 10e-6)
+            % The metric is not epoched to the default epoch length
+            continue
+        end
+        d = ACT.metric.(fnames{i}).(metNames{j}).Data;
+        MET.([fnames{i}, '_', metNames{j}]) = d;
+    end
+end
+% Set the date-time
+MET.datetime = datestr(t, 'yyyy-mm-ddTHH:MM:SS');
+MET.time = round((t-t(1))*24*60*60*1000)/1000; % Round t
+% Reorder the variables, put the time up front
+MET = movevars(MET, 'time', 'Before', MET.Properties.VariableNames{1});
+MET = movevars(MET, 'datetime', 'Before', MET.Properties.VariableNames{1});
+
+% Write table to CSV file
+writetable(MET, [fullpath, '.csv']);
+
+% ---------------------------------------------------------
+% Write history 
+ACT.history = char(ACT.history, '% ---------------------------------------------------------');
+ACT.history = char(ACT.history, '% Export metrics to .CSV files');
+ACT.history = char(ACT.history, sprintf('ACT = cic_exportMetrics(ACT, ''%s'');', fullpath));
+
+end % EOF
