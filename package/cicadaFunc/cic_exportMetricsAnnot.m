@@ -1,4 +1,4 @@
-function ACT = cic_exportMetrics(ACT, fullpath)
+function ACT = cic_exportMetricsAnnot(ACT, fullpath)
 
 % Initialize empty table
 MET = table();
@@ -29,9 +29,26 @@ for i = 1:length(fnames)
         MET.([fnames{i}, '_', metNames{j}]) = d;
     end
 end
+
+% For each annotation
+if isfield(ACT.analysis, 'annotate')
+    fnames = fieldnames(ACT.analysis.annotate);
+    for i = 1:length(fnames)
+        t = ACT.analysis.annotate.(fnames{i}).Time;
+        % Before extracting the data, first check sampling rate, should be equal to ACT.epoch
+        thisEpoch = mean(diff(t))*24*60*60;
+        if not(thisEpoch >= ACT.epoch - 10e-6 && thisEpoch <= ACT.epoch + 10e-6)
+            % The metric is not epoched to the default epoch length
+            continue
+        end
+        d = ACT.analysis.annotate.(fnames{i}).Data;
+        MET.(['annot_', fnames{i}]) = d;
+    end
+end
+
 % Set the date-time
 MET.datetime = datestr(t, 'yyyy-mm-ddTHH:MM:SS');
-MET.time = round((t-t(1))*24*60*60*1000)/1000; % Round t
+MET.time = round((t-t(1))*24*60*60*1000)/1000; % Round to millisecond precision
 % Reorder the variables, put the time up front
 MET = movevars(MET, 'time', 'Before', MET.Properties.VariableNames{1});
 MET = movevars(MET, 'datetime', 'Before', MET.Properties.VariableNames{1});

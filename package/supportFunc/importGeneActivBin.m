@@ -81,6 +81,7 @@ while ~strcmpi(page_name, DATA_PAGE_NAME)
         page_name = C{1}{end};
         header_page_count = header_page_count + 1;
     else
+        keyboard
         % We have reached the end of the file
         xyz = [];
         light = [];

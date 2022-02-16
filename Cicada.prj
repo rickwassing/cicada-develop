@@ -8,12 +8,12 @@
       <file>${PROJECT_ROOT}/Cicada_resources/icon_24.png</file>
       <file>${PROJECT_ROOT}/Cicada_resources/icon_16.png</file>
     </param.icons>
-    <param.version>0.8</param.version>
+    <param.version>0.9</param.version>
     <param.authnamewatermark>Rick Wassing</param.authnamewatermark>
     <param.email>rick.wassing@sydney.edu.au</param.email>
     <param.company />
     <param.summary>Cicada is an open source software to analyse actigraphy and other wearable devices.</param.summary>
-    <param.description>Version 0.8 (beta)
+    <param.description>Version 0.9 (beta)
 
 Warning. Cicada is still in development. Anything may change at any time and the software should not be considered stable.
 
@@ -46,7 +46,7 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
     <param.web.mcr>true</param.web.mcr>
     <param.package.mcr>false</param.package.mcr>
     <param.no.mcr>false</param.no.mcr>
-    <param.web.mcr.name>install-Cicada-0.8_MacOS</param.web.mcr.name>
+    <param.web.mcr.name>install-Cicada-0.9_MacOS</param.web.mcr.name>
     <param.package.mcr.name>MyAppInstaller_mcr</param.package.mcr.name>
     <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
     <param.windows.command.prompt>false</param.windows.command.prompt>
@@ -62,7 +62,7 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
 	 -?  print help on how to use the application 
 	 input arguments 
  Description 
- 	 Version 0.8 (beta)
+ 	 Version 0.9 (beta)
 
 Warning. Cicada is still in development. Anything may change at any time and the software should not be considered stable.
 
@@ -240,7 +240,7 @@ License. This work is licensed under a Creative Commons Attribution-ShareAlike 4
     </fileset.resources>
     <fileset.package />
     <fileset.depfun>
-      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_exportMetrics.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_exportMetricsAnnot.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/defaultCicadaSettings.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/getM10L5.m</file>
     </fileset.depfun>

@@ -12,7 +12,7 @@ Cicada is an open source software for analyzing actigraphy and data from other w
 
 .. _index-version:
 
-Version 0.8 (beta)
+Version 0.9 (beta)
 --------------------
 
 .. warning::

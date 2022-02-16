@@ -56,6 +56,8 @@ tmp_y = movmedian(ACT.data.acceleration.y.Data, k, 'EndPoints', 'fill');
 tmp_z = movmedian(ACT.data.acceleration.z.Data, k, 'EndPoints', 'fill');
 % -----
 % Replace any NaN's in the first 1000 samples with the first non-NaN value
+% TODO: MAKE SURE THERE ARE AT LEAST 1000 Samples, will result in error
+% otherwise
 if any(isnan(tmp_x(1:1000))) && any(~isnan(tmp_x(1:1000)))
     tmp_x(isnan(tmp_x(1:1000))) = tmp_x(find(~isnan(tmp_x(1:1000)), 1, 'first'));
 elseif any(isnan(tmp_x(1:1000))) && ~any(~isnan(tmp_x(1:1000)))
