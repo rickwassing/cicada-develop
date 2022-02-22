@@ -11,6 +11,9 @@ if isempty(fnames)
     error('Dataset does not contain any metrics')
 end
 
+% Check to see if there are any metrics in the default epoch length
+hasData = false;
+
 % For each metric type...
 for i = 1:length(fnames)
     % ... extract the names of the metric
@@ -25,9 +28,17 @@ for i = 1:length(fnames)
             % The metric is not epoched to the default epoch length
             continue
         end
+        % Extract and store data in table
         d = ACT.metric.(fnames{i}).(metNames{j}).Data;
         MET.([fnames{i}, '_', metNames{j}]) = d;
+        % We have data, so set boolean to true
+        hasData = true;
     end
+end
+
+% If there are no metrics, then throw and error
+if ~hasData
+    error('Dataset does not contain any metrics with an epoch length of %i seconds', ACT.epoch)
 end
 
 % For each annotation
@@ -43,6 +54,25 @@ if isfield(ACT.analysis, 'annotate')
         end
         d = ACT.analysis.annotate.(fnames{i}).Data;
         MET.(['annot_', fnames{i}]) = d;
+    end
+end
+
+% For each event
+eventLabels = unique(ACT.analysis.events.label);
+for i = 1:length(eventLabels)
+    if strcmpi(eventLabels{i}, 'start')
+        continue
+    end
+    idx = strcmpi(ACT.analysis.events.label, eventLabels{i});
+    eventTypes = unique(ACT.analysis.events.type(idx));
+    for j = 1:length(eventTypes)
+        if length(eventTypes) == 1
+            varName = eventLabels{i};
+        else
+            varName = [eventLabels{i}, '_', eventTypes{j}];
+        end
+        d = events2idx(ACT, t, 'Label', eventLabels{i}, 'Type', eventTypes{j});
+        MET.(['event_', varName]) = d;
     end
 end
 

@@ -11,6 +11,9 @@ if isempty(fnames)
     error('Dataset does not contain any metrics')
 end
 
+% Ch
+hasData = true;
+
 % For each metric type...
 for i = 1:length(fnames)
     % ... extract the names of the metric
@@ -31,7 +34,6 @@ for i = 1:length(fnames)
 end
 
 % For each annotation
-keyboard
 if isfield(ACT.analysis, 'annotate')
     fnames = fieldnames(ACT.analysis.annotate);
     for i = 1:length(fnames)
@@ -42,8 +44,26 @@ if isfield(ACT.analysis, 'annotate')
             % The metric is not epoched to the default epoch length
             continue
         end
-        d = ACT.metric.(fnames{i}).(metNames{j}).Data;
-        MET.([fnames{i}, '_', metNames{j}]) = d;
+        d = ACT.analysis.annotate.(fnames{i}).Data;
+        MET.(['annot_', fnames{i}]) = d;
+    end
+end
+
+% For each event
+eventLabels = unique(ACT.analysis.events.label);
+for i = 1:length(eventLabels)
+    if strcmpi(eventLabels{i}, 'start')
+        continue
+    end
+    idx = strcmpi(ACT.analysis.events.label, eventLabels{i});
+    eventTypes = unique(ACT.analysis.events.type(idx));
+    for j = 1:length(eventTypes)
+        if length(eventTypes) == 1
+            varName = eventLabels{i};
+        else
+            varName = [eventLabels{i}, '_', eventTypes{j}];
+        end
+        d = events2idx(ACT, 
     end
 end
 
