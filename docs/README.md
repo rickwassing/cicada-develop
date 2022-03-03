@@ -2,9 +2,13 @@
 
 This repository contains the source files for Cicada, an open source software for analyzing actigraphy and data from other wearable devices.
 
+## Documentation
+
+All documentation can be found on the [Cicada Read The Docs site](https://cicada-actigraphy-suite.readthedocs.io).
+
 ## Versioning
 
-We use [semantic versioning](http://semver.org/). Current version is 0.10. Cicada is still in development and currently ONLY works in Matlab 2019b. Anything may change at any time and the software should not be considered stable.
+We use [semantic versioning](http://semver.org/). Current version is 0.10.1. Cicada is still in development and currently ONLY works in Matlab 2019b. Anything may change at any time and the software should not be considered stable.
 
 ## Authors
 
@@ -25,10 +29,6 @@ I would kindly thank:
 
 - Vincent T. van Hees and colleagues for their pioneering work on GGIR, an R-package to process actigraphy data. [Visit the GGIR CRAN repository](https://cran.r-project.org/web/packages/GGIR/index.html).
 - Maxim Osipov, Bart Te Lindert, and German Gómez-Herrero for their work on the [Actant Activity Analysis Toolbox](https://github.com/btlindert/actant-1) and GeneActiv .bin file import functions.
-
-## Documentation
-
-All documentation can be found on the [Cicada Read The Docs site](https://cicada-actigraphy-suite.readthedocs.io).
 
 Have a nice day.
 

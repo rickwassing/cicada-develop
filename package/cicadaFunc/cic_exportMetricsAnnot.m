@@ -11,6 +11,12 @@ if isempty(fnames)
     error('Dataset does not contain any metrics')
 end
 
+% Get the timeseries
+maxWindows = floor(ACT.pnts/(ACT.srate*ACT.epoch));
+step  = 1/(24*60*60/ACT.epoch);
+times = ACT.xmin:step:ACT.xmax;
+times(maxWindows+1:end) = [];
+
 % Check to see if there are any metrics in the default epoch length
 hasData = false;
 
@@ -28,8 +34,15 @@ for i = 1:length(fnames)
             % The metric is not epoched to the default epoch length
             continue
         end
-        % Extract and store data in table
+        % Extract data
         d = ACT.metric.(fnames{i}).(metNames{j}).Data;
+        if length(d) > length(times)
+            % Crop the data to length
+            d = d(1:length(times));
+        else
+            % add padding
+            d = [d; nan(length(times)-length(d), 1)]; %#ok<AGROW>
+        end
         MET.([fnames{i}, '_', metNames{j}]) = d;
         % We have data, so set boolean to true
         hasData = true;
@@ -53,6 +66,13 @@ if isfield(ACT.analysis, 'annotate')
             continue
         end
         d = ACT.analysis.annotate.(fnames{i}).Data;
+        if length(d) > length(times)
+            % Crop the data to length
+            d = d(1:length(times));
+        else
+            % add padding
+            d = [d; nan(length(times)-length(d), 1)]; %#ok<AGROW>
+        end
         MET.(['annot_', fnames{i}]) = d;
     end
 end
@@ -71,14 +91,14 @@ for i = 1:length(eventLabels)
         else
             varName = [eventLabels{i}, '_', eventTypes{j}];
         end
-        d = events2idx(ACT, t, 'Label', eventLabels{i}, 'Type', eventTypes{j});
+        d = events2idx(ACT, ascolumn(times), 'Label', eventLabels{i}, 'Type', eventTypes{j});
         MET.(['event_', varName]) = d;
     end
 end
 
 % Set the date-time
-MET.datetime = datestr(t, 'yyyy-mm-ddTHH:MM:SS');
-MET.time = round((t-t(1))*24*60*60*1000)/1000; % Round to millisecond precision
+MET.datetime = ascolumn(cellstr(datestr(times, 'yyyy-mm-ddTHH:MM:SS')));
+MET.time = ascolumn(round((times-times(1))*24*60*60*1000)/1000); % Round to millisecond precision
 % Reorder the variables, put the time up front
 MET = movevars(MET, 'time', 'Before', MET.Properties.VariableNames{1});
 MET = movevars(MET, 'datetime', 'Before', MET.Properties.VariableNames{1});
@@ -89,7 +109,7 @@ writetable(MET, [fullpath, '.csv']);
 % ---------------------------------------------------------
 % Write history 
 ACT.history = char(ACT.history, '% ---------------------------------------------------------');
-ACT.history = char(ACT.history, '% Export metrics to .CSV files');
+ACT.history = char(ACT.history, '% Export metrics, annotation and events to a .CSV file');
 ACT.history = char(ACT.history, sprintf('ACT = cic_exportMetrics(ACT, ''%s'');', fullpath));
 
 end % EOF
