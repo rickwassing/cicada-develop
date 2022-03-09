@@ -9,7 +9,10 @@ end
 if ~ismember('Cursor', app.ComponentList)
     return
 end
-
+% Check if the parent is valid
+if ~isvalid(app.Cursor.Parent)
+    return
+end
 % ---------------------------------------------------------
 % Check if the user clicked on an axis in the data tab, or in the stats tab
 switch class(app.Cursor.Parent)

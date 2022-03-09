@@ -90,8 +90,7 @@ end
             end
             % ---------------------------------------------------------
             % make sure there is one and only one sleep period within this sleep window
-            slpPeriods.onset = slpPeriods.onset(1);
-            slpPeriods.duration = slpPeriods.duration(1);
+            slpPeriods = slpPeriods(1, :);
             % ---------------------------------------------------------
             % Sleep onset and offset date and time
             res.clockSlpOnset{s, 1} = datestr(slpPeriods.onset, 'dd/mm/yyyy HH:MM');
