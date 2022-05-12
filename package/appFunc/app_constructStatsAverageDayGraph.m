@@ -1,5 +1,8 @@
 function app_constructStatsAverageDayGraph(app, GridLayout, timeSeries, varName, unit, multiplier, clockOnsetMax, clockOnsetMin, maxValue, minValue)
 
+% Replace NaNs in the timeseries data
+timeSeries.Data(isnan(timeSeries.Data)) = 0;
+
 % Extract the window size from the variable name
 winSize = ifelse(strRegexpCheck(varName, '5h'), 5, ifelse(strRegexpCheck(varName, '30m'), 0.5, 0));
 

@@ -38,13 +38,17 @@ In the top-left panel, you can see that the recording spanned across 7 days, tha
 
 In the top-right panel, the inter-daily stability and intra-daily variability are shown. Intra-daily variability "quantifies the frequency and extent of transitions between periods of rest and activity" with higher values indicating more frequent or more extensive rest-activity transitions, whereas inter-daily stability "quantifies rhythm's synchronization to zeitgeber's 24h day–night [...] cycle" with higher values indicating stronger synchronization to the 24h rhythm (Gonçalves et al. 2014).
 
-The Euclidean Norm, averaged across all days using a 5h moving window, is shown in the bottom-left panel titled "Average Day Acceleration". The graph shows clear distinction between activity during the night and daytime, with a peak in average activity in the morning. The onset and activity level in the 5h of *most* (M5; dark-red up-triangles) and *least* (L5; blue down-triangles) average activity are shown as well. Furthermore, on an average day, the participant spent 5m in moderate-to-vigorous activity, and at these times the mean activity level was 153 milli-g.
-
-The next two-panels shows a similar graph but now for light and temperature Metrics averaged across all days using a 30m moving window. On the average day, the light exposure was strongest at 9:48 am with 4323 lux, etc.
-
 .. note::
 
     **Reference:** Gonçalves, Bruno SB, et al. "Nonparametric methods in actigraphy: An update." Sleep Science 7.3 (2014): 158-164.
+
+The Euclidean Norm, averaged across all days using a 5h moving window, is shown in the bottom-left panel titled "Average Day Acceleration". The graph shows clear distinction between activity during the night and daytime, with a peak in average activity in the morning. The onset and activity level in the 5h of *most* (M5; dark-red up-triangles) and *least* (L5; blue down-triangles) average activity are shown as well. Furthermore, on an average day, the participant spent 5m in moderate-to-vigorous activity, and at these times the mean activity level was 153 milli-g.
+
+The next two-panels shows a similar graph but now for light and temperature Metrics averaged across all days using a 30m moving window. On the average day, the light exposure was strongest at 9:48 am with 4323 lux, etc. 
+
+.. note::
+
+    Note that the minimum light exposure based on the GeneActiv light sensor cannot be easily interpreted because any datapoint below 1 lux had been excluded from analysis. As such, the real minimum light exposure may have been at a different time, but could not be accurately measured.
 
 Average Sleep panel
 ^^^^^^^^^^^^^^^^^^^

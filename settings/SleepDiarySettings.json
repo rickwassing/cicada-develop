@@ -1,20 +1,20 @@
 {
-  "format": {
-    "date": "dd/mm/yyyy",
-    "lightsOut": "HH:MM",
-    "finAwake": "HH:MM",
-    "lightsOn": "HH:MM",
-    "sleepLatency": "HH:MM",
-    "waso": "HH:MM",
-    "awakenings": "integer"
-  },
-  "idx": {
-    "date": 1,
-    "lightsOut": 3,
-    "sleepLatency": 5,
-    "awakenings": null,
-    "waso": null,
-    "finAwake": 6,
-    "lightsOn": 8
-  }
+	"format": {
+		"date": "dd/mm/yyyy",
+		"lightsOut": "HH:MM",
+		"finAwake": "HH:MM",
+		"lightsOn": "HH:MM",
+		"sleepLatency": "minutes",
+		"waso": "minutes",
+		"awakenings": "integer"
+	},
+	"idx": {
+		"date": 1,
+		"lightsOut": 4,
+		"sleepLatency": 5,
+		"awakenings": 6,
+		"waso": 7,
+		"finAwake": 8,
+		"lightsOn": 9
+	}
 }

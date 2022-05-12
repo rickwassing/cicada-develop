@@ -81,7 +81,6 @@ while ~strcmpi(page_name, DATA_PAGE_NAME)
         page_name = C{1}{end};
         header_page_count = header_page_count + 1;
     else
-        keyboard
         % We have reached the end of the file
         xyz = [];
         light = [];
@@ -224,6 +223,8 @@ xyz = (xyz*100 - repmat([x_offset, y_offset, z_offset], ...
     data_page_count*300, 1))./repmat([x_gain, y_gain, z_gain], ...
     data_page_count*300, 1);
 light = floor(light*lux/volts);
+% Exclude any samples below 1 lux
+light(light <= 1) = nan;
 
 end
 
