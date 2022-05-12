@@ -77,6 +77,11 @@ for ei = 1:size(events, 1)
             % Calculate average
             ACT.stats.custom.(tableName).(['av', titleCase(datatypes{ti}), titleCase(fnames{fi})])(ei, 1) = nanmean(data);
             % ---------------------------------------------------------
+            % For light data, calculate the mean above 1 lux
+            if strcmpi(datatypes{ti}, 'light')
+                ACT.stats.custom.(tableName).(['av', titleCase(datatypes{ti}), titleCase(fnames{fi}), 'Gt1Lux'])(ei, 1) = nanmean(data(data > 1));
+            end
+            % ---------------------------------------------------------
             % Calculate the min, max and delay onset only if the window is larger than 5 minutes
             if events.duration(ei) >= 5/(60*24) && ~all(isnan(data))
                 [...

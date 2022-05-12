@@ -46,10 +46,6 @@ The Euclidean Norm, averaged across all days using a 5h moving window, is shown 
 
 The next two-panels shows a similar graph but now for light and temperature Metrics averaged across all days using a 30m moving window. On the average day, the light exposure was strongest at 9:48 am with 4323 lux, etc. 
 
-.. note::
-
-    Note that the minimum light exposure based on the GeneActiv light sensor cannot be easily interpreted because any datapoint below 1 lux had been excluded from analysis. As such, the real minimum light exposure may have been at a different time, but could not be accurately measured.
-
 Average Sleep panel
 ^^^^^^^^^^^^^^^^^^^
 
@@ -129,6 +125,7 @@ Definition of average Statistics
 - **avEuclNormLightAct**. Average Euclidean Norm during segments of light activity.
 - **avEuclNormModVigAct**. Average Euclidean Norm during segments of moderate-to-vigorous activity.
 - **av(DataType)(Metric)**. The grand-average of the datatype's Metric (e.g. Temperature Wrist), excluding rejected segments.
+- **avLight(Metric)Gt1Lux**. The grand-average of the light Metric, excluding rejected segments and periods of extreme low light conditions (<1 lux).
 - **[min/max](DataType)(Metric)MovWin30m**. The minimum/maximum average Metric across all days using a 30m moving window.
 - **clockOnset[Min/Max](DataType)(Metric)MovWin30m**. The clock onset of the minimum/maximum 30m of averaged Metric across all days.
 - **hours(AnnotationLevel)(Metric)**. Average number of hours per day spent in this Annotation level for this Metric, e.g. ``hoursDimLight`` indicate the average number of hours spent in dim light per day.
@@ -169,6 +166,7 @@ Definition of Daily Statistics
 - **hoursModVigAct**. Number of hours spend in moderate-to-vigorous activity on this day.
 - **avEuclNormModVigAct**. Average Euclidean Norm during segments of moderate-to-vigorous activity on this day.
 - **av(DataType)(Metric)**. This day's grand-average of the datatype's Metric (e.g. Temperature Wrist), excluding rejected segments.
+- **avLight(Metric)Gt1Lux**. The day's grand-average of the light Metric, excluding rejected segments and periods of extreme low light conditions (<1 lux).
 - **[min/max](DataType)(Metric)MovWin30m**. The minimum/maximum average Metric for this day using a 30m moving window.
 - **clockOnset[Min/Max](DataType)(Metric)MovWin30m**. The clock onset of the minimum/maximum 30m of averaged Metric for this DataType on this day.
 - **hours(AnnotationLevel)(Metric)**. Average number of hours spent in this Annotation level for this Metric on this day, e.g. ``hoursDimLight`` indicate the average number of hours spent in dim light per day.
@@ -209,7 +207,8 @@ Definition of Custom Statistics
 - **avEuclNormModVigAct**. Average Euclidean Norm during segments of moderate-to-vigorous activity within this Custom Event.
 - **[min/max]EuclNormMovWin5m**. The minimum/maximum average Euclidean Norm during this Custom Event using a 5m (minute) moving window.
 - **delayOnset[Min/Max]EuclNormMovWin5m**. The delay of the onset in 'HH:MM' of the minimum/maximum 5m of averaged Euclidean Norm relative to the onset of this Custom Event.
-- **av(DataType)(Metric)**. The grand-average of the datatype's Metric (e.g. Temperature Wrist), excluding rejected segments during this Custom Event.
+- **av(DataType)(Metric)**. The grand-average of the datatype's Metric (e.g. Temperature Wrist) during this Custom Event, excluding rejected segments.
+- **avLight(Metric)Gt1Lux**. The grand-average of the light Metric during this Custom Event, excluding rejected segments and periods of extreme low light conditions (<1 lux).
 - **[min/max](DataType)(Metric)MovWin5m**. The minimum/maximum average Metric during this Custom Event using a 5m moving window.
 - **delayOnset[Min/Max](DataType)(Metric)MovWin5m**. The delay of the onset in 'HH:MM' of the minimum/maximum 5m of averaged Metric relative to the onset of this Custom Event.
 - **hours(AnnotationLevel)(Metric)**. Average number of hours spent in this Annotation level for this Metric during this Custom Event, e.g. ``hoursDimLight`` indicate the average number of hours spent in dim light.

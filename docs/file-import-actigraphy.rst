@@ -12,10 +12,6 @@ Import an Actigraphy recording
 
 - click ``File`` > ``Import Actigraphy`` > ``Import GeneActive (.bin)``.
 
-.. note::
-
-    Any datapoint in the light-sensor data that is below 1 lux will be removed from the analysis (Obayashi 2013 J Aff Dis, 10.1016/j.jad.2013.06.018). 
-
 .. figure:: images/file-import-actigraphy-1.png
     :width: 911px
     :align: center

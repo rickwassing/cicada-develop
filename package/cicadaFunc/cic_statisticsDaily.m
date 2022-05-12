@@ -80,6 +80,11 @@ for di = 1:ACT.ndays+1
             % Calculate average
             ACT.stats.daily.(['av', titleCase(datatypes{ti}), titleCase(fnames{fi})])(di, 1) = nanmean(data);
             % ---------------------------------------------------------
+            % For light data, calculate the mean above 1 lux
+            if strcmpi(datatypes{ti}, 'light')
+                ACT.stats.daily.(['av', titleCase(datatypes{ti}), titleCase(fnames{fi}), 'Gt1Lux'])(di, 1) = nanmean(data(data > 1));
+            end
+            % ---------------------------------------------------------
             % Calculate the min, max and clock onset only if there is a whole 24 hour day
             if range(times)+ACT.epoch/(24*60*60) > 0.9999
                 [...
