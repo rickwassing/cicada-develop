@@ -61,8 +61,11 @@ for ei = 1:size(events, 1)
     end
     % ---------------------------------------------------------
     % Average and variability of other data
-    datatypes = ACT.display.order;
+    datatypes = fieldnames(ACT.metric);
     for ti = 1:length(datatypes)
+        if strcmpi(datatypes{ti}, 'acceleration')
+            continue
+        end
         fnames = fieldnames(ACT.metric.(datatypes{ti}));
         for fi = 1:length(fnames)
             % ---------------------------------------------------------

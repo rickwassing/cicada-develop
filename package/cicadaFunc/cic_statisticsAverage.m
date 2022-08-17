@@ -108,8 +108,11 @@ end
 
 % ---------------------------------------------------------
 % Average and variability of other data
-datatypes = ACT.display.order;
+datatypes = fieldnames(ACT.metric);
 for di = 1:length(datatypes)
+    if strcmpi(datatypes{di}, 'acceleration')
+        continue
+    end
     fnames = fieldnames(ACT.metric.(datatypes{di}));
     for select = {'all', 'week', 'weekend'}
         for fi = 1:length(fnames)
@@ -127,7 +130,7 @@ for di = 1:length(datatypes)
             % ---------------------------------------------------------
             % For light data, calculate the mean above 1 lux
             if strcmpi(datatypes{di}, 'light')
-                ACT.stats.average.(select{:}).(['av', titleCase(datatypes{di}), titleCase(fnames{fi}), 'Gt1Lux'])(di, 1) = mean(data(data > 1), 'omitnan');
+                ACT.stats.average.(select{:}).(['av', titleCase(datatypes{di}), titleCase(fnames{fi}), 'Gt1Lux']) = mean(data(data > 1), 'omitnan');
             end
             % ---------------------------------------------------------
             % Calculate the min, max and clock onset across all days, but only if there is a whole 24 hour day
