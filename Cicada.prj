@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="2587506298" file="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-develop/Cicada.prj" location="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-develop" name="Cicada" preferred-package-location="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/packaged-installers" preferred-package-type="package.type.app" target="target.ezdeploy.standalone" target-name="Application Compiler">
+  <configuration build-checksum="2009233920" file="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-develop/Cicada.prj" location="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-develop" name="Cicada" preferred-package-location="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-develop/Cicada/for_redistribution" preferred-package-type="package.type.app" target="target.ezdeploy.standalone" target-name="Application Compiler">
     <param.appname>Cicada</param.appname>
     <param.icon>${PROJECT_ROOT}/Cicada_resources/icon.icns</param.icon>
     <param.icons>
@@ -8,20 +8,18 @@
       <file>${PROJECT_ROOT}/Cicada_resources/icon_24.png</file>
       <file>${PROJECT_ROOT}/Cicada_resources/icon_16.png</file>
     </param.icons>
-    <param.version>0.10.2</param.version>
+    <param.version>0.10.4</param.version>
     <param.authnamewatermark>Rick Wassing</param.authnamewatermark>
-    <param.email>rick.wassing@sydney.edu.au</param.email>
+    <param.email />
     <param.company />
     <param.summary>Cicada is an open source software to analyse actigraphy and other wearable devices.</param.summary>
-    <param.description>v0.10.2 (beta)</param.description>
-    <param.screenshot>${PROJECT_ROOT}/package/images/CicadaSplash.png</param.screenshot>
+    <param.description>v0.10.4 (beta)</param.description>
+    <param.screenshot>${PROJECT_ROOT}/Cicada_resources/icon_48.png</param.screenshot>
     <param.guid />
     <param.installpath.string>/Cicada/</param.installpath.string>
     <param.installpath.combo>option.installpath.systemwideapp</param.installpath.combo>
-    <param.logo>${PROJECT_ROOT}/package/images/CicadaLogo.png</param.logo>
-    <param.install.notes>-----
-Please refer to the documentation for a full description of the installation process at
-https://cicada-actigraphy-suite.readthedocs.io</param.install.notes>
+    <param.logo />
+    <param.install.notes />
     <param.target.install.notes>In the following directions, replace MR/v97 by the directory on the target machine where MATLAB is installed, or MR by the directory where the MATLAB Runtime is installed.
 
 If the environment variable DYLD_LIBRARY_PATH is undefined, set it to the following string:
@@ -31,10 +29,10 @@ MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci64
 If it is defined, set it to the following:
 
 ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci64</param.target.install.notes>
-    <param.intermediate>/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing</param.intermediate>
-    <param.files.only>/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/end-user-files</param.files.only>
-    <param.output>/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/packaged-installers</param.output>
-    <param.logdir>/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/log</param.logdir>
+    <param.intermediate>${PROJECT_ROOT}/Cicada/for_testing</param.intermediate>
+    <param.files.only>${PROJECT_ROOT}/Cicada/for_redistribution_files_only</param.files.only>
+    <param.output>${PROJECT_ROOT}/Cicada/for_redistribution</param.output>
+    <param.logdir>${PROJECT_ROOT}/Cicada</param.logdir>
     <param.enable.clean.build>false</param.enable.clean.build>
     <param.user.defined.mcr.options />
     <param.target.type>subtarget.standalone</param.target.type>
@@ -42,7 +40,7 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
     <param.web.mcr>true</param.web.mcr>
     <param.package.mcr>false</param.package.mcr>
     <param.no.mcr>false</param.no.mcr>
-    <param.web.mcr.name>install-Cicada-0.10.2_MacOS</param.web.mcr.name>
+    <param.web.mcr.name>install-Cicada-0.10.4_MacOS</param.web.mcr.name>
     <param.package.mcr.name>MyAppInstaller_mcr</param.package.mcr.name>
     <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
     <param.windows.command.prompt>false</param.windows.command.prompt>
@@ -58,12 +56,19 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
 	 -?  print help on how to use the application 
 	 input arguments 
  Description 
- 	 v0.10.2 (beta)</param.help.text>
+ 	 v0.10.4 (beta)</param.help.text>
     <unset>
+      <param.email />
       <param.company />
       <param.guid />
       <param.installpath.string />
       <param.installpath.combo />
+      <param.logo />
+      <param.install.notes />
+      <param.intermediate />
+      <param.files.only />
+      <param.output />
+      <param.logdir />
       <param.enable.clean.build />
       <param.user.defined.mcr.options />
       <param.target.type />
@@ -83,7 +88,9 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
     <fileset.main>
       <file>${PROJECT_ROOT}/cicada.mlapp</file>
     </fileset.main>
-    <fileset.resources>
+    <fileset.resources />
+    <fileset.package />
+    <fileset.depfun>
       <file>${PROJECT_ROOT}/package/appFunc/app_askToSaveDataset.m</file>
       <file>${PROJECT_ROOT}/package/appFunc/app_askToUndoAnalysis.m</file>
       <file>${PROJECT_ROOT}/package/appFunc/app_askToUndoStatistics.m</file>
@@ -111,7 +118,7 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
       <file>${PROJECT_ROOT}/package/appFunc/app_reorderPlotComponents.m</file>
       <file>${PROJECT_ROOT}/package/appFunc/app_showErrMsg.m</file>
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_actigraphySleepEvents.m</file>
-      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_annotateActivityGGIR.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_annotateActivityCicada.m</file>
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_annotateLight.m</file>
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_calcEpochedMetrics.m</file>
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_changeTimeZone.m</file>
@@ -121,6 +128,7 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_diarySleepEvents.m</file>
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_editEvents.m</file>
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_editInformation.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_exportMetricsAnnot.m</file>
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_exportStatistics.m</file>
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_getDays.m</file>
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_ggirAutomaticCalibration.m</file>
@@ -155,43 +163,22 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
       <file>${PROJECT_ROOT}/package/guis/createRelativeEvent.mlapp</file>
       <file>${PROJECT_ROOT}/package/guis/editDatasetInfo.mlapp</file>
       <file>${PROJECT_ROOT}/package/guis/editEvent.mlapp</file>
-      <file>${PROJECT_ROOT}/package/guis/emptyApp.mlapp</file>
       <file>${PROJECT_ROOT}/package/guis/importSleepDiary.mlapp</file>
       <file>${PROJECT_ROOT}/package/guis/selectColor.mlapp</file>
       <file>${PROJECT_ROOT}/package/guis/selectData.mlapp</file>
-      <file>${PROJECT_ROOT}/package/images/CicadaGuiLogo.png</file>
-      <file>${PROJECT_ROOT}/package/images/CicadaIcon.png</file>
-      <file>${PROJECT_ROOT}/package/images/CicadaLogo.png</file>
-      <file>${PROJECT_ROOT}/package/images/CicadaSplash.png</file>
-      <file>${PROJECT_ROOT}/package/images/colormap_batlow.mat</file>
       <file>${PROJECT_ROOT}/package/images/colormap_davos.mat</file>
-      <file>${PROJECT_ROOT}/package/images/iconEdit.png</file>
-      <file>${PROJECT_ROOT}/package/images/iconTrash.png</file>
-      <file>${PROJECT_ROOT}/package/mountFunc/mount_barh.m</file>
-      <file>${PROJECT_ROOT}/package/mountFunc/mount_colormap.m</file>
       <file>${PROJECT_ROOT}/package/mountFunc/mount_colororder.m</file>
-      <file>${PROJECT_ROOT}/package/mountFunc/mount_patch.m</file>
-      <file>${PROJECT_ROOT}/package/mountFunc/mount_plot.m</file>
       <file>${PROJECT_ROOT}/package/mountFunc/mount_sleepClock.m</file>
-      <file>${PROJECT_ROOT}/package/mountFunc/mount_text.m</file>
-      <file>${PROJECT_ROOT}/package/mountFunc/mount_uiaxes.m</file>
-      <file>${PROJECT_ROOT}/package/mountFunc/mount_uibutton.m</file>
-      <file>${PROJECT_ROOT}/package/mountFunc/mount_uidropdown.m</file>
-      <file>${PROJECT_ROOT}/package/mountFunc/mount_uigridlayout.m</file>
-      <file>${PROJECT_ROOT}/package/mountFunc/mount_uilabel.m</file>
-      <file>${PROJECT_ROOT}/package/mountFunc/mount_uipanel.m</file>
-      <file>${PROJECT_ROOT}/package/mountFunc/mount_uitab.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/ascolumn.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/asrow.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/averagePerWindow.m</file>
-      <file>${PROJECT_ROOT}/package/supportFunc/blink.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/checkEventOverlap.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/checkEventOverlapWithManualSleepWindow.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/checkProprietaryEventLabel.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/cicadaLogo.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/closeWaitbar.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/convertDatestr.m</file>
-      <file>${PROJECT_ROOT}/package/supportFunc/deleteComponent.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/defaultCicadaSettings.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/duration2str.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/events2idx.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/g2count.m</file>
@@ -199,21 +186,19 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
       <file>${PROJECT_ROOT}/package/supportFunc/getAvMetric.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/getBouts.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/getDefaultDisplaySettings.m</file>
-      <file>${PROJECT_ROOT}/package/supportFunc/getM5L5.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/getM10L5.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/getSleepAcrossNoon.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/ggirDailyStabilityVariability.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/ggirGetBout.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/ggirSleepWindowDetection.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/ifelse.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/importGeneActivBin.m</file>
-      <file>${PROJECT_ROOT}/package/supportFunc/isbetween.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/map.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/max2epochs.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/newDataset.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/parseSleepDiaryDate.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/parseSleepDiaryDateTime.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/remainingTime.m</file>
-      <file>${PROJECT_ROOT}/package/supportFunc/removeChar.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/removeOffsetGain.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/reorderPlotEvents.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/rollCellFun.m</file>
@@ -228,19 +213,12 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
       <file>${PROJECT_ROOT}/package/supportFunc/titleCase.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/updateDisplaySettings.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/waso2bouts.m</file>
-      <file>${PROJECT_ROOT}/settings/CicadaSettings.json</file>
-    </fileset.resources>
-    <fileset.package />
-    <fileset.depfun>
-      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_exportMetricsAnnot.m</file>
-      <file>${PROJECT_ROOT}/package/supportFunc/defaultCicadaSettings.m</file>
-      <file>${PROJECT_ROOT}/package/supportFunc/getM10L5.m</file>
     </fileset.depfun>
     <build-deliverables>
-      <file location="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing" name="readme.txt" optional="true">/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing/readme.txt</file>
-      <file location="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing" name="splash.png" optional="false">/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing/splash.png</file>
-      <file location="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing" name="run_Cicada.sh" optional="false">/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing/run_Cicada.sh</file>
-      <file location="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing" name="Cicada.app" optional="false">/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-app-installers/package/testing/Cicada.app</file>
+      <file location="${PROJECT_ROOT}/Cicada/for_testing" name="readme.txt" optional="true">/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-develop/Cicada/for_testing/readme.txt</file>
+      <file location="${PROJECT_ROOT}/Cicada/for_testing" name="Cicada.app" optional="false">/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-develop/Cicada/for_testing/Cicada.app</file>
+      <file location="${PROJECT_ROOT}/Cicada/for_testing" name="run_Cicada.sh" optional="false">/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-develop/Cicada/for_testing/run_Cicada.sh</file>
+      <file location="${PROJECT_ROOT}/Cicada/for_testing" name="splash.png" optional="false">/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-develop/Cicada/for_testing/splash.png</file>
     </build-deliverables>
     <workflow />
     <matlab>

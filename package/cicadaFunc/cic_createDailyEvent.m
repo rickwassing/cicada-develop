@@ -20,7 +20,7 @@ ACT = cic_editEvents(ACT, 'add', onset, repmat(duration/24, length(onset), 1), '
 % ---------------------------------------------------------
 % Set saved to false
 ACT.saved = false;
-% ---------------------------------------------------------
+% -----------------------------------------------onset----------
 % Update the pipeline
 ACT = cic_updatePipe(ACT, 'preproc');
 % ---------------------------------------------------------

@@ -9,8 +9,12 @@ switch ref
         onset = ACT.analysis.events.onset(idx) + ACT.analysis.events.duration(idx) + delay/24; % offset of the events plus delay
 end
 % ---------------------------------------------------------
+% Remove events before and after the data start and end points
+rmIdx = onset < ACT.xmin | onset+duration/24 > ACT.xmax;
+onset(rmIdx) = [];
+% ---------------------------------------------------------
 % Add events
-ACT = cic_editEvents(ACT, 'add', onset, repmat(duration/24, sum(idx), 1), 'Label', newLabel, 'Type', 'customEvent');
+ACT = cic_editEvents(ACT, 'add', onset, repmat(duration/24, length(onset), 1), 'Label', newLabel, 'Type', 'customEvent');
 % ---------------------------------------------------------
 % Set saved to false
 ACT.saved = false;
