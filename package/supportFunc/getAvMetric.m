@@ -71,6 +71,15 @@ if mod(oddWindow, 2) == 0 % its even so make it odd
 end
 metricPerWin = movmean([metric; metric], oddWindow, 'omitnan', 'Endpoints', 'discard');
 
+% Return if there is not enough data
+if isempty(metricPerWin) 
+    value     = NaN;
+    timeOnset = 'na';
+    metricPerWin = timeseries(NaN, 0);
+    metricPerWin.TimeInfo.Units = 'days';
+    return
+end
+
 % Crop the 'metricPerWin' back to its original size and add the discarded
 % endpoint back to the beginning of the vector
 metricPerWin = metricPerWin([length(metricPerWin)/2+1:(oddWindow-1)/2+length(metricPerWin)/2, 1:length(metricPerWin)/2]);
