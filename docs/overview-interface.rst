@@ -327,7 +327,7 @@ Menu items and their call-alone functions
 
 .. code-block:: matlab
 
-    ACT = cic_ggirSleepPeriodDetection(ACT);
+    ACT = cic_ggirSleepWindowDetection(ACT);
     ACT = cic_actigraphySleepEvents(ACT); % Generate sleep period and waso events if annotation is available
 
 **Statistics > Generate Statistics**

@@ -2,7 +2,7 @@ function [y,idx] = rollCellFun(h, x, k, varargin)
 
 % Initialize the varargin parser
 p = inputParser;
-% If the user wants to add an event, a 'label' and 'type' must be provided
+% Specify the variable arguments
 addParameter(p, 'fill', true, ...
     @(x) validateattributes(x, {'logical'}, {'nonempty', 'scalar'}) ...
 );
@@ -24,7 +24,13 @@ if fill % if the window does not fit, then shift the window right or left
     I = nan(2,length(1:step:length(x)));
     cnt=0;
     for i = 1:step:length(x)
-        idx = i-winSampleStart+1:i+winSampleEnd;
+        % ##################################################
+        % EDIT
+        % By: Rick Wassing
+        % Date: Aug 2022
+        % Reason: the original index was defined as 'i+1:end', but the
+        % correct way should have been 'i:end-1'.
+        idx = i-winSampleStart:i+winSampleEnd-1;
         if any(idx<1) % the window overlaps with non-positive indices
             idx = idx - min(idx) + 1; % so shift the window right
         end

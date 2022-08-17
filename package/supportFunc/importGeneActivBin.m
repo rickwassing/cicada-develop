@@ -192,8 +192,8 @@ if any(diff(freq))
 else
     % The data has been read in segments of 300 samples: how much time in
     % each segment?
-    diffTime       = 300/round(nanmean(freq))/60/60/24;
-    diffTimeMinOne = diffTime - 1/24/60/60/round(nanmean(freq));
+    diffTime       = 300/round(mean(freq, 'omitnan'))/60/60/24;
+    diffTimeMinOne = diffTime - 1/24/60/60/round(mean(freq, 'omitnan'));
     % Redefine time-segment vector starting from a whole rounded second.
     startTime = datenum(datestr(time(1),'yyyy-mm-dd HH:MM:SS'));
     time_interp = (startTime:diffTime:startTime+diffTime*(length(time)-1))';

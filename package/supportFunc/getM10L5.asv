@@ -19,14 +19,13 @@ endDate   = datenum([datestr(ACT.xmin+di, 'dd/mm/yyyy'), ' 00:00'], 'dd/mm/yyyy 
 % Insert NaN's for rejected data
 euclNormToday(events2idx(ACT, timesToday, 'Label', 'reject')) = nan;
 
-% There should be at least 21 hours of valid data (3 hours invalid: then return)
-if range(timesToday) < (21/24)
+% If there is less than 16 hours of data in this day, then return
+if range(timesToday) < (16/24)
     return
 end
 
-% If there is more than 3 hours of non-wear data, then return
-if (sum(isnan(euclNormToday)) * ACT.epoch) / (24*60*60) > 3/24
-    return
+if any(isnan(euclNormToday))
+    (sum(isnan(euclNormToday)) * ACT.epoch) / (24*60*60)
 end
 
 % Create a window of odd-length
@@ -64,12 +63,12 @@ elseif di == 1
     % If this is not the first day, but yesterday's clock onset M10 is not available, use yesterday at 15:00 as the start date
 elseif di > 1 && isnan(ACT.stats.daily.clockOnsetMaxEuclNormMovWin10h(di-1, 1))
     startDate = startDate - 9/24; % Start date was today's midnight, so take away 9 hours gives yesterday at 15:00
-    endDate   = clockOnsetM10 + 5/24; % Today's clock offset M10 plus 5 hours
+    endDate   = clockOnsetM10;
     % -----
     % Otherwise, all is good and we can use yesterday's clock offset M10 and and today's clock onset M10
 else
-    startDate = ACT.stats.daily.clockOnsetMaxEuclNormMovWin10h(di-1, 1) + 5/24; % yesterday's clock offset M10 minus 5 hours
-    endDate   = clockOnsetM10 + 5/24; % Today's clock offset M10 plus 5 hours
+    startDate = ACT.stats.daily.clockOnsetMaxEuclNormMovWin10h(di-1, 1)+10/24; % yesterday's clock offset M10
+    endDate   = clockOnsetM10;
 end
 
 % Now we're ready to find L5, Least active 5 hours of the day 

@@ -73,7 +73,7 @@ if doPlotTimeseries
     % Patch, Text and Markers
     % -----
     pnts = min(cellfun(@(t) t.length, app.ACT.analysis.custom.(tableName).euclNormMovWin5m));
-    data = nanmean(cell2mat(cellfun(@(t) asrow(t.Data(1:pnts)), app.ACT.analysis.custom.(tableName).euclNormMovWin5m, 'UniformOutput', false)));
+    data = mean(cell2mat(cellfun(@(t) asrow(t.Data(1:pnts)), app.ACT.analysis.custom.(tableName).euclNormMovWin5m, 'UniformOutput', false)), 'omitnan');
     times = ((0:pnts-1).*app.ACT.epoch/(60*60*24))';
     [~, idxMin] = min(data);
     [~, idxMax] = max(data);
@@ -137,7 +137,7 @@ if doPlotTimeseries
         % Patch, Text and Markers
         % -----
         pnts = min(cellfun(@(t) t.length, app.ACT.analysis.custom.(tableName).(['light', fname, 'MovWin5m'])));
-        data = nanmean(cell2mat(cellfun(@(t) asrow(t.Data(1:pnts)), app.ACT.analysis.custom.(tableName).(['light', fname, 'MovWin5m']), 'UniformOutput', false)));
+        data = mean(cell2mat(cellfun(@(t) asrow(t.Data(1:pnts)), app.ACT.analysis.custom.(tableName).(['light', fname, 'MovWin5m']), 'UniformOutput', false)), 'omitnan');
         times = ((0:pnts-1).*app.ACT.epoch/(60*60*24))';
         [~, idxMin] = min(data);
         [~, idxMax] = max(data);
@@ -202,7 +202,7 @@ if doPlotTimeseries
         % Patch, Text and Markers
         % -----
         pnts = min(cellfun(@(t) t.length, app.ACT.analysis.custom.(tableName).(['temperature', fname, 'MovWin5m'])));
-        data = nanmean(cell2mat(cellfun(@(t) asrow(t.Data(1:pnts)), app.ACT.analysis.custom.(tableName).(['temperature', fname, 'MovWin5m']), 'UniformOutput', false)));
+        data = mean(cell2mat(cellfun(@(t) asrow(t.Data(1:pnts)), app.ACT.analysis.custom.(tableName).(['temperature', fname, 'MovWin5m']), 'UniformOutput', false)), 'omitnan');
         times = ((0:pnts-1).*app.ACT.epoch/(60*60*24))';
         [~, idxMin] = min(data);
         [~, idxMax] = max(data);

@@ -18,7 +18,9 @@ for ai = 1:length(axesTypes)
     % Extract the parents of this interval to know which days it comprises
     days = [];
     for pi = 1:length(app.Interval.Parents)
-        days = [days; app.Interval.Parents(pi).UserData.Day];
+        if isfield(app.Interval.Parents(pi).UserData, 'Day')
+            days = [days; app.Interval.Parents(pi).UserData.Day];
+        end
     end
     days = days(1):days(end);
     % ---------------------------------------------------------

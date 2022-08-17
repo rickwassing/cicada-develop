@@ -57,7 +57,7 @@ windows = mod(round(times*24*60*(60/ACT.epoch)), 24*60*(60/ACT.epoch));
 % However if the number of unique windows is equal to the length of
 % windows, there is only one day, and this step can be skipped.
 if length(windows) ~= length(unique(windows)) % there are more windows than fit in one day
-    metric = accumarray(windows+1, metric, [], @nanmean);
+    metric = accumarray(windows+1, metric, [], @(x) mean(x, 'omitnan'));
     startTime = 0;
 else % There are less windows than fit in a day
     startTime = times(1);

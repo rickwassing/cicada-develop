@@ -1,6 +1,6 @@
 function ACT = cic_getDays(ACT, startClock, endClock)
 % Defines the number of whole analysis periods
-% The function 'cic_ggirSleepPeriodDetection' depends on this value
+% The function 'cic_ggirSleepWindowDetection' depends on this value
 
 % ---------------------------------------------------------
 % Set the start and end clock in the display settings

@@ -22,4 +22,4 @@ X = X(1:maxWindows*windowLength*srate);
 
 % Reshape the vector to a matrix <samples in a window x windows>
 % And calculate the mean for each window.
-X = nanmean(reshape(X, srate*windowLength, length(X)/(srate*windowLength)));
+X = mean(reshape(X, srate*windowLength, length(X)/(srate*windowLength)), 'omitnan');

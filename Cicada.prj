@@ -125,7 +125,7 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_getDays.m</file>
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_ggirAutomaticCalibration.m</file>
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_ggirDetectNonWear.m</file>
-      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_ggirSleepPeriodDetection.m</file>
+      <file>${PROJECT_ROOT}/package/cicadaFunc/cic_ggirSleepWindowDetection.m</file>
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_importGeneActivBin.m</file>
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_importSleepDiary.m</file>
       <file>${PROJECT_ROOT}/package/cicadaFunc/cic_importSleepDiarySettings.m</file>
@@ -203,7 +203,7 @@ ${DYLD_LIBRARY_PATH}:MR/v97/runtime/maci64:MR/v97/sys/os/maci64:MR/v97/bin/maci6
       <file>${PROJECT_ROOT}/package/supportFunc/getSleepAcrossNoon.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/ggirDailyStabilityVariability.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/ggirGetBout.m</file>
-      <file>${PROJECT_ROOT}/package/supportFunc/ggirSleepPeriodDetection.m</file>
+      <file>${PROJECT_ROOT}/package/supportFunc/ggirSleepWindowDetection.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/ifelse.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/importGeneActivBin.m</file>
       <file>${PROJECT_ROOT}/package/supportFunc/isbetween.m</file>

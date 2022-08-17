@@ -25,15 +25,15 @@ for ei = 1:size(events, 1)
         % insert NaNs for rejected segments
         annotate(events2idx(ACT, times, 'Label', 'reject')) = nan;
         ACT.stats.custom.(tableName).hoursSustInact(ei, 1) = (sum(annotate == 0) * ACT.epoch) / 3600;
-        ACT.stats.custom.(tableName).avEuclNormSustInact(ei, 1) = nanmean(euclNormMinOne(annotate == 0));
+        ACT.stats.custom.(tableName).avEuclNormSustInact(ei, 1) = mean(euclNormMinOne(annotate == 0), 'omitnan');
         ACT.stats.custom.(tableName).hoursLightAct(ei, 1) = (sum(annotate == 2) * ACT.epoch) / 3600;
-        ACT.stats.custom.(tableName).avEuclNormLightAct(ei, 1) = nanmean(euclNormMinOne(annotate == 2));
+        ACT.stats.custom.(tableName).avEuclNormLightAct(ei, 1) = mean(euclNormMinOne(annotate == 2), 'omitnan');
         ACT.stats.custom.(tableName).hoursModVigAct(ei, 1) = (sum(annotate >= 3) * ACT.epoch) / 3600;
-        ACT.stats.custom.(tableName).avEuclNormModVigAct(ei, 1) = nanmean(euclNormMinOne(annotate >= 3));
+        ACT.stats.custom.(tableName).avEuclNormModVigAct(ei, 1) = mean(euclNormMinOne(annotate >= 3), 'omitnan');
     end
     % ---------------------------------------------------------
     % Calculate average Euclidean norm
-    ACT.stats.custom.(tableName).avEuclNorm(ei, 1) = nanmean(euclNormMinOne);
+    ACT.stats.custom.(tableName).avEuclNorm(ei, 1) = mean(euclNormMinOne, 'omitnan');
     % ---------------------------------------------------------
     % Calculate the min, max and delay onset only if the window is larger than 5 minutes
     if events.duration(ei) >= 5/(60*24)
@@ -75,11 +75,11 @@ for ei = 1:size(events, 1)
             data(events2idx(ACT, times, 'Label', 'reject')) = nan;
             % ---------------------------------------------------------
             % Calculate average
-            ACT.stats.custom.(tableName).(['av', titleCase(datatypes{ti}), titleCase(fnames{fi})])(ei, 1) = nanmean(data);
+            ACT.stats.custom.(tableName).(['av', titleCase(datatypes{ti}), titleCase(fnames{fi})])(ei, 1) = mean(data, 'omitnan');
             % ---------------------------------------------------------
             % For light data, calculate the mean above 1 lux
             if strcmpi(datatypes{ti}, 'light')
-                ACT.stats.custom.(tableName).(['av', titleCase(datatypes{ti}), titleCase(fnames{fi}), 'Gt1Lux'])(ei, 1) = nanmean(data(data > 1));
+                ACT.stats.custom.(tableName).(['av', titleCase(datatypes{ti}), titleCase(fnames{fi}), 'Gt1Lux'])(ei, 1) = mean(data(data > 1), 'omitnan');
             end
             % ---------------------------------------------------------
             % Calculate the min, max and delay onset only if the window is larger than 5 minutes

@@ -59,20 +59,20 @@ euclNormMinOne(idx) = NaN;
 hour = ceil((30:30:30*length(euclNormMinOne))./3600)';
 
 % Calculate the mean Euclidean Norm for each hour of the recording
-euclNormPerHour = accumarray(hour, euclNormMinOne, [], @nanmean);
+euclNormPerHour = accumarray(hour, euclNormMinOne, [], @(x) mean(x, 'omitnan'));
 
 % Redefine the 'hour' vector to denote each hour of the day (0 - 23)
 hour = mod(unique(hour), 24);
 
 % For each hour of the day, calulate the mean euclidean norm
-euclNormPerHour  = accumarray(hour+1, euclNormPerHour, [], @nanmean);
+euclNormPerHour  = accumarray(hour+1, euclNormPerHour, [], @(x) mean(x, 'omitnan'));
 
 % Calculate the grand average euclidean norm
-grandMeanEuclNorm = nanmean(euclNormPerHour);
+grandMeanEuclNorm = mean(euclNormPerHour, 'omitnan');
 
 % Stability, lower values indicate less synchronization with the 24 hour zeitgeber
-interDailyStab = (nansum((euclNormPerHour - grandMeanEuclNorm).^2) * length(euclNormMinOne)) / (length(euclNormPerHour) * nansum((euclNormMinOne-grandMeanEuclNorm).^2));
+interDailyStab = (sum((euclNormPerHour - grandMeanEuclNorm).^2, 'omitnan') * length(euclNormMinOne)) / (length(euclNormPerHour) * sum((euclNormMinOne-grandMeanEuclNorm).^2, 'omitnan'));
 % Variability: higher values indicate more variability within days (fragmentation)
-intraDailyVar = (nansum(diff(euclNormMinOne).^2) * length(euclNormMinOne)) / ((length(euclNormMinOne)-1) * nansum((grandMeanEuclNorm-euclNormMinOne).^2));
+intraDailyVar = (sum(diff(euclNormMinOne).^2, 'omitnan') * length(euclNormMinOne)) / ((length(euclNormMinOne)-1) * sum((grandMeanEuclNorm-euclNormMinOne).^2, 'omitnan'));
 
 end

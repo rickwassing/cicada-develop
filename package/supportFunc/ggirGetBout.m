@@ -13,7 +13,7 @@ addParameter(idxMVPA, 'boutClosed', false, ...
     @(x) validateattributes(x, {'logical'}, {'nonempty', 'nonnan', 'scalar'}) ...
     );
 addParameter(idxMVPA, 'boutMetric', 1, ...
-    @(x) validateattributes(x, {'numeric'}, {'nonempty', 'nonnan', 'scalar', 'integer','>=' , 1, '<=', 4}) ...
+    @(x) validateattributes(x, {'numeric'}, {'nonempty', 'nonnan', 'scalar', 'integer','>=' , 1, '<=', 6}) ...
     );
 addParameter(idxMVPA, 'ws3', 5, ...
     @(x) validateattributes(x, {'numeric'}, {'nonempty', 'nonnan', 'scalar', 'integer'}) ...
@@ -127,4 +127,75 @@ switch boutMetric
         x(xt ~= 2) = 0;
         x(xt == 2) = 1;
         boutcount = x;
+    case 6
+      x(isnan(x)) = 0; % ignore NA values in the unlikely event that there are any
+      xt = x;
+      % look for breaks larger than 1 minute
+      % Note: we do + 1 to make sure we look for breaks larger than but not equal to a minute,
+      % this is critical when working with 1 minute epoch data
+      lookforbreaks = rollCellFun(@mean, x, (60/epoch), 'fill', true);
+      % insert negative numbers to prevent these minutes to be counted in bouts
+      % in this way there will not be bouts breaks lasting longer than 1 minute
+      xt(lookforbreaks == 0) = -boutduration;
+      RM = rollCellFun(@mean, xt, boutduration, 'fill', true);
+      p = find(RM >= boutcriter);
+      half1 = floor(boutduration/2);
+      half2 = boutduration - half1;
+      % only consider windows that at least start and end with value that meets criterium
+      p = [0, p, 0];
+      if epoch > 60
+          epochs2check = 1;
+      else
+          epochs2check = 60/epoch;
+      end
+      for ii = 1:epochs2check % only check the first and last minute of each bout
+        % p are all epochs at the centre of the windows that meet the bout criteria
+        % we want to check the start and end of sequence meets the 
+        % threshold criteria
+        edges = find(diff(p) ~= 1); 
+        seq_start = p(edges + 1);
+        zeros = find(seq_start == 0);
+        if ~isempty(zeros)
+            seq_start(zeros) = []; % remove the appended zero
+        end
+        seq_end = p(edges); % bout centre starts
+        zeros = find(seq_end == 0);
+        if ~isempty(zeros)
+            seq_end(zeros) = [];
+        end
+        length_xt = length(xt);
+        % ignore epochs at beginning and end of time time series
+        seq_start = seq_start(seq_start > half1 & seq_start < length_xt - half2);
+        seq_end = seq_end(seq_end > half1 & seq_end < length_xt - half2);
+        % check half a bout left of sequence centre:
+        if ~isempty(seq_start)
+          for bi = seq_start
+            if length_xt >= (bi - half1)
+              if xt((bi - half1) + 1) ~= 1 % if it does not meet criteria then remove this p value
+                p(p == bi) = [];
+              end
+            end
+          end
+        end
+        % check half a bout right of sequence centre:
+        if ~isempty(seq_end)
+          for bi = seq_end
+            if length_xt >= (bi - half2)
+              if xt((bi + half2) - 1) ~= 1
+                p(p == bi) = [];
+              end
+            end
+          end
+        end
+      end
+      p = p(p ~= 0);
+      % now mark all epochs that are covered by the remaining windows
+      for gi = 1:boutduration
+        inde = p-half1+gi;
+        xt(inde(inde > 0 & inde < length(xt))) = 2;
+      end
+      x(xt ~= 2) = 0;
+      x(xt == 2) = 1;
+      boutcount = x; % distinction not made anymore, but object kept to preserve output structure
+      
 end

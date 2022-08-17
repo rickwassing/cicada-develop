@@ -96,10 +96,14 @@ switch class(app.Cursor.Parent)
         % ---------------------------------------------------------
     case 'matlab.ui.container.GridLayout' % We're in the daily stats tab, so do the following
         % Update the UserData of the 'DailyStats_PatchCurrentSelection' Component
-        Component = findobj(app.GridLayoutDailyStats_Container.Children, 'Tag', 'DailyStats_PatchCurrentSelection');
-        Component.UserData.select = min([round(app.Cursor.CurrentPoint(1, 2)), size(app.ACT.stats.daily, 1)]);
-        % Add 'Stats' to the Component list
-        app.ComponentList = [app.ComponentList, {'DailyStats'}];
+        try
+            Component = findobj(app.GridLayoutDailyStats_Container.Children, 'Tag', 'DailyStats_PatchCurrentSelection');
+            Component.UserData.select = min([round(app.Cursor.CurrentPoint(1, 2)), size(app.ACT.stats.daily, 1)]);
+            % Add 'Stats' to the Component list
+            app.ComponentList = [app.ComponentList, {'DailyStats'}];
+        catch
+            % Never mind
+        end
 end
 
 end % EOF

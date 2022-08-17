@@ -27,9 +27,9 @@ ACT.stats.average.weekend.hoursReject = sum(ACT.stats.daily.hoursReject(ismember
 
 % ---------------------------------------------------------
 % Average and variability of Euclidean norm
-ACT.stats.average.all.avEuclNorm = nanmean(euclNormMinOne);
-ACT.stats.average.week.avEuclNorm = nanmean(euclNormMinOne(~idxWeekend));
-ACT.stats.average.weekend.avEuclNorm = nanmean(euclNormMinOne(idxWeekend));
+ACT.stats.average.all.avEuclNorm = mean(euclNormMinOne, 'omitnan');
+ACT.stats.average.week.avEuclNorm = mean(euclNormMinOne(~idxWeekend), 'omitnan');
+ACT.stats.average.weekend.avEuclNorm = mean(euclNormMinOne(idxWeekend), 'omitnan');
 
 % ---------------------------------------------------------
 % Average euclidean norm in the most active 10 hours of the average day and its time
@@ -76,25 +76,25 @@ if isfield(ACT.analysis.annotate, 'acceleration')
     annotate(events2idx(ACT, ACT.analysis.annotate.acceleration.Time, 'Label', 'reject')) = NaN;
     % All days
     ACT.stats.average.all.hoursSustInact = (sum(annotate == 0) * ACT.epoch / 3600) / (ACT.xmax-ACT.xmin); % hours per day
-    ACT.stats.average.all.avEuclNormSustInact = nanmean(euclNormMinOne(annotate == 0));
+    ACT.stats.average.all.avEuclNormSustInact = mean(euclNormMinOne(annotate == 0), 'omitnan');
     ACT.stats.average.all.hoursLightAct = (sum(annotate == 2) * ACT.epoch / 3600) / (ACT.xmax-ACT.xmin); % hours per day
-    ACT.stats.average.all.avEuclNormLightAct = nanmean(euclNormMinOne(annotate == 2));
+    ACT.stats.average.all.avEuclNormLightAct = mean(euclNormMinOne(annotate == 2), 'omitnan');
     ACT.stats.average.all.hoursModVigAct = (sum(annotate >= 3) * ACT.epoch / 3600) / (ACT.xmax-ACT.xmin); % hours per day
-    ACT.stats.average.all.avEuclNormModVigAct = nanmean(euclNormMinOne(annotate >= 3));
+    ACT.stats.average.all.avEuclNormModVigAct = mean(euclNormMinOne(annotate >= 3), 'omitnan');
     % Week days
     ACT.stats.average.week.hoursSustInact = sum(annotate(~idxWeekend) == 0) / ((sum(~idxWeekend)) / 24); % # hours per day
-    ACT.stats.average.week.avEuclNormSustInact = nanmean(euclNormMinOne(annotate == 0 & ~idxWeekend));
+    ACT.stats.average.week.avEuclNormSustInact = mean(euclNormMinOne(annotate == 0 & ~idxWeekend), 'omitnan');
     ACT.stats.average.week.hoursLightAct = sum(annotate(~idxWeekend) == 2) / ((sum(~idxWeekend)) / 24); % # hours per day
-    ACT.stats.average.week.avEuclNormLightAct = nanmean(euclNormMinOne(annotate == 2 & ~idxWeekend));
+    ACT.stats.average.week.avEuclNormLightAct = mean(euclNormMinOne(annotate == 2 & ~idxWeekend), 'omitnan');
     ACT.stats.average.week.hoursModVigAct = sum(annotate(~idxWeekend) >= 3) / ((sum(~idxWeekend)) / 24); % # hours per day
-    ACT.stats.average.week.avEuclNormModVigAct = nanmean(euclNormMinOne(annotate >= 3 & ~idxWeekend));
+    ACT.stats.average.week.avEuclNormModVigAct = mean(euclNormMinOne(annotate >= 3 & ~idxWeekend), 'omitnan');
     % Weekend days
     ACT.stats.average.weekend.hoursSustInact = sum(annotate(idxWeekend) == 0) / ((sum(idxWeekend)) / 24);
-    ACT.stats.average.weekend.avEuclNormSustInact = nanmean(euclNormMinOne(annotate == 0 & idxWeekend));
+    ACT.stats.average.weekend.avEuclNormSustInact = mean(euclNormMinOne(annotate == 0 & idxWeekend), 'omitnan');
     ACT.stats.average.weekend.hoursLightAct = sum(annotate(idxWeekend) == 2) / ((sum(idxWeekend)) / 24);
-    ACT.stats.average.weekend.avEuclNormLightAct = nanmean(euclNormMinOne(annotate == 2 & idxWeekend));
+    ACT.stats.average.weekend.avEuclNormLightAct = mean(euclNormMinOne(annotate == 2 & idxWeekend), 'omitnan');
     ACT.stats.average.weekend.hoursModVigAct = sum(annotate(idxWeekend) >= 3) / ((sum(idxWeekend)) / 24);
-    ACT.stats.average.weekend.avEuclNormModVigAct = nanmean(euclNormMinOne(annotate >= 3 & idxWeekend));
+    ACT.stats.average.weekend.avEuclNormModVigAct = mean(euclNormMinOne(annotate >= 3 & idxWeekend), 'omitnan');
 else
     for select = {'all', 'week', 'weekend'}
         ACT.stats.average.(select{:}).hoursSustInact = NaN;
@@ -123,11 +123,11 @@ for di = 1:length(datatypes)
             data(events2idx(ACT, times, 'Label', 'reject')) = nan;
             % ---------------------------------------------------------
             % Calculate average
-            ACT.stats.average.(select{:}).(['av', titleCase(datatypes{di}), titleCase(fnames{fi})]) = nanmean(data);
+            ACT.stats.average.(select{:}).(['av', titleCase(datatypes{di}), titleCase(fnames{fi})]) = mean(data, 'omitnan');
             % ---------------------------------------------------------
             % For light data, calculate the mean above 1 lux
             if strcmpi(datatypes{di}, 'light')
-                ACT.stats.average.(select{:}).(['av', titleCase(datatypes{di}), titleCase(fnames{fi}), 'Gt1Lux'])(di, 1) = nanmean(data(data > 1));
+                ACT.stats.average.(select{:}).(['av', titleCase(datatypes{di}), titleCase(fnames{fi}), 'Gt1Lux'])(di, 1) = mean(data(data > 1), 'omitnan');
             end
             % ---------------------------------------------------------
             % Calculate the min, max and clock onset across all days, but only if there is a whole 24 hour day
@@ -226,16 +226,16 @@ for select = {'all', 'week', 'weekend'}
         ACT.stats.average.(select{:}).avClockSlpOnsetAct     = getAvEventTime(ACT, 'onset', 'Label', 'sleepPeriod', 'Type', 'actigraphy', 'Select', select{:});
         ACT.stats.average.(select{:}).avClockMidSleepAct     = getAvEventTime(ACT, 'midpoint', 'Label', 'sleepPeriod', 'Type', 'actigraphy', 'Select', select{:});
         ACT.stats.average.(select{:}).avClockFinAwakeAct     = getAvEventTime(ACT, 'offset', 'Label', 'sleepPeriod', 'Type', 'actigraphy', 'Select', select{:});
-        ACT.stats.average.(select{:}).avSlpOnsetLatAct       = nanmean(ACT.stats.sleep.actigraphy.slpOnsetLat(idx));
-        ACT.stats.average.(select{:}).avAwakeningAct         = nanmean(ACT.stats.sleep.actigraphy.nAwakening(idx));
-        ACT.stats.average.(select{:}).avWakeAfterSlpOnsetAct = nanmean(ACT.stats.sleep.actigraphy.wakeAfterSlpOnset(idx));
-        ACT.stats.average.(select{:}).avSnoozeTimeAct        = nanmean(ACT.stats.sleep.actigraphy.snoozeTime(idx));
-        ACT.stats.average.(select{:}).avTotSlpTimeAct        = nanmean(ACT.stats.sleep.actigraphy.totSlpTime(idx));
-        ACT.stats.average.(select{:}).avSlpPeriodAct         = nanmean(ACT.stats.sleep.actigraphy.slpPeriod(idx));
-        ACT.stats.average.(select{:}).avSlpWindowAct         = nanmean(ACT.stats.sleep.actigraphy.slpWindow(idx));
-        ACT.stats.average.(select{:}).avSlpEffSlpTimeAct     = nanmean(ACT.stats.sleep.actigraphy.slpEffSlpTime(idx));
-        ACT.stats.average.(select{:}).avSlpEffSlpPeriodAct   = nanmean(ACT.stats.sleep.actigraphy.slpEffSlpPeriod(idx));
-        ACT.stats.average.(select{:}).avAwakePerHourAct      = nanmean(ACT.stats.sleep.actigraphy.awakePerHour(idx));
+        ACT.stats.average.(select{:}).avSlpOnsetLatAct       = mean(ACT.stats.sleep.actigraphy.slpOnsetLat(idx), 'omitnan');
+        ACT.stats.average.(select{:}).avAwakeningAct         = mean(ACT.stats.sleep.actigraphy.nAwakening(idx), 'omitnan');
+        ACT.stats.average.(select{:}).avWakeAfterSlpOnsetAct = mean(ACT.stats.sleep.actigraphy.wakeAfterSlpOnset(idx), 'omitnan');
+        ACT.stats.average.(select{:}).avSnoozeTimeAct        = mean(ACT.stats.sleep.actigraphy.snoozeTime(idx), 'omitnan');
+        ACT.stats.average.(select{:}).avTotSlpTimeAct        = mean(ACT.stats.sleep.actigraphy.totSlpTime(idx), 'omitnan');
+        ACT.stats.average.(select{:}).avSlpPeriodAct         = mean(ACT.stats.sleep.actigraphy.slpPeriod(idx), 'omitnan');
+        ACT.stats.average.(select{:}).avSlpWindowAct         = mean(ACT.stats.sleep.actigraphy.slpWindow(idx), 'omitnan');
+        ACT.stats.average.(select{:}).avSlpEffSlpTimeAct     = mean(ACT.stats.sleep.actigraphy.slpEffSlpTime(idx), 'omitnan');
+        ACT.stats.average.(select{:}).avSlpEffSlpPeriodAct   = mean(ACT.stats.sleep.actigraphy.slpEffSlpPeriod(idx), 'omitnan');
+        ACT.stats.average.(select{:}).avAwakePerHourAct      = mean(ACT.stats.sleep.actigraphy.awakePerHour(idx), 'omitnan');
         
         % ---------------------------------------------------------
         % Case 2, sleep windows are available but no annotation
@@ -319,16 +319,16 @@ for select = {'all', 'week', 'weekend'}
         ACT.stats.average.(select{:}).avClockSlpOnsetDiary     = getAvEventTime(ACT, 'onset',  'Label', 'sleepPeriod', 'Type', 'sleepDiary', 'Select', select{:});
         ACT.stats.average.(select{:}).avClockMidSleepDiary     = getAvEventTime(ACT, 'midpoint',  'Label', 'sleepPeriod', 'Type', 'sleepDiary', 'Select', select{:});
         ACT.stats.average.(select{:}).avClockFinAwakeDiary     = getAvEventTime(ACT, 'offset', 'Label', 'sleepPeriod', 'Type', 'sleepDiary', 'Select', select{:});
-        ACT.stats.average.(select{:}).avSlpOnsetLatDiary       = nanmean(ACT.stats.sleep.sleepDiary.slpOnsetLat(idx));
-        ACT.stats.average.(select{:}).avAwakeningDiary         = nanmean(ACT.stats.sleep.sleepDiary.nAwakening(idx));
-        ACT.stats.average.(select{:}).avWakeAfterSlpOnsetDiary = nanmean(ACT.stats.sleep.sleepDiary.wakeAfterSlpOnset(idx));
-        ACT.stats.average.(select{:}).avSnoozeTimeDiary        = nanmean(ACT.stats.sleep.sleepDiary.snoozeTime(idx));
-        ACT.stats.average.(select{:}).avTotSlpTimeDiary        = nanmean(ACT.stats.sleep.sleepDiary.totSlpTime(idx));
-        ACT.stats.average.(select{:}).avSlpPeriodDiary         = nanmean(ACT.stats.sleep.sleepDiary.slpPeriod(idx));
-        ACT.stats.average.(select{:}).avSlpWindowDiary         = nanmean(ACT.stats.sleep.sleepDiary.slpWindow(idx));
-        ACT.stats.average.(select{:}).avSlpEffSlpTimeDiary     = nanmean(ACT.stats.sleep.sleepDiary.slpEffSlpTime(idx));
-        ACT.stats.average.(select{:}).avSlpEffSlpPeriodDiary   = nanmean(ACT.stats.sleep.sleepDiary.slpEffSlpPeriod(idx));
-        ACT.stats.average.(select{:}).avAwakePerHourDiary      = nanmean(ACT.stats.sleep.sleepDiary.awakePerHour(idx));
+        ACT.stats.average.(select{:}).avSlpOnsetLatDiary       = mean(ACT.stats.sleep.sleepDiary.slpOnsetLat(idx), 'omitnan');
+        ACT.stats.average.(select{:}).avAwakeningDiary         = mean(ACT.stats.sleep.sleepDiary.nAwakening(idx), 'omitnan');
+        ACT.stats.average.(select{:}).avWakeAfterSlpOnsetDiary = mean(ACT.stats.sleep.sleepDiary.wakeAfterSlpOnset(idx), 'omitnan');
+        ACT.stats.average.(select{:}).avSnoozeTimeDiary        = mean(ACT.stats.sleep.sleepDiary.snoozeTime(idx), 'omitnan');
+        ACT.stats.average.(select{:}).avTotSlpTimeDiary        = mean(ACT.stats.sleep.sleepDiary.totSlpTime(idx), 'omitnan');
+        ACT.stats.average.(select{:}).avSlpPeriodDiary         = mean(ACT.stats.sleep.sleepDiary.slpPeriod(idx), 'omitnan');
+        ACT.stats.average.(select{:}).avSlpWindowDiary         = mean(ACT.stats.sleep.sleepDiary.slpWindow(idx), 'omitnan');
+        ACT.stats.average.(select{:}).avSlpEffSlpTimeDiary     = mean(ACT.stats.sleep.sleepDiary.slpEffSlpTime(idx), 'omitnan');
+        ACT.stats.average.(select{:}).avSlpEffSlpPeriodDiary   = mean(ACT.stats.sleep.sleepDiary.slpEffSlpPeriod(idx), 'omitnan');
+        ACT.stats.average.(select{:}).avAwakePerHourDiary      = mean(ACT.stats.sleep.sleepDiary.awakePerHour(idx), 'omitnan');
         ACT.stats.average.(select{:}).avSleepTimeMismatch      = ACT.stats.average.(select{:}).avTotSlpTimeDiary - ACT.stats.average.(select{:}).avTotSlpTimeAct;
         ACT.stats.average.(select{:}).avSleepPeriodMismatch    = ACT.stats.average.(select{:}).avSlpPeriodDiary - ACT.stats.average.(select{:}).avSlpPeriodAct;
     end

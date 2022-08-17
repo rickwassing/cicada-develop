@@ -40,15 +40,20 @@ switch ACT.info.device
         offWristStd = 0.013;
         offWristRng = 0.15;
 end
-
+% ---------------------------------------------------------
+% The nummber of window iterations that cover an edge
+containsEdge = ((winLong/winShort)/2)+1;
 for win = 1:maxWindows
     % ---------------------------------------------------------
     % Create a sliding window of length 'winLong' in steps of 'winShort'
-    winEdges = [...
-        ((win-1)*winShort + winShort*0.5) - winLong*0.5, ...
-        ((win-1)*winShort + winShort*0.5) + winLong*0.5];
-    if winEdges(1) < 1; winEdges(1) = 1; end
-    if winEdges(end) > ACT.pnts; winEdges(2) = ACT.pnts; end
+    winIdx = round([...
+        (((win-1)*winShort) + winShort*0.5) - winLong*0.5, ...
+        (((win-1)*winShort) + winShort*0.5) + winLong*0.5]);
+    if win <= containsEdge
+        winIdx = [1, winLong];
+    elseif win >= (maxWindows - containsEdge)
+        winIdx = [(maxWindows - containsEdge) * winShort, maxWindows*winShort];
+    end
     % ---------------------------------------------------------
     % For each of the three accelerometer axes:
     for ax = 1:3
@@ -57,13 +62,18 @@ for win = 1:maxWindows
         if ax == 3; fname = 'z'; end
         % ---------------------------------------------------------
         % Calculate the standard deviation and range in the window
-        stdwacc = nanstd(ACT.data.acceleration.(fname).Data(winEdges(1)+1:winEdges(2)));
-        rngwacc = range(ACT.data.acceleration.(fname).Data(winEdges(1)+1:winEdges(2)));
+        stdwacc = std(ACT.data.acceleration.(fname).Data(winIdx(1)+1:winIdx(2)), 'omitnan');
+        rngwacc = range(ACT.data.acceleration.(fname).Data(winIdx(1)+1:winIdx(2)));
         % ---------------------------------------------------------
         % If the standard deviation and range is below the threshold, then
         % this window can be scored as off-wrist.
-        if stdwacc < offWristStd && rngwacc < offWristRng
-            nonWear(winEdges(1)+1:winEdges(2), ax) = 1;
+        if isnan(stdwacc) || isnan(rngwacc)
+            % Deviation or range could not be derived, mark as non-wear
+            nonWear(winIdx(1)+1:winIdx(2), ax) = 1;
+        else
+            if stdwacc < offWristStd && rngwacc < offWristRng
+                nonWear(winIdx(1)+1:winIdx(2), ax) = 1;
+            end
         end
     end
 end
@@ -115,9 +125,9 @@ if size(wear,1) > 1
             idx = idx(1);
             % if this period is not the first or last one:
             if idx > 1 && idx < size(wear,1)
-                % Check if the wear-duration is less than 30% of the duration of the
+                % Check if the wear-duration is less than 30% or 80% of the duration of the
                 % bordering non-wear periods.
-                if wear.duration(idx) / (wear.duration(idx-1) + wear.duration(idx+1)) < pctThres
+                if (wear.duration(idx) / (wear.duration(idx-1) + wear.duration(idx+1))) < pctThres
                     % If so, we can remove the wear and subsequent non-wear period,
                     % while adding their duration to the preceding non-wear period.
                     wear.duration(idx-1) = wear.duration(idx-1) + wear.duration(idx) + wear.duration(idx+1);
@@ -137,7 +147,7 @@ if size(wear,1) > 1
             % Keep only the first index, deal with that one now, and then try
             % a new iteration
             idx = idx(1);
-            if wear.type(idx-1) == 1 && wear.duration(idx-1) >= 1*60*60
+            if wear.type(idx-1) == 0 && wear.duration(idx-1) >= 1*60*60
                 if idx == size(wear,1)
                     wear.duration(idx-1) = wear.duration(idx-1) + wear.duration(idx);
                     wear(idx,:) = [];
@@ -158,12 +168,20 @@ if size(wear,1) > 1
         wear.type(1) = 0;
         wear(2,:) = [];
     end
+    if wear.type(end) == 1 && wear.duration(end) < 3*60*60 && wear.type(end-1) == 0
+        wear.duration(end-1) = wear.duration(end-1) + wear.duration(end);
+        wear.type(end-1) = 0;
+        wear(end, :) = [];
+    end
 end
 % ---------------------------------------------------------
 % Keep only the non-wear periods
 wear = wear(wear.type == 0,:);
 % Transform duration to days
 wear.duration = wear.duration/(60*60*24);
+% ---------------------------------------------------------
+% For validation
+% nonwearscore = events2idx(ACT, 
 % ---------------------------------------------------------
 % Save the non-wear events to the events table
 ACT = cic_editEvents(ACT, 'delete', [], [], 'Label', 'reject', 'Type', 'GGIR');

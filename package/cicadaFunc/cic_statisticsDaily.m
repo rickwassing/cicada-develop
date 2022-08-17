@@ -29,7 +29,7 @@ for di = 1:ACT.ndays+1
     ACT.stats.daily.hoursReject(di, 1) = sum(isnan(euclNormMinOne)) * ACT.epoch / 3600;
     % ---------------------------------------------------------
     % Average euclidean norm across entire day
-    ACT.stats.daily.avEuclNorm(di, 1) = nanmean(euclNormMinOne);
+    ACT.stats.daily.avEuclNorm(di, 1) = mean(euclNormMinOne, 'omitnan');
     % ---------------------------------------------------------
     % Most (10h) and least (5h) activity
     % Note, this function returns datenum's which are converted to datestr at the end of this function
@@ -45,15 +45,18 @@ for di = 1:ACT.ndays+1
     % ---------------------------------------------------------
     % How much time and activity was spend in moderate to vigorous activity in hours
     if isfield(ACT.analysis.annotate, 'acceleration')
-        [annotate, timesAnnot] = selectDataUsingTime(ACT.analysis.annotate.acceleration.Data, ACT.analysis.annotate.acceleration.Time, startDate, endDate);
+        [annotate, timesAnnot] = selectDataUsingTime(...
+            ACT.analysis.annotate.acceleration.Data, ...
+            ACT.analysis.annotate.acceleration.Time, ...
+            startDate, endDate);
         % insert NaNs for rejected segments
         annotate(events2idx(ACT, timesAnnot, 'Label', 'reject')) = nan;
         ACT.stats.daily.hoursSustInact(di,1) = sum(annotate == 0) * ACT.epoch / 3600;
-        ACT.stats.daily.avEuclNormSustInact(di, 1) = nanmean(euclNormMinOne(annotate == 0));
+        ACT.stats.daily.avEuclNormSustInact(di, 1) = mean(euclNormMinOne(annotate == 0), 'omitnan');
         ACT.stats.daily.hoursLightAct(di,1) = sum(annotate == 2) * ACT.epoch / 3600;
-        ACT.stats.daily.avEuclNormLightAct(di, 1) = nanmean(euclNormMinOne(annotate == 2));
+        ACT.stats.daily.avEuclNormLightAct(di, 1) = mean(euclNormMinOne(annotate == 2), 'omitnan');
         ACT.stats.daily.hoursModVigAct(di,1) = sum(annotate >= 3) * ACT.epoch / 3600;
-        ACT.stats.daily.avEuclNormModVigAct(di, 1) = nanmean(euclNormMinOne(annotate >= 3));
+        ACT.stats.daily.avEuclNormModVigAct(di, 1) = mean(euclNormMinOne(annotate >= 3), 'omitnan');
     end
     % ---------------------------------------------------------
     % Indicates if participant slept across noon
@@ -78,11 +81,11 @@ for di = 1:ACT.ndays+1
             data(events2idx(ACT, times, 'Label', 'reject')) = nan;
             % ---------------------------------------------------------
             % Calculate average
-            ACT.stats.daily.(['av', titleCase(datatypes{ti}), titleCase(fnames{fi})])(di, 1) = nanmean(data);
+            ACT.stats.daily.(['av', titleCase(datatypes{ti}), titleCase(fnames{fi})])(di, 1) = mean(data, 'omitnan');
             % ---------------------------------------------------------
             % For light data, calculate the mean above 1 lux
             if strcmpi(datatypes{ti}, 'light')
-                ACT.stats.daily.(['av', titleCase(datatypes{ti}), titleCase(fnames{fi}), 'Gt1Lux'])(di, 1) = nanmean(data(data > 1));
+                ACT.stats.daily.(['av', titleCase(datatypes{ti}), titleCase(fnames{fi}), 'Gt1Lux'])(di, 1) = mean(data(data > 1), 'omitnan');
             end
             % ---------------------------------------------------------
             % Calculate the min, max and clock onset only if there is a whole 24 hour day
@@ -134,13 +137,20 @@ end
 % ---------------------------------------------------------
 % Transform the clock onset max and min euclidean norm to date strings
 idxNan = isnan(ACT.stats.daily.clockOnsetMaxEuclNormMovWin10h);
-ACT.stats.daily.clockOnsetMaxEuclNormMovWin10h = cellstr(datestr(ACT.stats.daily.clockOnsetMaxEuclNormMovWin10h, 'dd/mm/yyyy HH:MM'));
-ACT.stats.daily.clockOnsetMaxEuclNormMovWin10h(idxNan) = {'na'};
+if all(idxNan)
+    ACT.stats.daily.clockOnsetMaxEuclNormMovWin10h = repmat({'na'}, length(idxNan), 1);
+else
+    ACT.stats.daily.clockOnsetMaxEuclNormMovWin10h = cellstr(datestr(ACT.stats.daily.clockOnsetMaxEuclNormMovWin10h, 'dd/mm/yyyy HH:MM'));
+    ACT.stats.daily.clockOnsetMaxEuclNormMovWin10h(idxNan) = {'na'};
+end
 
 idxNan = isnan(ACT.stats.daily.clockOnsetMinEuclNormMovWin5h);
-ACT.stats.daily.clockOnsetMinEuclNormMovWin5h = cellstr(datestr(ACT.stats.daily.clockOnsetMinEuclNormMovWin5h, 'dd/mm/yyyy HH:MM'));
-ACT.stats.daily.clockOnsetMinEuclNormMovWin5h(idxNan) = {'na'};
-
+if all(idxNan)
+    ACT.stats.daily.clockOnsetMinEuclNormMovWin5h = repmat({'na'}, length(idxNan), 1);
+else
+    ACT.stats.daily.clockOnsetMinEuclNormMovWin5h = cellstr(datestr(ACT.stats.daily.clockOnsetMinEuclNormMovWin5h, 'dd/mm/yyyy HH:MM'));
+    ACT.stats.daily.clockOnsetMinEuclNormMovWin5h(idxNan) = {'na'};
+end
 % ---------------------------------------------------------
 % Turn back on the warnings
 warning('on', 'all')

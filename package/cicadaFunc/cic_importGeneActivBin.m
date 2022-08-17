@@ -153,6 +153,12 @@ ACT.data.acceleration.z.TimeInfo.StartDate = '00-Jan-0000 00:00:00';
 ACT.data.acceleration.z = setuniformtime(ACT.data.acceleration.z, 'StartTime', ACT.xmin, 'Interval', 1/(ACT.srate*60*60*24));
 % -----
 % Light data
+% ****************************************
+% EDIT 
+% Date: Aug 2022
+% By: Rick Wassing
+% Reason: the GeneActiv light sensor is not accurate at low (<100 lux)
+% illuminance levels.
 ACT.data.light.wideSpec = timeseries(light, times, 'Name', 'light_broadSpec');
 ACT.data.light.wideSpec.DataInfo.Units = 'lux';
 ACT.data.light.wideSpec.TimeInfo.Units = 'days';

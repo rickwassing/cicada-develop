@@ -12,4 +12,4 @@ end
 % Crop signal to precicely accomodate all windows
 maxWindows = floor(length(X)/(srate*windowLength));
 X = X(1:maxWindows*windowLength*srate);
-X = nanstd(reshape(X, srate*windowLength, length(X)/(srate*windowLength)));
+X = std(reshape(X, srate*windowLength, length(X)/(srate*windowLength)), 'omitnan');

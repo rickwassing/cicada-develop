@@ -1,4 +1,4 @@
-function ACT = cic_ggirSleepPeriodDetection(ACT)
+function ACT = cic_ggirSleepWindowDetection(ACT)
 
 % --------------------------------------------------------------------
 %  PART 1 - INITIALIZE
@@ -17,7 +17,7 @@ idxReject = events2idx(ACT, time, 'Label', 'reject');
 angle(idxReject) = nan;
 
 % --------------------------------------------------------------------
-% PART 2 - FIND PERIODS BETWEEN SLEEP ONSET AND FINAL AWAKENING
+% PART 2 - FIND SLEEP WINDOWS
 % --------------------------------------------------------------------
 onset    = nan(ACT.ndays,1);
 duration = nan(ACT.ndays,1);
@@ -30,7 +30,7 @@ for d = 1:ACT.ndays
         idxEndDate   = find(time < ACT.enddate-(ACT.ndays-d), 1, 'last');
         winSize      = idxEndDate - idxStartDate;
     else
-        if isnan(onset(d-1)) % if the previous day did not have a sleep period, use this day's 24 hour period
+        if isnan(onset(d-1)) % if the previous day did not have a sleep period, use this day's 24 hour period starting at the actogram window, e.g. 15:00
             idxStartDate = find(time >= ACT.startdate+(d-1), 1, 'first');
             idxEndDate   = find(time < ACT.enddate-(ACT.ndays-d), 1, 'last');
             winSize      = idxEndDate - idxStartDate;
@@ -62,7 +62,7 @@ for d = 1:ACT.ndays
     end
     % ---------------------------------------------------------
     % (2) Determine the sleep onset and final awakening times
-    [idxSleepPeriodOnset, idxSleepPeriodOffset] = ggirSleepPeriodDetection(angle(idxStartDate:idxEndDate), ACT.epoch);
+    [idxSleepPeriodOnset, idxSleepPeriodOffset] = ggirSleepWindowDetection(angle(idxStartDate:idxEndDate), ACT.epoch);
     % - If no sleep period was found in this day, continue to next day
     if isempty(idxSleepPeriodOnset) && isempty(idxSleepPeriodOffset); continue; end
     % ---------------------------------------------------------
@@ -95,7 +95,7 @@ for d = 1:ACT.ndays
         % Update the window size
         winSize = idxEndDate - idxStartDate;
         % Recalculate the sleep period 
-        [idxSleepPeriodOnset, idxSleepPeriodOffset] = ggirSleepPeriodDetection(angle(idxStartDate:idxEndDate), ACT.epoch);
+        [idxSleepPeriodOnset, idxSleepPeriodOffset] = ggirSleepWindowDetection(angle(idxStartDate:idxEndDate), ACT.epoch);
         % Update the logical variables
         onsetCloseToBoundary = idxSleepPeriodOnset <= (3600/ACT.epoch);
         offsetCloseToBoundary = idxSleepPeriodOffset >= winSize - (3600/ACT.epoch);
@@ -134,6 +134,6 @@ ACT = cic_updatePipe(ACT, 'analysis');
 % Write history
 ACT.history = char(ACT.history, '% ---------------------------------------------------------');
 ACT.history = char(ACT.history, '% GGIR''s sleep detection algorithm (DOI: 10.1038/s41598-018-31266-z)');
-ACT.history = char(ACT.history, 'ACT = cic_ggirSleepPeriodDetection(ACT);');
+ACT.history = char(ACT.history, 'ACT = cic_ggirSleepWindowDetection(ACT);');
 
 end % EOF

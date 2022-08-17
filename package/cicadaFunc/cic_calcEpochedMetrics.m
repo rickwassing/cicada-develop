@@ -61,17 +61,17 @@ tmp_z = movmedian(ACT.data.acceleration.z.Data, k, 'EndPoints', 'fill');
 if any(isnan(tmp_x(1:1000))) && any(~isnan(tmp_x(1:1000)))
     tmp_x(isnan(tmp_x(1:1000))) = tmp_x(find(~isnan(tmp_x(1:1000)), 1, 'first'));
 elseif any(isnan(tmp_x(1:1000))) && ~any(~isnan(tmp_x(1:1000)))
-    tmp_x(isnan(tmp_x(1:1000))) = nanmedian(tmp_x);
+    tmp_x(isnan(tmp_x(1:1000))) = median(tmp_x, 'omitnan');
 end
 if any(isnan(tmp_y(1:1000))) && any(~isnan(tmp_y(1:1000)))
     tmp_y(isnan(tmp_y(1:1000))) = tmp_y(find(~isnan(tmp_y(1:1000)), 1, 'first'));
 elseif any(isnan(tmp_y(1:1000))) && ~any(~isnan(tmp_y(1:1000)))
-    tmp_x(isnan(tmp_y(1:1000))) = nanmedian(tmp_y);
+    tmp_x(isnan(tmp_y(1:1000))) = median(tmp_y, 'omitnan');
 end
 if any(isnan(tmp_z(1:1000))) && any(~isnan(tmp_z(1:1000)))
     tmp_z(isnan(tmp_z(1:1000))) = tmp_z(find(~isnan(tmp_z(1:1000)), 1, 'first'));
 elseif any(isnan(tmp_z(1:1000))) && ~any(~isnan(tmp_z(1:1000)))
-    tmp_x(isnan(tmp_z(1:1000))) = nanmedian(tmp_z);
+    tmp_x(isnan(tmp_z(1:1000))) = median(tmp_z, 'omitnan');
 end
 % -----
 % Replace any remaining NaN's with the last non-NaN value
