@@ -161,7 +161,8 @@ if calErrorEnd > calErrorStart
 end
 % ---------------------------------------------------------
 % Now all is well, and we can calibrate the data
-ACT.etc.cal.error = calErrorEnd;
+ACT.etc.cal.errorStart = calErrorStart;
+ACT.etc.cal.errorEnd = calErrorEnd;
 ACT.etc.cal.useTemp = useTemp;
 ACT.etc.cal.nPoints = sum(noMovementIdx);
 ACT.etc.cal.x_gain = scale(1);
