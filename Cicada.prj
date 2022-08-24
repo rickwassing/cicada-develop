@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration file="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-develop/Cicada.prj" location="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-develop" name="Cicada" target="target.ezdeploy.standalone" target-name="Application Compiler">
+  <configuration build-checksum="4060709722" file="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-develop/Cicada.prj" location="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-develop" name="Cicada" preferred-package-location="/Users/rickwassing/Documents/Projects/2019_actigraphy-gui/cicada-develop/Cicada/for_redistribution" preferred-package-type="package.type.app" target="target.ezdeploy.standalone" target-name="Application Compiler">
     <param.appname>Cicada</param.appname>
     <param.icon />
     <param.icons />
