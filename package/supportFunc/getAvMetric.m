@@ -72,7 +72,7 @@ end
 metricPerWin = movmean([metric; metric], oddWindow, 'omitnan', 'Endpoints', 'discard');
 
 % Return if there is not enough data
-if isempty(metricPerWin) 
+if isempty(metricPerWin) || oddWindow > length(metric)
     value     = NaN;
     timeOnset = 'na';
     metricPerWin = timeseries(NaN, 0);
