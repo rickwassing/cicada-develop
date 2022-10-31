@@ -62,17 +62,17 @@ for d = 1:ACT.ndays
     end
     % ---------------------------------------------------------
     % (2) Determine the sleep onset and final awakening times
-    [idxSleepPeriodOnset, idxSleepPeriodOffset] = ggirSleepWindowDetection(angle(idxStartDate:idxEndDate), ACT.epoch);
+    [idxSleepWinOnset, idxSleepWinOffset] = ggirSleepWindowDetection(angle(idxStartDate:idxEndDate), ACT.epoch);
     % - If no sleep period was found in this day, continue to next day
-    if isempty(idxSleepPeriodOnset) && isempty(idxSleepPeriodOffset); continue; end
+    if isempty(idxSleepWinOnset) && isempty(idxSleepWinOffset); continue; end
     % ---------------------------------------------------------
     % (3) If the onset or offset marker is within 60 minutes of the edges
     % of this window, the actual sleep period may overlap with two
     % successive windows, so try again with an adjusted window +/- 1 hours
     % The while-loop is terminated after 10 iterations, or if the window
     % boundaries are near the edges of the data.
-    onsetCloseToBoundary = idxSleepPeriodOnset <= (3600/ACT.epoch);
-    offsetCloseToBoundary = idxSleepPeriodOffset >= winSize - (3600/ACT.epoch);
+    onsetCloseToBoundary = idxSleepWinOnset <= (3600/ACT.epoch);
+    offsetCloseToBoundary = idxSleepWinOffset >= winSize - (3600/ACT.epoch);
     iterCount = 0;
     while (onsetCloseToBoundary || offsetCloseToBoundary) && iterCount < 10
         % Enlarge the window size with one hour (3600/epoch length in seconds)
@@ -95,22 +95,31 @@ for d = 1:ACT.ndays
         % Update the window size
         winSize = idxEndDate - idxStartDate;
         % Recalculate the sleep period 
-        [idxSleepPeriodOnset, idxSleepPeriodOffset] = ggirSleepWindowDetection(angle(idxStartDate:idxEndDate), ACT.epoch);
+        [idxSleepWinOnset, idxSleepWinOffset] = ggirSleepWindowDetection(angle(idxStartDate:idxEndDate), ACT.epoch);
         % Update the logical variables
-        onsetCloseToBoundary = idxSleepPeriodOnset <= (3600/ACT.epoch);
-        offsetCloseToBoundary = idxSleepPeriodOffset >= winSize - (3600/ACT.epoch);
+        onsetCloseToBoundary = idxSleepWinOnset <= (3600/ACT.epoch);
+        offsetCloseToBoundary = idxSleepWinOffset >= winSize - (3600/ACT.epoch);
         % Up the iteration count
         iterCount = iterCount+1;
     end
     % ---------------------------------------------------------
     % (4) Store the bed times
     tmpTime = time(idxStartDate:idxEndDate);
-    onset(d,1) = tmpTime(idxSleepPeriodOnset);
-    duration(d,1) = tmpTime(idxSleepPeriodOffset) - tmpTime(idxSleepPeriodOnset);
+    onset(d,1) = tmpTime(idxSleepWinOnset);
+    duration(d,1) = tmpTime(idxSleepWinOffset) - tmpTime(idxSleepWinOnset);
 end
 % ---------------------------------------------------------
 % Remove any days where no in bed periods have been detected
 rmIdx = isnan(onset);
+onset(rmIdx)     = [];
+duration(rmIdx) = [];
+% ---------------------------------------------------------
+% Remove any sleep windows that start or end within 60 minutes of the start
+% or end of the recording
+rmIdx = (onset - ACT.xmin) < 1/24;
+onset(rmIdx)     = [];
+duration(rmIdx) = [];
+rmIdx = (ACT.xmax - (onset+duration)) < 1/24;
 onset(rmIdx)     = [];
 duration(rmIdx) = [];
 % ---------------------------------------------------------

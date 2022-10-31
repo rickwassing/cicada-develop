@@ -52,7 +52,7 @@ else % only use windows that fit in [1:length(x)]
         I(:,cnt) = [idx(1); idx(end)];
         C{cnt} = x(idx);
     end
-    idx = round(mean(I));
+    idx = round(mean(I)-1e-6);
 end
 
 y = cellfun(h, C);

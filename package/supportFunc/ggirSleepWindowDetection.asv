@@ -130,7 +130,8 @@ end
 % window where the window average is below the threshold, and it ends at
 % the middle sample in the sliding window.
 % idxInBedStart = idxInBedStart(longestInBed);
-% idxInBedEnd   = idxInBedEnd(longestInBed) + rollIdx(1) - 1
+% idxInBedEnd   = idxInBedEnd(longestInBed) + rollIdx(1) - 1;
+keyboard
 idxInBedStart = rollIdx(idxInBedStart(longestInBed));
 idxInBedEnd   = rollIdx(idxInBedEnd(longestInBed)-1);
 
