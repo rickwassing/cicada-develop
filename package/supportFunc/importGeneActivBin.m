@@ -1,8 +1,8 @@
 function [header, time, xyz, light, button, prop_val] = importGeneActivBin(fname, varargin)
-% BINREAD Reads GENEActive .bin files
+% IMPORTGENEACTIVBIN Reads GENEActive .bin files
 %
-% [hdr, time, xyz, light, but] = read(fname)
-% [hdr, time, xyz, light, but, prop_val] = read(fname, 'key1', 'key2',...)
+% [hdr, time, xyz, light, but] = importGeneActivBin(fname)
+% [hdr, time, xyz, light, but, prop_val] = importGeneActivBin(fname, 'key1', 'key2',...)
 %
 % Where
 %
@@ -134,29 +134,29 @@ while strcmpi(page_name, DATA_PAGE_NAME)
     prop_idx = find(prop_idx);
     prop_idx = prop_idx(idx);
     prop_val(data_page_count, prop_loc) = str2double(C{2}(prop_idx));
-    
+
     % Get the measurement time
     prop_idx = ismember(C{1}(1:end-1), TIME_NAME);
     if any(prop_idx)
         try
-        time(data_page_count) = datenum(C{2}(prop_idx), ...
-            TIME_FORMAT);
-        catch ME
+            time(data_page_count) = datenum(C{2}(prop_idx), ...
+                TIME_FORMAT);
+        catch ME %#ok<NASGU> 
             error_occurred = true;
         end
     end
-    
+
     % Get the measurement frequency
     prop_idx = ismember(C{1}(1:end-1), MEASUREMENT_FREQ_NAME);
     if any(prop_idx)
         freq(data_page_count) = str2double(C{2}(prop_idx));
     end
-    
+
     % Get the measurements
     meas_idx = (data_page_count-1)*300+1:(data_page_count*300);
     try
         [xyz(meas_idx,:), light(meas_idx), button(meas_idx)] = hex2xyz(C{1}{end});
-    catch ME
+    catch ME %#ok<NASGU> 
         error_occurred = true;
     end
     % Check the page name

@@ -59,7 +59,7 @@ elseif ...
         % For each date-time in 'thisTime' ...
         for di = 1:length(thisTime)
             % Chech if its value is missing, if not:
-            if ~ismissing(thisTime{di})
+            if ~isempty(thisTime{di})
                 % Convert the date-time to 'dd/mm/yyyy HH:MM'
                 dateTime{di} = datestr(datenum(thisTime{di}, format), 'dd/mm/yyyy HH:MM');
             else
