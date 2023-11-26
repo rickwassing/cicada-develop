@@ -10,6 +10,10 @@ end
 interDailyStab = NaN;
 intraDailyVar  = NaN;
 
+if ACT.srate < 0.5
+    return
+end
+
 % Create Euclidean Norm in 30 second epochs
 epoch = 30; % seconds
 step  = 1/(24*60*60/epoch);

@@ -14,10 +14,12 @@ end
 % ---------------------------------------------------------
 % Cut the raw data
 datatypes = fieldnames(ACT.data);
+hasAnyData = false;
 for di = 1:length(datatypes)
     if isstruct(ACT.data.(datatypes{di}))
         fnames = fieldnames(ACT.data.(datatypes{di}));
         for fi = 1:length(fnames)
+            hasAnyData = true;
             % Crop the timeseries
             ACT.data.(datatypes{di}).(fnames{fi}) = getsampleusingtime(ACT.data.(datatypes{di}).(fnames{fi}), startDate, endDate);
             % For some reason, the Interval is lost after cropping the timeseries
@@ -27,7 +29,7 @@ for di = 1:length(datatypes)
         end
     end
 end
-ACT.times = ACT.data.acceleration.x.Time;
+ACT.times = ACT.times(ACT.times >= startDate & ACT.times <= endDate);
 ACT.pnts  = length(ACT.times);
 ACT.xmin  = ACT.times(1);
 ACT.xmax  = ACT.times(end);
