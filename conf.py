@@ -6,10 +6,10 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'test'
-copyright = '2024, rick'
-author = 'rick'
-release = 'bla'
+project = 'Cicada'
+copyright = '2024, Rick Wassing'
+author = 'Rick Wassing'
+release = '0.10.5 (beta)'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
