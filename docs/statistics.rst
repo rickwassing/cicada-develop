@@ -129,7 +129,7 @@ Definition of average Statistics
 - **[min/max](DataType)(Metric)MovWin30m**. The minimum/maximum average Metric across all days using a 30m moving window.
 - **clockOnset[Min/Max](DataType)(Metric)MovWin30m**. The clock onset of the minimum/maximum 30m of averaged Metric across all days.
 - **hours(AnnotationLevel)(Metric)**. Average number of hours per day spent in this Annotation level for this Metric, e.g. ``hoursDimLight`` indicate the average number of hours spent in dim light per day.
-- **slpCount**. Number of Sleep Windows in the recording.
+- **count**. Number of Sleep Windows in the recording.
 - **napCount**. Number of Nap Windows in the recording.
 - **slpAcrossNoon**. Number of Sleep Windows to overlap with 12:00 pm in the recording.
 - **avClockLightsOut[Act/Diary]**. Average clock time of the the Sleep Window onsets (``Lights Out``) of type Actigraphy or Diary.
@@ -175,12 +175,12 @@ Definition of Daily Statistics
 Definition of Sleep Statistics
 ------------------------------
 
-- **slpType**. The type of sleep, ``nap`` or ``night``.
-- **slpCount**. Counter indicating this Sleep Window's index.
+- **type**. The type of sleep, ``nap`` or ``night``.
+- **count**. Counter indicating this Sleep Window's index.
 - **eventOrigin**. The origin of the Sleep Windows, ``manual``, ``sleepDiary`` or ``GGIR``.
-- **dayLightsOn**. The day of the week of ``Lights On``, i.e. the day when this Sleep Window ended.
-- **clockLightsOut**. Date and clock time of ``Lights Out``, start of the Sleep Window.
-- **clockLightsOn**. Date and clock time of ``Lights On``, end of the Sleep Window.
+- **dayEventOffset**. The day of the week of ``Lights On``, i.e. the day when this Sleep Window ended.
+- **clockEventOnset**. Date and clock time of ``Lights Out``, start of the Sleep Window.
+- **clockEventOffset**. Date and clock time of ``Lights On``, end of the Sleep Window.
 - **clockSlpOnset**. Date and clock time of ``Sleep Onset``, start of the Sleep Period.
 - **clockMidSleep**. Date and clock time of the sleep mid-point, ``Sleep Onset + 0.5 * Sleep Period``. 
 - **clockFinAwake**. Date and clock time of ``Final Awakening``, end of the Sleep Period.
@@ -188,7 +188,7 @@ Definition of Sleep Statistics
 - **nAwakening**. Number of awakenings within the Sleep Period. The Actigraphy number of awakenings are the number of segments *not* Annotated as ``sustained inactive`` during the Sleep Periods. The Diary number of awakenings correspond to the estimated ``Awakenings``.
 - **wakeAfterSlpOnset**. Duration of awakenings within the Sleep Period in minutes. The Actigraphy WASO is the sum of the duration of the segments *not* Annotated as ``sustained inactive``. The Diary WASO is the average ``WASO`` estimate.
 - **snoozeTime**. Duration of the time between ``Final Awakening`` and ``Lights On`` in minutes.
-- **slpWindow**. Duration of the Sleep Window in minutes, i.e. ``clockLightsOn - clockLightsOut``.
+- **slpWindow**. Duration of the Sleep Window in minutes, i.e. ``clockEventOffset - clockEventOnset``.
 - **slpPeriod**. Duration of the Sleep Period in minutes, i.e. ``clockFinAwake - clockSlpOnset``.
 - **totSlpTime**. Total sleep time in minutes calculated as ``slpPeriod - wakeAfterSlpOnset``.
 - **slpEffSlpTime**. Sleep efficiency calculated as ``100 * totSlpTime / slpWindow``.

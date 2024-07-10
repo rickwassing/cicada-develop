@@ -13,7 +13,7 @@ GridLayoutContainer = findobj(Tab.Children, 'Tag', 'TabGridLayoutContainerPanel'
 
 % -----
 % Update the Row Height of the grid layout if we can plot the average datatraces
-if ~all(cellfun(@(t) all(isnan(t.Data)), app.ACT.analysis.custom.(tableName).euclNormMovWin5m))
+if ~all(cellfun(@(t) all(isnan(t.Data)), app.ACT.analysis.custom.(tableName).activityMovWin5m))
     GridLayoutContainer.RowHeight = {150, '1x'};
     doPlotTimeseries = true;
 else
@@ -72,8 +72,8 @@ if doPlotTimeseries
     % -----
     % Patch, Text and Markers
     % -----
-    pnts = min(cellfun(@(t) t.length, app.ACT.analysis.custom.(tableName).euclNormMovWin5m));
-    data = mean(cell2mat(cellfun(@(t) asrow(t.Data(1:pnts)), app.ACT.analysis.custom.(tableName).euclNormMovWin5m, 'UniformOutput', false)), 'omitnan');
+    pnts = min(cellfun(@(t) t.length, app.ACT.analysis.custom.(tableName).activityMovWin5m));
+    data = mean(cell2mat(cellfun(@(t) asrow(t.Data(1:pnts)), app.ACT.analysis.custom.(tableName).activityMovWin5m, 'UniformOutput', false)), 'omitnan');
     times = ((0:pnts-1).*app.ACT.epoch/(60*60*24))';
     [~, idxMin] = min(data);
     [~, idxMax] = max(data);
@@ -292,27 +292,27 @@ for fi = 1:length(fnames)
                     Text = ifelse(isnan(value), '-', duration2str(value/24));
                     Color = [0.49, 0.18, 0.56];
                     Label = 'Mod/vig activity time';
-                case 'avEuclNormModVigAct'
+                case 'avActivityModVigAct'
                     Text = ifelse(isnan(value), '-', sprintf('%.0f mg', value*1000));
                     Color = [0.49, 0.18, 0.56];
                     Label = 'Mod/vig activity level';
-                case 'avEuclNorm'
+                case 'avActivity'
                     Text = sprintf('%.0f mg', value*1000);
                     Color = [0.49, 0.18, 0.56];
                     Label = 'Mean Eucl. norm';
-                case 'minEuclNormMovWin5m'
+                case 'minActivityMovWin5m'
                     Text = ifelse(isnan(value), '-', sprintf('%.0f mg', value*1000));
                     Color = [0.49, 0.18, 0.56];
                     Label = 'Min activity (5m mov win)';
-                case 'delayOnsetMinEuclNormMovWin5m'
+                case 'delayOnsetMinActivityMovWin5m'
                     Text = ifelse(strcmp(value{:}, 'na'), '-', value{:});
                     Color = [0.49, 0.18, 0.56];
                     Label = 'Delay onset min act';
-                case 'maxEuclNormMovWin5m'
+                case 'maxActivityMovWin5m'
                     Text = ifelse(isnan(value), '-', sprintf('%.0f mg', value*1000));
                     Color = [0.49, 0.18, 0.56];
                     Label = 'Max activity (5m mov win)';
-                case 'delayOnsetMaxEuclNormMovWin5m'
+                case 'delayOnsetMaxActivityMovWin5m'
                     Text = ifelse(strcmp(value{:}, 'na'), '-', value{:});
                     Color = [0.49, 0.18, 0.56];
                     Label = 'Delay onset max act';

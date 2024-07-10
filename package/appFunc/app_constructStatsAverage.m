@@ -224,12 +224,12 @@ end
 % Plot Daily average patches
 % ---------------------------------------------------------
 % EuclNorm
-app_constructStatsAverageDayGraph(app, app.AvStats_GridLayoutAccelerationPanel, app.ACT.analysis.average.(select).euclNormMovWin5h, ...
+app_constructStatsAverageDayGraph(app, app.AvStats_GridLayoutAccelerationPanel, app.ACT.analysis.average.(select).activityMovWin5h, ...
     'euclNormMovWin5h', 'mg', 1000, ...
-    app.ACT.stats.average.(select).clockOnsetMaxEuclNormMovWin10h, ...
-    app.ACT.stats.average.(select).clockOnsetMinEuclNormMovWin5h, ...
-    app.ACT.stats.average.(select).maxEuclNormMovWin10h, ...
-    app.ACT.stats.average.(select).minEuclNormMovWin5h)
+    app.ACT.stats.average.(select).clockOnsetMaxActivityMovWin10h, ...
+    app.ACT.stats.average.(select).clockOnsetMinActivityMovWin5h, ...
+    app.ACT.stats.average.(select).maxActivityMovWin10h, ...
+    app.ACT.stats.average.(select).minActivityMovWin5h)
 % ---------------------------------------------------------
 % Light
 % -----
@@ -277,10 +277,10 @@ app.AvStats_TimeRejectedValue.Text = duration2str(app.ACT.stats.average.(select)
 % Set Text values of the Acceleration Panel
 if app.ACT.stats.average.(select).hoursModVigAct > 0 && isfield(app.ACT.analysis.annotate, 'acceleration')
     app.AvStats_HoursModVigActValue.Text = duration2str(app.ACT.stats.average.(select).hoursModVigAct/24);
-    app.AvStats_AvEuclNormModVigActValue.Text = sprintf('%.0f mg', app.ACT.stats.average.(select).avEuclNormModVigAct*1000);
+    app.AvStats_AvActivityModVigActValue.Text = sprintf('%.0f mg', app.ACT.stats.average.(select).avActivityModVigAct*1000);
 else
     app.AvStats_HoursModVigActValue.Text = '-';
-    app.AvStats_AvEuclNormModVigActValue.Text = '-';
+    app.AvStats_AvActivityModVigActValue.Text = '-';
 end
 
 % ---------------------------------------------------------
@@ -388,7 +388,7 @@ mount_sleepClock(app, parent, ...
 
 % ---------------------------------------------------------
 % Set Text values of the Sleep Panel
-app.AvStats_SlpCountValue.Text = num2str(app.ACT.stats.average.(select).slpCount);
+app.AvStats_SlpCountValue.Text = num2str(app.ACT.stats.average.(select).count);
 app.AvStats_SlpAcrossNoonValue.Text = [num2str(app.ACT.stats.average.(select).slpAcrossNoon), 'x'];
 
 % ---------------------------------------------------------

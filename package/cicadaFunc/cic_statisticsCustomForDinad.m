@@ -25,39 +25,39 @@ for ei = 1:size(events, 1)
         % insert NaNs for rejected segments
         annotate(events2idx(ACT, times, 'Label', 'reject')) = nan;
         ACT.stats.custom.(tableName).hoursSustInact(ei, 1) = (sum(annotate == 0) * ACT.epoch) / 3600;
-        ACT.stats.custom.(tableName).avEuclNormSustInact(ei, 1) = mean(euclNormMinOne(annotate == 0), 'omitnan');
+        ACT.stats.custom.(tableName).avActivitySustInact(ei, 1) = mean(euclNormMinOne(annotate == 0), 'omitnan');
         ACT.stats.custom.(tableName).hoursLightAct(ei, 1) = (sum(annotate == 2) * ACT.epoch) / 3600;
-        ACT.stats.custom.(tableName).avEuclNormLightAct(ei, 1) = mean(euclNormMinOne(annotate == 2), 'omitnan');
+        ACT.stats.custom.(tableName).avActivityLightAct(ei, 1) = mean(euclNormMinOne(annotate == 2), 'omitnan');
         ACT.stats.custom.(tableName).hoursModVigAct(ei, 1) = (sum(annotate >= 3) * ACT.epoch) / 3600;
-        ACT.stats.custom.(tableName).avEuclNormModVigAct(ei, 1) = mean(euclNormMinOne(annotate >= 3), 'omitnan');
+        ACT.stats.custom.(tableName).avActivityModVigAct(ei, 1) = mean(euclNormMinOne(annotate >= 3), 'omitnan');
     end
     % ---------------------------------------------------------
     % Calculate average Euclidean norm
-    ACT.stats.custom.(tableName).avEuclNorm(ei, 1) = mean(euclNormMinOne, 'omitnan');
+    ACT.stats.custom.(tableName).avActivity(ei, 1) = mean(euclNormMinOne, 'omitnan');
     % ---------------------------------------------------------
     % Calculate the min, max and delay onset only if the window is larger than 5 minutes
     if events.duration(ei) >= 5/(60*24)
         [...
-            ACT.stats.custom.(tableName).minEuclNormMovWin5m(ei, 1), ...
-            ACT.stats.custom.(tableName).delayOnsetMinEuclNormMovWin5m{ei, 1}, ...
+            ACT.stats.custom.(tableName).minActivityMovWin5m(ei, 1), ...
+            ACT.stats.custom.(tableName).delayOnsetMinActivityMovWin5m{ei, 1}, ...
             euclNormMovWin5m ...
             ] = getAvMetric(ACT, euclNormMinOne, times-times(1), ...
             'getMinMax', 'min', ...
             'window',    5);
         [...
-            ACT.stats.custom.(tableName).maxEuclNormMovWin5m(ei, 1), ...
-            ACT.stats.custom.(tableName).delayOnsetMaxEuclNormMovWin5m{ei, 1}, ...
+            ACT.stats.custom.(tableName).maxActivityMovWin5m(ei, 1), ...
+            ACT.stats.custom.(tableName).delayOnsetMaxActivityMovWin5m{ei, 1}, ...
             ] = getAvMetric(ACT, euclNormMinOne, times-times(1), ...
             'getMinMax', 'max', ...
             'window',    5);
-        ACT.analysis.custom.(tableName).euclNormMovWin5m{ei, :} = asrow(euclNormMovWin5m);
+        ACT.analysis.custom.(tableName).activityMovWin5m{ei, :} = asrow(euclNormMovWin5m);
     else
-        ACT.stats.custom.(tableName).minEuclNormMovWin5m(ei, 1) = NaN;
-        ACT.stats.custom.(tableName).delayOnsetMinEuclNormMovWin5m{ei, 1} = 'na';
-        ACT.stats.custom.(tableName).maxEuclNormMovWin5m(ei, 1) = NaN;
-        ACT.stats.custom.(tableName).delayOnsetMaxEuclNormMovWin5m{ei, 1} = 'na';
-        ACT.analysis.custom.(tableName).euclNormMovWin5m{ei, :} = timeseries(NaN, 0);
-        ACT.analysis.custom.(tableName).euclNormMovWin5m{ei, :}.TimeInfo.Units = 'days';
+        ACT.stats.custom.(tableName).minActivityMovWin5m(ei, 1) = NaN;
+        ACT.stats.custom.(tableName).delayOnsetMinActivityMovWin5m{ei, 1} = 'na';
+        ACT.stats.custom.(tableName).maxActivityMovWin5m(ei, 1) = NaN;
+        ACT.stats.custom.(tableName).delayOnsetMaxActivityMovWin5m{ei, 1} = 'na';
+        ACT.analysis.custom.(tableName).activityMovWin5m{ei, :} = timeseries(NaN, 0);
+        ACT.analysis.custom.(tableName).activityMovWin5m{ei, :}.TimeInfo.Units = 'days';
     end
     % ---------------------------------------------------------
     % Average and variability of other data

@@ -49,15 +49,17 @@ REC.recEndDate = datestr(ACT.xmax, 'dd/mm/yyyy HH:MM');
 % ABOUT THE ANNOTATION ANALYSIS
 if isfield(ACT.analysis, 'settings') && isfield(ACT.analysis, 'annotate')
     if isfield(ACT.analysis.annotate, 'acceleration')
-        REC.annotAccBoutCrit      = ACT.analysis.settings.boutCrit;
-        REC.annotAccBoutClosed    = ACT.analysis.settings.boutClosed;
-        REC.annotAccBoutMetric    = ACT.analysis.settings.boutMetric;
-        REC.annotAccThrInactAngle = ACT.analysis.settings.inactAngle;
-        REC.annotAccThrInactTime  = ACT.analysis.settings.inactTime;
-        REC.annotAccThrActTime    = ACT.analysis.settings.actTime;
-        REC.annotAccThrActLig     = ACT.analysis.settings.actLight;
-        REC.annotAccThrActMod     = ACT.analysis.settings.actModerate;
-        REC.annotAccThrActVig     = ACT.analysis.settings.actVigorous;
+        if isfield(ACT.analysis.settings, 'boutCrit')
+            REC.annotAccBoutCrit      = ACT.analysis.settings.boutCrit;
+            REC.annotAccBoutClosed    = ACT.analysis.settings.boutClosed;
+            REC.annotAccBoutMetric    = ACT.analysis.settings.boutMetric;
+            REC.annotAccThrInactAngle = ACT.analysis.settings.inactAngle;
+            REC.annotAccThrInactTime  = ACT.analysis.settings.inactTime;
+            REC.annotAccThrActTime    = ACT.analysis.settings.actTime;
+            REC.annotAccThrActLig     = ACT.analysis.settings.actLight;
+            REC.annotAccThrActMod     = ACT.analysis.settings.actModerate;
+            REC.annotAccThrActVig     = ACT.analysis.settings.actVigorous;
+        end
     end
     if isfield(ACT.analysis.annotate, 'light')
         REC.annotLightMetric    = ACT.analysis.settings.lightMetric;

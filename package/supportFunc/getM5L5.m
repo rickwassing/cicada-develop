@@ -1,9 +1,9 @@
-function [avEuclNormM5, clockOnsetM5, avEuclNormL5, clockOnsetL5] = getM5L5(ACT, di)
+function [avActivityM5, clockOnsetM5, avActivityL5, clockOnsetL5] = getM5L5(ACT, di)
 
 % initialize the output values as NaN's
-avEuclNormM5 = NaN;
+avActivityM5 = NaN;
 clockOnsetM5 = NaN;
-avEuclNormL5 = NaN;
+avActivityL5 = NaN;
 clockOnsetL5 = NaN;
     
 % Start and end dates from midnight to midnight
@@ -38,7 +38,7 @@ euclNormToday = movmean(euclNormToday, window, 'omitnan', 'Endpoints', 'discard'
 timesToday    = timesToday(1:end-(window-1));
 
 % Find M5, Most active 5 hours of the day
-[avEuclNormM5, idx] = max(euclNormToday);
+[avActivityM5, idx] = max(euclNormToday);
 clockOnsetM5 = timesToday(idx);
 
 % Next we want to find L5, but for this we need clock onset M5 from today
@@ -53,13 +53,13 @@ elseif di == 1
     return
     % -----
     % If this is not the first day, but yesterday's clock onset M5 is not available, use yesterday at 15:00 as the start date
-elseif di > 1 && isnan(ACT.stats.daily.clockOnsetMaxEuclNormMovWin5h(di-1, 1))
+elseif di > 1 && isnan(ACT.stats.daily.clockOnsetMaxActivityMovWin5h(di-1, 1))
     startDate = startDate - 9/24; % Start date was today's midnight, so take away 9 hours gives yesterday at 15:00
     endDate   = clockOnsetM5;
     % -----
     % Otherwise, all is good and we can use yesterday's clock offset M5 and and today's clock onset M5 
 else
-    startDate = ACT.stats.daily.clockOnsetMaxEuclNormMovWin5h(di-1, 1)+5/24; % yesterday's clock offset M5
+    startDate = ACT.stats.daily.clockOnsetMaxActivityMovWin5h(di-1, 1)+5/24; % yesterday's clock offset M5
     endDate   = clockOnsetM5;
 end
 
@@ -86,7 +86,7 @@ euclNormToday = movmean(euclNormToday, window, 'omitnan', 'Endpoints', 'discard'
 timesToday = timesToday(1:end-(window-1));
 
 % Find the value and the time of the day where the metric is minimal
-[avEuclNormL5, idx] = min(euclNormToday);
+[avActivityL5, idx] = min(euclNormToday);
 clockOnsetL5 = timesToday(idx);
 
 end %EOF

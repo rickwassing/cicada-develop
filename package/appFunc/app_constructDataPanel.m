@@ -172,7 +172,7 @@ for di = 1:app.ACT.ndays
                         % If annotation data exists ...
                         if isfield(app.ACT.analysis.annotate, 'acceleration')
                             % ... Plot the annotation data at each intensity level
-                            for intensity = 4:-1:1
+                            for intensity = max(app.ACT.analysis.annotate.acceleration.Data):-1:1
                                 % Check if component should mount
                                 if shouldComponentMount(app, ax, ['PatchAnnotationAcceleration_day-', num2str(di), '_int-' num2str(intensity)])
                                     % Get properties that need more elaborate calculation

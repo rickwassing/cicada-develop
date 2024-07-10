@@ -187,6 +187,10 @@ for ai = 1:length(axesTypes)
             if shouldComponentMount(app.MainApp, ax, 'PatchCounts')
                 % Set X and YData
                 [YData, XData] = selectDataUsingTime(app.MainApp.ACT.metric.acceleration.counts.Data, app.MainApp.ACT.metric.acceleration.counts.Time, StartDate-step, EndDate+step);
+                if isempty(YData) || isempty(XData)
+                    XData = nan;
+                    YData = nan;
+                end
                 YData(end) = NaN;
                 % Define the properties
                 props = { ...
@@ -208,6 +212,10 @@ for ai = 1:length(axesTypes)
                 cmp = findobj(ax, 'Tag', 'PatchCounts');
                 % Set X and YData
                 [YData, XData] = selectDataUsingTime(app.MainApp.ACT.metric.acceleration.counts.Data, app.MainApp.ACT.metric.acceleration.counts.Time, StartDate-step, EndDate+step);
+                if isempty(YData) || isempty(XData)
+                    XData = nan;
+                    YData = nan;
+                end
                 YData(end) = NaN;
                 % Update the component with its updated XData
                 updateComponent(app.MainApp, cmp, { ...
@@ -222,6 +230,10 @@ for ai = 1:length(axesTypes)
             if shouldComponentMount(app.MainApp, ax, 'PatchEuclNorm')
                 % Set X and YData
                 [YData, XData] = selectDataUsingTime(app.MainApp.ACT.metric.acceleration.bpFiltEuclNorm.Data, app.MainApp.ACT.metric.acceleration.bpFiltEuclNorm.Time, StartDate-step, EndDate+step);
+                if isempty(YData) || isempty(XData)
+                    XData = nan;
+                    YData = nan;
+                end
                 YData(end) = NaN;
                 % Define the properties
                 props = { ...
@@ -243,6 +255,10 @@ for ai = 1:length(axesTypes)
                 cmp = findobj(ax, 'Tag', 'PatchEuclNorm');
                 % Set X and YData
                 [YData, XData] = selectDataUsingTime(app.MainApp.ACT.metric.acceleration.bpFiltEuclNorm.Data, app.MainApp.ACT.metric.acceleration.bpFiltEuclNorm.Time, StartDate-step, EndDate+step);
+                if isempty(YData) || isempty(XData)
+                    XData = nan;
+                    YData = nan;
+                end
                 YData(end) = NaN;
                 % Update the component with its updated XData
                 updateComponent(app.MainApp, cmp, { ...
@@ -257,6 +273,10 @@ for ai = 1:length(axesTypes)
             if shouldComponentMount(app.MainApp, ax, 'PatchAngle')
                 % Set X and YData
                 [YData, XData] = selectDataUsingTime(app.MainApp.ACT.metric.acceleration.angle_z.Data, app.MainApp.ACT.metric.acceleration.angle_z.Time, StartDate-step, EndDate+step);
+                if isempty(YData) || isempty(XData)
+                    XData = nan;
+                    YData = nan;
+                end
                 YData(end) = NaN;
                 % Define the properties
                 props = { ...
@@ -278,6 +298,10 @@ for ai = 1:length(axesTypes)
                 cmp = findobj(ax, 'Tag', 'PatchAngle');
                 % Set X and YData
                 [YData, XData] = selectDataUsingTime(app.MainApp.ACT.metric.acceleration.angle_z.Data, app.MainApp.ACT.metric.acceleration.angle_z.Time, StartDate-step, EndDate+step);
+                if isempty(YData) || isempty(XData)
+                    XData = nan;
+                    YData = nan;
+                end
                 YData(end) = NaN;
                 % Update the component with its updated XData
                 updateComponent(app.MainApp, cmp, { ...

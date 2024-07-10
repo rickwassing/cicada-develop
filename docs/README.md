@@ -8,7 +8,7 @@ All documentation can be found on the [Cicada Read The Docs site](https://cicada
 
 ## Versioning
 
-We use [semantic versioning](http://semver.org/). Current version is 0.10.4. Cicada is still in development and currently ONLY works in Matlab 2019b. Anything may change at any time and the software should not be considered stable.
+We use [semantic versioning](http://semver.org/). Current version is 0.10.5. Cicada is still in development and currently ONLY works in Matlab 2019b. Anything may change at any time and the software should not be considered stable.
 
 ## Authors
 

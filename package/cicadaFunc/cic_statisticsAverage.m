@@ -6,12 +6,19 @@ ACT.stats.average.weekend = table();
 
 % ---------------------------------------------------------
 % Extract Eucl Norm and Annotation and insert NaNs for rejected segments
-euclNormMinOne = ACT.metric.acceleration.euclNormMinOne.Data;
-euclNormMinOne(events2idx(ACT, ACT.metric.acceleration.euclNormMinOne.Time, 'Label', 'reject')) = nan;
+actMetric = ACT.metric.acceleration.euclNormMinOne.Data;
+times = ACT.metric.acceleration.euclNormMinOne.Time;
+if length(actMetric) <= 1
+    % Try activity counts
+    actMetric = ACT.metric.acceleration.counts.Data;
+    times = ACT.metric.acceleration.counts.Time;
+end
+
+actMetric(events2idx(ACT, times, 'Label', 'reject')) = nan;
 
 % ---------------------------------------------------------
 % Get indices of weekend days
-idxWeekend = weekday(ACT.metric.acceleration.euclNormMinOne.Time) == 1 | weekday(ACT.metric.acceleration.euclNormMinOne.Time) == 7; % Sunday (1) or Saturday (7)
+idxWeekend = weekday(times) == 1 | weekday(times) == 7; % Sunday (1) or Saturday (7)
 
 % ---------------------------------------------------------
 % Hours rejected
@@ -27,47 +34,47 @@ ACT.stats.average.weekend.hoursReject = sum(ACT.stats.daily.hoursReject(ismember
 
 % ---------------------------------------------------------
 % Average and variability of Euclidean norm
-ACT.stats.average.all.avEuclNorm = mean(euclNormMinOne, 'omitnan');
-ACT.stats.average.week.avEuclNorm = mean(euclNormMinOne(~idxWeekend), 'omitnan');
-ACT.stats.average.weekend.avEuclNorm = mean(euclNormMinOne(idxWeekend), 'omitnan');
+ACT.stats.average.all.avActivity = mean(actMetric, 'omitnan');
+ACT.stats.average.week.avActivity = mean(actMetric(~idxWeekend), 'omitnan');
+ACT.stats.average.weekend.avActivity = mean(actMetric(idxWeekend), 'omitnan');
 
 % ---------------------------------------------------------
 % Average euclidean norm in the most active 10 hours of the average day and its time
-[ACT.stats.average.all.maxEuclNormMovWin10h, ACT.stats.average.all.clockOnsetMaxEuclNormMovWin10h] = ...
-    getAvMetric(ACT, euclNormMinOne, ACT.metric.acceleration.euclNormMinOne.Time, ...
+[ACT.stats.average.all.maxActivityMovWin10h, ACT.stats.average.all.clockOnsetMaxActivityMovWin10h] = ...
+    getAvMetric(ACT, actMetric, times, ...
     'getMinMax', 'max', ...
     'window',    10*60);
-[ACT.stats.average.week.maxEuclNormMovWin10h, ACT.stats.average.week.clockOnsetMaxEuclNormMovWin10h] = ...
-    getAvMetric(ACT, euclNormMinOne, ACT.metric.acceleration.euclNormMinOne.Time, ...
+[ACT.stats.average.week.maxActivityMovWin10h, ACT.stats.average.week.clockOnsetMaxActivityMovWin10h] = ...
+    getAvMetric(ACT, actMetric, times, ...
     'getMinMax', 'max', ...
     'select', 'week', ...
     'window', 10*60);
-[ACT.stats.average.weekend.maxEuclNormMovWin10h, ACT.stats.average.weekend.clockOnsetMaxEuclNormMovWin10h] = ...
-    getAvMetric(ACT, euclNormMinOne, ACT.metric.acceleration.euclNormMinOne.Time, ...
+[ACT.stats.average.weekend.maxActivityMovWin10h, ACT.stats.average.weekend.clockOnsetMaxActivityMovWin10h] = ...
+    getAvMetric(ACT, actMetric, times, ...
     'getMinMax', 'max', ...
     'select', 'weekend', ...
     'window', 10*60);
 % Average euclidean norm in the least active 5 hours of the average day and its time
-[ACT.stats.average.all.minEuclNormMovWin5h, ACT.stats.average.all.clockOnsetMinEuclNormMovWin5h, ACT.analysis.average.all.euclNormMovWin5h] = ...
-    getAvMetric(ACT, euclNormMinOne, ACT.metric.acceleration.euclNormMinOne.Time, ...
+[ACT.stats.average.all.minActivityMovWin5h, ACT.stats.average.all.clockOnsetMinActivityMovWin5h, ACT.analysis.average.all.activityMovWin5h] = ...
+    getAvMetric(ACT, actMetric, times, ...
     'getMinMax', 'min', ...
     'window', 5*60);
-[ACT.stats.average.week.minEuclNormMovWin5h, ACT.stats.average.week.clockOnsetMinEuclNormMovWin5h, ACT.analysis.average.week.euclNormMovWin5h] = ...
-    getAvMetric(ACT, euclNormMinOne, ACT.metric.acceleration.euclNormMinOne.Time, ...
+[ACT.stats.average.week.minActivityMovWin5h, ACT.stats.average.week.clockOnsetMinActivityMovWin5h, ACT.analysis.average.week.activityMovWin5h] = ...
+    getAvMetric(ACT, actMetric, times, ...
     'getMinMax', 'min', ...
     'select', 'week', ...
     'window', 5*60);
-[ACT.stats.average.weekend.minEuclNormMovWin5h, ACT.stats.average.weekend.clockOnsetMinEuclNormMovWin5h, ACT.analysis.average.weekend.euclNormMovWin5h] = ...
-    getAvMetric(ACT, euclNormMinOne, ACT.metric.acceleration.euclNormMinOne.Time, ...
+[ACT.stats.average.weekend.minActivityMovWin5h, ACT.stats.average.weekend.clockOnsetMinActivityMovWin5h, ACT.analysis.average.weekend.activityMovWin5h] = ...
+    getAvMetric(ACT, actMetric, times, ...
     'getMinMax', 'min', ...
     'select', 'weekend', ...
     'window', 5*60);
 
 % ---------------------------------------------------------
 % Relative amplitude
-ACT.stats.average.all.relAmpl = (ACT.stats.average.all.maxEuclNormMovWin10h - ACT.stats.average.all.minEuclNormMovWin5h) / (ACT.stats.average.all.maxEuclNormMovWin10h + ACT.stats.average.all.minEuclNormMovWin5h);
-ACT.stats.average.week.relAmpl = (ACT.stats.average.week.maxEuclNormMovWin10h - ACT.stats.average.week.minEuclNormMovWin5h) / (ACT.stats.average.week.maxEuclNormMovWin10h + ACT.stats.average.week.minEuclNormMovWin5h);
-ACT.stats.average.weekend.relAmpl = (ACT.stats.average.weekend.maxEuclNormMovWin10h - ACT.stats.average.weekend.minEuclNormMovWin5h) / (ACT.stats.average.weekend.maxEuclNormMovWin10h + ACT.stats.average.weekend.minEuclNormMovWin5h);
+ACT.stats.average.all.relAmpl = (ACT.stats.average.all.maxActivityMovWin10h - ACT.stats.average.all.minActivityMovWin5h) / (ACT.stats.average.all.maxActivityMovWin10h + ACT.stats.average.all.minActivityMovWin5h);
+ACT.stats.average.week.relAmpl = (ACT.stats.average.week.maxActivityMovWin10h - ACT.stats.average.week.minActivityMovWin5h) / (ACT.stats.average.week.maxActivityMovWin10h + ACT.stats.average.week.minActivityMovWin5h);
+ACT.stats.average.weekend.relAmpl = (ACT.stats.average.weekend.maxActivityMovWin10h - ACT.stats.average.weekend.minActivityMovWin5h) / (ACT.stats.average.weekend.maxActivityMovWin10h + ACT.stats.average.weekend.minActivityMovWin5h);
 
 % ---------------------------------------------------------
 % How much time and activity was spend in moderate to vigorous activity
@@ -76,33 +83,33 @@ if isfield(ACT.analysis.annotate, 'acceleration')
     annotate(events2idx(ACT, ACT.analysis.annotate.acceleration.Time, 'Label', 'reject')) = NaN;
     % All days
     ACT.stats.average.all.hoursSustInact = (sum(annotate == 0) * ACT.epoch / 3600) / (ACT.xmax-ACT.xmin); % hours per day
-    ACT.stats.average.all.avEuclNormSustInact = mean(euclNormMinOne(annotate == 0), 'omitnan');
+    ACT.stats.average.all.avActivitySustInact = mean(actMetric(annotate == 0), 'omitnan');
     ACT.stats.average.all.hoursLightAct = (sum(annotate == 2) * ACT.epoch / 3600) / (ACT.xmax-ACT.xmin); % hours per day
-    ACT.stats.average.all.avEuclNormLightAct = mean(euclNormMinOne(annotate == 2), 'omitnan');
+    ACT.stats.average.all.avActivityLightAct = mean(actMetric(annotate == 2), 'omitnan');
     ACT.stats.average.all.hoursModVigAct = (sum(annotate >= 3) * ACT.epoch / 3600) / (ACT.xmax-ACT.xmin); % hours per day
-    ACT.stats.average.all.avEuclNormModVigAct = mean(euclNormMinOne(annotate >= 3), 'omitnan');
+    ACT.stats.average.all.avActivityModVigAct = mean(actMetric(annotate >= 3), 'omitnan');
     % Week days
     ACT.stats.average.week.hoursSustInact = sum(annotate(~idxWeekend) == 0) / ((sum(~idxWeekend)) / 24); % # hours per day
-    ACT.stats.average.week.avEuclNormSustInact = mean(euclNormMinOne(annotate == 0 & ~idxWeekend), 'omitnan');
+    ACT.stats.average.week.avActivitySustInact = mean(actMetric(annotate == 0 & ~idxWeekend), 'omitnan');
     ACT.stats.average.week.hoursLightAct = sum(annotate(~idxWeekend) == 2) / ((sum(~idxWeekend)) / 24); % # hours per day
-    ACT.stats.average.week.avEuclNormLightAct = mean(euclNormMinOne(annotate == 2 & ~idxWeekend), 'omitnan');
+    ACT.stats.average.week.avActivityLightAct = mean(actMetric(annotate == 2 & ~idxWeekend), 'omitnan');
     ACT.stats.average.week.hoursModVigAct = sum(annotate(~idxWeekend) >= 3) / ((sum(~idxWeekend)) / 24); % # hours per day
-    ACT.stats.average.week.avEuclNormModVigAct = mean(euclNormMinOne(annotate >= 3 & ~idxWeekend), 'omitnan');
+    ACT.stats.average.week.avActivityModVigAct = mean(actMetric(annotate >= 3 & ~idxWeekend), 'omitnan');
     % Weekend days
     ACT.stats.average.weekend.hoursSustInact = sum(annotate(idxWeekend) == 0) / ((sum(idxWeekend)) / 24);
-    ACT.stats.average.weekend.avEuclNormSustInact = mean(euclNormMinOne(annotate == 0 & idxWeekend), 'omitnan');
+    ACT.stats.average.weekend.avActivitySustInact = mean(actMetric(annotate == 0 & idxWeekend), 'omitnan');
     ACT.stats.average.weekend.hoursLightAct = sum(annotate(idxWeekend) == 2) / ((sum(idxWeekend)) / 24);
-    ACT.stats.average.weekend.avEuclNormLightAct = mean(euclNormMinOne(annotate == 2 & idxWeekend), 'omitnan');
+    ACT.stats.average.weekend.avActivityLightAct = mean(actMetric(annotate == 2 & idxWeekend), 'omitnan');
     ACT.stats.average.weekend.hoursModVigAct = sum(annotate(idxWeekend) >= 3) / ((sum(idxWeekend)) / 24);
-    ACT.stats.average.weekend.avEuclNormModVigAct = mean(euclNormMinOne(annotate >= 3 & idxWeekend), 'omitnan');
+    ACT.stats.average.weekend.avActivityModVigAct = mean(actMetric(annotate >= 3 & idxWeekend), 'omitnan');
 else
     for select = {'all', 'week', 'weekend'}
         ACT.stats.average.(select{:}).hoursSustInact = NaN;
-        ACT.stats.average.(select{:}).avEuclNormSustInact = NaN;
+        ACT.stats.average.(select{:}).avActivitySustInact = NaN;
         ACT.stats.average.(select{:}).hoursLightAct = NaN;
-        ACT.stats.average.(select{:}).avEuclNormLightAct = NaN;
+        ACT.stats.average.(select{:}).avActivityLightAct = NaN;
         ACT.stats.average.(select{:}).hoursModVigAct = NaN;
-        ACT.stats.average.(select{:}).avEuclNormModVigAct = NaN;
+        ACT.stats.average.(select{:}).avActivityModVigAct = NaN;
     end
 end
 
@@ -185,13 +192,13 @@ end
 if isfield(ACT.analysis.settings, 'sleepWindowType') && isfield(ACT.stats, 'sleep')
     % ---------------------------------------------------------
     % Number of sleep and nap windows
-    idxWeek = ismember(ACT.stats.sleep.actigraphy.dayLightsOn, {'Mon', 'Tue', 'Wed', 'Thu', 'Fri'});
-    ACT.stats.average.all.slpCount = sum(strcmpi(ACT.stats.sleep.actigraphy.slpType, 'night'));
-    ACT.stats.average.week.slpCount = sum(strcmpi(ACT.stats.sleep.actigraphy.slpType(idxWeek), 'night'));
-    ACT.stats.average.weekend.slpCount = sum(strcmpi(ACT.stats.sleep.actigraphy.slpType(~idxWeek), 'night'));
-    ACT.stats.average.all.napCount = sum(strcmpi(ACT.stats.sleep.actigraphy.slpType, 'nap'));
-    ACT.stats.average.week.napCount = sum(strcmpi(ACT.stats.sleep.actigraphy.slpType(idxWeek), 'nap'));
-    ACT.stats.average.weekend.napCount = sum(strcmpi(ACT.stats.sleep.actigraphy.slpType(~idxWeek), 'nap'));
+    idxWeek = ismember(ACT.stats.sleep.actigraphy.dayEventOffset, {'Mon', 'Tue', 'Wed', 'Thu', 'Fri'});
+    ACT.stats.average.all.count = sum(strcmpi(ACT.stats.sleep.actigraphy.type, 'sleep'));
+    ACT.stats.average.week.count = sum(strcmpi(ACT.stats.sleep.actigraphy.type(idxWeek), 'sleep'));
+    ACT.stats.average.weekend.count = sum(strcmpi(ACT.stats.sleep.actigraphy.type(~idxWeek), 'sleep'));
+    ACT.stats.average.all.napCount = sum(strcmpi(ACT.stats.sleep.actigraphy.type, 'nap'));
+    ACT.stats.average.week.napCount = sum(strcmpi(ACT.stats.sleep.actigraphy.type(idxWeek), 'nap'));
+    ACT.stats.average.weekend.napCount = sum(strcmpi(ACT.stats.sleep.actigraphy.type(~idxWeek), 'nap'));
     % ---------------------------------------------------------
     % Sleep across noon values
     ACT.stats.average.all.slpAcrossNoon = sum(ACT.stats.daily.slpAcrossNoon);
@@ -223,7 +230,7 @@ for select = {'all', 'week', 'weekend'}
     if isfield(ACT.analysis.settings, 'sleepWindowType') && isfield(ACT.analysis.annotate, 'acceleration')
         % ---------------------------------------------------------
         % Actigraphy
-        idx = ismember(ACT.stats.sleep.actigraphy.dayLightsOn, selectDays) & strcmpi(ACT.stats.sleep.actigraphy.slpType, 'night');
+        idx = ismember(ACT.stats.sleep.actigraphy.dayEventOffset, selectDays) & strcmpi(ACT.stats.sleep.actigraphy.type, 'sleep');
         ACT.stats.average.(select{:}).avClockLightsOutAct    = getAvEventTime(ACT, 'onset', 'Label', 'sleepWindow', 'Type', ACT.analysis.settings.sleepWindowType, 'Select', select{:});
         ACT.stats.average.(select{:}).avClockLightsOnAct     = getAvEventTime(ACT, 'offset', 'Label', 'sleepWindow', 'Type', ACT.analysis.settings.sleepWindowType, 'Select', select{:});
         ACT.stats.average.(select{:}).avClockSlpOnsetAct     = getAvEventTime(ACT, 'onset', 'Label', 'sleepPeriod', 'Type', 'actigraphy', 'Select', select{:});
@@ -288,24 +295,24 @@ for select = {'all', 'week', 'weekend'}
     if isfield(ACT.stats.sleep, 'sleepDiary')
         % Make sure each sleep diary entry aligns with one unique actigraphy sleep window, otherwise we cannot compare the two
         ACT.stats.sleep.compareAverage = true; % assume all is good
-        idxNight = find(strcmpi(ACT.stats.sleep.actigraphy.slpType, 'night'));
+        idxNight = find(strcmpi(ACT.stats.sleep.actigraphy.type, 'sleep'));
         if length(idxNight) ~= size(ACT.stats.sleep.sleepDiary, 1)
             ACT.stats.sleep.compareAverage = false;
             continue
         end
-        onset  = datenum(ACT.stats.sleep.sleepDiary.clockLightsOut, 'dd/mm/yyyy HH:MM');
-        offset = datenum(ACT.stats.sleep.sleepDiary.clockLightsOn, 'dd/mm/yyyy HH:MM');
+        onset  = datenum(ACT.stats.sleep.sleepDiary.clockEventOnset, 'dd/mm/yyyy HH:MM');
+        offset = datenum(ACT.stats.sleep.sleepDiary.clockEventOffset, 'dd/mm/yyyy HH:MM');
         for si = 1:length(idxNight)
             idx = ...
                 (...
-                onset >= datenum(ACT.stats.sleep.actigraphy.clockLightsOut{idxNight(si)}, 'dd/mm/yyyy HH:MM') & ...
-                onset <= datenum(ACT.stats.sleep.actigraphy.clockLightsOn{idxNight(si)}, 'dd/mm/yyyy HH:MM') ...
+                onset >= datenum(ACT.stats.sleep.actigraphy.clockEventOnset{idxNight(si)}, 'dd/mm/yyyy HH:MM') & ...
+                onset <= datenum(ACT.stats.sleep.actigraphy.clockEventOffset{idxNight(si)}, 'dd/mm/yyyy HH:MM') ...
                 ) | (...
-                offset >= datenum(ACT.stats.sleep.actigraphy.clockLightsOut{idxNight(si)}, 'dd/mm/yyyy HH:MM') & ...
-                offset <= datenum(ACT.stats.sleep.actigraphy.clockLightsOn{idxNight(si)}, 'dd/mm/yyyy HH:MM') ...
+                offset >= datenum(ACT.stats.sleep.actigraphy.clockEventOnset{idxNight(si)}, 'dd/mm/yyyy HH:MM') & ...
+                offset <= datenum(ACT.stats.sleep.actigraphy.clockEventOffset{idxNight(si)}, 'dd/mm/yyyy HH:MM') ...
                 ) | (...
-                onset <= datenum(ACT.stats.sleep.actigraphy.clockLightsOut{idxNight(si)}, 'dd/mm/yyyy HH:MM') & ...
-                offset >= datenum(ACT.stats.sleep.actigraphy.clockLightsOn{idxNight(si)}, 'dd/mm/yyyy HH:MM') ...
+                onset <= datenum(ACT.stats.sleep.actigraphy.clockEventOnset{idxNight(si)}, 'dd/mm/yyyy HH:MM') & ...
+                offset >= datenum(ACT.stats.sleep.actigraphy.clockEventOffset{idxNight(si)}, 'dd/mm/yyyy HH:MM') ...
                 );
             if sum(idx) ~= 1
                 ACT.stats.sleep.compareAverage = false;
@@ -316,7 +323,7 @@ for select = {'all', 'week', 'weekend'}
             continue
         end
         % All good, the size of actigraphy and diary sleep windows are the same, and each diary entry aligns with one unique actigraphy sleep window
-        idx = ismember(ACT.stats.sleep.sleepDiary.dayLightsOn, selectDays);
+        idx = ismember(ACT.stats.sleep.sleepDiary.dayEventOffset, selectDays);
         ACT.stats.average.(select{:}).avClockLightsOutDiary    = getAvEventTime(ACT, 'onset',  'Label', 'sleepWindow', 'Type', 'sleepDiary', 'Select', select{:});
         ACT.stats.average.(select{:}).avClockLightsOnDiary     = getAvEventTime(ACT, 'offset', 'Label', 'sleepWindow', 'Type', 'sleepDiary', 'Select', select{:});
         ACT.stats.average.(select{:}).avClockSlpOnsetDiary     = getAvEventTime(ACT, 'onset',  'Label', 'sleepPeriod', 'Type', 'sleepDiary', 'Select', select{:});
