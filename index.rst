@@ -74,8 +74,8 @@ The standalone desktop application does not require a paid Matlab license or any
   :maxdepth: 1
   :caption: Run Cicada standalone
 
-  installation-standalone-macos.rst
-  installation-standalone-mswin.rst
+  docs/installation-standalone-macos.rst
+  docs/installation-standalone-mswin.rst
 
 Run Cicada in Matlab
 --------------------
@@ -95,12 +95,12 @@ Run Cicada in Matlab
   :maxdepth: 2
   :caption: Overview
 
-  overview-terms.rst
-  overview-interface.rst
-  overview-pipeline.rst
-  overview-settings-files.rst
-  overview-act-structure.rst
-  overview-package.rst
+  docs/overview-terms.rst
+  docs/overview-interface.rst
+  docs/overview-pipeline.rst
+  docs/overview-settings-files.rst
+  docs/overview-act-structure.rst
+  docs/overview-package.rst
   
 .. figure:: https://www.alexhouse.net/sites/default/files/assets/images/read-all-about-it.png
     :width: 95px
@@ -112,39 +112,39 @@ Run Cicada in Matlab
   :maxdepth: 2
   :caption: Import, open, save, export
 
-  file-import-actigraphy.rst
-  file-save-open-dataset.rst
-  file-import-other-data.rst
-  file-import-sleep-diary.rst
+  docs/file-import-actigraphy.rst
+  docs/file-save-open-dataset.rst
+  docs/file-import-other-data.rst
+  docs/file-import-sleep-diary.rst
 
 .. toctree::
   :maxdepth: 2
   :caption: Edit the Dataset
 
-  edit-dataset-info.rst
-  edit-select-data.rst
-  edit-change-time-zone.rst
-  edit-change-epoch-length.rst
+  docs/edit-dataset-info.rst
+  docs/edit-select-data.rst
+  docs/edit-change-time-zone.rst
+  docs/edit-change-epoch-length.rst
 
 .. toctree::
   :maxdepth: 2
   :caption: Preprocess the Dataset
 
-  preproc-calibration.rst
-  preproc-non-wear-detection.rst
+  docs/preproc-calibration.rst
+  docs/preproc-non-wear-detection.rst
 
 .. toctree::
   :maxdepth: 2
   :caption: Analyse the Dataset
 
-  analysis-annotate-acceleration-ggir.rst
-  analysis-annotate-light.rst
-  analysis-sleep.rst
-  analysis-daily-events.rst
-  analysis-relative-events.rst
+  docs/analysis-annotate-acceleration-ggir.rst
+  docs/analysis-annotate-light.rst
+  docs/analysis-sleep.rst
+  docs/analysis-daily-events.rst
+  docs/analysis-relative-events.rst
 
 .. toctree::
   :maxdepth: 2
   :caption: Generate, Export Statistics
 
-  statistics.rst
+  docs/statistics.rst
