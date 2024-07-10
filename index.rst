@@ -1,6 +1,6 @@
 .. _index-top:
 
-.. figure:: images/index-cicada-logo.png
+.. figure:: docs/images/index-cicada-logo.png
   :width: 125px
   :align: center
 
