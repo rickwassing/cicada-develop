@@ -102,7 +102,7 @@ Run Cicada in Matlab
   docs/overview-act-structure.rst
   docs/overview-package.rst
   
-.. figure:: https://www.alexhouse.net/sites/default/files/assets/images/read-all-about-it.png
+.. figure:: https://www.fortnightly.com/sites/default/files/FEA2-Extra.jpg
     :width: 95px
     :align: center
 
