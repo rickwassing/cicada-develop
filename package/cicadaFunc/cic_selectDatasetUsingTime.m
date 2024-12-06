@@ -29,7 +29,10 @@ for di = 1:length(datatypes)
         end
     end
 end
-ACT.times = ACT.times(ACT.times >= startDate & ACT.times <= endDate);
+if ~hasAnyData
+    return
+end
+ACT.times = ACT.data.(datatypes{di}).(fnames{fi}).Time;
 ACT.pnts  = length(ACT.times);
 ACT.xmin  = ACT.times(1);
 ACT.xmax  = ACT.times(end);
