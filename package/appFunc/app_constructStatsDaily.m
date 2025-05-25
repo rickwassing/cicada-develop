@@ -101,10 +101,13 @@ if length(XData) <= 1
     YData = app.ACT.metric.acceleration.counts.Data;
 end
 addToYData = ceil(XData) - floor(XData(1));
-XData = [mod(XData, 1)*24; NaN];
+XData = [mod(XData, 1); NaN];
 YData = [-map(YData, ...
     0, app.ACT.display.acceleration.euclNorm.range(2), ...
     -0.24, 0.33, true) + addToYData; NaN];
+% -----
+% Replace midnight values with NaN's so we can plot the entire patch as one
+XData = replace_midnight_with_nan(XData).*24;
 % -----
 % Check if component should mount
 if shouldComponentMount(app, parent, 'DailyStats_PatchOverviewEuclNorm')
@@ -207,7 +210,7 @@ for di = 1:size(app.ACT.stats.daily, 1)
     end
 end
 % ---------------------------------------------------------
-% Table 
+% Table
 % ---------------------------------------------------------
 % Panel
 % -----
@@ -384,5 +387,19 @@ for fi = 1:length(fnames)
     end
     
 end
+
+    function timeVecOut = replace_midnight_with_nan(timeVec)
+        timeVecOut = timeVec;
+        
+        % Extract fractional part (time of day in days)
+        timeOfDay = timeVec - floor(timeVec);
+        
+        % 5 seconds in days
+        tolerance = 5 / 86400;
+        
+        % Replace values near midnight
+        isMidnight = timeOfDay < tolerance;
+        timeVecOut(isMidnight) = NaN;
+    end
 
 end %EOF

@@ -9,7 +9,7 @@
 project = 'Cicada'
 copyright = '2024, Rick Wassing'
 author = 'Rick Wassing'
-release = '0.10.6 (beta)'
+release = '0.10.7 (beta)'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
