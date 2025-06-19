@@ -488,7 +488,6 @@ if options.modality(3)
     % Assign to output
     data.TEMP = tempRaw;
 end
-
 % close the file, done.
 fclose(fid);
 end
@@ -644,7 +643,6 @@ if not(isempty(firstId))
     data.start.str = datestr(data.start.mtime);
     data.start.datetime = datetime(data.start.mtime, 'ConvertFrom', 'datenum');
 end
-
 % get time of last valid packet
 if not(isempty(firstId))
     lastId = find(data.packetInfo(:,5) == seekType & data.packetInfo(:,2) > data.start.mtime, 1, 'last');
