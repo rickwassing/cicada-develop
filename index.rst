@@ -81,9 +81,10 @@ Run Cicada in Matlab
 --------------------
 
 1. You're required to have Matlab R2019b.
-2. Download the code  `as a .zip file <https://github.com/rickwassing/cicada-develop/archive/master.zip>`_ or `clone the Cicada-develop GitHub repository <https://github.com/rickwassing/cicada-develop>`_. 
-3. Open Matlab and navigate to the path where the Cicada directory is located (or add the Cicada directory to the Matlab Search Path).
-4. Call the Cicada application in the Command Window:
+2. Make sure you have the Statistics and Machine Learning Toolbox and the Signal Processing Toolbox installed.
+3. Download the code  `as a .zip file <https://github.com/rickwassing/cicada-develop/archive/master.zip>`_ or `clone the Cicada-develop GitHub repository <https://github.com/rickwassing/cicada-develop>`_. 
+4. Open Matlab and navigate to the path where the Cicada directory is located (or add the Cicada directory to the Matlab Search Path).
+5. Call the Cicada application in the Command Window:
 
 .. code-block:: matlab
 
